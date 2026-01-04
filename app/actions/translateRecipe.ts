@@ -1,14 +1,17 @@
-"use server"
+"use server";
 // Placeholder server action to integrate with Google Gemini (Generative AI)
 // This file provides a function that can later be wired to @google/generative-ai
 // to translate recipe transcripts into Bangla or English.
 
-import type { Recipe } from '../../types'
+import type { Recipe } from "../../types";
 
 // Example placeholder import (commented) for the Gemini client:
 // import { TextGenerationModel } from '@google/generative-ai'
 
-export async function translateRecipe(recipeId: string, targetLang: 'bn' | 'en') {
+export async function translateRecipe(
+  recipeId: string,
+  targetLang: "bn" | "en"
+) {
   // TODO: Replace this placeholder with real calls to the Gemini API.
   // The function signature is ready for Server Actions. It currently returns
   // a minimal response so frontend callers can be implemented now.
@@ -21,6 +24,7 @@ export async function translateRecipe(recipeId: string, targetLang: 'bn' | 'en')
   return {
     recipeId,
     translated: false,
-    message: 'Placeholder translateRecipe server action — integrate Gemini here',
-  }
+    message:
+      "Placeholder translateRecipe server action — integrate Gemini here",
+  };
 }
