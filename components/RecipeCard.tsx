@@ -1,8 +1,9 @@
 "use client"
 import React, { useMemo, useState } from 'react'
-import type { MatchedRecipe } from '../lib/matching'
-import { useLanguage } from './LanguageProvider'
+import type { MatchResult } from '../lib/matchingLogic'
 import { extractYouTubeId, youtubeThumbnailFor } from '../lib/matching'
+
+type Locale = 'en' | 'bn'
 
 function toBengaliNumber(n: number) {
   const map = ['০','১','২','৩','৪','৫','৬','৭','৮','৯']
@@ -21,14 +22,17 @@ function missingLabel(lang: 'en' | 'bn', need: number, missing: string[]) {
   return `${bnNum}টি উপকরণ নেই: ${missing.join(', ')}`
 }
 
-export default function RecipeCard({ m }: { m: MatchedRecipe }) {
-  const { lang } = useLanguage()
+export default function RecipeCard({ result, locale = 'en' }: { result: MatchResult; locale?: Locale }) {
+  const m = result
   const r = m.recipe
   const videoId = useMemo(() => extractYouTubeId(r.youtubeUrl), [r.youtubeUrl])
   const thumbnail = videoId ? youtubeThumbnailFor(videoId) : r.thumbnail
   const [open, setOpen] = useState(false)
 
-  const haveText = lang === 'en' ? `You have ${m.have} ingredients, you need ${m.need} more.` : `আপনার আছে ${toBengaliNumber(m.have)} উপকরণ, আরও প্রয়োজন ${toBengaliNumber(m.need)}`
+  const haveText =
+    locale === 'en'
+      ? `You have ${m.have} ingredients, you need ${m.need} more.`
+      : `আপনার আছে ${toBengaliNumber(m.have)} উপকরণ, আরও প্রয়োজন ${toBengaliNumber(m.need)}`
 
   return (
     <article className="bg-white rounded-lg shadow p-4 flex flex-col">
@@ -41,24 +45,35 @@ export default function RecipeCard({ m }: { m: MatchedRecipe }) {
       </div>
 
       <div className="mt-3 flex-1 flex flex-col">
-        <h3 className="font-semibold text-lg">{r.title[lang]}</h3>
+        <h3 className="font-semibold text-lg">{r.title[locale]}</h3>
         <div className="text-sm text-gray-600 mt-1">{haveText}</div>
         <div className="mt-2 text-sm">
-          <strong>{lang === 'en' ? 'Match %' : 'মিল %'}: </strong>
+          <strong>{locale === 'en' ? 'Match %' : 'মিল %'}: </strong>
           <span className="font-medium">{m.matchPercent}%</span>
         </div>
 
         <div className="mt-2 text-sm">
-          <strong>{lang === 'en' ? 'Missing Ingredients' : 'নেটি উপকরণ'}: </strong>
-          <div className="text-sm text-gray-700 mt-1">{missingLabel(lang, m.need, m.missing)}</div>
+          <strong>{locale === 'en' ? 'Ingredients' : 'উপকরণ'}: </strong>
+          <div className="text-sm text-gray-700 mt-1">
+            <ul className="list-inside">
+              {r.ingredients[locale].map((ing) => {
+                const isMissing = m.missing.includes(ing)
+                return (
+                  <li key={ing} className={`${isMissing ? 'text-red-600' : 'text-green-600'}`}>
+                    {isMissing ? (locale === 'en' ? `✖ ${ing}` : `✖ ${ing}`) : (locale === 'en' ? `✓ ${ing}` : `✓ ${ing}`)}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
 
         <div className="mt-3 flex gap-2">
           <button onClick={() => setOpen(true)} className="px-3 py-1 bg-red-500 text-white rounded">
-            {lang === 'en' ? 'Watch Tutorial' : 'টিউটোরিয়াল দেখুন'}
+            {locale === 'en' ? 'Watch Tutorial' : 'টিউটোরিয়াল দেখুন'}
           </button>
           <a href={r.youtubeUrl} target="_blank" rel="noreferrer" className="px-3 py-1 border rounded">
-            {lang === 'en' ? 'Open in YouTube' : 'ইউটিউবে খুলুন'}
+            {locale === 'en' ? 'Open in YouTube' : 'ইউটিউবে খুলুন'}
           </a>
         </div>
       </div>
