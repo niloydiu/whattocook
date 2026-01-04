@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import RecipeCard from "../components/RecipeCardClean";
 import useLanguage from "../hooks/useLanguage";
 import recipeDataRaw from "../lib/recipeData.json";
+import Hero from "../components/Hero";
+
 
 type Locale = "en" | "bn";
 
@@ -62,6 +64,8 @@ export default function Page() {
   const [pantry, setPantry] = useState<string[]>([]);
   const [debouncedPantry, setDebouncedPantry] = useState<string[]>(pantry);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const id = setTimeout(() => setDebouncedPantry(pantry.slice()), 200);
@@ -122,6 +126,12 @@ export default function Page() {
     return out;
   }, [indexed, debouncedPantry]);
 
+  function handleFind() {
+    setLoading(true);
+    // simulate smooth loading while results compute (instant for client)
+    setTimeout(() => setLoading(false), 500);
+  }
+
   return (
     <main className="min-h-screen p-4 bg-gradient-to-b from-slate-50 to-white font-sans">
       <div className="max-w-6xl mx-auto">
@@ -147,67 +157,21 @@ export default function Page() {
           </div>
         </header>
 
-        <section className="mb-6">
-          <div className="bg-white/30 backdrop-blur-md rounded-xl p-4 shadow-sm">
-            <label className="block text-xs text-slate-700 mb-2">
-              {t("Add ingredient", "উপকরণ যোগ করুন")}
-            </label>
-            <div className="flex gap-2">
-              <input
-                aria-label="ingredient"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    addPantryItem(query);
-                  }
-                }}
-                className="flex-1 bg-white/40 rounded-md px-3 py-2 outline-none"
-                placeholder={t(
-                  "Type ingredient and press Enter",
-                  "এন্টার করে উপকরণ যোগ করুন"
-                )}
-              />
-              <button
-                onClick={() => addPantryItem(query)}
-                className="bg-indigo-600 text-white px-4 rounded-md"
-              >
-                {t("Add", "যোগ করুন")}
-              </button>
-            </div>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {pantry.map((p, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 rounded-full bg-white/60 text-sm flex items-center gap-2"
-                >
-                  <span>{p}</span>
-                  <button
-                    onClick={() => removePantryItem(i)}
-                    aria-label="remove"
-                    className="text-slate-600"
-                  >
-                    ✕
-                  </button>
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Hero pantry={pantry} onAdd={(s) => addPantryItem(s)} onRemove={removePantryItem} onFind={handleFind} locale={locale} />
 
         <section>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {results.map((r) => (
-              <RecipeCard
-                key={r.recipe.id}
-                recipe={r.recipe}
-                matchPercent={r.matchPercent}
-                have={r.have}
-                total={r.total}
-                locale={locale}
-                onOpenVideo={(id) => setSelectedVideo(id)}
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {results.map((r, idx) => (
+              <div key={r.recipe.id + idx} className="transform hover:-translate-y-1 transition">
+                <RecipeCard
+                  recipe={r.recipe}
+                  matchPercent={r.matchPercent}
+                  have={r.have}
+                  total={r.total}
+                  locale={locale}
+                  onOpenVideo={(id) => setSelectedVideo(id)}
+                />
+              </div>
             ))}
           </div>
         </section>
