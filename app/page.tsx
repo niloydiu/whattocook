@@ -2,11 +2,12 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChefHat, Languages, Github, Youtube, X } from "lucide-react";
+import { ChefHat, Languages, Github, Youtube, X, Settings, Plus, Loader2 } from "lucide-react";
 import RecipeCard from "../components/RecipeCardClean";
 import useLanguage from "../hooks/useLanguage";
 import recipeDataRaw from "../lib/recipeData.json";
 import Hero from "../components/Hero";
+import { importRecipeFromYoutube } from "./actions/importer";
 
 type Locale = "en" | "bn";
 
@@ -45,7 +46,7 @@ function itemMatches(a: string, b: string) {
 
 export default function Page() {
   const { locale, setLocale, t } = useLanguage();
-  const recipeData = recipeDataRaw as Recipe[];
+  const [recipeData, setRecipeData] = useState<Recipe[]>(recipeDataRaw as Recipe[]);
 
   const indexed = useMemo(() => {
     return recipeData.map((r) => {
@@ -64,6 +65,12 @@ export default function Page() {
   const [debouncedPantry, setDebouncedPantry] = useState<string[]>(pantry);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  
+  // Admin State
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [importId, setImportId] = useState("");
+  const [importing, setImporting] = useState(false);
+  const [importMsg, setImportMsg] = useState("");
 
   useEffect(() => {
     const id = setTimeout(() => setDebouncedPantry(pantry.slice()), 200);
@@ -116,9 +123,26 @@ export default function Page() {
   function handleFind() {
     setLoading(true);
     setTimeout(() => setLoading(false), 600);
-    // Scroll to results
     const el = document.getElementById("results-section");
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  async function handleImport() {
+    if (!importId) return;
+    setImporting(true);
+    setImportMsg("");
+    const res = await importRecipeFromYoutube(importId);
+    setImporting(false);
+    if (res.success) {
+      setImportMsg("Successfully imported!");
+      setImportId("");
+      // Refresh local data (in a real app we'd re-fetch from API)
+      if (res.recipe) {
+        setRecipeData(prev => [...prev, res.recipe as Recipe]);
+      }
+    } else {
+      setImportMsg("Error: " + res.message);
+    }
   }
 
   return (
@@ -126,7 +150,7 @@ export default function Page() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 glass-effect border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => setShowAdmin(!showAdmin)}>
             <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-red-600/20">
               <ChefHat size={20} />
             </div>
@@ -164,6 +188,46 @@ export default function Page() {
           </div>
         </div>
       </nav>
+
+      {/* Admin Panel */}
+      <AnimatePresence>
+        {showAdmin && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-slate-900 text-white overflow-hidden"
+          >
+            <div className="max-w-7xl mx-auto px-4 py-8">
+              <div className="flex items-center gap-2 mb-4 text-red-500">
+                <Settings size={20} />
+                <h2 className="font-bold uppercase tracking-widest text-sm">Admin Recipe Importer</h2>
+              </div>
+              <div className="flex flex-col md:flex-row gap-4">
+                <input 
+                  value={importId}
+                  onChange={(e) => setImportId(e.target.value)}
+                  placeholder="Enter YouTube Video ID (e.g. TrFaEvxxf6Y)"
+                  className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-red-500 transition-colors"
+                />
+                <button 
+                  onClick={handleImport}
+                  disabled={importing || !importId}
+                  className="bg-red-600 hover:bg-red-700 disabled:bg-slate-700 px-8 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all"
+                >
+                  {importing ? <Loader2 className="animate-spin" size={20} /> : <Plus size={20} />}
+                  {importing ? "Processing..." : "Import Recipe"}
+                </button>
+              </div>
+              {importMsg && (
+                <p className={`mt-3 text-sm font-medium ${importMsg.includes("Error") ? "text-red-400" : "text-green-400"}`}>
+                  {importMsg}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Hero 
         pantry={pantry} 
