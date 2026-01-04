@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --brand: #EF4444;
+}
+
+html,body,#root{
+  height:100%;
+}
+
+body{
+  font-family: 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: #fff7f5;
+  color: #111827;
+}
+
+.ingredient-chip{
+  @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border text-sm shadow-sm;
+}
