@@ -3,14 +3,16 @@
 import React, { useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Plus, X, ArrowRight } from "lucide-react";
-import recipeData from "../lib/recipeData.json";
+import ingredientsData from "../lib/ingredients.json";
 
 type Locale = "en" | "bn";
 
-function getIngredientIcon(name: string) {
-  const formatted = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  return `https://www.themealdb.com/images/ingredients/${formatted}-Small.png`;
-}
+type Ingredient = {
+  id: string;
+  name_en: string;
+  name_bn: string;
+  img: string;
+};
 
 export default function IngredientSearch({
   selected,
@@ -29,31 +31,47 @@ export default function IngredientSearch({
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const suggestions = useMemo(() => {
-    const pool = new Set<string>();
-    (recipeData as any[]).forEach((r) => {
-      (r.ingredients?.en || []).forEach((i: string) => pool.add(i));
-      (r.ingredients?.bn || []).forEach((i: string) => pool.add(i));
-    });
-    return Array.from(pool).sort();
-  }, []);
+  const ingredients = ingredientsData as Ingredient[];
 
   const filtered = useMemo(() => {
     const q = input.trim().toLowerCase();
-    if (!q) return suggestions.slice(0, 8);
-    return suggestions.filter((s) => s.toLowerCase().includes(q)).slice(0, 8);
-  }, [input, suggestions]);
+    if (!q) return ingredients.slice(0, 8);
+    return ingredients
+      .filter(
+        (i) =>
+          i.name_en.toLowerCase().includes(q) || i.name_bn.includes(q)
+      )
+      .slice(0, 8);
+  }, [input, ingredients]);
 
   function addFromInput() {
     const v = input.trim();
     if (!v) return;
-    if (selected.includes(v)) {
+    
+    // Try to find the ingredient in our list to get the canonical name
+    const found = ingredients.find(
+      (i) =>
+        i.name_en.toLowerCase() === v.toLowerCase() ||
+        i.name_bn === v
+    );
+    
+    const nameToAdd = found ? (locale === "en" ? found.name_en : found.name_bn) : v;
+
+    if (selected.includes(nameToAdd)) {
       setInput("");
       return;
     }
-    onAdd(v);
+    onAdd(nameToAdd);
     setInput("");
     setOpen(false);
+  }
+
+  function getIconForName(name: string) {
+    const found = ingredients.find(i => i.name_en === name || i.name_bn === name);
+    if (found) return found.img;
+    // Fallback
+    const formatted = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    return `https://www.themealdb.com/images/ingredients/${formatted}-Small.png`;
   }
 
   return (
@@ -83,12 +101,12 @@ export default function IngredientSearch({
                   exit={{ opacity: 0, y: 15 }}
                   className="absolute left-0 right-0 mt-4 bg-white/95 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-100 max-h-72 overflow-auto z-50 py-3 px-2"
                 >
-                  {filtered.map((s) => (
+                  {filtered.map((i) => (
                     <li
-                      key={s}
+                      key={i.id}
                       onMouseDown={(e) => {
                         e.preventDefault();
-                        onAdd(s);
+                        onAdd(locale === "en" ? i.name_en : i.name_bn);
                         setInput("");
                         setOpen(false);
                       }}
@@ -96,12 +114,15 @@ export default function IngredientSearch({
                     >
                       <div className="flex items-center gap-3">
                         <img 
-                          src={getIngredientIcon(s)} 
+                          src={i.img} 
                           alt="" 
-                          className="w-6 h-6 object-contain"
+                          className="w-8 h-8 object-contain"
                           onError={(e) => (e.currentTarget.style.display = 'none')}
                         />
-                        <span>{s}</span>
+                        <div className="flex flex-col">
+                          <span className="font-bold">{locale === "en" ? i.name_en : i.name_bn}</span>
+                          <span className="text-xs text-slate-400">{locale === "en" ? i.name_bn : i.name_en}</span>
+                        </div>
                       </div>
                       <Plus size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                     </li>
@@ -140,7 +161,7 @@ export default function IngredientSearch({
                     className="flex items-center gap-2.5 bg-white border border-slate-100 px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-700 shadow-sm hover:border-red-200 transition-all group"
                   >
                     <img 
-                      src={getIngredientIcon(s)} 
+                      src={getIconForName(s)} 
                       alt="" 
                       className="w-5 h-5 object-contain"
                       onError={(e) => (e.currentTarget.style.display = 'none')}

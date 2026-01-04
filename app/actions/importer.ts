@@ -19,7 +19,10 @@ export async function importRecipeFromYoutube(videoId: string) {
 
     // 2. Call Gemini to process transcript
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    
+
+    const ingredientsPath = path.join(process.cwd(), "lib", "ingredients.json");
+    const ingredientsList = await fs.readFile(ingredientsPath, "utf-8");
+
     const prompt = `
       Act as a professional chef and data engineer. 
       Below is a transcript from a cooking video. Extract the recipe and format it as a valid JSON object.
@@ -33,6 +36,9 @@ export async function importRecipeFromYoutube(videoId: string) {
       Rules:
       - Simplify ingredients to single words or short phrases (e.g., "Chicken" instead of "500g Chicken").
       - Translate accurately between English and Bangla.
+      - IMPORTANT: Use the following list of known ingredients if they match. Use the exact "name_en" and "name_bn" values.
+      Known Ingredients: ${ingredientsList}
+      
       - Return ONLY the JSON object, no markdown formatting.
 
       Transcript: ${transcript}
@@ -40,8 +46,11 @@ export async function importRecipeFromYoutube(videoId: string) {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text().replace(/```json|```/g, "").trim();
-    
+    const text = response
+      .text()
+      .replace(/```json|```/g, "")
+      .trim();
+
     const recipeJson = JSON.parse(text);
 
     // 3. Add metadata
@@ -49,14 +58,14 @@ export async function importRecipeFromYoutube(videoId: string) {
       id: videoId,
       youtubeId: videoId,
       thumbnail: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-      ...recipeJson
+      ...recipeJson,
     };
 
     // 4. Save to local file
     const filePath = path.join(process.cwd(), "lib", "recipeData.json");
     const fileData = await fs.readFile(filePath, "utf-8");
     const recipes = JSON.parse(fileData);
-    
+
     // Check if already exists
     const exists = recipes.find((r: any) => r.youtubeId === videoId);
     if (exists) {
