@@ -37,9 +37,11 @@ function getYoutubeThumbnail(id?: string) {
 
 function getIngredientIcon(name: string) {
   const ingredients = ingredientsData as any[];
-  const found = ingredients.find(i => i.name_en === name || i.name_bn === name);
+  const found = ingredients.find(
+    (i) => i.name_en === name || i.name_bn === name
+  );
   if (found) return found.img;
-  
+
   // TheMealDB uses capitalized names for icons
   const formatted = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   return `https://www.themealdb.com/images/ingredients/${formatted}-Small.png`;
@@ -83,17 +85,17 @@ export default function RecipeCardClean({
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -8 }}
-      className="glass-card rounded-[2rem] overflow-hidden flex flex-col h-full group transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 border border-white/40"
+      className="glass-card rounded-[2rem] md:rounded-[2.5rem] overflow-hidden flex flex-col h-full group transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(239,68,68,0.15)] border border-white/50"
     >
-      <div className="relative h-56 overflow-hidden">
+      <div className="relative h-48 md:h-64 overflow-hidden">
         {thumbnail ? (
           <img
             src={thumbnail}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">
@@ -102,14 +104,14 @@ export default function RecipeCardClean({
         )}
 
         {/* Match Badge Overlay */}
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-5 left-5 z-10">
           <div
-            className={`px-4 py-2 rounded-2xl backdrop-blur-xl border text-xs font-bold flex items-center gap-2 shadow-lg ${
+            className={`px-4 py-2 rounded-2xl backdrop-blur-xl border text-xs font-black flex items-center gap-2 shadow-lg transition-all duration-500 ${
               pct > 80
                 ? "bg-green-500/20 border-green-500/30 text-green-700"
                 : pct > 50
                 ? "bg-orange-500/20 border-orange-500/30 text-orange-700"
-                : "bg-slate-500/20 border-slate-500/30 text-slate-700"
+                : "bg-red-500/20 border-red-500/30 text-red-700"
             }`}
           >
             <div
@@ -118,7 +120,7 @@ export default function RecipeCardClean({
                   ? "bg-green-500"
                   : pct > 50
                   ? "bg-orange-500"
-                  : "bg-slate-500"
+                  : "bg-red-500"
               }`}
             />
             {pct}% {locale === "en" ? "Match" : "মিল"}
@@ -127,37 +129,37 @@ export default function RecipeCardClean({
 
         {/* Play Button Overlay */}
         {recipe.youtubeId && (
-          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-red-600 shadow-2xl cursor-pointer"
+              className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white shadow-2xl cursor-pointer"
               onClick={() => onOpenVideo(recipe.youtubeId!)}
             >
-              <Play fill="currentColor" size={28} className="ml-1" />
+              <Play fill="currentColor" size={32} className="ml-1" />
             </motion.div>
           </div>
         )}
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
-        <h3 className="font-black text-xl text-slate-900 leading-tight mb-3 group-hover:text-red-600 transition-colors line-clamp-2">
+      <div className="p-5 md:p-8 flex-1 flex flex-col">
+        <h3 className="font-black text-xl md:text-2xl text-slate-900 leading-tight mb-4 group-hover:text-red-600 transition-colors line-clamp-2">
           {title}
         </h3>
 
         {/* Progress Bar */}
-        <div className="mb-4">
-          <div className="flex justify-between text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider">
+        <div className="mb-6">
+          <div className="flex justify-between text-[10px] font-black text-slate-400 mb-2 uppercase tracking-[0.2em]">
             <span>{locale === "en" ? "Ingredients" : "উপকরণ"}</span>
-            <span>
+            <span className="text-slate-900">
               {have}/{total}
             </span>
           </div>
-          <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+          <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden p-0.5">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${pct}%` }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
               className={`h-full rounded-full ${
                 pct > 80
                   ? "bg-green-500"
@@ -169,29 +171,31 @@ export default function RecipeCardClean({
           </div>
         </div>
 
-        {/* Missing Ingredients - Red Pill Style */}
+        {/* Missing Ingredients */}
         {missing.length > 0 && (
-          <div className="mb-6">
-            <div className="flex items-center gap-1.5 text-[10px] font-black text-red-500 uppercase tracking-widest mb-3">
-              <AlertCircle size={12} />
+          <div className="mb-6 md:mb-8">
+            <div className="flex items-center gap-2 text-[10px] font-black text-amber-600 uppercase tracking-[0.2em] mb-3 md:mb-4">
+              <AlertCircle size={14} />
               {locale === "en" ? "Missing Items" : "যা প্রয়োজন"}
             </div>
             <div className="flex flex-wrap gap-2">
               {missing.map((ing, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 border border-red-100 text-red-600 rounded-xl text-xs font-medium"
+                  className="flex items-center gap-2 px-3 py-1.5 md:px-3.5 md:py-2 bg-slate-50 border border-slate-100 text-slate-600 rounded-xl text-[10px] md:text-xs font-bold hover:bg-white hover:shadow-sm transition-all"
                 >
-                  <img
-                    src={getIngredientIcon(
-                      recipe.ingredients.en[
-                        recipe.ingredients[locale].indexOf(ing)
-                      ]
-                    )}
-                    alt=""
-                    className="w-4 h-4 object-contain"
-                    onError={(e) => (e.currentTarget.style.display = "none")}
-                  />
+                  <div className="w-4 h-4 md:w-5 md:h-5 bg-white rounded-lg flex items-center justify-center p-0.5 md:p-1">
+                    <img
+                      src={getIngredientIcon(
+                        recipe.ingredients.en[
+                          recipe.ingredients[locale].indexOf(ing)
+                        ]
+                      )}
+                      alt=""
+                      className="w-full h-full object-contain"
+                      onError={(e) => (e.currentTarget.style.display = "none")}
+                    />
+                  </div>
                   {ing}
                 </div>
               ))}
@@ -199,13 +203,17 @@ export default function RecipeCardClean({
           </div>
         )}
 
-        <div className="mt-auto pt-4 flex items-center gap-3">
+        <div className="mt-auto pt-4 md:pt-6 flex items-center gap-3 md:gap-4">
           <button
             onClick={() => onOpenVideo(recipe.youtubeId!)}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-red-600 text-white rounded-2xl font-bold text-sm transition-all duration-300 shadow-xl shadow-slate-900/10 hover:shadow-red-600/20 active:scale-95"
+            className="flex-1 flex items-center justify-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-slate-900 hover:bg-red-600 text-white rounded-xl md:rounded-[1.5rem] font-black text-xs md:text-sm transition-all duration-500 shadow-xl shadow-slate-900/10 hover:shadow-red-600/20 active:scale-95"
           >
-            <Play size={16} fill="currentColor" />
-            {locale === "en" ? "Watch Now" : "এখনই দেখুন"}
+            <Play
+              size={16}
+              className="md:w-[18px] md:h-[18px]"
+              fill="currentColor"
+            />
+            {locale === "en" ? "Watch Recipe" : "রেসিপি দেখুন"}
           </button>
 
           {recipe.youtubeUrl && (
@@ -213,9 +221,9 @@ export default function RecipeCardClean({
               href={recipe.youtubeUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-3.5 border-2 border-slate-100 hover:border-red-100 hover:bg-red-50 text-slate-400 hover:text-red-600 rounded-2xl transition-all duration-300"
+              className="p-3 md:p-4 border-2 border-slate-100 hover:border-red-100 hover:bg-red-50 text-slate-400 hover:text-red-600 rounded-xl md:rounded-[1.5rem] transition-all duration-500"
             >
-              <ExternalLink size={20} />
+              <ExternalLink size={20} className="md:w-[22px] md:h-[22px]" />
             </a>
           )}
         </div>

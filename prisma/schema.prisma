@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Ingredients table - stores all 1200+ ingredients
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name_en   String
+  name_bn   String
+  img       String
+  phonetic  String[] // Array of phonetic variations for fuzzy search
+  
+  recipeIngredients RecipeIngredient[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([name_en])
+  @@index([name_bn])
+}
+
+// Recipes table - stores recipe metadata
+model Recipe {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  title_en     String
+  title_bn     String
+  image        String
+  youtube_url  String
+  youtube_id   String? // Extracted YouTube video ID
+  cuisine      String
+  category     String
+  difficulty   String
+  prep_time    Int // in minutes
+  cook_time    Int // in minutes
+  servings     Int
+  
+  ingredients  RecipeIngredient[]
+  steps        RecipeStep[]
+  blogContent  RecipeBlogContent?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([title_en])
+  @@index([title_bn])
+  @@index([cuisine])
+  @@index([category])
+}
+
+// Junction table - links recipes to ingredients with quantities
+model RecipeIngredient {
+  id            Int        @id @default(autoincrement())
+  recipe_id     Int
+  ingredient_id Int
+  quantity      String
+  unit_en       String
+  unit_bn       String
+  notes_en      String?
+  notes_bn      String?
+  
+  recipe        Recipe     @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  ingredient    Ingredient @relation(fields: [ingredient_id], references: [id])
+  
+  @@unique([recipe_id, ingredient_id])
+  @@index([recipe_id])
+  @@index([ingredient_id])
+}
+
+// Recipe steps - cooking instructions with timestamps
+model RecipeStep {
+  id            Int     @id @default(autoincrement())
+  recipe_id     Int
+  step_number   Int
+  instruction_en String @db.Text
+  instruction_bn String @db.Text
+  timestamp     String? // YouTube video timestamp (e.g., "2:30")
+  
+  recipe        Recipe  @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  
+  @@unique([recipe_id, step_number])
+  @@index([recipe_id])
+}
+
+// Recipe blog content - full blog sections
+model RecipeBlogContent {
+  id                Int     @id @default(autoincrement())
+  recipe_id         Int     @unique
+  intro_en          String  @db.Text
+  intro_bn          String  @db.Text
+  what_makes_it_special_en String @db.Text
+  what_makes_it_special_bn String @db.Text
+  cooking_tips_en   String  @db.Text
+  cooking_tips_bn   String  @db.Text
+  serving_en        String  @db.Text
+  serving_bn        String  @db.Text
+  storage_en        String? @db.Text
+  storage_bn        String? @db.Text
+  full_blog_en      String  @db.Text
+  full_blog_bn      String  @db.Text
+  
+  recipe            Recipe  @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  
+  @@index([recipe_id])
+}
+
+// Admin users - for authentication
+model Admin {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  password_hash String
+  email         String?  @unique
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([username])
+}

@@ -138,7 +138,7 @@
     "id": "13",
     "name_en": "Coconut Oil",
     "name_bn": "নারকেল তেল",
-    "img": "/ingredients/13_coconut_oil.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut%20Oil.png",
     "phonetic": [
       "coconut oil",
       "coocoonut ooil",
@@ -296,7 +296,7 @@
     "id": "27",
     "name_en": "Mustard Oil",
     "name_bn": "সরিষার তেল",
-    "img": "/ingredients/27_mustard_oil.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Mustard%20Oil.png",
     "phonetic": [
       "shorisher tel",
       "sorisher tel",
@@ -349,7 +349,7 @@
     "id": "32",
     "name_en": "Mutton",
     "name_bn": "খাসির মাংস",
-    "img": "/ingredients/32_mutton.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Mutton.png",
     "phonetic": [
       "khashir mangsho",
       "khasi",
@@ -381,7 +381,7 @@
     "id": "35",
     "name_en": "Soy Milk",
     "name_bn": "সয়া দুধ",
-    "img": "/ingredients/35_soy_milk.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Soy%20Milk.png",
     "phonetic": [
       "soy milk",
       "sooy milk",
@@ -403,7 +403,7 @@
     "id": "37",
     "name_en": "Bok Choy",
     "name_bn": "বক চয়",
-    "img": "/ingredients/37_bok_choy.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Bok%20Choy.png",
     "phonetic": [
       "bok choy",
       "book chooy"
@@ -424,7 +424,7 @@
     "id": "39",
     "name_en": "Bell Pepper",
     "name_bn": "ক্যাপসিকাম",
-    "img": "/ingredients/39_bell_pepper.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Bell%20Pepper.png",
     "phonetic": [
       "bell pepper",
       "beell peeppeer"
@@ -467,7 +467,7 @@
     "id": "43",
     "name_en": "Cauliflower",
     "name_bn": "ফুলকপি",
-    "img": "/ingredients/43-Cauliflower.png",
+    "img": "https://www.themealdb.com/images/ingredients/Cauliflower.png",
     "phonetic": [
       "fulkopi",
       "phulkopi",
@@ -490,7 +490,7 @@
     "id": "45",
     "name_en": "Red Amaranth",
     "name_bn": "লাল শাক",
-    "img": "/ingredients/45-Red_Amaranth.png",
+    "img": "https://www.themealdb.com/images/ingredients/Red%20Amaranth.png",
     "phonetic": [
       "red amaranth",
       "red aamaaraanth",
@@ -525,7 +525,7 @@
     "id": "48",
     "name_en": "Pasta",
     "name_bn": "পাস্তা",
-    "img": "/ingredients/48-Pasta.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pasta.png",
     "phonetic": [
       "pasta",
       "paastaa"
@@ -670,7 +670,7 @@
     "id": "61",
     "name_en": "Sesame Oil",
     "name_bn": "তিল তেল",
-    "img": "/ingredients/61_sesame_oil.png",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Oil.png",
     "phonetic": [
       "sesame oil",
       "sesaame oil",
@@ -725,7 +725,7 @@
     "id": "66",
     "name_en": "Nigella Seed",
     "name_bn": "কালোজিরা",
-    "img": "/ingredients/66_nigella_seed.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Nigella%20Seed.png",
     "phonetic": [
       "nigella seed",
       "nigellaa seed",
@@ -737,7 +737,7 @@
     "id": "67",
     "name_en": "Tamarind",
     "name_bn": "তেঁতুল",
-    "img": "/ingredients/67-Tamarind.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tamarind.png",
     "phonetic": [
       "tetul",
       "tentul",
@@ -748,7 +748,7 @@
     "id": "68",
     "name_en": "Curry Leaves",
     "name_bn": "কারিপাতা",
-    "img": "/ingredients/68_curry_leaves.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Curry%20Leaves.png",
     "phonetic": [
       "curry pata",
       "karipatta"
@@ -881,7 +881,7 @@
     "id": "80",
     "name_en": "Ketchup",
     "name_bn": "কেচাপ",
-    "img": "/ingredients/80-Ketchup.png",
+    "img": "https://www.themealdb.com/images/ingredients/Ketchup.png",
     "phonetic": [
       "ketchup",
       "keetchup",
@@ -914,7 +914,7 @@
     "id": "83",
     "name_en": "Burger Bun",
     "name_bn": "বার্গার বান",
-    "img": "/ingredients/83_burger_bun.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Burger%20Bun.png",
     "phonetic": [
       "burger bun",
       "burgeer bun",
@@ -959,7 +959,7 @@
     "id": "87",
     "name_en": "Corn",
     "name_bn": "ভুট্টা",
-    "img": "/ingredients/87-Corn.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Corn.png",
     "phonetic": [
       "bhutta",
       "maize",
@@ -970,7 +970,7 @@
     "id": "88",
     "name_en": "Green Peas",
     "name_bn": "মটরশুঁটি",
-    "img": "/ingredients/88-Green_Peas.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Peas.png",
     "phonetic": [
       "green peas",
       "green peaas",
@@ -1107,7 +1107,7 @@
     "id": "100",
     "name_en": "Mango",
     "name_bn": "আম",
-    "img": "/ingredients/100-Mango.png",
+    "img": "https://www.themealdb.com/images/ingredients/Mango.png",
     "phonetic": [
       "aam",
       "am",
@@ -1118,7 +1118,7 @@
     "id": "101",
     "name_en": "Bamboo Shoots",
     "name_bn": "বাঁশ কোড়ল",
-    "img": "/ingredients/101-Bamboo_Shoots.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bamboo%20Shoots.png",
     "phonetic": [
       "bamboo shoots",
       "baamboo shoots",
@@ -1129,7 +1129,7 @@
     "id": "102",
     "name_en": "Water Chestnuts",
     "name_bn": "পানিফল",
-    "img": "/ingredients/102_water_chestnuts.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Water%20Chestnuts.png",
     "phonetic": [
       "water chestnuts",
       "waater chestnuts",
@@ -1141,7 +1141,7 @@
     "id": "103",
     "name_en": "Sichuan Peppercorns",
     "name_bn": "সিচুয়ান গোলমরিচ",
-    "img": "/ingredients/103-Sichuan_Peppercorns.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sichuan%20Peppercorns.png",
     "phonetic": [
       "sichuan peppercorns",
       "sichuaan peppercorns",
@@ -1225,7 +1225,7 @@
     "id": "110",
     "name_en": "Goat Cheese",
     "name_bn": "ছাগলের দুধের পনির",
-    "img": "/ingredients/110-Goat_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Goat%20Cheese.png",
     "phonetic": [
       "goat cheese",
       "goaat cheese",
@@ -1249,7 +1249,7 @@
     "id": "112",
     "name_en": "Pancetta",
     "name_bn": "প্যানচেটা",
-    "img": "/ingredients/112-Pancetta.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pancetta.png",
     "phonetic": [
       "pancetta",
       "paancettaa",
@@ -1272,7 +1272,7 @@
     "id": "114",
     "name_en": "Salami",
     "name_bn": "সালামি",
-    "img": "/ingredients/114-Salami.png",
+    "img": "https://www.themealdb.com/images/ingredients/Salami.png",
     "phonetic": [
       "salami",
       "saalaami",
@@ -1330,7 +1330,7 @@
     "id": "119",
     "name_en": "Artichokes",
     "name_bn": "আর্টিকোক",
-    "img": "/ingredients/119-Artichokes.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Artichokes.png",
     "phonetic": [
       "artichokes",
       "aartichokes",
@@ -1354,7 +1354,7 @@
     "id": "121",
     "name_en": "Lasagna Sheets",
     "name_bn": "লাজানিয়া শিট",
-    "img": "/ingredients/121-Lasagna_Sheets.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lasagna%20Sheets.png",
     "phonetic": [
       "lasagna sheets",
       "laasaagnaa sheets",
@@ -1365,7 +1365,7 @@
     "id": "122",
     "name_en": "Penne",
     "name_bn": "পেন্নে পাস্তা",
-    "img": "/ingredients/122-Penne.png",
+    "img": "https://www.themealdb.com/images/ingredients/Penne.png",
     "phonetic": [
       "penne",
       "peennee"
@@ -1387,7 +1387,7 @@
     "id": "124",
     "name_en": "Gnocchi",
     "name_bn": "নকি",
-    "img": "/ingredients/124-Gnocchi.png",
+    "img": "https://www.themealdb.com/images/ingredients/Gnocchi.png",
     "phonetic": [
       "gnocchi",
       "gnoocchi",
@@ -1432,7 +1432,7 @@
     "id": "128",
     "name_en": "Red Kidney Beans",
     "name_bn": "লাল শিম",
-    "img": "/ingredients/128-Red_Kidney_Beans.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Red%20Kidney%20Beans.png",
     "phonetic": [
       "red kidney beans",
       "red kidney beaans",
@@ -1479,7 +1479,7 @@
     "id": "132",
     "name_en": "Pearl Barley",
     "name_bn": "বার্লি",
-    "img": "/ingredients/132-Pearl_Barley.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pearl%20Barley.png",
     "phonetic": [
       "pearl barley",
       "peaarl baarley",
@@ -1502,7 +1502,7 @@
     "id": "134",
     "name_en": "Evaporated Milk",
     "name_bn": "ঘন দুধ",
-    "img": "/ingredients/134-Evaporated_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Evaporated%20Milk.png",
     "phonetic": [
       "evaporated milk",
       "evaaporaated milk",
@@ -1619,7 +1619,7 @@
     "id": "144",
     "name_en": "Panko",
     "name_bn": "পাঙ্কো",
-    "img": "/ingredients/144_panko.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Panko.png",
     "phonetic": [
       "panko",
       "paanko",
@@ -1630,7 +1630,7 @@
     "id": "145",
     "name_en": "Gelatine",
     "name_bn": "জেলেটিন",
-    "img": "/ingredients/145-Gelatine.png",
+    "img": "https://www.themealdb.com/images/ingredients/Gelatine.png",
     "phonetic": [
       "gelatine",
       "gelaatine",
@@ -1654,7 +1654,7 @@
     "id": "147",
     "name_en": "Polenta",
     "name_bn": "পোলেন্টা",
-    "img": "/ingredients/147-Polenta.png",
+    "img": "https://www.themealdb.com/images/ingredients/Polenta.png",
     "phonetic": [
       "polenta",
       "polentaa",
@@ -1690,7 +1690,7 @@
     "id": "150",
     "name_en": "Whole Wheat Flour",
     "name_bn": "আটা/গমের আটা",
-    "img": "/ingredients/150_whole_wheat_flour.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Whole%20Wheat%20Flour.png",
     "phonetic": [
       "whole wheat flour",
       "whole wheaat flour",
@@ -1725,7 +1725,7 @@
     "id": "153",
     "name_en": "Muesli",
     "name_bn": "মুসলি",
-    "img": "/ingredients/153-Muesli.png",
+    "img": "https://www.themealdb.com/images/ingredients/Muesli.png",
     "phonetic": [
       "muesli",
       "mueesli",
@@ -1737,7 +1737,7 @@
     "id": "154",
     "name_en": "Granola",
     "name_bn": "গ্রানোলা",
-    "img": "/ingredients/154-Granola.png",
+    "img": "https://www.themealdb.com/images/ingredients/Granola.png",
     "phonetic": [
       "granola",
       "graanolaa",
@@ -1796,7 +1796,7 @@
     "id": "159",
     "name_en": "Stevia",
     "name_bn": "স্টিভিয়া",
-    "img": "/ingredients/159-Stevia.png",
+    "img": "https://www.themealdb.com/images/ingredients/Stevia.png",
     "phonetic": [
       "stevia",
       "steviaa",
@@ -1879,7 +1879,7 @@
     "id": "166",
     "name_en": "Tumeric Powder",
     "name_bn": "হলুদ গুঁড়া",
-    "img": "/ingredients/166-Tumeric_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tumeric%20Powder.png",
     "phonetic": [
       "tumeric powder",
       "tumeric poowder",
@@ -1946,7 +1946,7 @@
     "id": "172",
     "name_en": "Five-Spice Powder",
     "name_bn": "ফাইভ-স্পাইস পাউডার",
-    "img": "/ingredients/172-Five-Spice_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Five-Spice%20Powder.png",
     "phonetic": [
       "five-spice powder",
       "five-spice poowder",
@@ -2016,7 +2016,7 @@
     "id": "178",
     "name_en": "Sesame Seeds",
     "name_bn": "তিল",
-    "img": "/ingredients/178-Sesame_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Seeds.png",
     "phonetic": [
       "sesame seeds",
       "sesaame seeds",
@@ -2027,7 +2027,7 @@
     "id": "179",
     "name_en": "Black Sesame Seeds",
     "name_bn": "কালো তিল",
-    "img": "/ingredients/179-Black_Sesame_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Sesame%20Seeds.png",
     "phonetic": [
       "black sesame seeds",
       "blaack sesaame seeds",
@@ -2049,7 +2049,7 @@
     "id": "181",
     "name_en": "Asafoetida",
     "name_bn": "হিং",
-    "img": "/ingredients/181-Asafoetida.png",
+    "img": "https://www.themealdb.com/images/ingredients/Asafoetida.png",
     "phonetic": [
       "asafoetida",
       "aasaafoetidaa",
@@ -2072,7 +2072,7 @@
     "id": "183",
     "name_en": "Mace",
     "name_bn": "জয়ত্রী",
-    "img": "/ingredients/183-Mace.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mace.png",
     "phonetic": [
       "mace",
       "maace",
@@ -2095,7 +2095,7 @@
     "id": "185",
     "name_en": "Star Anise Pods",
     "name_bn": "আস্ত তারা মৌরি",
-    "img": "/ingredients/185-Star_Anise_Pods.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Star%20Anise%20Pods.png",
     "phonetic": [
       "star anise pods",
       "staar aanise pods",
@@ -2119,7 +2119,7 @@
     "id": "187",
     "name_en": "Maple Extract",
     "name_bn": "ম্যাপেল নির্যাস",
-    "img": "/ingredients/187-Maple_Extract.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Maple%20Extract.png",
     "phonetic": [
       "maple extract",
       "maaple extraact",
@@ -2250,7 +2250,7 @@
     "id": "199",
     "name_en": "BBQ Sauce",
     "name_bn": "বিবিকিউ সস",
-    "img": "/ingredients/199-BBQ_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/BBQ%20Sauce.png",
     "phonetic": [
       "bbq sauce",
       "bbq saauce",
@@ -2262,7 +2262,7 @@
     "id": "200",
     "name_en": "Teriyaki Sauce",
     "name_bn": "তেরিয়াকি সস",
-    "img": "/ingredients/200-Teriyaki_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Teriyaki%20Sauce.png",
     "phonetic": [
       "teriyaki sauce",
       "teriyaaki saauce",
@@ -2296,7 +2296,7 @@
     "id": "203",
     "name_en": "Quail Eggs",
     "name_bn": "কোয়েলের ডিম",
-    "img": "/ingredients/203-Quail_Eggs.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Quail%20Eggs.png",
     "phonetic": [
       "quail eggs",
       "quaail eggs",
@@ -2308,7 +2308,7 @@
     "id": "204",
     "name_en": "Hilsa Fish",
     "name_bn": "ইলিশ মাছ",
-    "img": "/ingredients/204-Hilsa_Fish.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hilsa%20Fish.png",
     "phonetic": [
       "hilsa fish",
       "hilsaa fish",
@@ -2319,7 +2319,7 @@
     "id": "205",
     "name_en": "Rohu Fish",
     "name_bn": "রুই মাছ",
-    "img": "/ingredients/205_rohu_fish.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Rohu%20Fish.png",
     "phonetic": [
       "rohu fish",
       "roohu fish",
@@ -2331,7 +2331,7 @@
     "id": "206",
     "name_en": "Catla Fish",
     "name_bn": "কাতল মাছ",
-    "img": "/ingredients/206-Catla_Fish.png",
+    "img": "https://www.themealdb.com/images/ingredients/Catla%20Fish.png",
     "phonetic": [
       "catla fish",
       "caatlaa fish",
@@ -2342,7 +2342,7 @@
     "id": "207",
     "name_en": "Pomfret",
     "name_bn": "রূপচাঁদা মাছ",
-    "img": "/ingredients/207_pomfret.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Pomfret.png",
     "phonetic": [
       "pomfret",
       "poomfret",
@@ -2353,7 +2353,7 @@
     "id": "208",
     "name_en": "Dried Fish",
     "name_bn": "শুঁটকি মাছ",
-    "img": "/ingredients/208-Dried_Fish.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dried%20Fish.png",
     "phonetic": [
       "dried fish",
       "drieed fish",
@@ -2396,7 +2396,7 @@
     "id": "212",
     "name_en": "Octopus",
     "name_bn": "অক্টোপাস",
-    "img": "/ingredients/212-Octopus.png",
+    "img": "https://www.themealdb.com/images/ingredients/Octopus.png",
     "phonetic": [
       "octopus",
       "ooctoopus",
@@ -2453,7 +2453,7 @@
     "id": "217",
     "name_en": "Bitter Gourd",
     "name_bn": "করল্লা",
-    "img": "/ingredients/217-Bitter_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bitter%20Gourd.png",
     "phonetic": [
       "korola",
       "karela",
@@ -2465,7 +2465,7 @@
     "id": "218",
     "name_en": "Bottle Gourd",
     "name_bn": "লাউ",
-    "img": "/ingredients/218-Bottle_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bottle%20Gourd.png",
     "phonetic": [
       "lau",
       "laau",
@@ -2476,7 +2476,7 @@
     "id": "219",
     "name_en": "Ridge Gourd",
     "name_bn": "ঝিঙা",
-    "img": "/ingredients/219-Ridge_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ridge%20Gourd.png",
     "phonetic": [
       "jhinga",
       "jheengaa",
@@ -2487,7 +2487,7 @@
     "id": "220",
     "name_en": "Snake Gourd",
     "name_bn": "চিচিঙ্গা",
-    "img": "/ingredients/220-Snake_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Snake%20Gourd.png",
     "phonetic": [
       "snake gourd",
       "snaake gourd",
@@ -2499,7 +2499,7 @@
     "id": "221",
     "name_en": "Pointed Gourd",
     "name_bn": "পটল",
-    "img": "/ingredients/221-Pointed_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pointed%20Gourd.png",
     "phonetic": [
       "pointed gourd",
       "poointed goourd",
@@ -2511,7 +2511,7 @@
     "id": "222",
     "name_en": "Spiny Gourd",
     "name_bn": "কাঁকরোল",
-    "img": "/ingredients/222-Spiny_Gourd.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spiny%20Gourd.png",
     "phonetic": [
       "spiny gourd",
       "spiny goourd",
@@ -2535,7 +2535,7 @@
     "id": "224",
     "name_en": "Sweet Potato",
     "name_bn": "মিষ্টি আলু",
-    "img": "/ingredients/224-Sweet_Potato.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sweet%20Potato.png",
     "phonetic": [
       "sweet potato",
       "sweet potaato",
@@ -2568,7 +2568,7 @@
     "id": "227",
     "name_en": "Okra",
     "name_bn": "ঢেঁড়স",
-    "img": "/ingredients/227-Okra.png",
+    "img": "https://www.themealdb.com/images/ingredients/Okra.png",
     "phonetic": [
       "dharosh",
       "dherosh",
@@ -2614,7 +2614,7 @@
     "id": "231",
     "name_en": "Curry Leaves",
     "name_bn": "কারি পাতা",
-    "img": "/ingredients/231-Curry_Leaves.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Curry%20Leaves.png",
     "phonetic": [
       "curry pata",
       "karipatta"
@@ -2624,7 +2624,7 @@
     "id": "232",
     "name_en": "Kaffir Lime Leaves",
     "name_bn": "লেবু পাতা",
-    "img": "/ingredients/232-Kaffir_Lime_Leaves.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kaffir%20Lime%20Leaves.png",
     "phonetic": [
       "kaffir lime leaves",
       "kaaffir lime leaaves",
@@ -2722,7 +2722,7 @@
     "id": "241",
     "name_en": "White Pepper",
     "name_bn": "সাদা গোলমরিচ",
-    "img": "/ingredients/241-White_Pepper.svg",
+    "img": "https://www.themealdb.com/images/ingredients/White%20Pepper.png",
     "phonetic": [
       "white pepper",
       "whitee peeppeer",
@@ -2733,7 +2733,7 @@
     "id": "242",
     "name_en": "Pink Peppercorns",
     "name_bn": "গোলাপী গোলমরিচ",
-    "img": "/ingredients/242-Pink_Peppercorns.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pink%20Peppercorns.png",
     "phonetic": [
       "pink peppercorns",
       "pink peppercoorns",
@@ -2745,7 +2745,7 @@
     "id": "243",
     "name_en": "Cardamom Pods",
     "name_bn": "এলাচ দানা",
-    "img": "/ingredients/243-Cardamom_Pods.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cardamom%20Pods.png",
     "phonetic": [
       "cardamom pods",
       "caardaamom pods",
@@ -2756,7 +2756,7 @@
     "id": "244",
     "name_en": "Black Cardamom",
     "name_bn": "বড় এলাচ",
-    "img": "/ingredients/244-Black_Cardamom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Cardamom.png",
     "phonetic": [
       "black cardamom",
       "blaack caardaamom",
@@ -2767,7 +2767,7 @@
     "id": "245",
     "name_en": "Caraway Seeds",
     "name_bn": "শাহ জিরা",
-    "img": "/ingredients/245-Caraway_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Caraway%20Seeds.png",
     "phonetic": [
       "caraway seeds",
       "caaraawaay seeds",
@@ -2778,7 +2778,7 @@
     "id": "246",
     "name_en": "Celery Seeds",
     "name_bn": "রাধুনি",
-    "img": "/ingredients/246-Celery_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Celery%20Seeds.png",
     "phonetic": [
       "celery seeds",
       "ceeleery seeeeds"
@@ -2788,7 +2788,7 @@
     "id": "247",
     "name_en": "Dill Seeds",
     "name_bn": "ডিল বীজ",
-    "img": "/ingredients/247-Dill_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dill%20Seeds.png",
     "phonetic": [
       "dill seeds",
       "dill seeeeds",
@@ -2811,7 +2811,7 @@
     "id": "249",
     "name_en": "Wasabi",
     "name_bn": "ওয়াসাবি",
-    "img": "/ingredients/249-Wasabi.png",
+    "img": "https://www.themealdb.com/images/ingredients/Wasabi.png",
     "phonetic": [
       "wasabi",
       "waasaabi",
@@ -2894,7 +2894,7 @@
     "id": "256",
     "name_en": "Corn Oil",
     "name_bn": "ভুট্টার তেল",
-    "img": "/ingredients/256-Corn_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Corn%20Oil.png",
     "phonetic": [
       "corn oil",
       "coorn ooil",
@@ -2938,7 +2938,7 @@
     "id": "260",
     "name_en": "Gouda",
     "name_bn": "গৌডা চিজ",
-    "img": "/ingredients/260-Gouda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gouda.png",
     "phonetic": [
       "gouda",
       "goudaa",
@@ -2961,7 +2961,7 @@
     "id": "262",
     "name_en": "Blue Cheese",
     "name_bn": "ব্লু চিজ",
-    "img": "/ingredients/262-Blue_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blue%20Cheese.png",
     "phonetic": [
       "blue cheese",
       "bluee cheeeesee",
@@ -2972,7 +2972,7 @@
     "id": "263",
     "name_en": "Swiss Cheese",
     "name_bn": "সুইস চিজ",
-    "img": "/ingredients/263-Swiss_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Swiss%20Cheese.png",
     "phonetic": [
       "swiss cheese",
       "swiss cheeeesee",
@@ -2983,7 +2983,7 @@
     "id": "264",
     "name_en": "Goat Milk",
     "name_bn": "ছাগলের দুধ",
-    "img": "/ingredients/264-Goat_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Goat%20Milk.png",
     "phonetic": [
       "goat milk",
       "goaat milk",
@@ -3007,7 +3007,7 @@
     "id": "266",
     "name_en": "Oat Milk",
     "name_bn": "ওটস দুধ",
-    "img": "/ingredients/266-Oat_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Oat%20Milk.png",
     "phonetic": [
       "oat milk",
       "oaat milk",
@@ -3099,7 +3099,7 @@
     "id": "274",
     "name_en": "Marmalade",
     "name_bn": "মার্মালেড",
-    "img": "/ingredients/274-Marmalade.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Marmalade.png",
     "phonetic": [
       "marmalade",
       "maarmaalaade",
@@ -3122,7 +3122,7 @@
     "id": "276",
     "name_en": "Baking Soda",
     "name_bn": "খাবার সোডা",
-    "img": "/ingredients/276-Baking_Soda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baking%20Soda.png",
     "phonetic": [
       "baking soda",
       "baaking sodaa",
@@ -3169,7 +3169,7 @@
     "id": "280",
     "name_en": "Pecan",
     "name_bn": "পেকান বাদাম",
-    "img": "/ingredients/280-Pecan.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pecan.png",
     "phonetic": [
       "pecan",
       "pecaan",
@@ -3192,7 +3192,7 @@
     "id": "282",
     "name_en": "Macadamia Nut",
     "name_bn": "ম্যাকাডামিয়া বাদাম",
-    "img": "/ingredients/282-Macadamia_Nut.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Macadamia%20Nut.png",
     "phonetic": [
       "macadamia nut",
       "maacaadaamiaa nut",
@@ -3204,7 +3204,7 @@
     "id": "283",
     "name_en": "Hazelnuts",
     "name_bn": "হেজেলনাট",
-    "img": "/ingredients/283-Hazelnuts.png",
+    "img": "https://www.themealdb.com/images/ingredients/Hazelnuts.png",
     "phonetic": [
       "hazelnuts",
       "haazelnuts",
@@ -3238,7 +3238,7 @@
     "id": "286",
     "name_en": "Watermelon",
     "name_bn": "তরমুজ",
-    "img": "/ingredients/286-Watermelon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Watermelon.png",
     "phonetic": [
       "tormuj",
       "tarbuj",
@@ -3249,7 +3249,7 @@
     "id": "287",
     "name_en": "Grapes",
     "name_bn": "আঙ্গুর",
-    "img": "/ingredients/287-Grapes.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Grapes.png",
     "phonetic": [
       "grapes",
       "graapes",
@@ -3320,7 +3320,7 @@
     "id": "293",
     "name_en": "Guava",
     "name_bn": "পেয়ারা",
-    "img": "/ingredients/293-Guava.png",
+    "img": "https://www.themealdb.com/images/ingredients/Guava.png",
     "phonetic": [
       "peyara",
       "amrood",
@@ -3331,7 +3331,7 @@
     "id": "294",
     "name_en": "Lychee",
     "name_bn": "লিচু",
-    "img": "/ingredients/294-Lychee.png",
+    "img": "https://www.themealdb.com/images/ingredients/Lychee.png",
     "phonetic": [
       "lichu",
       "litchi",
@@ -3342,7 +3342,7 @@
     "id": "295",
     "name_en": "Jackfruit",
     "name_bn": "কাঁঠাল",
-    "img": "/ingredients/295-Jackfruit.png",
+    "img": "https://www.themealdb.com/images/ingredients/Jackfruit.png",
     "phonetic": [
       "kathal",
       "kathaal",
@@ -3354,7 +3354,7 @@
     "id": "296",
     "name_en": "Starfruit",
     "name_bn": "কামরাঙ্গা",
-    "img": "/ingredients/296-Starfruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Starfruit.png",
     "phonetic": [
       "starfruit",
       "staarfruit",
@@ -3366,7 +3366,7 @@
     "id": "297",
     "name_en": "Wood Apple",
     "name_bn": "বেল",
-    "img": "/ingredients/297-Wood_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wood%20Apple.png",
     "phonetic": [
       "wood apple",
       "wood aapple",
@@ -3378,7 +3378,7 @@
     "id": "298",
     "name_en": "Jujube",
     "name_bn": "বরই/কূল",
-    "img": "/ingredients/298-Jujube.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jujube.png",
     "phonetic": [
       "jujube",
       "jujubee",
@@ -3389,7 +3389,7 @@
     "id": "299",
     "name_en": "Custard Apple",
     "name_bn": "আতা ফল",
-    "img": "/ingredients/299-Custard_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Custard%20Apple.png",
     "phonetic": [
       "custard apple",
       "custaard aapple",
@@ -3401,7 +3401,7 @@
     "id": "300",
     "name_en": "Pear",
     "name_bn": "নাশপাতি",
-    "img": "/ingredients/300-Pear.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pear.png",
     "phonetic": [
       "pear",
       "peaar",
@@ -3412,7 +3412,7 @@
     "id": "301",
     "name_en": "Arborio Rice",
     "name_bn": "আরবোরিও চাল (রিসোটো চাল)",
-    "img": "/ingredients/301-Arborio_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Arborio%20Rice.png",
     "phonetic": [
       "arborio rice",
       "aarborio rice",
@@ -3436,7 +3436,7 @@
     "id": "303",
     "name_en": "Wild Rice",
     "name_bn": "বুনো চাল",
-    "img": "/ingredients/303-Wild_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wild%20Rice.png",
     "phonetic": [
       "wild rice",
       "wild ricee",
@@ -3459,7 +3459,7 @@
     "id": "305",
     "name_en": "Farro",
     "name_bn": "ফারো",
-    "img": "/ingredients/305-Farro.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Farro.png",
     "phonetic": [
       "farro",
       "faarro",
@@ -3470,7 +3470,7 @@
     "id": "306",
     "name_en": "Millet",
     "name_bn": "কাউন চাল/বাজরা",
-    "img": "/ingredients/306-Millet.png",
+    "img": "https://www.themealdb.com/images/ingredients/Millet.png",
     "phonetic": [
       "millet",
       "milleet",
@@ -3481,7 +3481,7 @@
     "id": "307",
     "name_en": "Sorghum",
     "name_bn": "জোয়ার",
-    "img": "/ingredients/307-Sorghum.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sorghum.png",
     "phonetic": [
       "sorghum",
       "soorghum",
@@ -3504,7 +3504,7 @@
     "id": "309",
     "name_en": "Rice Flour",
     "name_bn": "চালের গুঁড়া",
-    "img": "/ingredients/309-Rice_Flour.png",
+    "img": "https://www.themealdb.com/images/ingredients/Rice%20Flour.png",
     "phonetic": [
       "rice flour",
       "rice floour",
@@ -3516,7 +3516,7 @@
     "id": "310",
     "name_en": "Gram Flour",
     "name_bn": "বেসন",
-    "img": "/ingredients/310-Gram_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gram%20Flour.png",
     "phonetic": [
       "gram flour",
       "graam flour",
@@ -3528,7 +3528,7 @@
     "id": "311",
     "name_en": "Tapioca Starch",
     "name_bn": "ট্যাপিওকা স্টার্চ (সাগুদানা গুঁড়া)",
-    "img": "/ingredients/311-Tapioca_Starch.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tapioca%20Starch.png",
     "phonetic": [
       "tapioca starch",
       "taapiocaa staarch",
@@ -3540,7 +3540,7 @@
     "id": "312",
     "name_en": "Potato Flour",
     "name_bn": "আলুর ময়দা",
-    "img": "/ingredients/312-Potato_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Potato%20Flour.png",
     "phonetic": [
       "potato flour",
       "potaato flour",
@@ -3564,7 +3564,7 @@
     "id": "314",
     "name_en": "Fusilli",
     "name_bn": "ফুসিলি পাস্তা",
-    "img": "/ingredients/314-Fusilli.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fusilli.png",
     "phonetic": [
       "fusilli",
       "fuseellee",
@@ -3598,7 +3598,7 @@
     "id": "317",
     "name_en": "Ravioli",
     "name_bn": "রাভিওলি",
-    "img": "/ingredients/317-Ravioli.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ravioli.png",
     "phonetic": [
       "ravioli",
       "raavioli",
@@ -3633,7 +3633,7 @@
     "id": "320",
     "name_en": "Soba Noodles",
     "name_bn": "সোবা নুডলস",
-    "img": "/ingredients/320-Soba_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Soba%20Noodles.png",
     "phonetic": [
       "soba noodles",
       "sobaa noodles",
@@ -3645,7 +3645,7 @@
     "id": "321",
     "name_en": "Ramen Noodles",
     "name_bn": "রামেন নুডলস",
-    "img": "/ingredients/321-Ramen_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ramen%20Noodles.png",
     "phonetic": [
       "ramen noodles",
       "raamen noodles",
@@ -3692,7 +3692,7 @@
     "id": "325",
     "name_en": "Bagel",
     "name_bn": "বেগেল",
-    "img": "/ingredients/325-Bagel.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bagel.png",
     "phonetic": [
       "bagel",
       "baagel",
@@ -3703,7 +3703,7 @@
     "id": "326",
     "name_en": "Croissant",
     "name_bn": "ক্রসেন্ট",
-    "img": "/ingredients/326-Croissant.png",
+    "img": "https://www.themealdb.com/images/ingredients/Croissant.png",
     "phonetic": [
       "croissant",
       "croissaant",
@@ -3727,7 +3727,7 @@
     "id": "328",
     "name_en": "Brioche",
     "name_bn": "ব্রায়োশ",
-    "img": "/ingredients/328-Brioche.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Brioche.png",
     "phonetic": [
       "brioche",
       "briooche",
@@ -3739,7 +3739,7 @@
     "id": "329",
     "name_en": "Hot Dog Bun",
     "name_bn": "হট ডগ বান",
-    "img": "/ingredients/329-Hot_Dog_Bun.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hot%20Dog%20Bun.png",
     "phonetic": [
       "hot dog bun",
       "hoot doog bun",
@@ -3762,7 +3762,7 @@
     "id": "331",
     "name_en": "Nori Seaweed",
     "name_bn": "নোরি সামুদ্রিক শৈবাল",
-    "img": "/ingredients/331-Nori_Seaweed.png",
+    "img": "https://www.themealdb.com/images/ingredients/Nori%20Seaweed.png",
     "phonetic": [
       "nori seaweed",
       "nori seaaweed",
@@ -3774,7 +3774,7 @@
     "id": "332",
     "name_en": "Wakame",
     "name_bn": "ওয়াকামে",
-    "img": "/ingredients/332-Wakame.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wakame.png",
     "phonetic": [
       "wakame",
       "waakaame",
@@ -3785,7 +3785,7 @@
     "id": "333",
     "name_en": "Kombu",
     "name_bn": "কম্বু",
-    "img": "/ingredients/333-Kombu.png",
+    "img": "https://www.themealdb.com/images/ingredients/Kombu.png",
     "phonetic": [
       "kombu",
       "koombu",
@@ -3796,7 +3796,7 @@
     "id": "334",
     "name_en": "Miso Paste",
     "name_bn": "মিসো পেস্ট",
-    "img": "/ingredients/334-Miso_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Miso%20Paste.png",
     "phonetic": [
       "miso paste",
       "miso paaste",
@@ -3820,7 +3820,7 @@
     "id": "336",
     "name_en": "Kimchi",
     "name_bn": "কিমচি",
-    "img": "/ingredients/336-Kimchi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kimchi.png",
     "phonetic": [
       "kimchi",
       "keemchee"
@@ -3875,7 +3875,7 @@
     "id": "341",
     "name_en": "Pesto",
     "name_bn": "পেস্টো সস",
-    "img": "/ingredients/341-Pesto.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pesto.png",
     "phonetic": [
       "pesto",
       "pestoo",
@@ -3886,7 +3886,7 @@
     "id": "342",
     "name_en": "Guacamole",
     "name_bn": "গুয়াকামোল",
-    "img": "/ingredients/342-Guacamole.png",
+    "img": "https://www.themealdb.com/images/ingredients/Guacamole.png",
     "phonetic": [
       "guacamole",
       "guaacaamole",
@@ -3919,7 +3919,7 @@
     "id": "345",
     "name_en": "Chutney",
     "name_bn": "চাটনি",
-    "img": "/ingredients/345-Chutney.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chutney.png",
     "phonetic": [
       "chutney",
       "chutneey",
@@ -3930,7 +3930,7 @@
     "id": "346",
     "name_en": "Mango Pickle",
     "name_bn": "আমের আচার",
-    "img": "/ingredients/346-Mango_Pickle.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mango%20Pickle.png",
     "phonetic": [
       "mango pickle",
       "maango pickle",
@@ -3942,7 +3942,7 @@
     "id": "347",
     "name_en": "Lime Pickle",
     "name_bn": "লেবুর আচার",
-    "img": "/ingredients/347-Lime_Pickle.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lime%20Pickle.png",
     "phonetic": [
       "lime pickle",
       "limee picklee",
@@ -3953,7 +3953,7 @@
     "id": "348",
     "name_en": "Pickled Ginger",
     "name_bn": "আদার আচার",
-    "img": "/ingredients/348-Pickled_Ginger.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pickled%20Ginger.png",
     "phonetic": [
       "pickled ginger",
       "pickleed gingeer",
@@ -3964,7 +3964,7 @@
     "id": "349",
     "name_en": "Gherkins",
     "name_bn": "ঘেরকিন (আচারি শশা)",
-    "img": "/ingredients/349-Gherkins.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gherkins.png",
     "phonetic": [
       "gherkins",
       "gheerkins",
@@ -3975,7 +3975,7 @@
     "id": "350",
     "name_en": "Jalapeños",
     "name_bn": "জালাপেনো",
-    "img": "/ingredients/350-Jalape_os.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jalapeños.png",
     "phonetic": [
       "jalapeños",
       "jaalaapeños",
@@ -3987,7 +3987,7 @@
     "id": "351",
     "name_en": "Habanero",
     "name_bn": "হাবানেরো মরিচ",
-    "img": "/ingredients/351-Habanero.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Habanero.png",
     "phonetic": [
       "habanero",
       "haabaanero",
@@ -3999,7 +3999,7 @@
     "id": "352",
     "name_en": "Bird's Eye Chili",
     "name_bn": "পাখির চোখের মরিচ",
-    "img": "/ingredients/352-Bird_s_Eye_Chili.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bird's%20Eye%20Chili.png",
     "phonetic": [
       "bird's eye chili",
       "bird's eeyee chili",
@@ -4010,7 +4010,7 @@
     "id": "353",
     "name_en": "Ghost Pepper",
     "name_bn": "নাগা মরিচ",
-    "img": "/ingredients/353-Ghost_Pepper.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ghost%20Pepper.png",
     "phonetic": [
       "ghost pepper",
       "ghoost pepper",
@@ -4021,7 +4021,7 @@
     "id": "354",
     "name_en": "Sun-dried Chillies",
     "name_bn": "শুকনা মরিচ",
-    "img": "/ingredients/354-Sun-dried_Chillies.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sun-dried%20Chillies.png",
     "phonetic": [
       "sun-dried chillies",
       "sun-drieed chilliees",
@@ -4033,7 +4033,7 @@
     "id": "355",
     "name_en": "Anchovy Paste",
     "name_bn": "অ্যাঙ্কোভি পেস্ট",
-    "img": "/ingredients/355-Anchovy_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Anchovy%20Paste.png",
     "phonetic": [
       "anchovy paste",
       "aanchovy paaste",
@@ -4159,7 +4159,7 @@
     "id": "366",
     "name_en": "Pork Belly",
     "name_bn": "পোর্ক বেলি",
-    "img": "/ingredients/366-Pork_Belly.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pork%20Belly.png",
     "phonetic": [
       "pork belly",
       "poork belly",
@@ -4180,7 +4180,7 @@
     "id": "368",
     "name_en": "Pepperoni",
     "name_bn": "পেপারনি",
-    "img": "/ingredients/368_pepperoni.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Pepperoni.png",
     "phonetic": [
       "pepperoni",
       "pepperooni",
@@ -4192,7 +4192,7 @@
     "id": "369",
     "name_en": "Salami",
     "name_bn": "সালামি",
-    "img": "/ingredients/369-Salami.png",
+    "img": "https://www.themealdb.com/images/ingredients/Salami.png",
     "phonetic": [
       "salami",
       "saalaami",
@@ -4280,7 +4280,7 @@
     "id": "377",
     "name_en": "Tilapia",
     "name_bn": "তেলাপিয়া মাছ",
-    "img": "/ingredients/377-Tilapia.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tilapia.png",
     "phonetic": [
       "tilapia",
       "tilaapiaa",
@@ -4291,7 +4291,7 @@
     "id": "378",
     "name_en": "Carp",
     "name_bn": "কার্প মাছ",
-    "img": "/ingredients/378-Carp.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Carp.png",
     "phonetic": [
       "carp",
       "caarp"
@@ -4301,7 +4301,7 @@
     "id": "379",
     "name_en": "Lobster",
     "name_bn": "লবস্টার (গলদা চিংড়ি)",
-    "img": "/ingredients/379-Lobster.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lobster.png",
     "phonetic": [
       "lobster",
       "loobster",
@@ -4312,7 +4312,7 @@
     "id": "380",
     "name_en": "Crab",
     "name_bn": "কাঁকড়া",
-    "img": "/ingredients/380-Crab.png",
+    "img": "https://www.themealdb.com/images/ingredients/Crab.png",
     "phonetic": [
       "crab",
       "craab"
@@ -4344,7 +4344,7 @@
     "id": "383",
     "name_en": "Scallops",
     "name_bn": "স্ক্যালপস",
-    "img": "/ingredients/383-Scallops.png",
+    "img": "https://www.themealdb.com/images/ingredients/Scallops.png",
     "phonetic": [
       "scallops",
       "scaallops",
@@ -4355,7 +4355,7 @@
     "id": "384",
     "name_en": "Seaweed",
     "name_bn": "সামুদ্রিক শৈবাল",
-    "img": "/ingredients/384-Seaweed.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Seaweed.png",
     "phonetic": [
       "seaweed",
       "seaaweed",
@@ -4366,7 +4366,7 @@
     "id": "385",
     "name_en": "Agar Agar",
     "name_bn": "আগার আগার",
-    "img": "/ingredients/385-Agar_Agar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agar%20Agar.png",
     "phonetic": [
       "agar agar",
       "aagaar aagaar"
@@ -4376,7 +4376,7 @@
     "id": "386",
     "name_en": "Arrowroot",
     "name_bn": "অ্যারোরুট",
-    "img": "/ingredients/386-Arrowroot.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Arrowroot.png",
     "phonetic": [
       "arrowroot",
       "aarrowroot",
@@ -4387,7 +4387,7 @@
     "id": "387",
     "name_en": "Sago",
     "name_bn": "সাগুদানা",
-    "img": "/ingredients/387-Sago.png",
+    "img": "https://www.themealdb.com/images/ingredients/Sago.png",
     "phonetic": [
       "sago",
       "saago",
@@ -4398,7 +4398,7 @@
     "id": "388",
     "name_en": "Flaxseed",
     "name_bn": "তিসি বীজ",
-    "img": "/ingredients/388-Flaxseed.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Flaxseed.png",
     "phonetic": [
       "flaxseed",
       "flaaxseed",
@@ -4409,7 +4409,7 @@
     "id": "389",
     "name_en": "Chia Seeds",
     "name_bn": "চিয়া সিডস",
-    "img": "/ingredients/389-Chia_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chia%20Seeds.png",
     "phonetic": [
       "chia seeds",
       "chiaa seeds",
@@ -4421,7 +4421,7 @@
     "id": "390",
     "name_en": "Pumpkin Seeds",
     "name_bn": "মিষ্টি কুমড়ার বীজ",
-    "img": "/ingredients/390-Pumpkin_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pumpkin%20Seeds.png",
     "phonetic": [
       "pumpkin seeds",
       "pumpkin seeeeds",
@@ -4433,7 +4433,7 @@
     "id": "391",
     "name_en": "Sunflower Seeds",
     "name_bn": "সূর্যমুখীর বীজ",
-    "img": "/ingredients/391_sunflower_seeds.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Sunflower%20Seeds.png",
     "phonetic": [
       "sunflower seeds",
       "sunfloower seeds",
@@ -4445,7 +4445,7 @@
     "id": "392",
     "name_en": "Hemp Seeds",
     "name_bn": "হেম্প সিডস",
-    "img": "/ingredients/392-Hemp_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hemp%20Seeds.png",
     "phonetic": [
       "hemp seeds",
       "heemp seeeeds"
@@ -4455,7 +4455,7 @@
     "id": "393",
     "name_en": "Goji Berries",
     "name_bn": "গোজি বেরি",
-    "img": "/ingredients/393-Goji_Berries.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Goji%20Berries.png",
     "phonetic": [
       "goji berries",
       "gooji berries",
@@ -4467,7 +4467,7 @@
     "id": "394",
     "name_en": "Dates",
     "name_bn": "খেজুর",
-    "img": "/ingredients/394-Dates.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dates.png",
     "phonetic": [
       "dates",
       "daates",
@@ -4488,7 +4488,7 @@
     "id": "396",
     "name_en": "Apricots",
     "name_bn": "এপ্রিকট",
-    "img": "/ingredients/396-Apricots.png",
+    "img": "https://www.themealdb.com/images/ingredients/Apricots.png",
     "phonetic": [
       "apricots",
       "aapricots",
@@ -4545,7 +4545,7 @@
     "id": "401",
     "name_en": "Matcha Powder",
     "name_bn": "মাচা পাউডার",
-    "img": "/ingredients/401-Matcha_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Matcha%20Powder.png",
     "phonetic": [
       "matcha powder",
       "maatchaa powder",
@@ -4557,7 +4557,7 @@
     "id": "402",
     "name_en": "Espresso Beans",
     "name_bn": "এসপ্রেসো বিনস",
-    "img": "/ingredients/402-Espresso_Beans.png",
+    "img": "https://www.themealdb.com/images/ingredients/Espresso%20Beans.png",
     "phonetic": [
       "espresso beans",
       "espresso beaans",
@@ -4569,7 +4569,7 @@
     "id": "403",
     "name_en": "Green Tea Leaves",
     "name_bn": "গ্রিন টি পাতা",
-    "img": "/ingredients/403-Green_Tea_Leaves.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Tea%20Leaves.png",
     "phonetic": [
       "green tea leaves",
       "green teaa leaaves",
@@ -4580,7 +4580,7 @@
     "id": "404",
     "name_en": "Black Tea",
     "name_bn": "কালো চা/রঙ চা",
-    "img": "/ingredients/404-Black_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Tea.png",
     "phonetic": [
       "black tea",
       "blaack teaa",
@@ -4591,7 +4591,7 @@
     "id": "405",
     "name_en": "Earl Grey",
     "name_bn": "আর্ল গ্রে টি",
-    "img": "/ingredients/405-Earl_Grey.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Earl%20Grey.png",
     "phonetic": [
       "earl grey",
       "eaarl grey",
@@ -4602,7 +4602,7 @@
     "id": "406",
     "name_en": "Chamomile",
     "name_bn": "ক্যামোমাইল",
-    "img": "/ingredients/406-Chamomile.png",
+    "img": "https://www.themealdb.com/images/ingredients/Chamomile.png",
     "phonetic": [
       "chamomile",
       "chaamomile",
@@ -4614,7 +4614,7 @@
     "id": "407",
     "name_en": "Jasmine Tea",
     "name_bn": "জেসমিন টি",
-    "img": "/ingredients/407-Jasmine_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jasmine%20Tea.png",
     "phonetic": [
       "jasmine tea",
       "jaasmine teaa",
@@ -4626,7 +4626,7 @@
     "id": "408",
     "name_en": "Hibiscus",
     "name_bn": "জবা ফুল (চা)",
-    "img": "/ingredients/408-Hibiscus.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hibiscus.png",
     "phonetic": [
       "hibiscus",
       "heebeescus",
@@ -4637,7 +4637,7 @@
     "id": "409",
     "name_en": "Whole Milk Powder",
     "name_bn": "গুঁড়ো দুধ",
-    "img": "/ingredients/409_whole_milk_powder.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Whole%20Milk%20Powder.png",
     "phonetic": [
       "whole milk powder",
       "whoole milk poowder",
@@ -4649,7 +4649,7 @@
     "id": "410",
     "name_en": "Skimmed Milk",
     "name_bn": "ননিহীন দুধ",
-    "img": "/ingredients/410-Skimmed_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Skimmed%20Milk.png",
     "phonetic": [
       "skimmed milk",
       "skimmeed milk",
@@ -4671,7 +4671,7 @@
     "id": "412",
     "name_en": "Pink Himalayan Salt",
     "name_bn": "বিট লবণ/হিমালয় লবণ",
-    "img": "/ingredients/412-Pink_Himalayan_Salt.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pink%20Himalayan%20Salt.png",
     "phonetic": [
       "pink himalayan salt",
       "pink himaalaayaan saalt",
@@ -4682,7 +4682,7 @@
     "id": "413",
     "name_en": "Black Salt",
     "name_bn": "বিট লবণ",
-    "img": "/ingredients/413-Black_Salt.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Salt.png",
     "phonetic": [
       "black salt",
       "blaack saalt"
@@ -4715,7 +4715,7 @@
     "id": "416",
     "name_en": "Garlic Salt",
     "name_bn": "রসুন লবণ",
-    "img": "/ingredients/416-Garlic_Salt.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Garlic%20Salt.png",
     "phonetic": [
       "garlic salt",
       "gaarlic saalt",
@@ -4773,7 +4773,7 @@
     "id": "421",
     "name_en": "Jaggery",
     "name_bn": "আখের গুড়",
-    "img": "/ingredients/421-Jaggery.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jaggery.png",
     "phonetic": [
       "gur",
       "guur",
@@ -4784,7 +4784,7 @@
     "id": "422",
     "name_en": "Glucose Syrup",
     "name_bn": "গ্লুকোজ সিরাপ",
-    "img": "/ingredients/422_glucose_syrup.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Glucose%20Syrup.png",
     "phonetic": [
       "glucose syrup",
       "glucoose syrup",
@@ -4796,7 +4796,7 @@
     "id": "423",
     "name_en": "Agave Nectar",
     "name_bn": "আগভে নেক্টার",
-    "img": "/ingredients/423-Agave_Nectar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agave%20Nectar.png",
     "phonetic": [
       "agave nectar",
       "aagaave nectaar",
@@ -4818,7 +4818,7 @@
     "id": "425",
     "name_en": "Fondant",
     "name_bn": "ফন্ড্যান্ট",
-    "img": "/ingredients/425-Fondant.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fondant.png",
     "phonetic": [
       "fondant",
       "fondaant",
@@ -4829,7 +4829,7 @@
     "id": "426",
     "name_en": "Chocolate Sprinkles",
     "name_bn": "চকলেট স্প্রিঙ্কলস",
-    "img": "/ingredients/426-Chocolate_Sprinkles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chocolate%20Sprinkles.png",
     "phonetic": [
       "chocolate sprinkles",
       "chocolaate sprinkles",
@@ -4841,7 +4841,7 @@
     "id": "427",
     "name_en": "Hundreds and Thousands",
     "name_bn": "রঙিন স্প্রিঙ্কলস",
-    "img": "/ingredients/427-Hundreds_and_Thousands.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hundreds%20and%20Thousands.png",
     "phonetic": [
       "hundreds and thousands",
       "hundreds aand thousaands",
@@ -4853,7 +4853,7 @@
     "id": "428",
     "name_en": "Food Colouring",
     "name_bn": "খাবার রঙ",
-    "img": "/ingredients/428-Food_Colouring.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Food%20Colouring.png",
     "phonetic": [
       "food colouring",
       "fooood cooloouring",
@@ -4901,7 +4901,7 @@
     "id": "432",
     "name_en": "Cake Flour",
     "name_bn": "কেক ফ্লাওয়ার",
-    "img": "/ingredients/432-Cake_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cake%20Flour.png",
     "phonetic": [
       "cake flour",
       "caake flour",
@@ -4925,7 +4925,7 @@
     "id": "434",
     "name_en": "Gluten-Free Flour",
     "name_bn": "গ্লুটেন-মুক্ত ময়দা",
-    "img": "/ingredients/434-Gluten-Free_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gluten-Free%20Flour.png",
     "phonetic": [
       "gluten-free flour",
       "gluten-free floour",
@@ -4937,7 +4937,7 @@
     "id": "435",
     "name_en": "Tapioca Flour",
     "name_bn": "ট্যাপিওকা ময়দা",
-    "img": "/ingredients/435-Tapioca_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tapioca%20Flour.png",
     "phonetic": [
       "tapioca flour",
       "taapiocaa flour",
@@ -4949,7 +4949,7 @@
     "id": "436",
     "name_en": "Chestnut Flour",
     "name_bn": "চেস্টনাট ময়দা",
-    "img": "/ingredients/436-Chestnut_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chestnut%20Flour.png",
     "phonetic": [
       "chestnut flour",
       "chestnut floour",
@@ -4961,7 +4961,7 @@
     "id": "437",
     "name_en": "Coconut Flour",
     "name_bn": "নারকেল ময়দা",
-    "img": "/ingredients/437-Coconut_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut%20Flour.png",
     "phonetic": [
       "coconut flour",
       "coocoonut floour",
@@ -4972,7 +4972,7 @@
     "id": "438",
     "name_en": "Rice Paper",
     "name_bn": "রাইস পেপার",
-    "img": "/ingredients/438-Rice_Paper.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Rice%20Paper.png",
     "phonetic": [
       "rice paper",
       "rice paaper",
@@ -4996,7 +4996,7 @@
     "id": "440",
     "name_en": "Spring Roll Wrappers",
     "name_bn": "স্প্রিং রোল র‍্যাপার",
-    "img": "/ingredients/440-Spring_Roll_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spring%20Roll%20Wrappers.png",
     "phonetic": [
       "spring roll wrappers",
       "spring roll wraappers",
@@ -5008,7 +5008,7 @@
     "id": "441",
     "name_en": "Wonton Wrappers",
     "name_bn": "ওয়ানটন র‍্যাপার",
-    "img": "/ingredients/441-Wonton_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wonton%20Wrappers.png",
     "phonetic": [
       "wonton wrappers",
       "wonton wraappers",
@@ -5020,7 +5020,7 @@
     "id": "442",
     "name_en": "Dumpling Wrappers",
     "name_bn": "ডাম্পলিং র‍্যাপার",
-    "img": "/ingredients/442-Dumpling_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dumpling%20Wrappers.png",
     "phonetic": [
       "dumpling wrappers",
       "dumpling wraappers",
@@ -5065,7 +5065,7 @@
     "id": "446",
     "name_en": "Beef Topside",
     "name_bn": "গরুর টপসাইড",
-    "img": "/ingredients/446-Beef_Topside.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Topside.png",
     "phonetic": [
       "beef topside",
       "beef toopside",
@@ -5098,7 +5098,7 @@
     "id": "449",
     "name_en": "Pork Fillet",
     "name_bn": "পোর্ক ফিলেট",
-    "img": "/ingredients/449-Pork_Fillet.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pork%20Fillet.png",
     "phonetic": [
       "pork fillet",
       "poork fillet",
@@ -5122,7 +5122,7 @@
     "id": "451",
     "name_en": "Lamb Chops",
     "name_bn": "ভেড়ার চপস",
-    "img": "/ingredients/451-Lamb_Chops.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lamb%20Chops.png",
     "phonetic": [
       "lamb chops",
       "laamb chops",
@@ -5214,7 +5214,7 @@
     "id": "459",
     "name_en": "Chicken Mince",
     "name_bn": "চিকেন কিমা",
-    "img": "/ingredients/459-Chicken_Mince.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Mince.png",
     "phonetic": [
       "chicken mince",
       "chickeen mincee",
@@ -5225,7 +5225,7 @@
     "id": "460",
     "name_en": "Whole Chicken",
     "name_bn": "আস্ত মুরগি",
-    "img": "/ingredients/460-Whole_Chicken.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Whole%20Chicken.png",
     "phonetic": [
       "whole chicken",
       "whoole chicken",
@@ -5261,7 +5261,7 @@
     "id": "463",
     "name_en": "Hazelnut Spread",
     "name_bn": "হেজেলনাট স্প্রেড (নুটেলা)",
-    "img": "/ingredients/463-Hazelnut_Spread.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hazelnut%20Spread.png",
     "phonetic": [
       "hazelnut spread",
       "haazelnut spreaad",
@@ -5273,7 +5273,7 @@
     "id": "464",
     "name_en": "Biscoff Spread",
     "name_bn": "বিসকফ স্প্রেড",
-    "img": "/ingredients/464-Biscoff_Spread.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Biscoff%20Spread.png",
     "phonetic": [
       "biscoff spread",
       "biscoff spreaad",
@@ -5297,7 +5297,7 @@
     "id": "466",
     "name_en": "Fruit Salad",
     "name_bn": "ফ্রুট সালাদ",
-    "img": "/ingredients/466-Fruit_Salad.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fruit%20Salad.png",
     "phonetic": [
       "fruit salad",
       "fruit saalaad",
@@ -5309,7 +5309,7 @@
     "id": "467",
     "name_en": "Mixed Berries",
     "name_bn": "মিক্সড বেরি",
-    "img": "/ingredients/467-Mixed_Berries.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mixed%20Berries.png",
     "phonetic": [
       "mixed berries",
       "mixeed beerriees",
@@ -5332,7 +5332,7 @@
     "id": "469",
     "name_en": "Dried Figs",
     "name_bn": "শুকনা ডুমুর",
-    "img": "/ingredients/469-Dried_Figs.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dried%20Figs.png",
     "phonetic": [
       "dried figs",
       "drieed figs",
@@ -5355,7 +5355,7 @@
     "id": "471",
     "name_en": "Goji Berries",
     "name_bn": "গোজি বেরি",
-    "img": "/ingredients/471-Goji_Berries.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Goji%20Berries.png",
     "phonetic": [
       "goji berries",
       "gooji berries",
@@ -5412,7 +5412,7 @@
     "id": "476",
     "name_en": "Glacé Cherries",
     "name_bn": "চিনিযুক্ত চেরি",
-    "img": "/ingredients/476-Glac__Cherries.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Glacé%20Cherries.png",
     "phonetic": [
       "glacé cherries",
       "glaacé cherries",
@@ -5424,7 +5424,7 @@
     "id": "477",
     "name_en": "Preserved Lemons",
     "name_bn": "আচারি লেবু",
-    "img": "/ingredients/477-Preserved_Lemons.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Preserved%20Lemons.png",
     "phonetic": [
       "preserved lemons",
       "preserved lemoons",
@@ -5471,7 +5471,7 @@
     "id": "481",
     "name_en": "Margarine",
     "name_bn": "মার্জারিন",
-    "img": "/ingredients/481-Margarine.png",
+    "img": "https://www.themealdb.com/images/ingredients/Margarine.png",
     "phonetic": [
       "margarine",
       "maargaarine",
@@ -5483,7 +5483,7 @@
     "id": "482",
     "name_en": "Beef Suet",
     "name_bn": "গরুর চর্বি (সুয়েট)",
-    "img": "/ingredients/482-Beef_Suet.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Suet.png",
     "phonetic": [
       "beef suet",
       "beeeef sueet",
@@ -5494,7 +5494,7 @@
     "id": "483",
     "name_en": "Vegetable Suet",
     "name_bn": "ভেজিটেবল সুয়েট",
-    "img": "/ingredients/483-Vegetable_Suet.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Vegetable%20Suet.png",
     "phonetic": [
       "vegetable suet",
       "vegetaable suet",
@@ -5542,7 +5542,7 @@
     "id": "487",
     "name_en": "Cottage Cheese",
     "name_bn": "কুটির পনির",
-    "img": "/ingredients/487-Cottage_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cottage%20Cheese.png",
     "phonetic": [
       "cottage cheese",
       "cottaage cheese",
@@ -5565,7 +5565,7 @@
     "id": "489",
     "name_en": "Halloumi",
     "name_bn": "হালৌমি চিজ",
-    "img": "/ingredients/489-Halloumi.png",
+    "img": "https://www.themealdb.com/images/ingredients/Halloumi.png",
     "phonetic": [
       "halloumi",
       "haalloumi",
@@ -5577,7 +5577,7 @@
     "id": "490",
     "name_en": "Quark",
     "name_bn": "কোয়ার্ক চিজ",
-    "img": "/ingredients/490-Quark.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Quark.png",
     "phonetic": [
       "quark",
       "quaark",
@@ -5588,7 +5588,7 @@
     "id": "491",
     "name_en": "Blue Vein Cheese",
     "name_bn": "ব্লু ভেইন চিজ",
-    "img": "/ingredients/491-Blue_Vein_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blue%20Vein%20Cheese.png",
     "phonetic": [
       "blue vein cheese",
       "bluee veein cheeeesee",
@@ -5600,7 +5600,7 @@
     "id": "492",
     "name_en": "Emmental",
     "name_bn": "এমমেন্টাল চিজ",
-    "img": "/ingredients/492-Emmental.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Emmental.png",
     "phonetic": [
       "emmental",
       "emmentaal",
@@ -5622,7 +5622,7 @@
     "id": "494",
     "name_en": "Roquefort",
     "name_bn": "রোকফোর্ট চিজ",
-    "img": "/ingredients/494-Roquefort.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Roquefort.png",
     "phonetic": [
       "roquefort",
       "rooquefoort",
@@ -5634,7 +5634,7 @@
     "id": "495",
     "name_en": "Stilton",
     "name_bn": "স্টিলটন চিজ",
-    "img": "/ingredients/495-Stilton.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Stilton.png",
     "phonetic": [
       "stilton",
       "stiltoon",
@@ -5645,7 +5645,7 @@
     "id": "496",
     "name_en": "Camembert",
     "name_bn": "ক্যামেমবার্ট চিজ",
-    "img": "/ingredients/496-Camembert.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Camembert.png",
     "phonetic": [
       "camembert",
       "caamembert",
@@ -5656,7 +5656,7 @@
     "id": "497",
     "name_en": "Gorgonzola",
     "name_bn": "গর্গোনজোলা চিজ",
-    "img": "/ingredients/497-Gorgonzola.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gorgonzola.png",
     "phonetic": [
       "gorgonzola",
       "gorgonzolaa",
@@ -5679,7 +5679,7 @@
     "id": "499",
     "name_en": "Edam",
     "name_bn": "এডাম চিজ",
-    "img": "/ingredients/499-Edam.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Edam.png",
     "phonetic": [
       "edam",
       "edaam",
@@ -5690,7 +5690,7 @@
     "id": "500",
     "name_en": "Monterey Jack",
     "name_bn": "মনটেরি জ্যাক চিজ",
-    "img": "/ingredients/500-Monterey_Jack.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Monterey%20Jack.png",
     "phonetic": [
       "monterey jack",
       "monterey jaack",
@@ -5713,7 +5713,7 @@
     "id": "502",
     "name_en": "Za'atar",
     "name_bn": "জাতর",
-    "img": "/ingredients/502-Za_atar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Za'atar.png",
     "phonetic": [
       "za'atar",
       "zaa'aataar"
@@ -5723,7 +5723,7 @@
     "id": "503",
     "name_en": "Baharat",
     "name_bn": "বাহারাত (আরবি মসলা)",
-    "img": "/ingredients/503-Baharat.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baharat.png",
     "phonetic": [
       "baharat",
       "baahaaraat"
@@ -5745,7 +5745,7 @@
     "id": "505",
     "name_en": "Preserved Lemon",
     "name_bn": "আচারি লেবু (লেমন কনফি)",
-    "img": "/ingredients/505-Preserved_Lemon.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Preserved%20Lemon.png",
     "phonetic": [
       "preserved lemon",
       "preserved lemoon",
@@ -5768,7 +5768,7 @@
     "id": "507",
     "name_en": "Phyllo Pastry",
     "name_bn": "ফিলো পেস্ট্রি",
-    "img": "/ingredients/507-Phyllo_Pastry.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Phyllo%20Pastry.png",
     "phonetic": [
       "phyllo pastry",
       "phyllo paastry",
@@ -5779,7 +5779,7 @@
     "id": "508",
     "name_en": "Harissa Paste",
     "name_bn": "হারিসা পেস্ট",
-    "img": "/ingredients/508-Harissa_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Harissa%20Paste.png",
     "phonetic": [
       "harissa paste",
       "haarissaa paaste",
@@ -5791,7 +5791,7 @@
     "id": "509",
     "name_en": "Masa Harina",
     "name_bn": "ভুট্টার আটা (টাকোর জন্য)",
-    "img": "/ingredients/509-Masa_Harina.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Masa%20Harina.png",
     "phonetic": [
       "masa harina",
       "maasaa haarinaa",
@@ -5802,7 +5802,7 @@
     "id": "510",
     "name_en": "Corn Tortilla",
     "name_bn": "ভুট্টার টর্টিলা",
-    "img": "/ingredients/510-Corn_Tortilla.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Corn%20Tortilla.png",
     "phonetic": [
       "corn tortilla",
       "corn tortillaa",
@@ -5849,7 +5849,7 @@
     "id": "514",
     "name_en": "Chipotle in Adobo",
     "name_bn": "চিপোটলে সস",
-    "img": "/ingredients/514-Chipotle_in_Adobo.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chipotle%20in%20Adobo.png",
     "phonetic": [
       "chipotle in adobo",
       "chipotle in aadobo",
@@ -5861,7 +5861,7 @@
     "id": "515",
     "name_en": "Ancho Chili",
     "name_bn": "অ্যাঞ্চো মরিচ",
-    "img": "/ingredients/515_ancho_chili.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Ancho%20Chili.png",
     "phonetic": [
       "ancho chili",
       "aancho chili",
@@ -5873,7 +5873,7 @@
     "id": "516",
     "name_en": "Poblano Pepper",
     "name_bn": "পোবলানো মরিচ",
-    "img": "/ingredients/516-Poblano_Pepper.png",
+    "img": "https://www.themealdb.com/images/ingredients/Poblano%20Pepper.png",
     "phonetic": [
       "poblano pepper",
       "poblaano pepper",
@@ -5885,7 +5885,7 @@
     "id": "517",
     "name_en": "Serrano Pepper",
     "name_bn": "সেরানো মরিচ",
-    "img": "/ingredients/517-Serrano_Pepper.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Serrano%20Pepper.png",
     "phonetic": [
       "serrano pepper",
       "serraano pepper",
@@ -5897,7 +5897,7 @@
     "id": "518",
     "name_en": "Tomatillo",
     "name_bn": "টোমাটিলো",
-    "img": "/ingredients/518-Tomatillo.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tomatillo.png",
     "phonetic": [
       "tomatillo",
       "tomaatillo",
@@ -5921,7 +5921,7 @@
     "id": "520",
     "name_en": "Epazote",
     "name_bn": "এপাজোট",
-    "img": "/ingredients/520-Epazote.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Epazote.png",
     "phonetic": [
       "epazote",
       "epaazote",
@@ -5955,7 +5955,7 @@
     "id": "523",
     "name_en": "Thai Basil",
     "name_bn": "থাই তুলসী",
-    "img": "/ingredients/523-Thai_Basil.png",
+    "img": "https://www.themealdb.com/images/ingredients/Thai%20Basil.png",
     "phonetic": [
       "thai basil",
       "thaai baasil",
@@ -5966,7 +5966,7 @@
     "id": "524",
     "name_en": "Kaffir Lime",
     "name_bn": "কাফির লেবু",
-    "img": "/ingredients/524-Kaffir_Lime.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kaffir%20Lime.png",
     "phonetic": [
       "kaffir lime",
       "kaaffir lime",
@@ -6013,7 +6013,7 @@
     "id": "528",
     "name_en": "Candlenuts",
     "name_bn": "ক্যান্ডেল নাটস",
-    "img": "/ingredients/528-Candlenuts.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Candlenuts.png",
     "phonetic": [
       "candlenuts",
       "caandlenuts",
@@ -6037,7 +6037,7 @@
     "id": "530",
     "name_en": "Red Curry Paste",
     "name_bn": "লাল কারি পেস্ট",
-    "img": "/ingredients/530-Red_Curry_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Red%20Curry%20Paste.png",
     "phonetic": [
       "red curry paste",
       "red curry paaste",
@@ -6049,7 +6049,7 @@
     "id": "531",
     "name_en": "Green Curry Paste",
     "name_bn": "সবুজ কারি পেস্ট",
-    "img": "/ingredients/531-Green_Curry_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Curry%20Paste.png",
     "phonetic": [
       "green curry paste",
       "green curry paaste",
@@ -6061,7 +6061,7 @@
     "id": "532",
     "name_en": "Yellow Curry Paste",
     "name_bn": "হলুদ কারি পেস্ট",
-    "img": "/ingredients/532-Yellow_Curry_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Yellow%20Curry%20Paste.png",
     "phonetic": [
       "yellow curry paste",
       "yellow curry paaste",
@@ -6097,7 +6097,7 @@
     "id": "535",
     "name_en": "Udon",
     "name_bn": "উডন নুডলস",
-    "img": "/ingredients/535-Udon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Udon.png",
     "phonetic": [
       "udon",
       "udoon",
@@ -6108,7 +6108,7 @@
     "id": "536",
     "name_en": "Soba",
     "name_bn": "সোবা নুডলস",
-    "img": "/ingredients/536-Soba.png",
+    "img": "https://www.themealdb.com/images/ingredients/Soba.png",
     "phonetic": [
       "soba",
       "sobaa",
@@ -6119,7 +6119,7 @@
     "id": "537",
     "name_en": "Glass Noodles",
     "name_bn": "গ্লাস নুডলস (ফ্যান্সি নুডলস)",
-    "img": "/ingredients/537-Glass_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Glass%20Noodles.png",
     "phonetic": [
       "glass noodles",
       "glaass noodles",
@@ -6153,7 +6153,7 @@
     "id": "540",
     "name_en": "Ramen",
     "name_bn": "রামেন",
-    "img": "/ingredients/540-Ramen.png",
+    "img": "https://www.themealdb.com/images/ingredients/Ramen.png",
     "phonetic": [
       "ramen",
       "raamen",
@@ -6196,7 +6196,7 @@
     "id": "544",
     "name_en": "Dashi",
     "name_bn": "দাশি (জাপানি স্টক)",
-    "img": "/ingredients/544-Dashi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dashi.png",
     "phonetic": [
       "dashi",
       "daashi",
@@ -6207,7 +6207,7 @@
     "id": "545",
     "name_en": "Katsuobushi",
     "name_bn": "বোনিতো ফ্লেক্স",
-    "img": "/ingredients/545-Katsuobushi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Katsuobushi.png",
     "phonetic": [
       "katsuobushi",
       "kaatsuobushi",
@@ -6219,7 +6219,7 @@
     "id": "546",
     "name_en": "Miso",
     "name_bn": "মিসো পেস্ট",
-    "img": "/ingredients/546-Miso.png",
+    "img": "https://www.themealdb.com/images/ingredients/Miso.png",
     "phonetic": [
       "miso",
       "misoo",
@@ -6230,7 +6230,7 @@
     "id": "547",
     "name_en": "Wakame",
     "name_bn": "ওয়াকামে (শৈবাল)",
-    "img": "/ingredients/547-Wakame.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wakame.png",
     "phonetic": [
       "wakame",
       "waakaame",
@@ -6241,7 +6241,7 @@
     "id": "548",
     "name_en": "Kombu",
     "name_bn": "কম্বু",
-    "img": "/ingredients/548-Kombu.png",
+    "img": "https://www.themealdb.com/images/ingredients/Kombu.png",
     "phonetic": [
       "kombu",
       "koombu",
@@ -6252,7 +6252,7 @@
     "id": "549",
     "name_en": "Edamame",
     "name_bn": "এডামামে (কচি সয়াবিন)",
-    "img": "/ingredients/549-Edamame.png",
+    "img": "https://www.themealdb.com/images/ingredients/Edamame.png",
     "phonetic": [
       "edamame",
       "edaamaame",
@@ -6263,7 +6263,7 @@
     "id": "550",
     "name_en": "Shiitake",
     "name_bn": "শিতাক মাশরুম",
-    "img": "/ingredients/550-Shiitake.png",
+    "img": "https://www.themealdb.com/images/ingredients/Shiitake.png",
     "phonetic": [
       "shiitake",
       "shiitaake",
@@ -6275,7 +6275,7 @@
     "id": "551",
     "name_en": "Oyster Mushroom",
     "name_bn": "অয়েস্টার মাশরুম",
-    "img": "/ingredients/551-Oyster_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Oyster%20Mushroom.png",
     "phonetic": [
       "oyster mushroom",
       "ooyster mushroooom",
@@ -6287,7 +6287,7 @@
     "id": "552",
     "name_en": "Enoki Mushroom",
     "name_bn": "এনোকি মাশরুম",
-    "img": "/ingredients/552-Enoki_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Enoki%20Mushroom.png",
     "phonetic": [
       "enoki mushroom",
       "enooki mushroooom",
@@ -6323,7 +6323,7 @@
     "id": "555",
     "name_en": "Water Chestnuts",
     "name_bn": "পানিফল",
-    "img": "/ingredients/555_water_chestnuts.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Water%20Chestnuts.png",
     "phonetic": [
       "water chestnuts",
       "waater chestnuts",
@@ -6335,7 +6335,7 @@
     "id": "556",
     "name_en": "Bamboo Shoots",
     "name_bn": "বাঁশ কোড়ল",
-    "img": "/ingredients/556-Bamboo_Shoots.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bamboo%20Shoots.png",
     "phonetic": [
       "bamboo shoots",
       "baamboo shoots",
@@ -6346,7 +6346,7 @@
     "id": "557",
     "name_en": "Panko",
     "name_bn": "পাঙ্কো (ব্রেডক্রাম্বস)",
-    "img": "/ingredients/557_panko.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Panko.png",
     "phonetic": [
       "panko",
       "paanko",
@@ -6357,7 +6357,7 @@
     "id": "558",
     "name_en": "Tempura Flour",
     "name_bn": "টেম্পুরা ময়দা",
-    "img": "/ingredients/558-Tempura_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tempura%20Flour.png",
     "phonetic": [
       "tempura flour",
       "tempuraa flour",
@@ -6369,7 +6369,7 @@
     "id": "559",
     "name_en": "Gyoza Wrappers",
     "name_bn": "গিয়োজা র‍্যাপার",
-    "img": "/ingredients/559-Gyoza_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gyoza%20Wrappers.png",
     "phonetic": [
       "gyoza wrappers",
       "gyozaa wraappers",
@@ -6402,7 +6402,7 @@
     "id": "562",
     "name_en": "Mustard Oil",
     "name_bn": "সরিষার তেল",
-    "img": "/ingredients/562-Mustard_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mustard%20Oil.png",
     "phonetic": [
       "shorisher tel",
       "sorisher tel",
@@ -6413,7 +6413,7 @@
     "id": "563",
     "name_en": "Coconut Oil",
     "name_bn": "নারকেল তেল",
-    "img": "/ingredients/563-Coconut_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut%20Oil.png",
     "phonetic": [
       "coconut oil",
       "coocoonut ooil",
@@ -6425,7 +6425,7 @@
     "id": "564",
     "name_en": "Palm Oil",
     "name_bn": "পাম তেল",
-    "img": "/ingredients/564_palm_oil.jpg",
+    "img": "https://www.themealdb.com/images/ingredients/Palm%20Oil.png",
     "phonetic": [
       "palm oil",
       "paalm oil",
@@ -6437,7 +6437,7 @@
     "id": "565",
     "name_en": "Grapeseed Oil",
     "name_bn": "আঙ্গুর বীজ তেল",
-    "img": "/ingredients/565-Grapeseed_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Grapeseed%20Oil.png",
     "phonetic": [
       "grapeseed oil",
       "graapeseed oil",
@@ -6449,7 +6449,7 @@
     "id": "566",
     "name_en": "Avocado Oil",
     "name_bn": "অ্যাভোকাডো তেল",
-    "img": "/ingredients/566-Avocado_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Avocado%20Oil.png",
     "phonetic": [
       "avocado oil",
       "aavocaado oil",
@@ -6461,7 +6461,7 @@
     "id": "567",
     "name_en": "Walnut Oil",
     "name_bn": "আখরোট তেল",
-    "img": "/ingredients/567-Walnut_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Walnut%20Oil.png",
     "phonetic": [
       "walnut oil",
       "waalnut oil",
@@ -6473,7 +6473,7 @@
     "id": "568",
     "name_en": "Pumpkin Seed Oil",
     "name_bn": "কুমড়ার বীজের তেল",
-    "img": "/ingredients/568-Pumpkin_Seed_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pumpkin%20Seed%20Oil.png",
     "phonetic": [
       "pumpkin seed oil",
       "pumpkin seed ooil",
@@ -6496,7 +6496,7 @@
     "id": "570",
     "name_en": "Agave Syrup",
     "name_bn": "আগভে সিরাপ",
-    "img": "/ingredients/570-Agave_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agave%20Syrup.png",
     "phonetic": [
       "agave syrup",
       "aagaave syrup",
@@ -6508,7 +6508,7 @@
     "id": "571",
     "name_en": "Stevia",
     "name_bn": "স্টিভিয়া",
-    "img": "/ingredients/571-Stevia.png",
+    "img": "https://www.themealdb.com/images/ingredients/Stevia.png",
     "phonetic": [
       "stevia",
       "steviaa",
@@ -6520,7 +6520,7 @@
     "id": "572",
     "name_en": "Coconut Sugar",
     "name_bn": "নারকেল চিনি",
-    "img": "/ingredients/572-Coconut_Sugar.png",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut%20Sugar.png",
     "phonetic": [
       "coconut sugar",
       "coconut sugaar",
@@ -6532,7 +6532,7 @@
     "id": "573",
     "name_en": "Date Syrup",
     "name_bn": "খেজুরে সিরাপ",
-    "img": "/ingredients/573-Date_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Date%20Syrup.png",
     "phonetic": [
       "date syrup",
       "daate syrup",
@@ -6592,7 +6592,7 @@
     "id": "578",
     "name_en": "Pearl Sugar",
     "name_bn": "পার্ল চিনি",
-    "img": "/ingredients/578-Pearl_Sugar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pearl%20Sugar.png",
     "phonetic": [
       "pearl sugar",
       "peaarl sugaar",
@@ -6604,7 +6604,7 @@
     "id": "579",
     "name_en": "Gelatin Leaves",
     "name_bn": "জেলেটিন পাতা",
-    "img": "/ingredients/579-Gelatin_Leaves.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gelatin%20Leaves.png",
     "phonetic": [
       "gelatin leaves",
       "gelaatin leaaves",
@@ -6616,7 +6616,7 @@
     "id": "580",
     "name_en": "Agar Agar Powder",
     "name_bn": "আগার আগার পাউডার",
-    "img": "/ingredients/580-Agar_Agar_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agar%20Agar%20Powder.png",
     "phonetic": [
       "agar agar powder",
       "aagaar aagaar powder",
@@ -6628,7 +6628,7 @@
     "id": "581",
     "name_en": "Pectin",
     "name_bn": "পেকটিন",
-    "img": "/ingredients/581-Pectin.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pectin.png",
     "phonetic": [
       "pectin",
       "peectin",
@@ -6650,7 +6650,7 @@
     "id": "583",
     "name_en": "Sourdough Starter",
     "name_bn": "সাউরডো স্টার্টার",
-    "img": "/ingredients/583-Sourdough_Starter.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sourdough%20Starter.png",
     "phonetic": [
       "sourdough starter",
       "sourdough staarter",
@@ -6674,7 +6674,7 @@
     "id": "585",
     "name_en": "Baking Soda",
     "name_bn": "খাবার সোডা",
-    "img": "/ingredients/585-Baking_Soda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baking%20Soda.png",
     "phonetic": [
       "baking soda",
       "baaking sodaa",
@@ -6698,7 +6698,7 @@
     "id": "587",
     "name_en": "Arrowroot Powder",
     "name_bn": "অ্যারোরুট পাউডার",
-    "img": "/ingredients/587-Arrowroot_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Arrowroot%20Powder.png",
     "phonetic": [
       "arrowroot powder",
       "aarrowroot powder",
@@ -6710,7 +6710,7 @@
     "id": "588",
     "name_en": "Tapioca Pearls",
     "name_bn": "সাগুদানা",
-    "img": "/ingredients/588-Tapioca_Pearls.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tapioca%20Pearls.png",
     "phonetic": [
       "tapioca pearls",
       "taapiocaa peaarls",
@@ -6722,7 +6722,7 @@
     "id": "589",
     "name_en": "Sago",
     "name_bn": "সাগু",
-    "img": "/ingredients/589-Sago.png",
+    "img": "https://www.themealdb.com/images/ingredients/Sago.png",
     "phonetic": [
       "sago",
       "saago",
@@ -6756,7 +6756,7 @@
     "id": "592",
     "name_en": "Amaranth",
     "name_bn": "লাল শাক বীজ/আমারান্ত",
-    "img": "/ingredients/592-Amaranth.png",
+    "img": "https://www.themealdb.com/images/ingredients/Amaranth.png",
     "phonetic": [
       "amaranth",
       "aamaaraanth"
@@ -6778,7 +6778,7 @@
     "id": "594",
     "name_en": "Millet",
     "name_bn": "বাজরা",
-    "img": "/ingredients/594-Millet.png",
+    "img": "https://www.themealdb.com/images/ingredients/Millet.png",
     "phonetic": [
       "millet",
       "milleet",
@@ -6789,7 +6789,7 @@
     "id": "595",
     "name_en": "Sorghum",
     "name_bn": "জোয়ার",
-    "img": "/ingredients/595-Sorghum.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sorghum.png",
     "phonetic": [
       "sorghum",
       "soorghum",
@@ -6800,7 +6800,7 @@
     "id": "596",
     "name_en": "Teff",
     "name_bn": "টেফ",
-    "img": "/ingredients/596-Teff.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Teff.png",
     "phonetic": [
       "teff",
       "teeff"
@@ -6810,7 +6810,7 @@
     "id": "597",
     "name_en": "Spelt Flour",
     "name_bn": "স্পেল্ট ময়দা",
-    "img": "/ingredients/597-Spelt_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spelt%20Flour.png",
     "phonetic": [
       "spelt flour",
       "spelt floour",
@@ -6822,7 +6822,7 @@
     "id": "598",
     "name_en": "Rye Flour",
     "name_bn": "রাই ময়দা",
-    "img": "/ingredients/598-Rye_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Rye%20Flour.png",
     "phonetic": [
       "rye flour",
       "rye floour",
@@ -6846,7 +6846,7 @@
     "id": "600",
     "name_en": "Lentil Flour",
     "name_bn": "মসুর ডাল ময়দা",
-    "img": "/ingredients/600-Lentil_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lentil%20Flour.png",
     "phonetic": [
       "lentil flour",
       "lentil floour",
@@ -6858,7 +6858,7 @@
     "id": "601",
     "name_en": "Soya Chunks",
     "name_bn": "সয়াবিন বড়ি",
-    "img": "/ingredients/601-Soya_Chunks.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Soya%20Chunks.png",
     "phonetic": [
       "soya chunks",
       "soyaa chunks",
@@ -6902,7 +6902,7 @@
     "id": "605",
     "name_en": "Seitan",
     "name_bn": "সেইটান (গমের মাংস)",
-    "img": "/ingredients/605-Seitan.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Seitan.png",
     "phonetic": [
       "seitan",
       "seitaan",
@@ -6926,7 +6926,7 @@
     "id": "607",
     "name_en": "Beef Steak",
     "name_bn": "গরুর স্টেক",
-    "img": "/ingredients/607-Beef_Steak.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Steak.png",
     "phonetic": [
       "beef steak",
       "beef steaak",
@@ -6937,7 +6937,7 @@
     "id": "608",
     "name_en": "Beef Ribs",
     "name_bn": "গরুর পাঁজরের মাংস",
-    "img": "/ingredients/608-Beef_Ribs.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Ribs.png",
     "phonetic": [
       "beef ribs",
       "beeeef ribs",
@@ -6948,7 +6948,7 @@
     "id": "609",
     "name_en": "Mutton Chops",
     "name_bn": "খাসির চপ",
-    "img": "/ingredients/609-Mutton_Chops.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mutton%20Chops.png",
     "phonetic": [
       "mutton chops",
       "muttoon choops",
@@ -6959,7 +6959,7 @@
     "id": "610",
     "name_en": "Mutton Leg",
     "name_bn": "খাসির রান",
-    "img": "/ingredients/610-Mutton_Leg.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mutton%20Leg.png",
     "phonetic": [
       "mutton leg",
       "muttoon leg",
@@ -6982,7 +6982,7 @@
     "id": "612",
     "name_en": "Chicken Gizzard",
     "name_bn": "মুরগির গিলা",
-    "img": "/ingredients/612-Chicken_Gizzard.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Gizzard.png",
     "phonetic": [
       "chicken gizzard",
       "chicken gizzaard",
@@ -6994,7 +6994,7 @@
     "id": "613",
     "name_en": "Chicken Heart",
     "name_bn": "মুরগির হৃদপিণ্ড",
-    "img": "/ingredients/613-Chicken_Heart.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Heart.png",
     "phonetic": [
       "chicken heart",
       "chicken heaart",
@@ -7006,7 +7006,7 @@
     "id": "614",
     "name_en": "Chicken Feet",
     "name_bn": "মুরগির পা",
-    "img": "/ingredients/614-Chicken_Feet.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Feet.png",
     "phonetic": [
       "chicken feet",
       "chickeen feeeet",
@@ -7017,7 +7017,7 @@
     "id": "615",
     "name_en": "Duck Breast",
     "name_bn": "হাঁসের বুকের মাংস",
-    "img": "/ingredients/615-Duck_Breast.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Duck%20Breast.png",
     "phonetic": [
       "duck breast",
       "duck breaast",
@@ -7029,7 +7029,7 @@
     "id": "616",
     "name_en": "Turkey Breast",
     "name_bn": "টার্কির বুকের মাংস",
-    "img": "/ingredients/616-Turkey_Breast.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Turkey%20Breast.png",
     "phonetic": [
       "turkey breast",
       "turkey breaast",
@@ -7041,7 +7041,7 @@
     "id": "617",
     "name_en": "Bacon Strips",
     "name_bn": "বেকন স্লাইস",
-    "img": "/ingredients/617-Bacon_Strips.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bacon%20Strips.png",
     "phonetic": [
       "bacon strips",
       "baacon strips",
@@ -7065,7 +7065,7 @@
     "id": "619",
     "name_en": "Salami",
     "name_bn": "সালামি",
-    "img": "/ingredients/619-Salami.png",
+    "img": "https://www.themealdb.com/images/ingredients/Salami.png",
     "phonetic": [
       "salami",
       "saalaami",
@@ -7076,7 +7076,7 @@
     "id": "620",
     "name_en": "Pepperoni",
     "name_bn": "পেপারনি",
-    "img": "/ingredients/620-Pepperoni.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pepperoni.png",
     "phonetic": [
       "pepperoni",
       "pepperooni",
@@ -7088,7 +7088,7 @@
     "id": "621",
     "name_en": "Beef Salami",
     "name_bn": "বিফ সালামি",
-    "img": "/ingredients/621-Beef_Salami.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Salami.png",
     "phonetic": [
       "beef salami",
       "beef saalaami",
@@ -7100,7 +7100,7 @@
     "id": "622",
     "name_en": "Hot Dog",
     "name_bn": "হট ডগ",
-    "img": "/ingredients/622-Hot_Dog.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hot%20Dog.png",
     "phonetic": [
       "hot dog",
       "hoot doog"
@@ -7121,7 +7121,7 @@
     "id": "624",
     "name_en": "Fish Balls",
     "name_bn": "ফিশ বল",
-    "img": "/ingredients/624-Fish_Balls.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fish%20Balls.png",
     "phonetic": [
       "fish balls",
       "fish baalls",
@@ -7132,7 +7132,7 @@
     "id": "625",
     "name_en": "Crab Sticks",
     "name_bn": "কাঁকড়া স্টিক",
-    "img": "/ingredients/625-Crab_Sticks.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Crab%20Sticks.png",
     "phonetic": [
       "crab sticks",
       "craab sticks",
@@ -7165,7 +7165,7 @@
     "id": "628",
     "name_en": "Squid Rings",
     "name_bn": "স্কুইড রিংস",
-    "img": "/ingredients/628-Squid_Rings.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Squid%20Rings.png",
     "phonetic": [
       "squid rings",
       "squeed reengs",
@@ -7176,7 +7176,7 @@
     "id": "629",
     "name_en": "Scallops",
     "name_bn": "স্ক্যালপস",
-    "img": "/ingredients/629-Scallops.png",
+    "img": "https://www.themealdb.com/images/ingredients/Scallops.png",
     "phonetic": [
       "scallops",
       "scaallops",
@@ -7198,7 +7198,7 @@
     "id": "631",
     "name_en": "Tiger Prawn",
     "name_bn": "বাগদা চিংড়ি",
-    "img": "/ingredients/631-Tiger_Prawn.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tiger%20Prawn.png",
     "phonetic": [
       "tiger prawn",
       "tiger praawn",
@@ -7210,7 +7210,7 @@
     "id": "632",
     "name_en": "King Prawn",
     "name_bn": "গলদা চিংড়ি",
-    "img": "/ingredients/632-King_Prawn.svg",
+    "img": "https://www.themealdb.com/images/ingredients/King%20Prawn.png",
     "phonetic": [
       "king prawn",
       "king praawn",
@@ -7244,7 +7244,7 @@
     "id": "635",
     "name_en": "Onion (White)",
     "name_bn": "সাদা পেঁয়াজ",
-    "img": "/ingredients/635-Onion__White_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/White%20Onion.png",
     "phonetic": [
       "onion (white)",
       "oonioon (white)",
@@ -7292,7 +7292,7 @@
     "id": "639",
     "name_en": "Green Peperoncini",
     "name_bn": "সবুজ পেপারোনচিনি",
-    "img": "/ingredients/639-Green_Peperoncini.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Peperoncini.png",
     "phonetic": [
       "green peperoncini",
       "green peperooncini",
@@ -7304,7 +7304,7 @@
     "id": "640",
     "name_en": "Bird's Eye Chili",
     "name_bn": "পাখির চোখের মরিচ",
-    "img": "/ingredients/640-Bird_s_Eye_Chili.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bird's%20Eye%20Chili.png",
     "phonetic": [
       "bird's eye chili",
       "bird's eeyee chili",
@@ -7315,7 +7315,7 @@
     "id": "641",
     "name_en": "Thai Chili",
     "name_bn": "থাই মরিচ",
-    "img": "/ingredients/641-Thai_Chili.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Thai%20Chili.png",
     "phonetic": [
       "thai chili",
       "thaai chili",
@@ -7326,7 +7326,7 @@
     "id": "642",
     "name_en": "Cherry Tomato",
     "name_bn": "চেরি টমেটো",
-    "img": "/ingredients/642-Cherry_Tomato.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cherry%20Tomato.png",
     "phonetic": [
       "cherry tomato",
       "cherry tomaato",
@@ -7338,7 +7338,7 @@
     "id": "643",
     "name_en": "Plum Tomato",
     "name_bn": "প্লাম টমেটো",
-    "img": "/ingredients/643-Plum_Tomato.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Plum%20Tomato.png",
     "phonetic": [
       "plum tomato",
       "plum tomaato",
@@ -7374,7 +7374,7 @@
     "id": "646",
     "name_en": "Tomato Paste",
     "name_bn": "টমেটো পেস্ট",
-    "img": "/ingredients/646-Tomato_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tomato%20Paste.png",
     "phonetic": [
       "tomato paste",
       "tomaato paaste",
@@ -7386,7 +7386,7 @@
     "id": "647",
     "name_en": "Tomato Ketchup",
     "name_bn": "টমেটো কেচাপ",
-    "img": "https://www.themealdb.com/images/ingredients/Tomato%20Ketchup.png",
+    "img": "https://www.themealdb.com/images/ingredients/Ketchup.png",
     "phonetic": [
       "tomato ketchup",
       "tomaato ketchup",
@@ -7410,7 +7410,7 @@
     "id": "649",
     "name_en": "Button Mushroom",
     "name_bn": "বাটন মাশরুম",
-    "img": "/ingredients/649-Button_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Button%20Mushroom.png",
     "phonetic": [
       "button mushroom",
       "buttoon mushroooom",
@@ -7421,7 +7421,7 @@
     "id": "650",
     "name_en": "Oyster Mushroom",
     "name_bn": "অয়েস্টার মাশরুম",
-    "img": "/ingredients/650-Oyster_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Oyster%20Mushroom.png",
     "phonetic": [
       "oyster mushroom",
       "ooyster mushroooom",
@@ -7433,7 +7433,7 @@
     "id": "651",
     "name_en": "Shiitake Mushroom",
     "name_bn": "শিতাকে মাশরুম",
-    "img": "/ingredients/651-Shiitake_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Shiitake%20Mushroom.png",
     "phonetic": [
       "shiitake mushroom",
       "shiitaake mushroom",
@@ -7445,7 +7445,7 @@
     "id": "652",
     "name_en": "Portobello Mushroom",
     "name_bn": "পোর্টেবেলো মাশরুম",
-    "img": "/ingredients/652-Portobello_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Portobello%20Mushroom.png",
     "phonetic": [
       "portobello mushroom",
       "poortoobelloo mushroooom",
@@ -7457,7 +7457,7 @@
     "id": "653",
     "name_en": "Porcini Mushroom",
     "name_bn": "পরচিনি মাশরুম",
-    "img": "/ingredients/653-Porcini_Mushroom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Porcini%20Mushroom.png",
     "phonetic": [
       "porcini mushroom",
       "poorcini mushroooom",
@@ -7469,7 +7469,7 @@
     "id": "654",
     "name_en": "Baby Corn",
     "name_bn": "বেবি কর্ন",
-    "img": "/ingredients/654-Baby_Corn.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baby%20Corn.png",
     "phonetic": [
       "baby corn",
       "baaby corn",
@@ -7480,7 +7480,7 @@
     "id": "655",
     "name_en": "Sweet Corn",
     "name_bn": "মিষ্টি ভুট্টা",
-    "img": "/ingredients/655-Sweet_Corn.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sweet%20Corn.png",
     "phonetic": [
       "sweet corn",
       "sweet coorn",
@@ -7491,7 +7491,7 @@
     "id": "656",
     "name_en": "Frozen Corn",
     "name_bn": "ফ্রোজেন ভুট্টা",
-    "img": "/ingredients/656-Frozen_Corn.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Frozen%20Corn.png",
     "phonetic": [
       "frozen corn",
       "froozen coorn",
@@ -7502,7 +7502,7 @@
     "id": "657",
     "name_en": "Snap Peas",
     "name_bn": "স্ন্যাপ মটরশুঁটি",
-    "img": "/ingredients/657-Snap_Peas.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Snap%20Peas.png",
     "phonetic": [
       "snap peas",
       "snaap peaas",
@@ -7525,7 +7525,7 @@
     "id": "659",
     "name_en": "Garden Peas",
     "name_bn": "মটরশুঁটি",
-    "img": "/ingredients/659-Garden_Peas.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Garden%20Peas.png",
     "phonetic": [
       "garden peas",
       "gaarden peaas",
@@ -7536,7 +7536,7 @@
     "id": "660",
     "name_en": "French Beans",
     "name_bn": "ফ্রেঞ্চ বিনস (বরবটি)",
-    "img": "/ingredients/660-French_Beans.svg",
+    "img": "https://www.themealdb.com/images/ingredients/French%20Beans.png",
     "phonetic": [
       "french beans",
       "french beaans",
@@ -7547,7 +7547,7 @@
     "id": "661",
     "name_en": "Yardlong Beans",
     "name_bn": "বরবটি",
-    "img": "/ingredients/661-Yardlong_Beans.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Yardlong%20Beans.png",
     "phonetic": [
       "yardlong beans",
       "yaardlong beaans",
@@ -7559,7 +7559,7 @@
     "id": "662",
     "name_en": "Kidney Beans (Red)",
     "name_bn": "রাজমা (লাল শিম)",
-    "img": "/ingredients/662-Kidney_Beans__Red_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Red%20Kidney%20Beans.png",
     "phonetic": [
       "kidney beans (red)",
       "kidney beaans (red)",
@@ -7571,7 +7571,7 @@
     "id": "663",
     "name_en": "Kidney Beans (White)",
     "name_bn": "সাদা শিম",
-    "img": "/ingredients/663-Kidney_Beans__White_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/White%20Kidney%20Beans.png",
     "phonetic": [
       "kidney beans (white)",
       "kidney beaans (white)",
@@ -7630,7 +7630,7 @@
     "id": "668",
     "name_en": "Mung Beans",
     "name_bn": "মুগ ডাল (আস্ত)",
-    "img": "/ingredients/668-Mung_Beans.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mung%20Beans.png",
     "phonetic": [
       "mung beans",
       "mung beaans",
@@ -7642,7 +7642,7 @@
     "id": "669",
     "name_en": "Black Lentils",
     "name_bn": "কালো ডাল",
-    "img": "/ingredients/669-Black_Lentils.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Lentils.png",
     "phonetic": [
       "kalo dal",
       "urad dal"
@@ -7652,7 +7652,7 @@
     "id": "670",
     "name_en": "Yellow Lentils",
     "name_bn": "মুগ ডাল/অড়হর ডাল",
-    "img": "/ingredients/670-Yellow_Lentils.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Yellow%20Lentils.png",
     "phonetic": [
       "mug dal",
       "moong dal"
@@ -7673,7 +7673,7 @@
     "id": "672",
     "name_en": "Green Lentils",
     "name_bn": "সবুজ মসুর ডাল",
-    "img": "/ingredients/672-Green_Lentils.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Lentils.png",
     "phonetic": [
       "green lentils",
       "greeeen leentils",
@@ -7708,7 +7708,7 @@
     "id": "675",
     "name_en": "Sticky Rice",
     "name_bn": "বিন্নি চাল/স্টিকি রাইস",
-    "img": "/ingredients/675-Sticky_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sticky%20Rice.png",
     "phonetic": [
       "sticky rice",
       "sticky ricee",
@@ -7731,7 +7731,7 @@
     "id": "677",
     "name_en": "Arborio Rice",
     "name_bn": "আরবোরিও চাল",
-    "img": "/ingredients/677-Arborio_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Arborio%20Rice.png",
     "phonetic": [
       "arborio rice",
       "aarborio rice",
@@ -7778,7 +7778,7 @@
     "id": "681",
     "name_en": "Instant Noodles",
     "name_bn": "ইনস্ট্যান্ট নুডলস (ম্যাগি)",
-    "img": "/ingredients/681-Instant_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Instant%20Noodles.png",
     "phonetic": [
       "instant noodles",
       "instaant noodles",
@@ -7802,7 +7802,7 @@
     "id": "683",
     "name_en": "Penne",
     "name_bn": "পেন্নে পাস্তা",
-    "img": "/ingredients/683-Penne.png",
+    "img": "https://www.themealdb.com/images/ingredients/Penne.png",
     "phonetic": [
       "penne",
       "peennee"
@@ -7824,7 +7824,7 @@
     "id": "685",
     "name_en": "Fusilli",
     "name_bn": "ফুসিলি পাস্তা",
-    "img": "/ingredients/685-Fusilli.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fusilli.png",
     "phonetic": [
       "fusilli",
       "fuseellee",
@@ -7835,7 +7835,7 @@
     "id": "686",
     "name_en": "Lasagna Sheets",
     "name_bn": "লাজানিয়া শিট",
-    "img": "/ingredients/686-Lasagna_Sheets.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lasagna%20Sheets.png",
     "phonetic": [
       "lasagna sheets",
       "laasaagnaa sheets",
@@ -7846,7 +7846,7 @@
     "id": "687",
     "name_en": "Rice Paper",
     "name_bn": "রাইস পেপার",
-    "img": "/ingredients/687-Rice_Paper.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Rice%20Paper.png",
     "phonetic": [
       "rice paper",
       "rice paaper",
@@ -7858,7 +7858,7 @@
     "id": "688",
     "name_en": "Wonton Wrappers",
     "name_bn": "ওয়ানটন র‍্যাপার",
-    "img": "/ingredients/688-Wonton_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wonton%20Wrappers.png",
     "phonetic": [
       "wonton wrappers",
       "wonton wraappers",
@@ -7870,7 +7870,7 @@
     "id": "689",
     "name_en": "Spring Roll Wrappers",
     "name_bn": "স্প্রিং রোল র‍্যাপার",
-    "img": "/ingredients/689-Spring_Roll_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spring%20Roll%20Wrappers.png",
     "phonetic": [
       "spring roll wrappers",
       "spring roll wraappers",
@@ -7894,7 +7894,7 @@
     "id": "691",
     "name_en": "Tortilla (Corn)",
     "name_bn": "ভুট্টার টর্টিলা",
-    "img": "/ingredients/691-Tortilla__Corn_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Corn%20Tortilla.png",
     "phonetic": [
       "tortilla (corn)",
       "tortillaa (corn)",
@@ -7918,7 +7918,7 @@
     "id": "693",
     "name_en": "Naan Bread",
     "name_bn": "নান রুটি",
-    "img": "https://www.themealdb.com/images/ingredients/Naan%20Bread.png",
+    "img": "https://www.themealdb.com/images/ingredients/Naan.png",
     "phonetic": [
       "naan bread",
       "naaaan breaad",
@@ -7941,7 +7941,7 @@
     "id": "695",
     "name_en": "Burger Bun",
     "name_bn": "বার্গার বান",
-    "img": "/ingredients/695-Burger_Bun.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Burger%20Bun.png",
     "phonetic": [
       "burger bun",
       "burgeer bun",
@@ -7964,7 +7964,7 @@
     "id": "697",
     "name_en": "Whole Wheat Bread",
     "name_bn": "লাল আটার রুটি",
-    "img": "/ingredients/697-Whole_Wheat_Bread.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Whole%20Wheat%20Bread.png",
     "phonetic": [
       "whole wheat bread",
       "whole wheaat breaad",
@@ -7976,7 +7976,7 @@
     "id": "698",
     "name_en": "Croissant",
     "name_bn": "ক্রসেন্ট",
-    "img": "/ingredients/698-Croissant.png",
+    "img": "https://www.themealdb.com/images/ingredients/Croissant.png",
     "phonetic": [
       "croissant",
       "croissaant",
@@ -7988,7 +7988,7 @@
     "id": "699",
     "name_en": "Bagel",
     "name_bn": "বেগেল",
-    "img": "/ingredients/699-Bagel.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bagel.png",
     "phonetic": [
       "bagel",
       "baagel",
@@ -8011,7 +8011,7 @@
     "id": "701",
     "name_en": "Chinigura Rice",
     "name_bn": "চিনিগুঁড়া চাল",
-    "img": "/ingredients/701-Chinigura_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chinigura%20Rice.png",
     "phonetic": [
       "chinigura rice",
       "chiniguraa rice",
@@ -8023,7 +8023,7 @@
     "id": "702",
     "name_en": "Kalojira Rice",
     "name_bn": "কালজিরা চাল",
-    "img": "/ingredients/702-Kalojira_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kalojira%20Rice.png",
     "phonetic": [
       "kalojira rice",
       "kaalojiraa rice",
@@ -8035,7 +8035,7 @@
     "id": "703",
     "name_en": "Miniket Rice",
     "name_bn": "মিনিকেট চাল",
-    "img": "/ingredients/703-Miniket_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Miniket%20Rice.png",
     "phonetic": [
       "miniket rice",
       "minikeet ricee",
@@ -8046,7 +8046,7 @@
     "id": "704",
     "name_en": "Najirshail Rice",
     "name_bn": "নাজিরশাইল চাল",
-    "img": "/ingredients/704-Najirshail_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Najirshail%20Rice.png",
     "phonetic": [
       "najirshail rice",
       "naajirshaail rice",
@@ -8058,7 +8058,7 @@
     "id": "705",
     "name_en": "Kataribhog Rice",
     "name_bn": "কাটারিভোগ চাল",
-    "img": "/ingredients/705-Kataribhog_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kataribhog%20Rice.png",
     "phonetic": [
       "kataribhog rice",
       "kaataaribhog rice",
@@ -8070,7 +8070,7 @@
     "id": "706",
     "name_en": "Puffed Rice",
     "name_bn": "মুড়ি",
-    "img": "/ingredients/706-Puffed_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Puffed%20Rice.png",
     "phonetic": [
       "puffed rice",
       "puffeed ricee",
@@ -8082,7 +8082,7 @@
     "id": "707",
     "name_en": "Flattened Rice",
     "name_bn": "চিঁড়া",
-    "img": "/ingredients/707-Flattened_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Flattened%20Rice.png",
     "phonetic": [
       "flattened rice",
       "flaattened rice",
@@ -8094,7 +8094,7 @@
     "id": "708",
     "name_en": "Fried Paddy",
     "name_bn": "খৈ",
-    "img": "/ingredients/708-Fried_Paddy.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fried%20Paddy.png",
     "phonetic": [
       "fried paddy",
       "fried paaddy",
@@ -8106,7 +8106,7 @@
     "id": "709",
     "name_en": "Jackfruit",
     "name_bn": "কাঁঠাল",
-    "img": "/ingredients/709-Jackfruit.png",
+    "img": "https://www.themealdb.com/images/ingredients/Jackfruit.png",
     "phonetic": [
       "kathal",
       "kathaal",
@@ -8118,7 +8118,7 @@
     "id": "710",
     "name_en": "Raw Jackfruit",
     "name_bn": "এঁচোড়",
-    "img": "/ingredients/710-Raw_Jackfruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jackfruit.png",
     "phonetic": [
       "raw jackfruit",
       "raaw jaackfruit",
@@ -8130,7 +8130,7 @@
     "id": "711",
     "name_en": "Lychee",
     "name_bn": "লিচু",
-    "img": "/ingredients/711-Lychee.png",
+    "img": "https://www.themealdb.com/images/ingredients/Lychee.png",
     "phonetic": [
       "lichu",
       "litchi",
@@ -8141,7 +8141,7 @@
     "id": "712",
     "name_en": "Blackberry",
     "name_bn": "কালোজাম",
-    "img": "/ingredients/712-Blackberry.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blackberry.png",
     "phonetic": [
       "blackberry",
       "blaackberry",
@@ -8152,7 +8152,7 @@
     "id": "713",
     "name_en": "Java Plum",
     "name_bn": "জাম",
-    "img": "/ingredients/713-Java_Plum.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Plum.png",
     "phonetic": [
       "java plum",
       "jaavaa plum",
@@ -8163,7 +8163,7 @@
     "id": "714",
     "name_en": "Guava",
     "name_bn": "পেয়ারা",
-    "img": "/ingredients/714-Guava.png",
+    "img": "https://www.themealdb.com/images/ingredients/Guava.png",
     "phonetic": [
       "peyara",
       "amrood",
@@ -8174,7 +8174,7 @@
     "id": "715",
     "name_en": "Water Apple",
     "name_bn": "জামরুল",
-    "img": "/ingredients/715-Water_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Water%20Apple.png",
     "phonetic": [
       "water apple",
       "waater aapple",
@@ -8185,7 +8185,7 @@
     "id": "716",
     "name_en": "Wood Apple",
     "name_bn": "বেল",
-    "img": "/ingredients/716-Wood_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Wood%20Apple.png",
     "phonetic": [
       "wood apple",
       "wood aapple",
@@ -8197,7 +8197,7 @@
     "id": "717",
     "name_en": "Elephant Apple",
     "name_bn": "চালতা",
-    "img": "/ingredients/717-Elephant_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Elephant%20Apple.png",
     "phonetic": [
       "elephant apple",
       "elephaant aapple",
@@ -8208,7 +8208,7 @@
     "id": "718",
     "name_en": "Hog Plum",
     "name_bn": "আমড়া",
-    "img": "/ingredients/718-Hog_Plum.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hog%20Plum.png",
     "phonetic": [
       "hog plum",
       "hoog plum",
@@ -8219,7 +8219,7 @@
     "id": "719",
     "name_en": "Star Fruit",
     "name_bn": "কামরাঙ্গা",
-    "img": "/ingredients/719-Star_Fruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Star%20Fruit.png",
     "phonetic": [
       "star fruit",
       "staar fruit",
@@ -8231,7 +8231,7 @@
     "id": "720",
     "name_en": "Jujube",
     "name_bn": "বরই/কুল",
-    "img": "/ingredients/720-Jujube.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jujube.png",
     "phonetic": [
       "jujube",
       "jujubee",
@@ -8242,7 +8242,7 @@
     "id": "721",
     "name_en": "Custard Apple",
     "name_bn": "আতা ফল",
-    "img": "/ingredients/721-Custard_Apple.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Custard%20Apple.png",
     "phonetic": [
       "custard apple",
       "custaard aapple",
@@ -8254,7 +8254,7 @@
     "id": "722",
     "name_en": "Sapodilla",
     "name_bn": "সফেদা",
-    "img": "/ingredients/722-Sapodilla.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sapodilla.png",
     "phonetic": [
       "sapodilla",
       "saapodillaa",
@@ -8266,7 +8266,7 @@
     "id": "723",
     "name_en": "Pomelo",
     "name_bn": "জাম্বুরা",
-    "img": "/ingredients/723-Pomelo.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pomelo.png",
     "phonetic": [
       "pomelo",
       "poomeloo",
@@ -8277,7 +8277,7 @@
     "id": "724",
     "name_en": "Dragon Fruit",
     "name_bn": "ড্রাগন ফল",
-    "img": "/ingredients/724-Dragon_Fruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dragon%20Fruit.png",
     "phonetic": [
       "dragon fruit",
       "draagon fruit",
@@ -8310,7 +8310,7 @@
     "id": "727",
     "name_en": "Blueberry",
     "name_bn": "ব্লুবেরি",
-    "img": "/ingredients/727-Blueberry.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blueberry.png",
     "phonetic": [
       "blueberry",
       "blueebeerry",
@@ -8321,7 +8321,7 @@
     "id": "728",
     "name_en": "Raspberry",
     "name_bn": "রাসবেরি",
-    "img": "/ingredients/728-Raspberry.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Raspberry.png",
     "phonetic": [
       "raspberry",
       "raaspberry",
@@ -8343,7 +8343,7 @@
     "id": "730",
     "name_en": "Strawberry",
     "name_bn": "স্ট্রবেরি",
-    "img": "/ingredients/730-Strawberry.png",
+    "img": "https://www.themealdb.com/images/ingredients/Strawberry.png",
     "phonetic": [
       "strawberry",
       "straawberry",
@@ -8354,7 +8354,7 @@
     "id": "731",
     "name_en": "Blackcurrant",
     "name_bn": "ব্ল্যাককারেন্ট",
-    "img": "/ingredients/731-Blackcurrant.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blackcurrant.png",
     "phonetic": [
       "blackcurrant",
       "blaackcurraant",
@@ -8365,7 +8365,7 @@
     "id": "732",
     "name_en": "Green Apple",
     "name_bn": "সবুজ আপেল",
-    "img": "/ingredients/732-Green_Apple.png",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Apple.png",
     "phonetic": [
       "green apple",
       "green aapple",
@@ -8387,7 +8387,7 @@
     "id": "734",
     "name_en": "Pear",
     "name_bn": "নাশপাতি",
-    "img": "/ingredients/734-Pear.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pear.png",
     "phonetic": [
       "pear",
       "peaar",
@@ -8398,7 +8398,7 @@
     "id": "735",
     "name_en": "Peach",
     "name_bn": "পিচ ফল",
-    "img": "/ingredients/735-Peach.png",
+    "img": "https://www.themealdb.com/images/ingredients/Peach.png",
     "phonetic": [
       "peach",
       "peaach",
@@ -8431,7 +8431,7 @@
     "id": "738",
     "name_en": "Plum",
     "name_bn": "আলুবোখারা/প্লাম",
-    "img": "/ingredients/738-Plum.png",
+    "img": "https://www.themealdb.com/images/ingredients/Plum.png",
     "phonetic": [
       "plum",
       "ploom"
@@ -8441,7 +8441,7 @@
     "id": "739",
     "name_en": "Grape (Green)",
     "name_bn": "সবুজ আঙ্গুর",
-    "img": "/ingredients/739-Grape__Green_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Grapes.png",
     "phonetic": [
       "grape (green)",
       "graape (green)",
@@ -8452,7 +8452,7 @@
     "id": "740",
     "name_en": "Grape (Black)",
     "name_bn": "কালো আঙ্গুর",
-    "img": "/ingredients/740-Grape__Black_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Grapes.png",
     "phonetic": [
       "grape (black)",
       "graape (blaack)",
@@ -8474,7 +8474,7 @@
     "id": "742",
     "name_en": "Tangerine",
     "name_bn": "মাল্টা",
-    "img": "/ingredients/742-Tangerine.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tangerine.png",
     "phonetic": [
       "tangerine",
       "taangerine",
@@ -8554,7 +8554,7 @@
     "id": "749",
     "name_en": "Watermelon",
     "name_bn": "তরমুজ",
-    "img": "/ingredients/749-Watermelon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Watermelon.png",
     "phonetic": [
       "tormuj",
       "tarbuj",
@@ -8565,7 +8565,7 @@
     "id": "750",
     "name_en": "Melon",
     "name_bn": "বাঙ্গী/মেলন",
-    "img": "/ingredients/750-Melon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Melon.png",
     "phonetic": [
       "melon",
       "meloon",
@@ -8576,7 +8576,7 @@
     "id": "751",
     "name_en": "Tamarind",
     "name_bn": "তেঁতুল",
-    "img": "/ingredients/751-Tamarind.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tamarind.png",
     "phonetic": [
       "tetul",
       "tentul",
@@ -8587,7 +8587,7 @@
     "id": "752",
     "name_en": "Dates",
     "name_bn": "খেজুর",
-    "img": "/ingredients/752-Dates.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dates.png",
     "phonetic": [
       "dates",
       "daates",
@@ -8631,7 +8631,7 @@
     "id": "756",
     "name_en": "Caraway Seeds",
     "name_bn": "শাহ জিরা",
-    "img": "/ingredients/756-Caraway_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Caraway%20Seeds.png",
     "phonetic": [
       "caraway seeds",
       "caaraawaay seeds",
@@ -8642,7 +8642,7 @@
     "id": "757",
     "name_en": "Nigella Seeds",
     "name_bn": "কালো জিরা",
-    "img": "/ingredients/757-Nigella_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Nigella%20Seeds.png",
     "phonetic": [
       "nigella seeds",
       "nigellaa seeds",
@@ -8677,7 +8677,7 @@
     "id": "760",
     "name_en": "Sesame Seeds",
     "name_bn": "তিল",
-    "img": "/ingredients/760-Sesame_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Seeds.png",
     "phonetic": [
       "sesame seeds",
       "sesaame seeds",
@@ -8747,7 +8747,7 @@
     "id": "766",
     "name_en": "Kashmiri Mirch",
     "name_bn": "কাশ্মীরি মরিচ গুঁড়া",
-    "img": "/ingredients/766-Kashmiri_Mirch.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kashmiri%20Mirch.png",
     "phonetic": [
       "kashmiri mirch",
       "kaashmiri mirch",
@@ -8781,7 +8781,7 @@
     "id": "769",
     "name_en": "White Pepper Powder",
     "name_bn": "সাদা গোল মরিচ গুঁড়া",
-    "img": "/ingredients/769-White_Pepper_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/White%20Pepper.png",
     "phonetic": [
       "white pepper powder",
       "white pepper poowder",
@@ -8817,7 +8817,7 @@
     "id": "772",
     "name_en": "Black Cardamom",
     "name_bn": "বড় এলাচ",
-    "img": "/ingredients/772-Black_Cardamom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Cardamom.png",
     "phonetic": [
       "black cardamom",
       "blaack caardaamom",
@@ -8850,7 +8850,7 @@
     "id": "775",
     "name_en": "Mace",
     "name_bn": "জয়ত্রী",
-    "img": "/ingredients/775-Mace.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mace.png",
     "phonetic": [
       "mace",
       "maace",
@@ -8895,7 +8895,7 @@
     "id": "779",
     "name_en": "Dry Red Chili",
     "name_bn": "শুকনা মরিচ",
-    "img": "/ingredients/779-Dry_Red_Chili.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chili.png",
     "phonetic": [
       "dry red chili",
       "dry reed chili",
@@ -8906,7 +8906,7 @@
     "id": "780",
     "name_en": "Radhuni",
     "name_bn": "রাধুনী",
-    "img": "/ingredients/780-Radhuni.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Celery%20Seeds.png",
     "phonetic": [
       "radhuni",
       "raadhuni",
@@ -8918,7 +8918,7 @@
     "id": "781",
     "name_en": "Five Spice",
     "name_bn": "পাঁচফোড়ন",
-    "img": "/ingredients/781-Five_Spice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Five%20Spice.png",
     "phonetic": [
       "five spice",
       "fivee spicee",
@@ -8929,7 +8929,7 @@
     "id": "782",
     "name_en": "Kasoori Methi",
     "name_bn": "কাসুরি মেথি",
-    "img": "/ingredients/782-Kasoori_Methi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Kasoori%20Methi.png",
     "phonetic": [
       "kasoori methi",
       "kaasoori methi",
@@ -8941,7 +8941,7 @@
     "id": "783",
     "name_en": "Dry Ginger",
     "name_bn": "শুকনা আদা/শুট",
-    "img": "/ingredients/783-Dry_Ginger.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dry%20Ginger.png",
     "phonetic": [
       "dry ginger",
       "dry gingeer",
@@ -8962,7 +8962,7 @@
     "id": "785",
     "name_en": "Chat Masala",
     "name_bn": "চাট মশলা",
-    "img": "/ingredients/785-Chat_Masala.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chat%20Masala.png",
     "phonetic": [
       "chat masala",
       "chaat maasaalaa"
@@ -8995,7 +8995,7 @@
     "id": "788",
     "name_en": "Meat Masala",
     "name_bn": "মাংসের মশলা",
-    "img": "/ingredients/788-Meat_Masala.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Meat%20Masala.png",
     "phonetic": [
       "meat masala",
       "meaat maasaalaa",
@@ -9006,7 +9006,7 @@
     "id": "789",
     "name_en": "Fish Masala",
     "name_bn": "মাছের মশলা",
-    "img": "/ingredients/789-Fish_Masala.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fish%20Masala.png",
     "phonetic": [
       "fish masala",
       "fish maasaalaa",
@@ -9017,7 +9017,7 @@
     "id": "790",
     "name_en": "Asafoetida",
     "name_bn": "হিং",
-    "img": "/ingredients/790-Asafoetida.png",
+    "img": "https://www.themealdb.com/images/ingredients/Asafoetida.png",
     "phonetic": [
       "asafoetida",
       "aasaafoetidaa",
@@ -9029,7 +9029,7 @@
     "id": "791",
     "name_en": "Black Salt",
     "name_bn": "বিট লবণ",
-    "img": "/ingredients/791-Black_Salt.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Salt.png",
     "phonetic": [
       "black salt",
       "blaack saalt"
@@ -9062,7 +9062,7 @@
     "id": "794",
     "name_en": "Sesame Oil",
     "name_bn": "তিল তেল",
-    "img": "/ingredients/794-Sesame_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Oil.png",
     "phonetic": [
       "sesame oil",
       "sesaame oil",
@@ -9098,7 +9098,7 @@
     "id": "797",
     "name_en": "Soybean Oil",
     "name_bn": "সয়াবিন তেল",
-    "img": "/ingredients/797-Soybean_Oil.png",
+    "img": "https://www.themealdb.com/images/ingredients/Soybean%20Oil.png",
     "phonetic": [
       "soybean oil",
       "soybeaan oil",
@@ -9121,7 +9121,7 @@
     "id": "799",
     "name_en": "Vanaspati",
     "name_bn": "ডালডা",
-    "img": "/ingredients/799-Vanaspati.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Vanaspati.png",
     "phonetic": [
       "vanaspati",
       "vaanaaspaati",
@@ -9179,7 +9179,7 @@
     "id": "804",
     "name_en": "Gouda",
     "name_bn": "গৌডা চিজ",
-    "img": "/ingredients/804-Gouda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gouda.png",
     "phonetic": [
       "gouda",
       "goudaa",
@@ -9202,7 +9202,7 @@
     "id": "806",
     "name_en": "Blue Cheese",
     "name_bn": "ব্লু চিজ",
-    "img": "/ingredients/806-Blue_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Blue%20Cheese.png",
     "phonetic": [
       "blue cheese",
       "bluee cheeeesee",
@@ -9213,7 +9213,7 @@
     "id": "807",
     "name_en": "Monterey Jack",
     "name_bn": "মনটেরি জ্যাক চিজ",
-    "img": "/ingredients/807-Monterey_Jack.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Monterey%20Jack.png",
     "phonetic": [
       "monterey jack",
       "monterey jaack",
@@ -9225,7 +9225,7 @@
     "id": "808",
     "name_en": "Swiss Cheese",
     "name_bn": "সুইস চিজ",
-    "img": "/ingredients/808-Swiss_Cheese.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Swiss%20Cheese.png",
     "phonetic": [
       "swiss cheese",
       "swiss cheeeesee",
@@ -9236,7 +9236,7 @@
     "id": "809",
     "name_en": "Provolone",
     "name_bn": "প্রোভোলোন চিজ",
-    "img": "/ingredients/809-Provolone.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Provolone.png",
     "phonetic": [
       "provolone",
       "proovooloone",
@@ -9247,7 +9247,7 @@
     "id": "810",
     "name_en": "Burrata",
     "name_bn": "বুরাটা চিজ",
-    "img": "/ingredients/810-Burrata.png",
+    "img": "https://www.themealdb.com/images/ingredients/Burrata.png",
     "phonetic": [
       "burrata",
       "burraataa",
@@ -9341,7 +9341,7 @@
     "id": "818",
     "name_en": "Evaporated Milk",
     "name_bn": "ঘন দুধ (ইভাপোরেটেড)",
-    "img": "/ingredients/818-Evaporated_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Evaporated%20Milk.png",
     "phonetic": [
       "evaporated milk",
       "evaaporaated milk",
@@ -9377,7 +9377,7 @@
     "id": "821",
     "name_en": "Oat Milk",
     "name_bn": "ওটস দুধ",
-    "img": "/ingredients/821-Oat_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Oat%20Milk.png",
     "phonetic": [
       "oat milk",
       "oaat milk",
@@ -9389,7 +9389,7 @@
     "id": "822",
     "name_en": "Soy Milk",
     "name_bn": "সয়া দুধ",
-    "img": "/ingredients/822-Soy_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Soy%20Milk.png",
     "phonetic": [
       "soy milk",
       "sooy milk",
@@ -9400,7 +9400,7 @@
     "id": "823",
     "name_en": "Matcha Powder",
     "name_bn": "মাচা পাউডার",
-    "img": "/ingredients/823-Matcha_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Matcha%20Powder.png",
     "phonetic": [
       "matcha powder",
       "maatchaa powder",
@@ -9435,7 +9435,7 @@
     "id": "826",
     "name_en": "Coffee Beans",
     "name_bn": "আস্ত কফি বিন",
-    "img": "/ingredients/826-Coffee_Beans.png",
+    "img": "https://www.themealdb.com/images/ingredients/Coffee%20Beans.png",
     "phonetic": [
       "coffee beans",
       "coffee beaans",
@@ -9447,7 +9447,7 @@
     "id": "827",
     "name_en": "Earl Grey Tea",
     "name_bn": "আর্ল গ্রে চা",
-    "img": "/ingredients/827-Earl_Grey_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Earl%20Grey.png",
     "phonetic": [
       "earl grey tea",
       "eaarl grey teaa",
@@ -9458,7 +9458,7 @@
     "id": "828",
     "name_en": "Jasmine Tea",
     "name_bn": "জেসমিন চা",
-    "img": "/ingredients/828-Jasmine_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jasmine%20Tea.png",
     "phonetic": [
       "jasmine tea",
       "jaasmine teaa",
@@ -9470,7 +9470,7 @@
     "id": "829",
     "name_en": "Green Tea Bags",
     "name_bn": "গ্রিন টি ব্যাগ",
-    "img": "/ingredients/829-Green_Tea_Bags.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Green%20Tea.png",
     "phonetic": [
       "green tea bags",
       "green teaa baags",
@@ -9481,7 +9481,7 @@
     "id": "830",
     "name_en": "Chamomile Tea",
     "name_bn": "ক্যামোমাইল চা",
-    "img": "/ingredients/830-Chamomile_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chamomile.png",
     "phonetic": [
       "chamomile tea",
       "chaamomile teaa",
@@ -9493,7 +9493,7 @@
     "id": "831",
     "name_en": "Burger Patty (Beef)",
     "name_bn": "বিফ বার্গার প্যাটি",
-    "img": "/ingredients/831-Burger_Patty__Beef_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Patty.png",
     "phonetic": [
       "burger patty (beef)",
       "burger paatty (beef)",
@@ -9505,7 +9505,7 @@
     "id": "832",
     "name_en": "Burger Patty (Chicken)",
     "name_bn": "চিকেন বার্গার প্যাটি",
-    "img": "/ingredients/832-Burger_Patty__Chicken_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Patty.png",
     "phonetic": [
       "burger patty (chicken)",
       "burger paatty (chicken)",
@@ -9517,7 +9517,7 @@
     "id": "833",
     "name_en": "Chicken Nuggets",
     "name_bn": "চিকেন নাগেটস",
-    "img": "/ingredients/833-Chicken_Nuggets.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Nuggets.png",
     "phonetic": [
       "chicken nuggets",
       "chickeen nuggeets",
@@ -9529,7 +9529,7 @@
     "id": "834",
     "name_en": "Fish Fingers",
     "name_bn": "ফিশ ফিঙ্গার",
-    "img": "/ingredients/834-Fish_Fingers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fish%20Fingers.png",
     "phonetic": [
       "fish fingers",
       "fish fingeers",
@@ -9552,7 +9552,7 @@
     "id": "836",
     "name_en": "Pastrami",
     "name_bn": "পাস্তরামি",
-    "img": "/ingredients/836-Pastrami.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pastrami.png",
     "phonetic": [
       "pastrami",
       "paastraami",
@@ -9563,7 +9563,7 @@
     "id": "837",
     "name_en": "Beef Salami",
     "name_bn": "বিফ সালামি",
-    "img": "/ingredients/837-Beef_Salami.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Salami.png",
     "phonetic": [
       "beef salami",
       "beef saalaami",
@@ -9575,7 +9575,7 @@
     "id": "838",
     "name_en": "Pepperoni Slices",
     "name_bn": "পেপারনি স্লাইস",
-    "img": "/ingredients/838-Pepperoni_Slices.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pepperoni.png",
     "phonetic": [
       "pepperoni slices",
       "pepperooni slices",
@@ -9599,7 +9599,7 @@
     "id": "840",
     "name_en": "Nachos/Tortilla Chips",
     "name_bn": "নাচোস",
-    "img": "/ingredients/840-Nachos_Tortilla_Chips.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tortilla%20Chips.png",
     "phonetic": [
       "nachos/tortilla chips",
       "naachos/tortillaa chips",
@@ -9646,7 +9646,7 @@
     "id": "844",
     "name_en": "Pizza Dough",
     "name_bn": "পিজ্জা ডো",
-    "img": "/ingredients/844-Pizza_Dough.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pizza%20Dough.png",
     "phonetic": [
       "pizza dough",
       "pizzaa dough",
@@ -9730,7 +9730,7 @@
     "id": "851",
     "name_en": "Baking Soda",
     "name_bn": "বেকিং সোডা",
-    "img": "/ingredients/851-Baking_Soda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baking%20Soda.png",
     "phonetic": [
       "baking soda",
       "baaking sodaa",
@@ -9765,7 +9765,7 @@
     "id": "854",
     "name_en": "Gelatine Powder",
     "name_bn": "জেলেটিন পাউডার",
-    "img": "/ingredients/854-Gelatine_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gelatine.png",
     "phonetic": [
       "gelatine powder",
       "gelaatine powder",
@@ -9777,7 +9777,7 @@
     "id": "855",
     "name_en": "Agar Agar",
     "name_bn": "আগার আগার",
-    "img": "/ingredients/855-Agar_Agar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agar%20Agar.png",
     "phonetic": [
       "agar agar",
       "aagaar aagaar"
@@ -9810,7 +9810,7 @@
     "id": "858",
     "name_en": "Agave Nectar",
     "name_bn": "আগভে নেক্টার",
-    "img": "/ingredients/858-Agave_Nectar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Agave.png",
     "phonetic": [
       "agave nectar",
       "aagaave nectaar",
@@ -9893,7 +9893,7 @@
     "id": "865",
     "name_en": "Tabasco Sauce",
     "name_bn": "টাবাস্কো সস",
-    "img": "https://www.themealdb.com/images/ingredients/Tabasco%20Sauce.png",
+    "img": "https://www.themealdb.com/images/ingredients/Tabasco.png",
     "phonetic": [
       "tabasco sauce",
       "taabaasco saauce",
@@ -9916,7 +9916,7 @@
     "id": "867",
     "name_en": "Hoisin Sauce",
     "name_bn": "হোসিন সস",
-    "img": "https://www.themealdb.com/images/ingredients/Hoisin%20Sauce.png",
+    "img": "https://www.themealdb.com/images/ingredients/Hoisin.png",
     "phonetic": [
       "hoisin sauce",
       "hoisin saauce",
@@ -9976,7 +9976,7 @@
     "id": "872",
     "name_en": "Sesame Oil",
     "name_bn": "তিল তেল",
-    "img": "/ingredients/872-Sesame_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Oil.png",
     "phonetic": [
       "sesame oil",
       "sesaame oil",
@@ -10035,7 +10035,7 @@
     "id": "877",
     "name_en": "Pesto",
     "name_bn": "পেস্টো সস",
-    "img": "/ingredients/877-Pesto.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pesto.png",
     "phonetic": [
       "pesto",
       "pestoo",
@@ -10056,7 +10056,7 @@
     "id": "879",
     "name_en": "Guacamole",
     "name_bn": "গুয়াকামোল",
-    "img": "/ingredients/879-Guacamole.png",
+    "img": "https://www.themealdb.com/images/ingredients/Guacamole.png",
     "phonetic": [
       "guacamole",
       "guaacaamole",
@@ -10102,7 +10102,7 @@
     "id": "883",
     "name_en": "Sweet Corn (Canned)",
     "name_bn": "ক্যানড ভুট্টা",
-    "img": "/ingredients/883-Sweet_Corn__Canned_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Corn.png",
     "phonetic": [
       "sweet corn (canned)",
       "sweet corn (caanned)",
@@ -10114,7 +10114,7 @@
     "id": "884",
     "name_en": "Artichokes",
     "name_bn": "আর্টিকোক",
-    "img": "/ingredients/884-Artichokes.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Artichokes.png",
     "phonetic": [
       "artichokes",
       "aartichokes",
@@ -10173,7 +10173,7 @@
     "id": "889",
     "name_en": "Gherkins",
     "name_bn": "আচারি শশা/ঘেরকিন",
-    "img": "/ingredients/889-Gherkins.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gherkins.png",
     "phonetic": [
       "gherkins",
       "gheerkins",
@@ -10184,7 +10184,7 @@
     "id": "890",
     "name_en": "Jalapeños (Pickled)",
     "name_bn": "আচারি জালাপেনো",
-    "img": "/ingredients/890-Jalape_os__Pickled_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jalapenos.png",
     "phonetic": [
       "jalapeños (pickled)",
       "jaalaapeños (pickled)",
@@ -10231,7 +10231,7 @@
     "id": "894",
     "name_en": "Pistachios",
     "name_bn": "পেস্তা বাদাম",
-    "img": "/ingredients/894-Pistachios.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pistachios.png",
     "phonetic": [
       "pistachios",
       "pistaachios",
@@ -10267,7 +10267,7 @@
     "id": "897",
     "name_en": "Pumpkin Seeds",
     "name_bn": "কুমড়ার বীজ",
-    "img": "/ingredients/897-Pumpkin_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pumpkin%20Seeds.png",
     "phonetic": [
       "pumpkin seeds",
       "pumpkin seeeeds",
@@ -10279,7 +10279,7 @@
     "id": "898",
     "name_en": "Sunflower Seeds",
     "name_bn": "সূর্যমুখী বীজ",
-    "img": "/ingredients/898-Sunflower_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sunflower%20Seeds.png",
     "phonetic": [
       "sunflower seeds",
       "sunfloower seeds",
@@ -10291,7 +10291,7 @@
     "id": "899",
     "name_en": "Chia Seeds",
     "name_bn": "চিয়া সিডস",
-    "img": "/ingredients/899-Chia_Seeds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chia%20Seeds.png",
     "phonetic": [
       "chia seeds",
       "chiaa seeds",
@@ -10303,7 +10303,7 @@
     "id": "900",
     "name_en": "Flaxseed",
     "name_bn": "তিসি বীজ",
-    "img": "/ingredients/900-Flaxseed.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Flaxseed.png",
     "phonetic": [
       "flaxseed",
       "flaaxseed",
@@ -10451,7 +10451,7 @@
     "id": "913",
     "name_en": "Cinnamon Powder",
     "name_bn": "দারুচিনি গুঁড়া",
-    "img": "/ingredients/913-Cinnamon_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cinnamon%20Powder.png",
     "phonetic": [
       "cinnamon powder",
       "cinnaamon powder",
@@ -10498,7 +10498,7 @@
     "id": "917",
     "name_en": "Coriander Powder",
     "name_bn": "ধনিয়া গুঁড়া",
-    "img": "/ingredients/917-Coriander_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coriander%20Powder.png",
     "phonetic": [
       "coriander powder",
       "coriaander powder",
@@ -10510,7 +10510,7 @@
     "id": "918",
     "name_en": "Cumin Powder",
     "name_bn": "জিরা গুঁড়া",
-    "img": "/ingredients/918-Cumin_Powder.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Cumin%20Powder.png",
     "phonetic": [
       "cumin powder",
       "cumin poowder",
@@ -10557,7 +10557,7 @@
     "id": "922",
     "name_en": "Cauliflower",
     "name_bn": "ফুলকপি",
-    "img": "/ingredients/922-Cauliflower.png",
+    "img": "https://www.themealdb.com/images/ingredients/Cauliflower.png",
     "phonetic": [
       "fulkopi",
       "phulkopi",
@@ -10784,7 +10784,7 @@
     "id": "943",
     "name_en": "Mango",
     "name_bn": "আম",
-    "img": "/ingredients/943-Mango.png",
+    "img": "https://www.themealdb.com/images/ingredients/Mango.png",
     "phonetic": [
       "aam",
       "am",
@@ -10806,7 +10806,7 @@
     "id": "945",
     "name_en": "Grapes",
     "name_bn": "আঙ্গুর",
-    "img": "/ingredients/945-Grapes.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Grapes.png",
     "phonetic": [
       "grapes",
       "graapes",
@@ -10852,7 +10852,7 @@
     "id": "949",
     "name_en": "Watermelon",
     "name_bn": "তরমুজ",
-    "img": "/ingredients/949-Watermelon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Watermelon.png",
     "phonetic": [
       "tormuj",
       "tarbuj",
@@ -10897,7 +10897,7 @@
     "id": "953",
     "name_en": "Peach",
     "name_bn": "পিচ",
-    "img": "/ingredients/953-Peach.png",
+    "img": "https://www.themealdb.com/images/ingredients/Peach.png",
     "phonetic": [
       "peach",
       "peaach",
@@ -10908,7 +10908,7 @@
     "id": "954",
     "name_en": "Pear",
     "name_bn": "নাশপাতি",
-    "img": "/ingredients/954-Pear.png",
+    "img": "https://www.themealdb.com/images/ingredients/Pear.png",
     "phonetic": [
       "pear",
       "peaar",
@@ -10919,7 +10919,7 @@
     "id": "955",
     "name_en": "Plum",
     "name_bn": "আলুবোখারা",
-    "img": "/ingredients/955-Plum.png",
+    "img": "https://www.themealdb.com/images/ingredients/Plum.png",
     "phonetic": [
       "plum",
       "ploom"
@@ -10949,7 +10949,7 @@
     "id": "958",
     "name_en": "Melon",
     "name_bn": "তরমুজ/মেলন",
-    "img": "/ingredients/958-Melon.png",
+    "img": "https://www.themealdb.com/images/ingredients/Melon.png",
     "phonetic": [
       "melon",
       "meloon",
@@ -10960,7 +10960,7 @@
     "id": "959",
     "name_en": "Jackfruit",
     "name_bn": "কাঁঠাল",
-    "img": "/ingredients/959-Jackfruit.png",
+    "img": "https://www.themealdb.com/images/ingredients/Jackfruit.png",
     "phonetic": [
       "kathal",
       "kathaal",
@@ -10972,7 +10972,7 @@
     "id": "960",
     "name_en": "Lychee",
     "name_bn": "লিচু",
-    "img": "/ingredients/960-Lychee.png",
+    "img": "https://www.themealdb.com/images/ingredients/Lychee.png",
     "phonetic": [
       "lichu",
       "litchi",
@@ -11007,7 +11007,7 @@
     "id": "963",
     "name_en": "Mutton",
     "name_bn": "খাসির মাংস",
-    "img": "/ingredients/963-Mutton.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mutton.png",
     "phonetic": [
       "khashir mangsho",
       "khasi",
@@ -11114,7 +11114,7 @@
     "id": "973",
     "name_en": "Lobster",
     "name_bn": "লবস্টার",
-    "img": "/ingredients/973-Lobster.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lobster.png",
     "phonetic": [
       "lobster",
       "loobster",
@@ -11125,7 +11125,7 @@
     "id": "974",
     "name_en": "Crab",
     "name_bn": "কাঁকড়া",
-    "img": "/ingredients/974-Crab.png",
+    "img": "https://www.themealdb.com/images/ingredients/Crab.png",
     "phonetic": [
       "crab",
       "craab"
@@ -11135,7 +11135,7 @@
     "id": "975",
     "name_en": "Scallops",
     "name_bn": "স্ক্যালপস",
-    "img": "/ingredients/975-Scallops.png",
+    "img": "https://www.themealdb.com/images/ingredients/Scallops.png",
     "phonetic": [
       "scallops",
       "scaallops",
@@ -11146,7 +11146,7 @@
     "id": "976",
     "name_en": "Octopus",
     "name_bn": "অক্টোপাস",
-    "img": "/ingredients/976-Octopus.png",
+    "img": "https://www.themealdb.com/images/ingredients/Octopus.png",
     "phonetic": [
       "octopus",
       "ooctoopus",
@@ -11260,7 +11260,7 @@
     "id": "986",
     "name_en": "Noodles (Instant)",
     "name_bn": "নুডলস",
-    "img": "/ingredients/986-Noodles__Instant_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Instant%20Noodles.png",
     "phonetic": [
       "noodles (instant)",
       "noodles (instaant)",
@@ -11307,7 +11307,7 @@
     "id": "990",
     "name_en": "Kidney Beans",
     "name_bn": "রাজমা",
-    "img": "https://www.themealdb.com/images/ingredients/Kidney%20Beans.png",
+    "img": "https://www.themealdb.com/images/ingredients/Red%20Kidney%20Beans.png",
     "phonetic": [
       "kidney beans",
       "kidney beaans",
@@ -11436,7 +11436,7 @@
     "id": "1001",
     "name_en": "Chili Crisp (Lao Gan Ma)",
     "name_bn": "চিলি ক্রিস্প",
-    "img": "/ingredients/1001-Chili_Crisp__Lao_Gan_Ma_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chili%20Crisp.png",
     "phonetic": [
       "chili crisp (lao gan ma)",
       "chili crisp (laao gaan maa)",
@@ -11448,7 +11448,7 @@
     "id": "1002",
     "name_en": "Black Vinegar",
     "name_bn": "কালো ভিনেগার",
-    "img": "/ingredients/1002-Black_Vinegar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Vinegar.png",
     "phonetic": [
       "black vinegar",
       "blaack vinegaar",
@@ -11460,7 +11460,7 @@
     "id": "1003",
     "name_en": "Rock Sugar",
     "name_bn": "মিছরি",
-    "img": "/ingredients/1003-Rock_Sugar.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Rock%20Sugar.png",
     "phonetic": [
       "rock sugar",
       "rock sugaar",
@@ -11472,7 +11472,7 @@
     "id": "1004",
     "name_en": "Doubanjiang",
     "name_bn": "ডুবানজিয়াং (বিন পেস্ট)",
-    "img": "https://www.themealdb.com/images/ingredients/Doubanjiang.png",
+    "img": "https://www.themealdb.com/images/ingredients/Bean%20Paste.png",
     "phonetic": [
       "doubanjiang",
       "doubaanjiaang",
@@ -11484,7 +11484,7 @@
     "id": "1005",
     "name_en": "Green Coconut",
     "name_bn": "ডাব",
-    "img": "/ingredients/1005-Green_Coconut.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut.png",
     "phonetic": [
       "green coconut",
       "green coocoonut",
@@ -11496,7 +11496,7 @@
     "id": "1006",
     "name_en": "Palm Fruit",
     "name_bn": "তাল",
-    "img": "/ingredients/1006-Palm_Fruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Palm%20Fruit.png",
     "phonetic": [
       "palm fruit",
       "paalm fruit",
@@ -11508,7 +11508,7 @@
     "id": "1007",
     "name_en": "Popped Rice",
     "name_bn": "খৈ",
-    "img": "/ingredients/1007-Popped_Rice.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fried%20Paddy.png",
     "phonetic": [
       "popped rice",
       "poopped rice",
@@ -11520,7 +11520,7 @@
     "id": "1008",
     "name_en": "Tapioca Pearls (Boba)",
     "name_bn": "সাগু দানা (বোবা)",
-    "img": "/ingredients/1008-Tapioca_Pearls__Boba_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tapioca%20Pearls.png",
     "phonetic": [
       "tapioca pearls (boba)",
       "taapiocaa peaarls (bobaa)",
@@ -11532,7 +11532,7 @@
     "id": "1009",
     "name_en": "Hazelnut Syrup",
     "name_bn": "হেজেলনাট সিরাপ",
-    "img": "/ingredients/1009-Hazelnut_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hazelnut%20Syrup.png",
     "phonetic": [
       "hazelnut syrup",
       "haazelnut syrup",
@@ -11544,7 +11544,7 @@
     "id": "1010",
     "name_en": "Vanilla Syrup",
     "name_bn": "ভ্যানিলা সিরাপ",
-    "img": "/ingredients/1010-Vanilla_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Vanilla%20Syrup.png",
     "phonetic": [
       "vanilla syrup",
       "vaanillaa syrup",
@@ -11567,7 +11567,7 @@
     "id": "1012",
     "name_en": "Evaporated Milk",
     "name_bn": "ঘন দুধ",
-    "img": "/ingredients/1012-Evaporated_Milk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Evaporated%20Milk.png",
     "phonetic": [
       "evaporated milk",
       "evaaporaated milk",
@@ -11579,7 +11579,7 @@
     "id": "1013",
     "name_en": "Milk Powder",
     "name_bn": "গুঁড়া দুধ",
-    "img": "/ingredients/1013-Milk_Powder.png",
+    "img": "https://www.themealdb.com/images/ingredients/Milk%20Powder.png",
     "phonetic": [
       "milk powder",
       "milk poowder",
@@ -11603,7 +11603,7 @@
     "id": "1015",
     "name_en": "Gorgonzola",
     "name_bn": "গর্গোনজোলা চিজ",
-    "img": "/ingredients/1015-Gorgonzola.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gorgonzola.png",
     "phonetic": [
       "gorgonzola",
       "gorgonzolaa",
@@ -11626,7 +11626,7 @@
     "id": "1017",
     "name_en": "Panko Breadcrumbs",
     "name_bn": "পাঙ্কো ব্রেডক্রাম্বস",
-    "img": "/ingredients/1017-Panko_Breadcrumbs.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Panko.png",
     "phonetic": [
       "panko breadcrumbs",
       "paanko breaadcrumbs",
@@ -11638,7 +11638,7 @@
     "id": "1018",
     "name_en": "Spring Roll Wrappers",
     "name_bn": "স্প্রিং রোল র‍্যাপার",
-    "img": "/ingredients/1018-Spring_Roll_Wrappers.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spring%20Roll%20Wrappers.png",
     "phonetic": [
       "spring roll wrappers",
       "spring roll wraappers",
@@ -11650,7 +11650,7 @@
     "id": "1019",
     "name_en": "Nori Sheets",
     "name_bn": "নোরি শৈবাল",
-    "img": "/ingredients/1019-Nori_Sheets.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Nori.png",
     "phonetic": [
       "nori sheets",
       "noori sheets",
@@ -11731,7 +11731,7 @@
     "id": "1026",
     "name_en": "Miso Paste",
     "name_bn": "মিসো পেস্ট",
-    "img": "/ingredients/1026-Miso_Paste.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Miso%20Paste.png",
     "phonetic": [
       "miso paste",
       "miso paaste",
@@ -11767,7 +11767,7 @@
     "id": "1029",
     "name_en": "Soba Noodles",
     "name_bn": "সোবা নুডলস",
-    "img": "/ingredients/1029-Soba_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Soba%20Noodles.png",
     "phonetic": [
       "soba noodles",
       "sobaa noodles",
@@ -11779,7 +11779,7 @@
     "id": "1030",
     "name_en": "Ramen Noodles",
     "name_bn": "রামেন নুডলস",
-    "img": "/ingredients/1030-Ramen_Noodles.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ramen%20Noodles.png",
     "phonetic": [
       "ramen noodles",
       "raamen noodles",
@@ -11791,7 +11791,7 @@
     "id": "1031",
     "name_en": "Gnocchi",
     "name_bn": "নকি",
-    "img": "/ingredients/1031-Gnocchi.png",
+    "img": "https://www.themealdb.com/images/ingredients/Gnocchi.png",
     "phonetic": [
       "gnocchi",
       "gnoocchi",
@@ -11825,7 +11825,7 @@
     "id": "1034",
     "name_en": "Bulgur",
     "name_bn": "বুলগুর",
-    "img": "/ingredients/1034-Bulgur.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Bulgur.png",
     "phonetic": [
       "bulgur",
       "boolgoor"
@@ -11835,7 +11835,7 @@
     "id": "1035",
     "name_en": "Polenta",
     "name_bn": "পোলেন্টা",
-    "img": "/ingredients/1035-Polenta.png",
+    "img": "https://www.themealdb.com/images/ingredients/Polenta.png",
     "phonetic": [
       "polenta",
       "polentaa",
@@ -11859,7 +11859,7 @@
     "id": "1037",
     "name_en": "Gram Flour (Besan)",
     "name_bn": "বেসন",
-    "img": "/ingredients/1037-Gram_Flour__Besan_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Gram%20Flour.png",
     "phonetic": [
       "gram flour (besan)",
       "graam flour (besaan)",
@@ -11882,7 +11882,7 @@
     "id": "1039",
     "name_en": "Tapioca Starch",
     "name_bn": "ট্যাপিওকা স্টার্চ",
-    "img": "/ingredients/1039-Tapioca_Starch.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tapioca%20Starch.png",
     "phonetic": [
       "tapioca starch",
       "taapiocaa staarch",
@@ -11894,7 +11894,7 @@
     "id": "1040",
     "name_en": "Rice Flour",
     "name_bn": "চালের গুঁড়া",
-    "img": "/ingredients/1040-Rice_Flour.png",
+    "img": "https://www.themealdb.com/images/ingredients/Rice%20Flour.png",
     "phonetic": [
       "rice flour",
       "rice floour",
@@ -11918,7 +11918,7 @@
     "id": "1042",
     "name_en": "Whole Wheat Flour",
     "name_bn": "আটা",
-    "img": "/ingredients/1042-Whole_Wheat_Flour.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Whole%20Wheat%20Flour.png",
     "phonetic": [
       "whole wheat flour",
       "whole wheaat flour",
@@ -11942,7 +11942,7 @@
     "id": "1044",
     "name_en": "Baking Soda",
     "name_bn": "বেকিং সোডা",
-    "img": "/ingredients/1044-Baking_Soda.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Baking%20Soda.png",
     "phonetic": [
       "baking soda",
       "baaking sodaa",
@@ -12082,7 +12082,7 @@
     "id": "1056",
     "name_en": "Marmalade",
     "name_bn": "মার্মালেড",
-    "img": "/ingredients/1056-Marmalade.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Marmalade.png",
     "phonetic": [
       "marmalade",
       "maarmaalaade",
@@ -12129,7 +12129,7 @@
     "id": "1060",
     "name_en": "Sesame Oil",
     "name_bn": "তিল তেল",
-    "img": "/ingredients/1060-Sesame_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Oil.png",
     "phonetic": [
       "sesame oil",
       "sesaame oil",
@@ -12141,7 +12141,7 @@
     "id": "1061",
     "name_en": "Coconut Oil",
     "name_bn": "নারকেল তেল",
-    "img": "/ingredients/1061-Coconut_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut%20Oil.png",
     "phonetic": [
       "coconut oil",
       "coocoonut ooil",
@@ -12153,7 +12153,7 @@
     "id": "1062",
     "name_en": "Mustard Oil",
     "name_bn": "সরিষার তেল",
-    "img": "/ingredients/1062-Mustard_Oil.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mustard%20Oil.png",
     "phonetic": [
       "shorisher tel",
       "sorisher tel",
@@ -12198,7 +12198,7 @@
     "id": "1066",
     "name_en": "Margarine",
     "name_bn": "মার্জারিন",
-    "img": "/ingredients/1066-Margarine.png",
+    "img": "https://www.themealdb.com/images/ingredients/Margarine.png",
     "phonetic": [
       "margarine",
       "maargaarine",
@@ -12222,7 +12222,7 @@
     "id": "1068",
     "name_en": "Ketchup",
     "name_bn": "কেচাপ",
-    "img": "/ingredients/1068-Ketchup.png",
+    "img": "https://www.themealdb.com/images/ingredients/Ketchup.png",
     "phonetic": [
       "ketchup",
       "keetchup",
@@ -12245,7 +12245,7 @@
     "id": "1070",
     "name_en": "BBQ Sauce",
     "name_bn": "বিবিকিউ সস",
-    "img": "/ingredients/1070-BBQ_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/BBQ%20Sauce.png",
     "phonetic": [
       "bbq sauce",
       "bbq saauce",
@@ -12470,7 +12470,7 @@
     "id": "1089",
     "name_en": "Black Cardamom",
     "name_bn": "বড় এলাচ",
-    "img": "/ingredients/1089-Black_Cardamom.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Cardamom.png",
     "phonetic": [
       "black cardamom",
       "blaack caardaamom",
@@ -12504,7 +12504,7 @@
     "id": "1092",
     "name_en": "Mace",
     "name_bn": "জয়ত্রী",
-    "img": "/ingredients/1092-Mace.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mace.png",
     "phonetic": [
       "mace",
       "maace",
@@ -12572,7 +12572,7 @@
     "id": "1098",
     "name_en": "Nigella Seeds (Kalo Jeera)",
     "name_bn": "কালো জিরা",
-    "img": "/ingredients/1098-Nigella_Seeds__Kalo_Jeera_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Nigella%20Seeds.png",
     "phonetic": [
       "nigella seeds (kalo jeera)",
       "nigellaa seeds (kaalo jeeraa)",
@@ -12584,7 +12584,7 @@
     "id": "1099",
     "name_en": "Sesame Seeds (White)",
     "name_bn": "সাদা তিল",
-    "img": "/ingredients/1099-Sesame_Seeds__White_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sesame%20Seeds.png",
     "phonetic": [
       "sesame seeds (white)",
       "sesaame seeds (white)",
@@ -12596,7 +12596,7 @@
     "id": "1100",
     "name_en": "Sesame Seeds (Black)",
     "name_bn": "কালো তিল",
-    "img": "/ingredients/1100-Sesame_Seeds__Black_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Black%20Sesame%20Seeds.png",
     "phonetic": [
       "sesame seeds (black)",
       "sesaame seeds (blaack)",
@@ -12643,7 +12643,7 @@
     "id": "1104",
     "name_en": "Irish Cream Syrup",
     "name_bn": "আইরিশ ক্রিম সিরাপ",
-    "img": "/ingredients/1104-Irish_Cream_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "irish cream syrup",
       "irish creaam syrup",
@@ -12655,7 +12655,7 @@
     "id": "1105",
     "name_en": "Roasted Chicory",
     "name_bn": "চিকোরি পাউডার",
-    "img": "/ingredients/1105-Roasted_Chicory.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicory.png",
     "phonetic": [
       "roasted chicory",
       "roaasted chicory",
@@ -12667,7 +12667,7 @@
     "id": "1106",
     "name_en": "Brioche Bun",
     "name_bn": "ব্রায়োশ বার্গার বান",
-    "img": "/ingredients/1106-Brioche_Bun.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Brioche.png",
     "phonetic": [
       "brioche bun",
       "briooche bun",
@@ -12679,7 +12679,7 @@
     "id": "1107",
     "name_en": "Pretzel Bun",
     "name_bn": "প্রিটজেল বার্গার বান",
-    "img": "/ingredients/1107-Pretzel_Bun.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pretzel.png",
     "phonetic": [
       "pretzel bun",
       "preetzeel bun",
@@ -12690,7 +12690,7 @@
     "id": "1108",
     "name_en": "Potato Bun",
     "name_bn": "পটেটো বার্গার বান",
-    "img": "/ingredients/1108-Potato_Bun.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Potato%20Bun.png",
     "phonetic": [
       "potato bun",
       "potaato bun",
@@ -12713,7 +12713,7 @@
     "id": "1110",
     "name_en": "Focaccia",
     "name_bn": "ফোকাচিয়া",
-    "img": "/ingredients/1110-Focaccia.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Focaccia.png",
     "phonetic": [
       "focaccia",
       "focaacciaa",
@@ -12725,7 +12725,7 @@
     "id": "1111",
     "name_en": "Chicken Patty",
     "name_bn": "চিকেন প্যাটি",
-    "img": "/ingredients/1111-Chicken_Patty.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Chicken%20Patty.png",
     "phonetic": [
       "chicken patty",
       "chicken paatty",
@@ -12737,7 +12737,7 @@
     "id": "1112",
     "name_en": "Beef Patty",
     "name_bn": "বিফ প্যাটি",
-    "img": "/ingredients/1112-Beef_Patty.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Beef%20Patty.png",
     "phonetic": [
       "beef patty",
       "beef paatty",
@@ -12748,7 +12748,7 @@
     "id": "1113",
     "name_en": "Frozen French Fries",
     "name_bn": "ফ্রেঞ্চ ফ্রাই (ফ্রোজেন)",
-    "img": "/ingredients/1113-Frozen_French_Fries.svg",
+    "img": "https://www.themealdb.com/images/ingredients/French%20Fries.png",
     "phonetic": [
       "frozen french fries",
       "froozen french fries",
@@ -12760,7 +12760,7 @@
     "id": "1114",
     "name_en": "Hash Brown",
     "name_bn": "হ্যাশ ব্রাউন",
-    "img": "/ingredients/1114-Hash_Brown.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Hash%20Brown.png",
     "phonetic": [
       "hash brown",
       "haash brown",
@@ -12783,7 +12783,7 @@
     "id": "1116",
     "name_en": "Pizza Sauce",
     "name_bn": "পিজ্জা সস",
-    "img": "/ingredients/1116-Pizza_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pizza%20Sauce.png",
     "phonetic": [
       "pizza sauce",
       "pizzaa saauce",
@@ -12795,7 +12795,7 @@
     "id": "1117",
     "name_en": "Alfredo Sauce",
     "name_bn": "অ্যালফ্রেডো সস",
-    "img": "/ingredients/1117-Alfredo_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Alfredo%20Sauce.png",
     "phonetic": [
       "alfredo sauce",
       "aalfredo saauce",
@@ -12807,7 +12807,7 @@
     "id": "1118",
     "name_en": "Marinara Sauce",
     "name_bn": "মারিনারা সস",
-    "img": "/ingredients/1118-Marinara_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Marinara%20Sauce.png",
     "phonetic": [
       "marinara sauce",
       "maarinaaraa saauce",
@@ -12819,7 +12819,7 @@
     "id": "1119",
     "name_en": "Tartar Sauce",
     "name_bn": "টারটার সস",
-    "img": "/ingredients/1119-Tartar_Sauce.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Tartar%20Sauce.png",
     "phonetic": [
       "tartar sauce",
       "taartaar saauce",
@@ -12831,7 +12831,7 @@
     "id": "1120",
     "name_en": "Thousand Island",
     "name_bn": "থাউজেন্ড আইল্যান্ড ড্রেসিং",
-    "img": "/ingredients/1120-Thousand_Island.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Salad%20Dressing.png",
     "phonetic": [
       "thousand island",
       "thousaand islaand",
@@ -12854,7 +12854,7 @@
     "id": "1122",
     "name_en": "Ranch Dressing",
     "name_bn": "র‍্যাঞ্চ ড্রেসিং",
-    "img": "/ingredients/1122-Ranch_Dressing.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Ranch.png",
     "phonetic": [
       "ranch dressing",
       "raanch dressing",
@@ -12902,7 +12902,7 @@
     "id": "1126",
     "name_en": "Lotus Root",
     "name_bn": "পদ্মমূল",
-    "img": "/ingredients/1126-Lotus_Root.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Lotus%20Root.png",
     "phonetic": [
       "lotus root",
       "lootus roooot",
@@ -12925,7 +12925,7 @@
     "id": "1128",
     "name_en": "Dried Lily Buds",
     "name_bn": "লিলি বার্ডস",
-    "img": "/ingredients/1128-Dried_Lily_Buds.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dried%20Lily.png",
     "phonetic": [
       "dried lily buds",
       "drieed lily buds",
@@ -12972,7 +12972,7 @@
     "id": "1132",
     "name_en": "Radhuni Seed",
     "name_bn": "রাধুনী",
-    "img": "/ingredients/1132-Radhuni_Seed.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Celery%20Seeds.png",
     "phonetic": [
       "radhuni seed",
       "raadhuni seed",
@@ -13008,7 +13008,7 @@
     "id": "1135",
     "name_en": "Khoi",
     "name_bn": "খৈ",
-    "img": "/ingredients/1135-Khoi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Fried%20Paddy.png",
     "phonetic": [
       "khoi",
       "khooi",
@@ -13029,7 +13029,7 @@
     "id": "1137",
     "name_en": "Gur (Jaggery)",
     "name_bn": "আখের গুড়",
-    "img": "/ingredients/1137-Gur__Jaggery_.png",
+    "img": "https://www.themealdb.com/images/ingredients/Jaggery.png",
     "phonetic": [
       "gur (jaggery)",
       "gur (jaaggery)",
@@ -13041,7 +13041,7 @@
     "id": "1138",
     "name_en": "Nolen Gur",
     "name_bn": "নলেন গুড়",
-    "img": "/ingredients/1138-Nolen_Gur.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jaggery.png",
     "phonetic": [
       "nolen gur",
       "noolen gur",
@@ -13053,7 +13053,7 @@
     "id": "1139",
     "name_en": "Patali Gur",
     "name_bn": "পাটালি গুড়",
-    "img": "/ingredients/1139-Patali_Gur.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Jaggery.png",
     "phonetic": [
       "patali gur",
       "paataali gur",
@@ -13125,7 +13125,7 @@
     "id": "1145",
     "name_en": "Paan (Betel Leaf)",
     "name_bn": "পান পাতা",
-    "img": "/ingredients/1145-Paan__Betel_Leaf_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Leaf.png",
     "phonetic": [
       "paan (betel leaf)",
       "paaaan (betel leaaf)",
@@ -13136,7 +13136,7 @@
     "id": "1146",
     "name_en": "Supari (Betel Nut)",
     "name_bn": "সুপারি",
-    "img": "/ingredients/1146-Supari__Betel_Nut_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Nut.png",
     "phonetic": [
       "supari (betel nut)",
       "supaari (betel nut)",
@@ -13148,7 +13148,7 @@
     "id": "1147",
     "name_en": "Chun (Lime)",
     "name_bn": "চুন",
-    "img": "/ingredients/1147-Chun__Lime_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/White.png",
     "phonetic": [
       "chun (lime)",
       "chun (limee)",
@@ -13160,7 +13160,7 @@
     "id": "1148",
     "name_en": "Katha (Catechu)",
     "name_bn": "খয়ের",
-    "img": "/ingredients/1148-Katha__Catechu_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Brown.png",
     "phonetic": [
       "katha (catechu)",
       "kaathaa (caatechu)",
@@ -13183,7 +13183,7 @@
     "id": "1150",
     "name_en": "Fuchka Shell",
     "name_bn": "ফুচকার শেল",
-    "img": "/ingredients/1150-Fuchka_Shell.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Puri.png",
     "phonetic": [
       "fuchka shell",
       "fuchkaa shell",
@@ -13195,7 +13195,7 @@
     "id": "1151",
     "name_en": "Papdi",
     "name_bn": "পাপড়ি",
-    "img": "/ingredients/1151-Papdi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Crisp.png",
     "phonetic": [
       "papdi",
       "paapdi",
@@ -13206,7 +13206,7 @@
     "id": "1152",
     "name_en": "Sev",
     "name_bn": "ঝুড়ি ভাজা/সেভ",
-    "img": "/ingredients/1152-Sev.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sev.png",
     "phonetic": [
       "sev",
       "seev"
@@ -13216,7 +13216,7 @@
     "id": "1153",
     "name_en": "Boondi",
     "name_bn": "বুন্দিয়া",
-    "img": "/ingredients/1153-Boondi.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Boondi.png",
     "phonetic": [
       "boondi",
       "boooondi",
@@ -13227,7 +13227,7 @@
     "id": "1154",
     "name_en": "Chanachur",
     "name_bn": "চানাচুর",
-    "img": "/ingredients/1154-Chanachur.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mix.png",
     "phonetic": [
       "chanachur",
       "chaanaachur",
@@ -13238,7 +13238,7 @@
     "id": "1155",
     "name_en": "Mawa",
     "name_bn": "মাওয়া",
-    "img": "/ingredients/1155-Mawa.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Milk%20Solids.png",
     "phonetic": [
       "mawa",
       "maawaa"
@@ -13248,7 +13248,7 @@
     "id": "1156",
     "name_en": "Khoya",
     "name_bn": "ক্ষীর/খোয়া",
-    "img": "/ingredients/1156-Khoya.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Milk%20Solids.png",
     "phonetic": [
       "khoya",
       "khoyaa",
@@ -13270,7 +13270,7 @@
     "id": "1158",
     "name_en": "Gulab Jamun Mix",
     "name_bn": "গোলাপ জামুন মিক্স",
-    "img": "/ingredients/1158-Gulab_Jamun_Mix.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Mix.png",
     "phonetic": [
       "gulab jamun mix",
       "gulaab jaamun mix",
@@ -13306,7 +13306,7 @@
     "id": "1161",
     "name_en": "Basil Seeds (Tokma)",
     "name_bn": "তোকমা দানা",
-    "img": "/ingredients/1161-Basil_Seeds__Tokma_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Seeds.png",
     "phonetic": [
       "basil seeds (tokma)",
       "baasil seeds (tokmaa)",
@@ -13318,7 +13318,7 @@
     "id": "1162",
     "name_en": "Ispaghula Husk",
     "name_bn": "ইসবগুলের ভুষি",
-    "img": "/ingredients/1162-Ispaghula_Husk.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Husk.png",
     "phonetic": [
       "ispaghula husk",
       "ispaaghulaa husk",
@@ -13330,7 +13330,7 @@
     "id": "1163",
     "name_en": "Aloe Vera",
     "name_bn": "ঘৃতকুমারী",
-    "img": "/ingredients/1163-Aloe_Vera.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Aloe.png",
     "phonetic": [
       "aloe vera",
       "aaloe veraa",
@@ -13378,7 +13378,7 @@
     "id": "1167",
     "name_en": "Tea Masala",
     "name_bn": "চা মশলা",
-    "img": "/ingredients/1167-Tea_Masala.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spice%20Mix.png",
     "phonetic": [
       "tea masala",
       "teaa maasaalaa",
@@ -13401,7 +13401,7 @@
     "id": "1169",
     "name_en": "Matcha Tea",
     "name_bn": "মাচা গ্রিন টি",
-    "img": "/ingredients/1169-Matcha_Tea.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Matcha.png",
     "phonetic": [
       "matcha tea",
       "maatchaa teaa",
@@ -13435,7 +13435,7 @@
     "id": "1172",
     "name_en": "Baking Glaze",
     "name_bn": "বেকিং গ্লেজ",
-    "img": "/ingredients/1172-Baking_Glaze.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "baking glaze",
       "baaking glaaze",
@@ -13447,7 +13447,7 @@
     "id": "1173",
     "name_en": "Fruit Pectin",
     "name_bn": "পেকটিন",
-    "img": "/ingredients/1173-Fruit_Pectin.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Pectin.png",
     "phonetic": [
       "fruit pectin",
       "fruit peectin",
@@ -13459,7 +13459,7 @@
     "id": "1174",
     "name_en": "Liquid Smoke",
     "name_bn": "লিকুইড স্মোক",
-    "img": "/ingredients/1174-Liquid_Smoke.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Smoke.png",
     "phonetic": [
       "liquid smoke",
       "liquid smooke",
@@ -13483,7 +13483,7 @@
     "id": "1176",
     "name_en": "Kelp",
     "name_bn": "কেল্প (শৈবাল)",
-    "img": "/ingredients/1176-Kelp.png",
+    "img": "https://www.themealdb.com/images/ingredients/Seaweed.png",
     "phonetic": [
       "kelp",
       "keelp"
@@ -13493,7 +13493,7 @@
     "id": "1177",
     "name_en": "Spirulina",
     "name_bn": "স্পিরুলিনা",
-    "img": "/ingredients/1177-Spirulina.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Spirulina.png",
     "phonetic": [
       "spirulina",
       "spirulinaa",
@@ -13505,7 +13505,7 @@
     "id": "1178",
     "name_en": "Whey Protein",
     "name_bn": "হোয়ে প্রোটিন",
-    "img": "/ingredients/1178-Whey_Protein.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Protein.png",
     "phonetic": [
       "whey protein",
       "whey prootein",
@@ -13517,7 +13517,7 @@
     "id": "1179",
     "name_en": "Stevia Drops",
     "name_bn": "স্টিভিয়া ড্রপস",
-    "img": "/ingredients/1179-Stevia_Drops.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sweetener.png",
     "phonetic": [
       "stevia drops",
       "steviaa drops",
@@ -13529,7 +13529,7 @@
     "id": "1180",
     "name_en": "Monk Fruit",
     "name_bn": "মঙ্ক ফ্রুট",
-    "img": "/ingredients/1180-Monk_Fruit.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Sweetener.png",
     "phonetic": [
       "monk fruit",
       "moonk fruit",
@@ -13600,7 +13600,7 @@
     "id": "1186",
     "name_en": "Preserved Dates",
     "name_bn": "খেজুর সংরক্ষন",
-    "img": "/ingredients/1186-Preserved_Dates.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Dates.png",
     "phonetic": [
       "preserved dates",
       "preserved daates",
@@ -13611,7 +13611,7 @@
     "id": "1187",
     "name_en": "Canned Peach",
     "name_bn": "ক্যানড পিচ",
-    "img": "/ingredients/1187-Canned_Peach.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Peach.png",
     "phonetic": [
       "canned peach",
       "caanned peaach",
@@ -13646,7 +13646,7 @@
     "id": "1190",
     "name_en": "Lychee Syrup",
     "name_bn": "লিচু সিরাপ",
-    "img": "/ingredients/1190-Lychee_Syrup.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "lychee syrup",
       "lycheeee syrup",
@@ -13657,7 +13657,7 @@
     "id": "1191",
     "name_en": "Rose Syrup (Rooh Afza)",
     "name_bn": "রুহ আফজা/গোলাপ সিরাপ",
-    "img": "/ingredients/1191-Rose_Syrup__Rooh_Afza_.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "rose syrup (rooh afza)",
       "rose syrup (rooh aafzaa)",
@@ -13669,7 +13669,7 @@
     "id": "1192",
     "name_en": "Blue Curacao",
     "name_bn": "ব্লু কুরাসাও",
-    "img": "https://www.themealdb.com/images/ingredients/Blue%20Curacao.png",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "blue curacao",
       "blue curaacaao",
@@ -13681,7 +13681,7 @@
     "id": "1193",
     "name_en": "Grenadine",
     "name_bn": "গ্রেনাডাইন",
-    "img": "https://www.themealdb.com/images/ingredients/Grenadine.png",
+    "img": "https://www.themealdb.com/images/ingredients/Syrup.png",
     "phonetic": [
       "grenadine",
       "grenaadine",
@@ -13729,7 +13729,7 @@
     "id": "1197",
     "name_en": "Cola Base",
     "name_bn": "কোলা বেস",
-    "img": "/ingredients/1197-Cola_Base.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Soda.png",
     "phonetic": [
       "cola base",
       "colaa baase",
@@ -13753,7 +13753,7 @@
     "id": "1199",
     "name_en": "Coconut Water",
     "name_bn": "ডাবের পানি",
-    "img": "/ingredients/1199-Coconut_Water.svg",
+    "img": "https://www.themealdb.com/images/ingredients/Coconut.png",
     "phonetic": [
       "coconut water",
       "coconut waater",

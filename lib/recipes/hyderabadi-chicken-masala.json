@@ -1,0 +1,322 @@
+{
+  "id": "recipe-001",
+  "videoId": "QamJu5u___Y",
+  "youtubeVideoLink": "https://www.youtube.com/watch?v=QamJu5u___Y",
+  "slug": "hyderabadi-chicken-masala",
+  "title": {
+    "bn": "হায়দ্রাবাদি চিকেন মাসালা",
+    "en": "Hyderabadi Chicken Masala"
+  },
+  "description": {
+    "bn": "এরকম মসলাদার গ্রেভি আর এরকম নরম তুলতুলে চিকেন যদি আপনারা বানিয়ে নিতে চান তাহলে এই রেসিপিটা অবশ্যই আপনাদের ফলো করে নিতে হবে একদম সহজ পদ্ধতিতে।",
+    "en": "If you want to make such spicy gravy and soft, tender chicken, you must follow this recipe in a very simple way."
+  },
+  "thumbnail": "https://i.ytimg.com/vi/QamJu5u___Y/hqdefault.jpg",
+  "duration": 474,
+  "cuisine": ["Indian", "Bengali", "Hyderabadi"],
+  "category": ["Main Course"],
+  "dietaryInfo": ["Non-Vegetarian"],
+  "difficulty": "medium",
+  "prepTime": 20,
+  "cookTime": 45,
+  "servings": 6,
+  "ingredients": [
+    {
+      "ingredientId": "1",
+      "name": { "bn": "চিকেন", "en": "Chicken" },
+      "quantity": "2 kg",
+      "quantityBn": "২ কেজি",
+      "optional": false,
+      "notes": { "bn": "মাঝারি সাইজের পিস", "en": "medium sized pieces" }
+    },
+    {
+      "ingredientId": "6",
+      "name": { "bn": "আদা", "en": "Ginger" },
+      "quantity": "1 tbsp",
+      "quantityBn": "১ টেবিল চামচ",
+      "optional": false,
+      "notes": { "bn": "বাটা", "en": "paste" }
+    },
+    {
+      "ingredientId": "5",
+      "name": { "bn": "রসুন", "en": "Garlic" },
+      "quantity": "1 tbsp",
+      "quantityBn": "১ টেবিল চামচ",
+      "optional": false,
+      "notes": { "bn": "বাটা", "en": "paste" }
+    },
+    {
+      "ingredientId": "7",
+      "name": { "bn": "কাঁচা মরিচ", "en": "Green Chili" },
+      "quantity": "4-5 pieces",
+      "quantityBn": "৪-৫ টি",
+      "optional": false,
+      "notes": { "bn": "চেরা", "en": "slit" }
+    },
+    {
+      "ingredientId": "17",
+      "name": { "bn": "ধনেপাতা", "en": "Coriander" },
+      "quantity": "1 handful",
+      "quantityBn": "১ মুঠো",
+      "optional": false,
+      "notes": { "bn": "কুচানো", "en": "chopped" }
+    },
+    {
+      "ingredientId": "21",
+      "name": { "bn": "লবণ", "en": "Salt" },
+      "quantity": "to taste",
+      "quantityBn": "স্বাদমতো",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "16",
+      "name": { "bn": "হলুদ", "en": "Turmeric" },
+      "quantity": "0.5 tsp",
+      "quantityBn": "০.৫ চা চামচ",
+      "optional": false,
+      "notes": { "bn": "গুঁড়ো", "en": "powder" }
+    },
+    {
+      "ingredientId": "766",
+      "name": { "bn": "কাশ্মীরি মরিচ", "en": "Kashmiri Mirch" },
+      "quantity": "1 tsp",
+      "quantityBn": "১ চা চামচ",
+      "optional": false,
+      "notes": { "bn": "গুঁড়ো", "en": "powder" }
+    },
+    {
+      "ingredientId": "30",
+      "name": { "bn": "দই", "en": "Yogurt" },
+      "quantity": "150 gm",
+      "quantityBn": "১৫০ গ্রাম",
+      "optional": false,
+      "notes": { "bn": "টক দই", "en": "sour curd" }
+    },
+    {
+      "ingredientId": "15",
+      "name": { "bn": "অলিভ অয়েল", "en": "Olive Oil" },
+      "quantity": "200 ml",
+      "quantityBn": "২০০ মিলি",
+      "optional": false,
+      "notes": { "bn": "রান্নার জন্য", "en": "for cooking" }
+    },
+    {
+      "ingredientId": "275",
+      "name": { "bn": "কাজু", "en": "Cashews" },
+      "quantity": "10-12 pieces",
+      "quantityBn": "১০-১২ টি",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "779",
+      "name": { "bn": "শুকনো লাল মরিচ", "en": "Dry Red Chili" },
+      "quantity": "7-8 pieces",
+      "quantityBn": "৭-৮ টি",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "18",
+      "name": { "bn": "জিরা", "en": "Cumin" },
+      "quantity": "1 tsp",
+      "quantityBn": "১ চা চামচ",
+      "optional": false,
+      "notes": { "bn": "গোটা", "en": "whole seeds" }
+    },
+    {
+      "ingredientId": "19",
+      "name": { "bn": "দারুচিনি", "en": "Cinnamon" },
+      "quantity": "1 piece",
+      "quantityBn": "১ টুকরো",
+      "optional": false,
+      "notes": { "bn": "ছোট", "en": "small" }
+    },
+    {
+      "ingredientId": "240",
+      "name": { "bn": "গোল মরিচ", "en": "Black Pepper" },
+      "quantity": "1 tsp",
+      "quantityBn": "১ চা চামচ",
+      "optional": false,
+      "notes": { "bn": "গোটা", "en": "whole" }
+    },
+    {
+      "ingredientId": "775",
+      "name": { "bn": "জৈত্রি", "en": "Mace" },
+      "quantity": "1 small piece",
+      "quantityBn": "সামান্য একটু",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "4",
+      "name": { "bn": "পেঁয়াজ", "en": "Onion" },
+      "quantity": "400 gm",
+      "quantityBn": "৪০০ গ্রাম",
+      "optional": false,
+      "notes": {
+        "bn": "১০০ গ্রাম পেস্টের জন্য এবং ৩০০ গ্রাম স্লাইস করা",
+        "en": "100g for paste and 300g sliced"
+      }
+    },
+    {
+      "ingredientId": "58",
+      "name": { "bn": "ঘি", "en": "Ghee" },
+      "quantity": "1 tsp",
+      "quantityBn": "১ চা চামচ",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "20",
+      "name": { "bn": "এলাচ", "en": "Cardamom" },
+      "quantity": "6-7 pieces",
+      "quantityBn": "৬-৭ টি",
+      "optional": false,
+      "notes": { "bn": "ছোট এলাচ", "en": "green cardamom" }
+    },
+    {
+      "ingredientId": "168",
+      "name": { "bn": "লবঙ্গ", "en": "Cloves" },
+      "quantity": "8-9 pieces",
+      "quantityBn": "৮-৯ টি",
+      "optional": false,
+      "notes": null
+    },
+    {
+      "ingredientId": "171",
+      "name": { "bn": "গরম মসলা", "en": "Garam Masala" },
+      "quantity": "0.5 tsp",
+      "quantityBn": "০.৫ চা চামচ",
+      "optional": false,
+      "notes": null
+    }
+  ],
+  "steps": [
+    {
+      "stepNumber": 1,
+      "instruction": {
+        "bn": "ম্যারিনেট করার জন্য আমি এখানে দিয়ে দেব দু চা চামচ আদা রসুন বাটা, এরই সাথে যাবে অল্প একটু চেরা কাঁচা লঙ্কা, এরপর যাবে কুচনো ধনেপাতা সাথে যাবে স্বাদমত নুন, হাফ চা চামচ হলুদ গুঁড়ো আর তারই সাথে এক চা চামচ কাশমীরি লঙ্কার গুঁড়ো, ১৫০ গ্রাম টক দই আর সবশেষে তিন থেকে চার চা চামচ সাদা তেল।",
+        "en": "To marinate, add two teaspoons of ginger-garlic paste, some slit green chilies, chopped coriander leaves, salt to taste, half a teaspoon of turmeric powder, one teaspoon of Kashmiri red chili powder, 150 grams of yogurt, and finally three to four teaspoons of white oil."
+      },
+      "duration": 420,
+      "videoTimestamp": 56,
+      "tips": {
+        "bn": "চিকেন ম্যারিনেট করে ৫ থেকে ৭ মিনিট রেখে দিন।",
+        "en": "Keep the marinated chicken aside for 5 to 7 minutes."
+      }
+    },
+    {
+      "stepNumber": 2,
+      "instruction": {
+        "bn": "কাজু, শুকনো লঙ্কা, গোটা ধনে, গোটা জিরে, দারচিনি, গোটা গোল মরিচ আর সামান্য একটু জৈত্রি ফ্রাইং প্যানের মধ্যে লো টু মিডিয়াম ফ্লেমে ড্রাই রোস্ট করে নিন।",
+        "en": "Dry roast cashews, dry red chilies, coriander seeds, cumin seeds, cinnamon, black peppercorns, and a small piece of mace in a frying pan on low to medium flame."
+      },
+      "duration": 180,
+      "videoTimestamp": 104,
+      "tips": {
+        "bn": "মশলা থেকে সুন্দর গন্ধ বের হওয়া পর্যন্ত ভাজুন।",
+        "en": "Roast until a beautiful aroma comes out from the spices."
+      }
+    },
+    {
+      "stepNumber": 3,
+      "instruction": {
+        "bn": "ভাজা মশলা আর দুটো পেঁয়াজ অল্প জল দিয়ে ভালো করে পেস্ট করে নিন।",
+        "en": "Blend the roasted spices and two diced onions with a little water into a smooth paste."
+      },
+      "duration": 120,
+      "videoTimestamp": 155,
+      "tips": null
+    },
+    {
+      "stepNumber": 4,
+      "instruction": {
+        "bn": "কড়াইতে সাদা তেল এবং ঘি গরম করে ছোট এলাচ ও লবঙ্গ ফোড়ন দিন। এরপর স্লাইস করা পেঁয়াজ লাল করে ভেজে নিন।",
+        "en": "Heat white oil and ghee in a pan, temper with green cardamom and cloves. Then fry sliced onions until golden brown."
+      },
+      "duration": 300,
+      "videoTimestamp": 181,
+      "tips": null
+    },
+    {
+      "stepNumber": 5,
+      "instruction": {
+        "bn": "পেঁয়াজ ভাজা হয়ে এলে মশলার পেস্ট দিয়ে ৩-৪ মিনিট লো ফ্লেমে কষিয়ে নিন। এরপর ম্যারিনেট করা চিকেন দিয়ে দিন।",
+        "en": "Once onions are fried, add the spice paste and sauté for 3-4 minutes on low flame. Then add the marinated chicken."
+      },
+      "duration": 240,
+      "videoTimestamp": 235,
+      "tips": {
+        "bn": "কাজু থাকায় মশলা নিচে লেগে যেতে পারে, তাই অনবরত নাড়তে হবে।",
+        "en": "Due to cashews, the spice might stick to the bottom, so stir continuously."
+      }
+    },
+    {
+      "stepNumber": 6,
+      "instruction": {
+        "bn": "ঢাকা দিয়ে লো টু মিডিয়াম ফ্লেমে চিকেনটা রান্না করুন। মাঝেমধ্যে ঢাকা খুলে মিশিয়ে দেবেন। চিকেন থেকে ছাড়া জলেই রান্নাটা হবে।",
+        "en": "Cover and cook the chicken on low to medium flame. Stir occasionally. The chicken will cook in its own released juices."
+      },
+      "duration": 600,
+      "videoTimestamp": 295,
+      "tips": {
+        "bn": "প্রথমে ফ্লেম হাই রাখবেন না যাতে দই ফেটে না যায়।",
+        "en": "Do not keep the flame high initially to prevent the yogurt from curdling."
+      }
+    },
+    {
+      "stepNumber": 7,
+      "instruction": {
+        "bn": "চিকেন রান্না হয়ে গেলে ধনেপাতা কুচি এবং গরম মশলা ছড়িয়ে নামিয়ে নিন।",
+        "en": "When the chicken is fully cooked, sprinkle chopped coriander leaves and garam masala, then remove from heat."
+      },
+      "duration": 60,
+      "videoTimestamp": 392,
+      "tips": null
+    }
+  ],
+  "blogContent": {
+    "intro": {
+      "bn": "হায়দ্রাবাদি চিকেন মাসালা এমন একটি পদ যা সাধারণ ঘরোয়া উপকরণ দিয়েই আপনি রেস্টুরেন্টের মতো স্বাদ আনতে পারেন। অতনুর রান্নাঘরের এই রেসিপিটির প্রধান আকর্ষণ হলো এর মশলাদার গ্রেভি এবং নরম তুলতুলে মাংস।",
+      "en": "Hyderabadi Chicken Masala is a signature dish that brings the rich flavors of a restaurant right into your home using everyday ingredients. The highlight of this recipe from Atanur Rannaghar is the thick, aromatic gravy and the succulent chicken."
+    },
+    "whatMakesItSpecial": {
+      "bn": "এই রান্নাটিতে কোনো বাড়তি জল ব্যবহার করা হয় না, যা এর স্বাদকে বহুগুণ বাড়িয়ে দেয়। কাজু বাদাম এবং শুকনো মশলার পেস্ট গ্রেভিকে দেয় এক রাজকীয় ঘনত্ব।",
+      "en": "One of the best parts about this preparation is that no additional water is used, allowing the chicken to slow-cook in its own natural juices. The cashew and spice paste gives the gravy a royal richness."
+    },
+    "cookingTips": {
+      "bn": "চিকেন ম্যারিনেট করার পর অন্তত ৫-৭ মিনিট রেখে দিলে মশলাগুলো মাংসের গভীরে প্রবেশ করে। রান্নার সময় আঁচ নিয়ন্ত্রণ করা খুব জরুরি কারণ মশলায় কাজু থাকায় তা কড়াইয়ের নিচে লেগে যাওয়ার সম্ভাবনা থাকে। লো টু মিডিয়াম আঁচে ঢাকা দিয়ে রান্না করলে মাংস থেকে জল ছাড়বে এবং সেই জলেই মাংস সেদ্ধ হবে।",
+      "en": "Marinating the chicken for at least 5-7 minutes is key to ensuring the spices penetrate deep into the meat. Proper heat management is vital—since the paste contains cashews, it can easily burn or stick to the bottom of the pan if not stirred regularly. Always cook covered on low to medium flame for the best results."
+    },
+    "servingSuggestions": {
+      "bn": "এই হায়দ্রাবাদি চিকেন মাসালা আপনারা বাসমতি চালের পোলাও, রুমালি রুটি বা গরম পরোটার সাথে পরিবেশন করতে পারেন। উৎসবের ডিনারে বা মেহমানদারিতে এই একটি পদই সবার মন জয় করে নেবে।",
+      "en": "Pair this royal Hyderabadi Chicken Masala with fragrant Basmati Pulao, soft Rumali Rotis, or buttery Parathas. It's a perfect centerpiece for any celebratory dinner or weekend feast."
+    },
+    "storage": {
+      "bn": "ফ্রিজে এয়ার টাইট কন্টেনারে রাখলে এটি দুই থেকে তিন দিন ভালো থাকে।",
+      "en": "You can store leftovers in an airtight container in the refrigerator for up to 2-3 days."
+    },
+    "fullBlogText": {
+      "bn": "হায়দ্রাবাদি চিকেন মাসালা এমন একটি পদ যা সাধারণ ঘরোয়া উপকরণ দিয়েই আপনি রেস্টুরেন্টের মতো স্বাদ আনতে পারেন। অতনুর রান্নাঘরের এই রেসিপিটির প্রধান আকর্ষণ হলো এর মশলাদার গ্রেভি এবং নরম তুলতুলে মাংস। এই রান্নাটিতে কোনো বাড়তি জল ব্যবহার করা হয় না, যা এর স্বাদকে বহুগুণ বাড়িয়ে দেয়। কাজু বাদাম এবং শুকনো মশলার পেস্ট গ্রেভিকে দেয় এক রাজকীয় ঘনত্ব।\n\nবিশেষ টিপস: চিকেন ম্যারিনেট করার পর অন্তত ৫-৭ মিনিট রেখে দিলে মশলাগুলো মাংসের গভীরে প্রবেশ করে। রান্নার সময় আঁচ নিয়ন্ত্রণ করা খুব জরুরি কারণ মশলায় কাজু থাকায় তা কড়াইয়ের নিচে লেগে যাওয়ার সম্ভাবনা থাকে। লো টু মিডিয়াম আঁচে ঢাকা দিয়ে রান্না করলে মাংস থেকে জল ছাড়বে এবং সেই জলেই মাংস সেদ্ধ হবে।\n\nপরিবেশন: এই হায়দ্রাবাদি চিকেন মাসালা আপনারা বাসমতি চালের পোলাও, রুমালি রুটি বা গরম পরোটার সাথে পরিবেশন করতে পারেন। উৎসবের ডিনারে বা মেহমানদারিতে এই একটি পদই সবার মন জয় করে নেবে। ফ্রিজে এয়ার টাইট কন্টেনারে রাখলে এটি দুই থেকে তিন দিন ভালো থাকে।",
+      "en": "Hyderabadi Chicken Masala is a signature dish that brings the rich flavors of a restaurant right into your home using everyday ingredients. The highlight of this recipe from Atanur Rannaghar is the thick, aromatic gravy and the succulent chicken that practically melts in your mouth. One of the best parts about this preparation is that no additional water is used, allowing the chicken to slow-cook in its own natural juices.\n\nExpert Tips: Marinating the chicken for at least 5-7 minutes is key to ensuring the spices penetrate deep into the meat. Proper heat management is vital—since the paste contains cashews, it can easily burn or stick to the bottom of the pan if not stirred regularly. Always cook covered on low to medium flame for the best results.\n\nServing Suggestions: Pair this royal Hyderabadi Chicken Masala with fragrant Basmati Pulao, soft Rumali Rotis, or buttery Parathas. It's a perfect centerpiece for any celebratory dinner or weekend feast. You can store leftovers in an airtight container in the refrigerator for up to 2-3 days."
+    }
+  },
+  "tags": [
+    "hyderabadi",
+    "chicken masala",
+    "atanur rannaghar",
+    "bengali recipe",
+    "spicy chicken",
+    "party food"
+  ],
+  "nutrition": {
+    "calories": 520,
+    "protein": "42g",
+    "carbs": "14g",
+    "fat": "32g"
+  },
+  "createdAt": "2026-01-05T00:00:00.000Z",
+  "updatedAt": "2026-01-05T00:00:00.000Z"
+}

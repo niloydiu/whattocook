@@ -1,0 +1,9 @@
+🔎 Reading ingredients...
+📦 Backup written to /Users/niloy/programming/whattocook/lib/ingredients.backup.json
+✅ 100/1200 OK
+✅ 400/1200 OK
+✅ 800/1200 OK
+✅ 1000/1200 OK
+✅ 1200/1200 OK
+✅ Done. Checked 1200. Fixed: 8. Broken: 540
+📝 Report saved to /Users/niloy/programming/whattocook/scripts/image_report.json
