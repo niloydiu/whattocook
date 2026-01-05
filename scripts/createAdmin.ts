@@ -11,23 +11,40 @@ async function createAdmin() {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const admin = await prisma.admin.create({
-      data: {
-        username,
-        password_hash: hashedPassword,
+    // Check if admin already exists (case-insensitive)
+    const existingAdmin = await prisma.admin.findFirst({
+      where: { 
+        username: {
+          equals: username,
+          mode: 'insensitive'
+        }
       },
     });
 
-    console.log("✅ Admin user created successfully!");
-    console.log(`ID: ${admin.id}`);
-    console.log(`Username: ${admin.username}`);
+    if (existingAdmin) {
+      await prisma.admin.update({
+        where: { id: existingAdmin.id },
+        data: { 
+          username: username, // Update to the provided casing
+          password_hash: hashedPassword 
+        },
+      });
+      console.log(`✅ Password updated for existing admin: ${existingAdmin.username}`);
+    } else {
+      const admin = await prisma.admin.create({
+        data: {
+          username,
+          password_hash: hashedPassword,
+        },
+      });
+
+      console.log("✅ Admin user created successfully!");
+      console.log(`ID: ${admin.id}`);
+      console.log(`Username: ${admin.username}`);
+    }
     console.log("\n⚠️  Please save your credentials securely!");
   } catch (error: any) {
-    if (error.code === "P2002") {
-      console.error("❌ Admin user with this username already exists!");
-    } else {
-      console.error("❌ Error creating admin:", error);
-    }
+    console.error("❌ Error managing admin user:", error);
   }
 }
 

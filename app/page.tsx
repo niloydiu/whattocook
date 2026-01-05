@@ -11,8 +11,11 @@ import {
   Settings,
   Plus,
   Loader2,
+  Search,
 } from "lucide-react";
 import RecipeCard from "../components/RecipeCardClean";
+import RecipeCardApi from "../components/RecipeCardApi";
+import IngredientMatchRecipeCard from "../components/IngredientMatchRecipeCard";
 import useLanguage from "../hooks/useLanguage";
 import recipeDataRaw from "../lib/recipeData.json";
 import Hero from "../components/Hero";
@@ -26,6 +29,21 @@ type Recipe = {
   title: { en: string; bn: string };
   ingredients: { en: string[]; bn: string[] };
   instructions?: { en?: string; bn?: string } | string;
+};
+
+type ApiRecipe = {
+  id: number;
+  slug: string;
+  title_en: string;
+  title_bn: string;
+  image: string;
+  cuisine: string;
+  category: string;
+  difficulty: string;
+  prep_time: number;
+  cook_time: number;
+  servings: number;
+  createdAt: string;
 };
 
 function normalizeStr(s?: string) {
@@ -59,6 +77,12 @@ export default function Page() {
     recipeDataRaw as Recipe[]
   );
 
+  // API Recipes State
+  const [apiRecipes, setApiRecipes] = useState<ApiRecipe[]>([]);
+  const [apiRecipesLoading, setApiRecipesLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
+
   const indexed = useMemo(() => {
     return recipeData.map((r) => {
       const en = (r.ingredients?.en || []).map((s) => normalizeStr(s));
@@ -76,6 +100,8 @@ export default function Page() {
   const [debouncedPantry, setDebouncedPantry] = useState<string[]>(pantry);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [ingredientSearchResults, setIngredientSearchResults] = useState<any[]>([]);
+  const [ingredientSearchLoading, setIngredientSearchLoading] = useState(false);
 
   // Admin State
   const [showAdmin, setShowAdmin] = useState(false);
@@ -87,6 +113,29 @@ export default function Page() {
     const id = setTimeout(() => setDebouncedPantry(pantry.slice()), 200);
     return () => clearTimeout(id);
   }, [pantry]);
+
+  // Fetch API recipes on mount
+  useEffect(() => {
+    const fetchApiRecipes = async () => {
+      try {
+        const response = await fetch("/api/recipes");
+        const data = await response.json();
+        setApiRecipes(data.recipes || []);
+      } catch (error) {
+        console.error("Failed to fetch recipes:", error);
+      } finally {
+        setApiRecipesLoading(false);
+      }
+    };
+
+    fetchApiRecipes();
+  }, []);
+
+  // Debounce search query
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedSearchQuery(searchQuery), 300);
+    return () => clearTimeout(id);
+  }, [searchQuery]);
 
   function addPantryItem(raw: string) {
     const v = normalizeStr(raw);
@@ -131,11 +180,49 @@ export default function Page() {
       });
   }, [indexed, debouncedPantry]);
 
+  // Filtered API recipes based on search
+  const filteredApiRecipes = useMemo(() => {
+    if (!debouncedSearchQuery.trim()) return apiRecipes;
+
+    const query = debouncedSearchQuery.toLowerCase();
+    return apiRecipes.filter((recipe) => {
+      const titleEn = recipe.title_en.toLowerCase();
+      const titleBn = recipe.title_bn.toLowerCase();
+      const cuisine = recipe.cuisine.toLowerCase();
+      const category = recipe.category.toLowerCase();
+
+      return (
+        titleEn.includes(query) ||
+        titleBn.includes(query) ||
+        cuisine.includes(query) ||
+        category.includes(query)
+      );
+    });
+  }, [apiRecipes, debouncedSearchQuery]);
+
   function handleFind() {
     setLoading(true);
-    setTimeout(() => setLoading(false), 600);
-    const el = document.getElementById("results-section");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setIngredientSearchLoading(true);
+    
+    // Call API to search by ingredients
+    fetch("/api/recipes/search-by-ingredients", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ingredients: pantry }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIngredientSearchResults(data.recipes || []);
+        setIngredientSearchLoading(false);
+        setLoading(false);
+        const el = document.getElementById("results-section");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      })
+      .catch((error) => {
+        console.error("Error searching recipes:", error);
+        setIngredientSearchLoading(false);
+        setLoading(false);
+      });
   }
 
   async function handleImport() {
@@ -174,6 +261,20 @@ export default function Page() {
           </div>
 
           <div className="flex items-center gap-3 md:gap-6">
+            {/* Search Bar */}
+            <div className="hidden md:flex items-center bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl px-4 py-2 max-w-xs">
+              <Search size={18} className="text-slate-400 mr-3" />
+              <input
+                type="text"
+                placeholder={
+                  locale === "en" ? "Search recipes..." : "রেসিপি খুঁজুন..."
+                }
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 bg-transparent outline-none text-sm font-medium text-slate-700 placeholder-slate-400"
+              />
+            </div>
+
             <div className="flex items-center bg-slate-100/50 p-1 rounded-xl md:rounded-2xl backdrop-blur-sm border border-slate-200/50">
               <button
                 onClick={() => setLocale("en")}
@@ -283,8 +384,83 @@ export default function Page() {
         locale={locale}
       />
 
-      <main id="results-section" className="max-w-7xl mx-auto px-4 pb-24">
-        <AnimatePresence mode="wait">
+      {/* Mobile Search Bar */}
+      <div className="md:hidden px-4 pb-6">
+        <div className="flex items-center bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl px-4 py-3">
+          <Search size={18} className="text-slate-400 mr-3" />
+          <input
+            type="text"
+            placeholder={
+              locale === "en" ? "Search recipes..." : "রেসিপি খুঁজুন..."
+            }
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="flex-1 bg-transparent outline-none text-sm font-medium text-slate-700 placeholder-slate-400"
+          />
+        </div>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-4 pb-24">
+        {/* Recipes Section */}
+        <section className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                {locale === "en" ? "Featured Recipes" : "নির্বাচিত রেসিপি"}
+              </h2>
+              <p className="text-slate-600 font-medium">
+                {locale === "en"
+                  ? "Discover delicious recipes from around the world"
+                  : "বিশ্বের বিভিন্ন প্রান্ত থেকে সুস্বাদু রেসিপি আবিষ্কার করুন"}
+              </p>
+            </div>
+            {debouncedSearchQuery && (
+              <div className="text-sm text-slate-500 font-medium">
+                {locale === "en"
+                  ? `${filteredApiRecipes.length} recipes found`
+                  : `${filteredApiRecipes.length}টি রেসিপি পাওয়া গেছে`}
+              </div>
+            )}
+          </div>
+
+          {apiRecipesLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="w-12 h-12 border-4 border-red-100 border-t-red-600 rounded-full animate-spin" />
+            </div>
+          ) : filteredApiRecipes.length > 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredApiRecipes.map((recipe) => (
+                <RecipeCardApi
+                  key={recipe.id}
+                  recipe={recipe}
+                  locale={locale}
+                />
+              ))}
+            </motion.div>
+          ) : debouncedSearchQuery ? (
+            <div className="text-center py-20 bg-white/40 backdrop-blur-md rounded-[2rem] border border-dashed border-slate-200 px-6">
+              <Search size={48} className="mx-auto text-slate-300 mb-4" />
+              <h3 className="text-xl font-black text-slate-900 mb-2">
+                {locale === "en"
+                  ? "No recipes found"
+                  : "কোনো রেসিপি পাওয়া যায়নি"}
+              </h3>
+              <p className="text-slate-500">
+                {locale === "en"
+                  ? "Try searching with different keywords"
+                  : "ভিন্ন কীওয়ার্ড দিয়ে খুঁজে দেখুন"}
+              </p>
+            </div>
+          ) : null}
+        </section>
+
+        {/* Pantry Matching Results */}
+        <section id="results-section">
+          <AnimatePresence mode="wait">
           {loading ? (
             <motion.div
               key="loading"
@@ -299,6 +475,36 @@ export default function Page() {
                   ? "Finding the best recipes for you..."
                   : "আপনার জন্য সেরা রেসিপি খোঁজা হচ্ছে..."}
               </p>
+            </motion.div>
+          ) : ingredientSearchResults.length > 0 ? (
+            <motion.div
+              key="ingredient-results"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="mb-8">
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                  {locale === "en" ? "Recipes You Can Make" : "আপনি যা রান্না করতে পারেন"}
+                </h2>
+                <p className="text-slate-600 font-medium">
+                  {locale === "en"
+                    ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
+                    : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {ingredientSearchResults.map((result) => (
+                  <IngredientMatchRecipeCard
+                    key={result.recipe.id}
+                    recipe={result.recipe}
+                    matchPercent={result.matchPercent}
+                    matchedCount={result.matchedCount}
+                    totalIngredients={result.totalIngredients}
+                    missingCount={result.missingCount}
+                    locale={locale}
+                  />
+                ))}
+              </div>
             </motion.div>
           ) : results.length > 0 ? (
             <motion.div
@@ -354,7 +560,8 @@ export default function Page() {
               </button>
             </motion.div>
           ) : null}
-        </AnimatePresence>
+          </AnimatePresence>
+        </section>
       </main>
 
       {/* Video Modal */}

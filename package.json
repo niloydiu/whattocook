@@ -3,17 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run openapi:generate && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "db:studio": "prisma studio",
+    "openapi:generate": "node scripts/generate-openapi.js",
+    "openapi:watch": "node scripts/watch-openapi.js",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
     "db:import-ingredients": "tsx scripts/migrateIngredientsToDb.ts",
     "db:import-recipes": "tsx scripts/importRecipesToDb.ts",
+    "db:delete-recipes": "tsx scripts/deleteAllRecipes.ts",
     "admin:create": "tsx scripts/createAdmin.ts"
   },
   "repository": {

@@ -13,8 +13,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const admin = await prisma.admin.findUnique({
-      where: { username },
+    const admin = await prisma.admin.findFirst({
+      where: { 
+        username: {
+          equals: username,
+          mode: 'insensitive'
+        }
+      },
     });
 
     if (!admin) {

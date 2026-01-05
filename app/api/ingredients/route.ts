@@ -111,7 +111,11 @@ export async function POST(request: NextRequest) {
 
     // create a minimal ingredient record with provided name as English name
     const created = await prisma.ingredient.create({
-      data: { name_en: name },
+      data: {
+        name_en: name,
+        name_bn: name, // fallback to English name
+        img: "", // empty image URL
+      },
     });
 
     return NextResponse.json(
