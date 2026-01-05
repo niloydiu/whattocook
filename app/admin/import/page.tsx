@@ -41,7 +41,7 @@ export default function ImportFromYoutube() {
       }
 
       // Call API to extract and import recipe
-      const res = await fetch("/api/youtube/" + videoId);
+      const res = await fetch("/api/youtube/" + videoId + "?import=true");
       const data = await res.json();
 
       if (res.ok && data.success) {

@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
+import { importRecipeFromYoutube } from "@/app/actions/importer";
 
-// GET /api/youtube/[videoId] - Get YouTube video metadata
+// GET /api/youtube/[videoId] - Get YouTube video metadata and optionally import
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ videoId: string }> }
 ) {
   const { videoId } = await params;
+  const { searchParams } = new URL(request.url);
+  const shouldImport = searchParams.get("import") === "true";
 
   try {
+    if (shouldImport) {
+      const result = await importRecipeFromYoutube(videoId);
+      return NextResponse.json(result);
+    }
+
     // Method 1: Try to scrape from YouTube page (no API key needed)
     const response = await fetch(
       `https://www.youtube.com/watch?v=${videoId}`,

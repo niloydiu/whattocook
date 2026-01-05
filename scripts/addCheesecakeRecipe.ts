@@ -341,14 +341,27 @@ async function addRecipe() {
         cook_time: recipeData.cook_time,
         servings: recipeData.servings,
         ingredients: {
-          create: resolvedIngredients.map((r) => ({
-            ingredient_id: r.ingredientId,
-            quantity: r.meta.quantity,
-            unit_en: r.meta.unit_en,
-            unit_bn: r.meta.unit_bn,
-            notes_en: r.meta.notes_en || null,
-            notes_bn: r.meta.notes_bn || null,
-          })),
+          create: Array.from(
+            resolvedIngredients
+              .reduce((acc, r) => {
+                const key = r.ingredientId;
+                if (!acc.has(key)) {
+                  acc.set(key, {
+                    ingredient_id: r.ingredientId,
+                    quantity: r.meta.quantity,
+                    unit_en: r.meta.unit_en,
+                    unit_bn: r.meta.unit_bn,
+                    notes_en: r.meta.notes_en || null,
+                    notes_bn: r.meta.notes_bn || null,
+                  });
+                } else {
+                  // If duplicate, maybe append quantity or just keep first
+                  // For now, let's just keep the first one to avoid unique constraint error
+                }
+                return acc;
+              }, new Map())
+              .values()
+          ),
         },
         steps: {
           create: recipeData.steps.map((s) => ({
