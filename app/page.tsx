@@ -236,10 +236,12 @@ export default function Page() {
       setImportId("");
       // Refresh local data (in a real app we'd re-fetch from API)
       if (res.recipe) {
-        setRecipeData((prev) => [...prev, res.recipe as Recipe]);
+        // The API/prisma object shape differs from the client `Recipe` type.
+        // Cast via `unknown` first to satisfy TypeScript during production build.
+        setRecipeData((prev) => [...prev, res.recipe as unknown as Recipe]);
       }
     } else {
-      setImportMsg("Error: " + res.message);
+      setImportMsg("Error: " + ((res as any).message || "Unknown error"));
     }
   }
 
