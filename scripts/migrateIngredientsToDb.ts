@@ -10,8 +10,15 @@ async function migrateIngredients() {
 
   for (const ingredient of ingredients) {
     try {
-      await prisma.ingredient.create({
-        data: {
+      await prisma.ingredient.upsert({
+        where: { id: parseInt(ingredient.id) },
+        update: {
+          name_en: ingredient.name_en,
+          name_bn: ingredient.name_bn,
+          img: ingredient.img,
+          phonetic: ingredient.phonetic || [],
+        },
+        create: {
           id: parseInt(ingredient.id),
           name_en: ingredient.name_en,
           name_bn: ingredient.name_bn,

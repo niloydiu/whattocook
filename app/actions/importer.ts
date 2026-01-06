@@ -12,12 +12,17 @@ export async function importRecipeFromYoutube(videoId: string) {
       throw new Error("GEMINI_API_KEY is not set");
     }
 
+    console.log(`[Import] Starting import for video: ${videoId}`);
+
     // 1. Fetch Transcript
+    console.log("[Import] Fetching transcript...");
     const transcriptItems = await YoutubeTranscript.fetchTranscript(videoId);
     const transcript = transcriptItems.map((t) => t.text).join(" ");
+    console.log(`[Import] Transcript fetched: ${transcript.length} characters`);
 
     // 2. Call Gemini to process transcript
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    console.log("[Import] Calling Gemini AI...");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Using 1.5 flash for better quota
 
     // Get existing ingredients to help Gemini match them
     const existingIngredients = await prisma.ingredient.findMany({
@@ -35,6 +40,7 @@ export async function importRecipeFromYoutube(videoId: string) {
       - title_bn: string
       - cuisine: string (e.g., "Indian", "Italian", "Bengali")
       - category: string (e.g., "Main Course", "Dessert", "Snack")
+      - foodCategory: string (MUST BE ONE OF: "Dessert", "Spicy", "Sour", "Sweet", "Savory", "Drinks", "Appetizer", "Soup", "Salad")
       - difficulty: string ("Easy", "Medium", "Hard")
       - prep_time: number (minutes)
       - cook_time: number (minutes)
@@ -86,19 +92,28 @@ export async function importRecipeFromYoutube(videoId: string) {
       .replace(/```json|```/g, "")
       .trim();
 
+    console.log("[Import] Gemini response received");
+    console.log("[Import] Parsing JSON...");
+    
     const recipeData = JSON.parse(text);
+    console.log(`[Import] Recipe parsed: ${recipeData.title_en}`);
 
-    // 3. Check if recipe already exists
-    const exists = await prisma.recipe.findUnique({
-      where: { slug: recipeData.slug }
+    // 3. Check if recipe already exists by YouTube video ID
+    console.log(`[Import] Checking if video already imported: ${videoId}`);
+    const exists = await prisma.recipe.findFirst({
+      where: { youtube_id: videoId }
     });
     
     if (exists) {
-      return { success: false, error: "Recipe with this slug already exists" };
+      console.log("[Import] Recipe already exists!");
+      return { 
+        success: false, 
+        error: `This video has already been imported as "${exists.title_en}". You cannot import the same video twice.` 
+      };
     }
 
     // 4. Resolve ingredients and create recipe
-    // We'll use a simplified version of the logic from createRecipe.ts
+    console.log("[Import] Creating recipe in database...");
     const createdRecipe = await prisma.recipe.create({
       data: {
         slug: recipeData.slug,
@@ -109,6 +124,7 @@ export async function importRecipeFromYoutube(videoId: string) {
         youtube_id: videoId,
         cuisine: recipeData.cuisine,
         category: recipeData.category,
+        foodCategory: recipeData.foodCategory || "Savory",
         difficulty: recipeData.difficulty,
         prep_time: recipeData.prep_time,
         cook_time: recipeData.cook_time,
@@ -161,9 +177,20 @@ export async function importRecipeFromYoutube(videoId: string) {
       }
     });
 
-    return { success: true, recipe: createdRecipe };
+    console.log(`[Import] Recipe created successfully! ID: ${createdRecipe.id}`);
+    
+    return { 
+      success: true, 
+      recipe: createdRecipe,
+      geminiResponse: recipeData // Include the parsed Gemini response
+    };
   } catch (error: any) {
-    console.error("Import Error:", error);
-    return { success: false, error: error.message };
+    console.error("[Import] Error:", error);
+    console.error("[Import] Error stack:", error.stack);
+    return { 
+      success: false, 
+      error: error.message,
+      details: error.stack // Include stack trace for debugging
+    };
   }
 }

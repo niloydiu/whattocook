@@ -46,6 +46,7 @@ interface RecipeData {
   youtube_id?: string;
   cuisine: string;
   category: string;
+  foodCategory?: string;
   difficulty: string;
   prep_time: number;
   cook_time: number;
@@ -69,6 +70,20 @@ export async function createRecipeWithIngredients(recipeData: RecipeData, token:
   }
 
   try {
+    // Check if recipe with this YouTube ID already exists
+    if (recipeData.youtube_id) {
+      const existingRecipe = await prisma.recipe.findFirst({
+        where: { youtube_id: recipeData.youtube_id },
+      });
+      
+      if (existingRecipe) {
+        return {
+          success: false,
+          error: `This YouTube video has already been imported as "${existingRecipe.title_en}". You cannot add the same video twice.`,
+        };
+      }
+    }
+
     // First, create any new ingredients if provided
     const newIngredientMap = new Map<string, number>();
     
@@ -124,6 +139,7 @@ export async function createRecipeWithIngredients(recipeData: RecipeData, token:
       if (!ingredientId && (ing.name_en || ing.name_bn || ing.notes_en || ing.notes_bn)) {
         const searchName = ing.name_en || ing.notes_en || ing.name_bn || ing.notes_bn || "";
         
+        // Try to find existing ingredient with comprehensive search
         const found = await prisma.ingredient.findFirst({
           where: {
             OR: [
@@ -151,20 +167,35 @@ export async function createRecipeWithIngredients(recipeData: RecipeData, token:
           if (newIngredientMap.has(nameKey)) {
             ingredientId = newIngredientMap.get(nameKey)!;
           } else {
-            // Create new ingredient with data from Gemini
-            const created = await prisma.ingredient.create({
-              data: {
-                name_en: ing.name_en || ing.notes_en || "Unknown",
-                name_bn: ing.name_bn || ing.notes_bn || "Unknown",
-                img: ing.image || "", // Use image from Gemini
-                phonetic: [],
+            // Double-check one more time before creating
+            const doubleCheck = await prisma.ingredient.findFirst({
+              where: {
+                OR: [
+                  { name_en: { contains: ing.name_en || ing.notes_en || "", mode: "insensitive" } },
+                  { name_bn: { contains: ing.name_bn || ing.notes_bn || "" } },
+                ],
               },
             });
-            ingredientId = created.id;
-            createdIngredients.push(
-              `${created.name_en} (ID: ${created.id}${ing.image ? ", with image" : ""})`
-            );
-            newIngredientMap.set(nameKey, created.id);
+
+            if (doubleCheck) {
+              ingredientId = doubleCheck.id;
+              newIngredientMap.set(nameKey, doubleCheck.id);
+            } else {
+              // Create new ingredient with data from Gemini
+              const created = await prisma.ingredient.create({
+                data: {
+                  name_en: ing.name_en || ing.notes_en || "Unknown",
+                  name_bn: ing.name_bn || ing.notes_bn || "Unknown",
+                  img: ing.image || "", // Use image from Gemini
+                  phonetic: [],
+                },
+              });
+              ingredientId = created.id;
+              createdIngredients.push(
+                `${created.name_en} (ID: ${created.id}${ing.image ? ", with image" : ""})`
+              );
+              newIngredientMap.set(nameKey, created.id);
+            }
           }
         }
       }
@@ -200,16 +231,19 @@ export async function createRecipeWithIngredients(recipeData: RecipeData, token:
         youtube_id: recipeData.youtube_id || "",
         cuisine: recipeData.cuisine,
         category: recipeData.category,
+        foodCategory: recipeData.foodCategory || "Savory",
         difficulty: recipeData.difficulty,
         prep_time: recipeData.prep_time,
         cook_time: recipeData.cook_time,
         servings: recipeData.servings,
         ingredients: {
           create: resolvedIngredients.map((r) => ({
-            ingredient_id: r.ingredientId,
+            ingredient: {
+              connect: { id: r.ingredientId },
+            },
             quantity: r.meta.quantity,
             unit_en: r.meta.unit_en,
-            unit_bn: r.meta.unit_bn,
+            unit_bn: r.meta.unit_bn || "",
             notes_en: r.meta.notes_en || null,
             notes_bn: r.meta.notes_bn || null,
           })),

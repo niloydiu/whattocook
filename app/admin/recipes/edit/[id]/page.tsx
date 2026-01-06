@@ -15,6 +15,7 @@ interface RecipeFormData {
   youtube_id: string;
   cuisine: string;
   category: string;
+  foodCategory: string;
   difficulty: string;
   prep_time: number;
   cook_time: number;
@@ -102,6 +103,7 @@ export default function EditRecipe({ params }: { params: Promise<{ id: string }>
         youtube_id: data.youtube_id || "",
         cuisine: data.cuisine,
         category: data.category,
+        foodCategory: data.foodCategory || "Savory",
         difficulty: data.difficulty,
         prep_time: data.prep_time,
         cook_time: data.cook_time,
@@ -405,6 +407,25 @@ export default function EditRecipe({ params }: { params: Promise<{ id: string }>
               <option value="Snack">Snack</option>
               <option value="Breakfast">Breakfast</option>
               <option value="Beverage">Beverage</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Food Category (Internal Filter)</label>
+            <select
+              value={recipe.foodCategory}
+              onChange={(e) => setRecipe({ ...recipe, foodCategory: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+            >
+              <option value="Savory">Savory</option>
+              <option value="Sweet">Sweet</option>
+              <option value="Spicy">Spicy</option>
+              <option value="Sour">Sour</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Appetizer">Appetizer</option>
+              <option value="Soup">Soup</option>
+              <option value="Salad">Salad</option>
             </select>
           </div>
 

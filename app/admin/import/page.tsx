@@ -7,6 +7,8 @@ import AlertModal from "@/components/AlertModal";
 export default function ImportFromYoutube() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [importing, setImporting] = useState(false);
+  const [geminiResponse, setGeminiResponse] = useState<any>(null);
+  const [importStatus, setImportStatus] = useState<string>("");
   
   // Alert Modal State
   const [alertConfig, setAlertConfig] = useState<{
@@ -25,6 +27,8 @@ export default function ImportFromYoutube() {
     if (!youtubeUrl.trim()) return;
 
     setImporting(true);
+    setGeminiResponse(null);
+    setImportStatus("Initializing...");
 
     try {
       // Extract video ID from URL
@@ -37,14 +41,19 @@ export default function ImportFromYoutube() {
           type: "error",
         });
         setImporting(false);
+        setImportStatus("");
         return;
       }
+
+      setImportStatus(`Extracting recipe from video: ${videoId}...`);
 
       // Call API to extract and import recipe
       const res = await fetch("/api/youtube/" + videoId + "?import=true");
       const data = await res.json();
 
       if (res.ok && data.success) {
+        setGeminiResponse(data.geminiResponse); // Store the Gemini response
+        setImportStatus("Recipe imported successfully!");
         setAlertConfig({
           isOpen: true,
           title: "Success",
@@ -53,20 +62,27 @@ export default function ImportFromYoutube() {
         });
         setYoutubeUrl("");
       } else {
+        setImportStatus("");
         setAlertConfig({
           isOpen: true,
           title: "Error",
           message: data.error || "Failed to import recipe. Please try manually.",
           type: "error",
         });
+        // Log details to console for debugging
+        if (data.details) {
+          console.error("Import error details:", data.details);
+        }
       }
     } catch (error: any) {
+      setImportStatus("");
       setAlertConfig({
         isOpen: true,
         title: "Error",
         message: error.message || "Import failed",
         type: "error",
       });
+      console.error("Import error:", error);
     } finally {
       setImporting(false);
     }
@@ -135,7 +151,7 @@ export default function ImportFromYoutube() {
             {importing ? (
               <>
                 <Loader2 className="animate-spin" size={24} />
-                Importing...
+                {importStatus || "Importing..."}
               </>
             ) : (
               <>
@@ -188,6 +204,27 @@ export default function ImportFromYoutube() {
           using the "Add Recipe" option with AI-generated JSON from tools like ChatGPT or Claude.
         </p>
       </div>
+
+      {/* Gemini Response Display */}
+      {geminiResponse && (
+        <div className="bg-gray-900 rounded-2xl p-6 border border-gray-700">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-black text-green-400">✨ Gemini AI Response</h3>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(JSON.stringify(geminiResponse, null, 2));
+                alert("Copied to clipboard!");
+              }}
+              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-semibold transition-all"
+            >
+              Copy JSON
+            </button>
+          </div>
+          <pre className="text-xs text-green-300 overflow-x-auto bg-gray-800 p-4 rounded-lg border border-gray-700">
+            {JSON.stringify(geminiResponse, null, 2)}
+          </pre>
+        </div>
+      )}
 
       <AlertModal
         isOpen={alertConfig.isOpen}

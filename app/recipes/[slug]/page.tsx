@@ -64,6 +64,7 @@ type Recipe = {
   youtube_id: string;
   cuisine: string;
   category: string;
+  foodCategory?: string;
   difficulty: string;
   prep_time: number;
   cook_time: number;
@@ -272,6 +273,11 @@ export default function RecipePage() {
               <span className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm">
                 {recipe.category}
               </span>
+              {recipe.foodCategory && (
+                <span className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-sm shadow-lg">
+                  {recipe.foodCategory}
+                </span>
+              )}
             </div>
 
             <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">
