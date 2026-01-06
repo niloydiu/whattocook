@@ -17,6 +17,9 @@ export default function IngredientsManagement() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortField, setSortField] = useState<string>("name_en");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [filterHasImage, setFilterHasImage] = useState<'any' | 'with' | 'without'>('any');
   const [editId, setEditId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showAdd, setShowAdd] = useState(false);
@@ -49,7 +52,26 @@ export default function IngredientsManagement() {
 
   async function fetchIngredients() {
     try {
-      const res = await fetch("/api/ingredients?limit=1000");
+      const token = typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
+      const params = new URLSearchParams();
+      params.set("limit", "1000");
+      if (searchQuery) params.set("search", searchQuery);
+      if (sortField) params.set("sortField", sortField);
+      if (sortOrder) params.set("sortOrder", sortOrder);
+      if (filterHasImage && filterHasImage !== 'any') {
+        params.set('hasImage', filterHasImage === 'with' ? 'true' : 'false');
+      }
+
+      let url = "/api/ingredients?" + params.toString();
+      const opts: RequestInit = {};
+
+      // If we have an admin token, use admin endpoint with Authorization header
+      if (token) {
+        url = "/api/admin/ingredients?" + params.toString();
+        opts.headers = { Authorization: `Bearer ${token}` } as any;
+      }
+
+      const res = await fetch(url, opts);
       const data = await res.json();
       setIngredients(data.ingredients || []);
     } catch (error) {
@@ -58,6 +80,13 @@ export default function IngredientsManagement() {
       setLoading(false);
     }
   }
+
+  // refetch when sort/search changes
+  useEffect(() => {
+    // small debounce for search
+    const id = setTimeout(() => fetchIngredients(), 150);
+    return () => clearTimeout(id);
+  }, [searchQuery, sortField, sortOrder, filterHasImage]);
 
   async function handleSave() {
     setSaving(true);
@@ -266,22 +295,58 @@ export default function IngredientsManagement() {
           />
         </div>
 
-        {filteredIngredients.length > 0 && (
-          <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
-            <input
-              type="checkbox"
-              checked={filteredIngredients.length > 0 && selectedIds.length === filteredIngredients.length}
-              onChange={() => {
-                if (selectedIds.length === filteredIngredients.length) setSelectedIds([]);
-                else setSelectedIds(filteredIngredients.map(i => i.id));
-              }}
-              className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
-            />
-            <span className="text-sm font-bold text-gray-700">
-              Select All Visible ({filteredIngredients.length})
-            </span>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2 border-t border-gray-100">
+          <div className="flex items-center gap-3">
+            {filteredIngredients.length > 0 && (
+              <>
+                <input
+                  type="checkbox"
+                  checked={filteredIngredients.length > 0 && selectedIds.length === filteredIngredients.length}
+                  onChange={() => {
+                    if (selectedIds.length === filteredIngredients.length) setSelectedIds([]);
+                    else setSelectedIds(filteredIngredients.map(i => i.id));
+                  }}
+                  className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
+                />
+                <span className="text-sm font-bold text-gray-700">
+                  Select All Visible ({filteredIngredients.length})
+                </span>
+              </>
+            )}
           </div>
-        )}
+
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-gray-600 mr-2">Sort:</label>
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm outline-none"
+            >
+              <option value="name_en">Name (EN)</option>
+              <option value="name_bn">Name (BN)</option>
+              <option value="id">ID</option>
+              <option value="createdAt">Created</option>
+            </select>
+
+            <button
+              onClick={() => setSortOrder((o) => (o === "asc" ? "desc" : "asc"))}
+              className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm hover:bg-gray-100"
+              title="Toggle sort order"
+            >
+              {sortOrder === "asc" ? "Asc" : "Desc"}
+            </button>
+            <label className="text-sm text-gray-600 ml-4 mr-2">Image:</label>
+            <select
+              value={filterHasImage}
+              onChange={(e) => setFilterHasImage(e.target.value as 'any' | 'with' | 'without')}
+              className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm outline-none"
+            >
+              <option value="any">All</option>
+              <option value="with">With Image</option>
+              <option value="without">Without Image</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* Ingredients Grid */}

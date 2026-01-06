@@ -13,10 +13,12 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "50");
     const search = searchParams.get("search") || "";
+    const sortField = searchParams.get("sortField") || "id";
+    const sortOrder = (searchParams.get("sortOrder") || "asc") as "asc" | "desc";
 
     const skip = (page - 1) * limit;
 
-    const where = search
+    let where: any = search
       ? {
           OR: [
             { name_en: { contains: search, mode: "insensitive" as const } },
@@ -25,12 +27,32 @@ export async function GET(request: NextRequest) {
         }
       : {};
 
+    const hasImageParam = searchParams.get("hasImage");
+    if (hasImageParam === "true") {
+      const imgCond = { img: { not: "" } };
+      where = Object.keys(where).length ? { AND: [where, imgCond] } : imgCond;
+    } else if (hasImageParam === "false") {
+      const imgCond = { img: "" };
+      where = Object.keys(where).length ? { AND: [where, imgCond] } : imgCond;
+    }
+
+    // Validate sort field against allowed keys to avoid injection
+    const allowedSortFields: Record<string, any> = {
+      id: { id: sortOrder },
+      name_en: { name_en: sortOrder },
+      name_bn: { name_bn: sortOrder },
+      createdAt: { createdAt: sortOrder },
+      updatedAt: { updatedAt: sortOrder },
+    };
+
+    const orderBy = allowedSortFields[sortField] || { id: sortOrder };
+
     const [ingredients, total] = await Promise.all([
       prisma.ingredient.findMany({
         where,
         skip,
         take: limit,
-        orderBy: { id: "asc" },
+        orderBy,
       }),
       prisma.ingredient.count({ where }),
     ]);

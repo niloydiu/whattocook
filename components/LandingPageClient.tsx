@@ -343,9 +343,9 @@ export default function LandingPageClient({
       />
 
       {/* Mobile Search Bar */}
-      <div className="md:hidden px-4 pb-6">
-        <div className="flex relative items-center bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl px-4 py-3">
-          <Search size={18} className="text-slate-400 mr-3" />
+      <div className="md:hidden px-3 sm:px-4 pb-4">
+        <div className="flex relative items-center bg-white/70 backdrop-blur-sm border-2 border-slate-200 rounded-2xl px-4 py-3.5 min-h-[48px] shadow-sm">
+          <Search size={20} className="text-slate-400 mr-3 flex-shrink-0" />
           <input
             type="text"
             placeholder={
@@ -364,12 +364,12 @@ export default function LandingPageClient({
                 setShowSuggestions(false);
               }
             }}
-            className="flex-1 bg-transparent outline-none text-sm font-medium text-slate-700 placeholder-slate-400"
+            className="flex-1 bg-transparent outline-none text-base font-medium text-slate-700 placeholder-slate-400"
           />
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 pb-24">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 pb-12 sm:pb-16">
         {/* Unified Results Layout */}
         <div className="space-y-16">
           {/* Pantry Results Section */}
@@ -398,19 +398,19 @@ export default function LandingPageClient({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                  <div className="mb-6 sm:mb-8">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-2">
                       {locale === "en"
                         ? "Recipes You Can Make"
                         : "আপনি যা রান্না করতে পারেন"}
                     </h2>
-                    <p className="text-slate-600 font-medium">
+                    <p className="text-sm sm:text-base text-slate-600 font-medium">
                       {locale === "en"
                         ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
                         : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {ingredientSearchResults.map((result) => (
                       <IngredientMatchRecipeCard
                         key={result.recipe.id}
@@ -430,14 +430,14 @@ export default function LandingPageClient({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                  <div className="mb-6 sm:mb-8">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-2">
                       {locale === "en"
                         ? "Pantry Matches"
                         : "মজুদ উপকরণের সাথে মিল"}
                     </h2>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {pantryResults.map((r, idx) => (
                       <RecipeCard
                         key={r.recipe.id}
@@ -494,15 +494,14 @@ export default function LandingPageClient({
               locale={locale}
             />
 
-            <div className="mt-16 text-center">
+            <div className="mt-10 sm:mt-12 lg:mt-16 text-center">
               <Link
                 href="/recipes"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-2xl font-black hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 hover:border-red-300 transition-all shadow-md hover:shadow-xl group"
+                className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-xl sm:rounded-2xl text-sm sm:text-base lg:text-lg font-black hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 hover:border-red-300 transition-all shadow-md hover:shadow-xl active:scale-95 group min-h-[48px]"
               >
                 {locale === "en" ? "Explore All Recipes" : "সব রেসিপি দেখুন"}
                 <ArrowRight
-                  size={22}
-                  className="group-hover:translate-x-2 transition-transform"
+                  className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform"
                 />
               </Link>
             </div>
@@ -544,17 +543,17 @@ export default function LandingPageClient({
         )}
       </AnimatePresence>
 
-      <footer className="py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
+      <footer className="py-8 sm:py-12 lg:py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg">
-              <ChefHat size={20} />
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white shadow-lg">
+              <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <span className="font-black text-2xl text-slate-900">
+            <span className="font-black text-xl sm:text-2xl text-slate-900">
               whattoCook?
             </span>
           </div>
-          <p className="text-slate-700 text-base font-semibold mb-3">
+          <p className="text-slate-700 text-sm sm:text-base font-semibold mb-2 sm:mb-3">
             Created by{" "}
             <a
               href="https://niloykm.vercel.app"
@@ -565,16 +564,16 @@ export default function LandingPageClient({
               Niloy Kumar Mohonta
             </a>
           </p>
-          <p className="text-slate-600 text-sm mb-6 font-medium">
+          <p className="text-slate-600 text-xs sm:text-sm mb-4 sm:mb-6 font-medium">
             Contact:{" "}
             <a
               href="mailto:niloykumarmohonta@gmail.com"
-              className="hover:text-red-600 transition-colors font-semibold"
+              className="hover:text-red-600 transition-colors font-semibold break-all"
             >
               niloykumarmohonta@gmail.com
             </a>
           </p>
-          <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">
+          <p className="text-slate-500 text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-bold">
             © 2026 whattoCook.{" "}
             {locale === "en" ? "All rights reserved." : "সর্বস্বত্ব সংরক্ষিত।"}
           </p>

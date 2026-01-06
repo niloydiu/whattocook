@@ -177,12 +177,12 @@ export default function AllRecipesClient({
         }}
       />
 
-      <main className="max-w-7xl mx-auto px-4 py-12">
-        <header className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8 lg:py-12">
+        <header className="mb-8 sm:mb-10 lg:mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-2">
             {t("Explore All Recipes", "সব রেসিপি অন্বেষণ করুন")}
           </h1>
-          <p className="text-slate-600">
+          <p className="text-sm sm:text-base text-slate-600">
             {t(
               "Browse our collection of delicious AI-powered recipes",
               "আমাদের সুস্বাদু এআই-চালিত রেসিপি সংগ্রহ দেখুন"
@@ -190,8 +190,8 @@ export default function AllRecipesClient({
           </p>
         </header>
 
-        <section className="mb-12">
-          <div className="md:hidden mb-6">
+        <section className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="md:hidden mb-4 sm:mb-6">
             <div className="relative">
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -222,7 +222,7 @@ export default function AllRecipesClient({
                     }
                   }
                 }}
-                className="w-full pl-12 pr-4 py-4 bg-white/70 backdrop-blur-sm border-2 border-slate-200 rounded-2xl text-sm font-medium text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-300 transition-all"
+                className="w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white/70 backdrop-blur-sm border-2 border-slate-200 rounded-2xl text-sm sm:text-base font-medium text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-300 transition-all min-h-[48px]"
               />
             </div>
           </div>
@@ -243,15 +243,15 @@ export default function AllRecipesClient({
         </section>
 
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-4 mt-12">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4 mt-8 sm:mt-10 lg:mt-12 px-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1 || loading}
-              className="p-3 bg-white rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm hover:shadow-md"
+              className="p-2.5 sm:p-3 bg-white rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm hover:shadow-md min-w-[44px] min-h-[44px] flex items-center justify-center"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {[...Array(totalPages)].map((_, i) => {
                 const p = i + 1;
                 // Basic pagination logic: show current, first, last, and neighbors
@@ -264,7 +264,7 @@ export default function AllRecipesClient({
                     <button
                       key={p}
                       onClick={() => setPage(p)}
-                      className={`w-12 h-12 rounded-xl font-bold transition-all border-2 shadow-sm hover:shadow-md active:scale-95 ${
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl font-bold transition-all border-2 shadow-sm hover:shadow-md active:scale-95 text-sm sm:text-base ${
                         page === p
                           ? "bg-gradient-to-r from-red-600 to-orange-600 text-white border-red-600 shadow-lg"
                           : "bg-white border-slate-200 text-slate-700 hover:border-red-300 hover:bg-slate-50"
@@ -275,7 +275,7 @@ export default function AllRecipesClient({
                   );
                 } else if (p === page - 2 || p === page + 2) {
                   return (
-                    <span key={p} className="text-slate-400">
+                    <span key={p} className="text-slate-400 text-sm sm:text-base">
                       ...
                     </span>
                   );
@@ -286,25 +286,25 @@ export default function AllRecipesClient({
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages || loading}
-              className="p-3 bg-white rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm hover:shadow-md"
+              className="p-2.5 sm:p-3 bg-white rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm hover:shadow-md min-w-[44px] min-h-[44px] flex items-center justify-center"
             >
-              <ChevronRight size={24} />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
         )}
       </main>
 
-      <footer className="py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
+      <footer className="py-8 sm:py-12 lg:py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg">
-              <ChefHat size={20} />
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white shadow-lg">
+              <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <span className="font-black text-2xl text-slate-900">
+            <span className="font-black text-xl sm:text-2xl text-slate-900">
               whattoCook?
             </span>
           </div>
-          <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">
+          <p className="text-slate-500 text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-bold">
             © 2026 whattoCook.{" "}
             {locale === "en" ? "All rights reserved." : "সর্বস্বত্ব সংরক্ষিত।"}
           </p>

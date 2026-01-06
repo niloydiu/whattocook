@@ -134,18 +134,18 @@ export default function IngredientSearch({
         transition={{ duration: 0.6, delay: 0.4 }}
         className="relative"
       >
-        <div className="glass-effect rounded-[2.5rem] p-2 shadow-[0_25px_80px_-20px_rgba(0,0,0,0.15)] border border-white/60 backdrop-blur-xl">
+        <div className="glass-effect rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] p-1.5 sm:p-2 shadow-[0_15px_50px_-15px_rgba(0,0,0,0.15)] sm:shadow-[0_25px_80px_-20px_rgba(0,0,0,0.15)] border border-white/60 backdrop-blur-xl">
           {/* Search Input Section */}
-          <div className="flex items-center gap-3 p-2">
+          <div className="flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2">
             <div className="flex-1 relative">
               <motion.div
-                className="absolute inset-y-0 left-6 flex items-center pointer-events-none"
+                className="absolute inset-y-0 left-3 sm:left-4 lg:left-6 flex items-center pointer-events-none"
                 animate={{
                   color: input ? "#dc2626" : "#94a3b8",
                 }}
                 transition={{ duration: 0.2 }}
               >
-                <Search size={22} />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 lg:w-[22px] lg:h-[22px]" />
               </motion.div>
 
               <input
@@ -158,8 +158,18 @@ export default function IngredientSearch({
                 onFocus={() => setOpen(true)}
                 onClick={() => setOpen(true)}
                 onBlur={() => setTimeout(() => setOpen(false), 200)}
-                onKeyDown={(e) => e.key === "Enter" && addFromInput()}
-                className="w-full pl-16 pr-6 py-4 bg-white/80 backdrop-blur-sm rounded-2xl border-2 border-transparent focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-500/10 outline-none transition-all duration-300 text-base font-medium text-slate-700 placeholder:text-slate-400 placeholder:font-normal"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    // If user already selected ingredients, trigger search; otherwise add typed input
+                    if (selected.length > 0) {
+                      onFind();
+                    } else {
+                      addFromInput();
+                    }
+                  }
+                }}
+                className="w-full pl-10 sm:pl-12 lg:pl-16 pr-3 sm:pr-4 lg:pr-6 py-2.5 sm:py-3 lg:py-4 bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-red-300 focus:bg-white focus:ring-2 sm:focus:ring-4 focus:ring-red-500/10 outline-none transition-all duration-300 text-sm sm:text-base font-medium text-slate-700 placeholder:text-slate-400 placeholder:font-normal min-h-[44px]"
                 placeholder={
                   locale === "en"
                     ? "Add ingredients you have..."
@@ -184,7 +194,7 @@ export default function IngredientSearch({
                       scale: 0.95,
                     }}
                     transition={{ duration: 0.2 }}
-                    className={`absolute left-0 right-0 bg-white rounded-2xl shadow-2xl border border-slate-200/80 max-h-[400px] overflow-hidden z-[9999] backdrop-blur-sm ${
+                    className={`absolute left-0 right-0 sm:left-auto sm:right-auto sm:w-full bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200/80 max-h-[320px] sm:max-h-[400px] overflow-hidden z-[9999] backdrop-blur-sm ${
                       dropdownPosition === "bottom"
                         ? "top-full mt-3"
                         : "bottom-full mb-3"
@@ -207,10 +217,10 @@ export default function IngredientSearch({
                         filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))",
                       }}
                     />
-                    <div className="p-4 border-b border-slate-100/80 bg-gradient-to-r from-slate-50/50 to-white/50">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                        <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
-                          <Sparkles size={14} className="text-white" />
+                    <div className="p-3 sm:p-4 border-b border-slate-100/80 bg-gradient-to-r from-slate-50/50 to-white/50">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
+                          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
                         </div>
                         <span>
                           {locale === "en"
@@ -222,7 +232,7 @@ export default function IngredientSearch({
 
                     <div
                       ref={scrollCaptureRef as React.RefObject<HTMLDivElement>}
-                      className="max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent"
+                      className="max-h-[260px] sm:max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent"
                       onScroll={(e) => {
                         const el = e.currentTarget as HTMLElement;
                         if (
@@ -251,19 +261,19 @@ export default function IngredientSearch({
                               setInput("");
                               setOpen(false);
                             }}
-                            className={`group px-5 py-4 hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 active:bg-red-100 transition-all duration-200 cursor-pointer border-b border-slate-50/50 last:border-0 relative ${
+                            className={`group px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-4 hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 active:bg-red-100 transition-all duration-200 cursor-pointer border-b border-slate-50/50 last:border-0 relative ${
                               isGuess
                                 ? "border-l-4 border-orange-400 bg-gradient-to-r from-orange-50/30 to-transparent"
                                 : ""
                             }`}
                           >
-                            <div className="flex items-center gap-4">
-                              <div className="relative">
-                                <div className="w-12 h-12 bg-gradient-to-br from-white to-slate-50 rounded-xl flex items-center justify-center shadow-sm border border-slate-100/50">
+                            <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-4">
+                              <div className="relative shrink-0">
+                                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-slate-100/50">
                                   <img
                                     src={i.img}
                                     alt=""
-                                    className="w-8 h-8 object-contain"
+                                    className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain"
                                     onError={(e) => {
                                       const img = e.currentTarget;
                                       img.style.display = "none";
@@ -294,12 +304,12 @@ export default function IngredientSearch({
                                 )}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="text-slate-900 font-semibold text-base">
+                                <div className="text-slate-900 font-semibold text-sm sm:text-base truncate">
                                   {locale === "en"
                                     ? highlightMatch(i.name_en, result.matches)
                                     : highlightMatch(i.name_bn, result.matches)}
                                 </div>
-                                <div className="text-sm text-slate-500 font-medium">
+                                <div className="text-xs sm:text-sm text-slate-500 font-medium truncate">
                                   {locale === "en" ? i.name_bn : i.name_en}
                                 </div>
                                 {isGuess && (
@@ -316,9 +326,9 @@ export default function IngredientSearch({
                               <motion.div
                                 whileHover={{ scale: 1.1, rotate: 90 }}
                                 whileTap={{ scale: 0.9 }}
-                                className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center shadow-lg shadow-red-500/30 group-hover:shadow-red-500/50 transition-all duration-200"
+                                className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center shadow-md sm:shadow-lg shadow-red-500/30 group-hover:shadow-red-500/50 transition-all duration-200"
                               >
-                                <Plus size={18} />
+                                <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                               </motion.div>
                             </div>
                           </motion.div>
@@ -353,14 +363,14 @@ export default function IngredientSearch({
               disabled={selected.length === 0}
               whileHover={{ scale: selected.length > 0 ? 1.05 : 1 }}
               whileTap={{ scale: selected.length > 0 ? 0.95 : 1 }}
-              className={`px-6 py-4 rounded-2xl font-bold text-base transition-all duration-300 shadow-lg flex items-center gap-3 min-w-[140px] justify-center ${
+              className={`inline-flex px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 shadow-md sm:shadow-lg items-center gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] lg:min-w-[140px] justify-center min-h-[44px] ${
                 selected.length > 0
                   ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30 hover:shadow-red-500/40"
                   : "bg-slate-200 text-slate-400 cursor-not-allowed"
               }`}
             >
-              <ChefHat size={20} />
-              <span>{locale === "en" ? "Cook!" : "রান্না!"}</span>
+              <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="ml-2">{locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}</span>
             </motion.button>
           </div>
 
@@ -374,7 +384,7 @@ export default function IngredientSearch({
                 transition={{ duration: 0.3 }}
                 className="px-4 pb-4"
               >
-                <div className="flex flex-wrap gap-3 mt-4">
+                <div className="flex flex-wrap gap-2 sm:gap-3 mt-3 sm:mt-4">
                   {selected.map((s, i) => (
                     <motion.div
                       key={s}
@@ -383,13 +393,13 @@ export default function IngredientSearch({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.2 }}
-                      className="group flex items-center gap-3 bg-white/90 backdrop-blur-sm border border-slate-200/60 rounded-2xl px-4 py-3 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-200"
+                      className="group flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-sm border border-slate-200/60 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-200"
                     >
-                      <div className="w-8 h-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg flex items-center justify-center">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg flex items-center justify-center shrink-0">
                         <img
                           src={getIconForName(s)}
                           alt=""
-                          className="w-6 h-6 object-contain"
+                          className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
                           onError={(e) => {
                             const img = e.currentTarget;
                             img.style.display = "none";
@@ -404,14 +414,14 @@ export default function IngredientSearch({
                           }}
                         />
                       </div>
-                      <span className="text-slate-700 font-medium">{s}</span>
+                      <span className="text-slate-700 font-medium text-sm sm:text-base truncate max-w-[120px] sm:max-w-none">{s}</span>
                       <motion.button
                         onClick={() => onRemove(i)}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="text-slate-400 hover:text-red-500 transition-colors"
+                        className="text-slate-400 hover:text-red-500 transition-colors shrink-0 w-6 h-6 flex items-center justify-center"
                       >
-                        <X size={16} />
+                        <X className="w-4 h-4" />
                       </motion.button>
                     </motion.div>
                   ))}
@@ -427,24 +437,24 @@ export default function IngredientSearch({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="mt-6 md:hidden px-4"
+        className="mt-4 sm:mt-6 md:hidden px-2 sm:px-4"
       >
         <motion.button
           onClick={onFind}
           disabled={selected.length === 0}
           whileHover={{ scale: selected.length > 0 ? 1.02 : 1 }}
           whileTap={{ scale: selected.length > 0 ? 0.98 : 1 }}
-          className={`w-full py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-3 ${
+          className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2.5 sm:gap-3 min-h-[48px] ${
             selected.length > 0
               ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30"
               : "bg-slate-200 text-slate-400 cursor-not-allowed"
           }`}
         >
-          <ChefHat size={20} />
+          <ChefHat className="w-5 h-5" />
           <span>
             {locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}
           </span>
-          <ArrowRight size={20} />
+          <ArrowRight className="w-5 h-5" />
         </motion.button>
       </motion.div>
     </div>
