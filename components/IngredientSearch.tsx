@@ -370,7 +370,9 @@ export default function IngredientSearch({
               }`}
             >
               <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="ml-2">{locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}</span>
+              <span className="ml-2">
+                {locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}
+              </span>
             </motion.button>
           </div>
 
@@ -414,7 +416,9 @@ export default function IngredientSearch({
                           }}
                         />
                       </div>
-                      <span className="text-slate-700 font-medium text-sm sm:text-base truncate max-w-[120px] sm:max-w-none">{s}</span>
+                      <span className="text-slate-700 font-medium text-sm sm:text-base truncate max-w-[120px] sm:max-w-none">
+                        {s}
+                      </span>
                       <motion.button
                         onClick={() => onRemove(i)}
                         whileHover={{ scale: 1.1 }}

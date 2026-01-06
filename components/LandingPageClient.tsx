@@ -500,9 +500,7 @@ export default function LandingPageClient({
                 className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-xl sm:rounded-2xl text-sm sm:text-base lg:text-lg font-black hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 hover:border-red-300 transition-all shadow-md hover:shadow-xl active:scale-95 group min-h-[48px]"
               >
                 {locale === "en" ? "Explore All Recipes" : "সব রেসিপি দেখুন"}
-                <ArrowRight
-                  className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform"
-                />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
           </section>

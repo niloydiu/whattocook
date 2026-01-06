@@ -2,7 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Edit, Trash2, Plus, X, Loader2, Save, Image as ImageIcon } from "lucide-react";
+import {
+  Search,
+  Edit,
+  Trash2,
+  Plus,
+  X,
+  Loader2,
+  Save,
+  Image as ImageIcon,
+} from "lucide-react";
 import AlertModal from "@/components/AlertModal";
 
 interface Ingredient {
@@ -19,7 +28,9 @@ export default function IngredientsManagement() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortField, setSortField] = useState<string>("name_en");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [filterHasImage, setFilterHasImage] = useState<'any' | 'with' | 'without'>('any');
+  const [filterHasImage, setFilterHasImage] = useState<
+    "any" | "with" | "without"
+  >("any");
   const [editId, setEditId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showAdd, setShowAdd] = useState(false);
@@ -52,14 +63,17 @@ export default function IngredientsManagement() {
 
   async function fetchIngredients() {
     try {
-      const token = typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
+      const token =
+        typeof window !== "undefined"
+          ? localStorage.getItem("adminToken")
+          : null;
       const params = new URLSearchParams();
       params.set("limit", "1000");
       if (searchQuery) params.set("search", searchQuery);
       if (sortField) params.set("sortField", sortField);
       if (sortOrder) params.set("sortOrder", sortOrder);
-      if (filterHasImage && filterHasImage !== 'any') {
-        params.set('hasImage', filterHasImage === 'with' ? 'true' : 'false');
+      if (filterHasImage && filterHasImage !== "any") {
+        params.set("hasImage", filterHasImage === "with" ? "true" : "false");
       }
 
       let url = "/api/ingredients?" + params.toString();
@@ -99,9 +113,9 @@ export default function IngredientsManagement() {
 
       const res = await fetch(url, {
         method,
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ ...formData, phonetic: [] }),
       });
@@ -145,8 +159,8 @@ export default function IngredientsManagement() {
       const res = await fetch(`/api/admin/ingredients/${id}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (res.ok) {
@@ -186,10 +200,10 @@ export default function IngredientsManagement() {
       const res = await fetch("/api/admin/ingredients", {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ids: selectedIds })
+        body: JSON.stringify({ ids: selectedIds }),
       });
 
       if (res.ok) {
@@ -226,7 +240,7 @@ export default function IngredientsManagement() {
 
   function toggleSelectOne(id: number) {
     if (selectedIds.includes(id)) {
-      setSelectedIds(selectedIds.filter(idx => idx !== id));
+      setSelectedIds(selectedIds.filter((idx) => idx !== id));
     } else {
       setSelectedIds([...selectedIds, id]);
     }
@@ -253,7 +267,9 @@ export default function IngredientsManagement() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-black text-gray-900">Manage Ingredients</h2>
+          <h2 className="text-3xl font-black text-gray-900">
+            Manage Ingredients
+          </h2>
           <p className="text-gray-600 mt-1">
             {filteredIngredients.length} of {ingredients.length} ingredients
           </p>
@@ -285,7 +301,10 @@ export default function IngredientsManagement() {
       {/* Search and Selection */}
       <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            size={20}
+          />
           <input
             type="text"
             placeholder="Search ingredients..."
@@ -301,10 +320,14 @@ export default function IngredientsManagement() {
               <>
                 <input
                   type="checkbox"
-                  checked={filteredIngredients.length > 0 && selectedIds.length === filteredIngredients.length}
+                  checked={
+                    filteredIngredients.length > 0 &&
+                    selectedIds.length === filteredIngredients.length
+                  }
                   onChange={() => {
-                    if (selectedIds.length === filteredIngredients.length) setSelectedIds([]);
-                    else setSelectedIds(filteredIngredients.map(i => i.id));
+                    if (selectedIds.length === filteredIngredients.length)
+                      setSelectedIds([]);
+                    else setSelectedIds(filteredIngredients.map((i) => i.id));
                   }}
                   className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
                 />
@@ -329,7 +352,9 @@ export default function IngredientsManagement() {
             </select>
 
             <button
-              onClick={() => setSortOrder((o) => (o === "asc" ? "desc" : "asc"))}
+              onClick={() =>
+                setSortOrder((o) => (o === "asc" ? "desc" : "asc"))
+              }
               className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm hover:bg-gray-100"
               title="Toggle sort order"
             >
@@ -338,7 +363,9 @@ export default function IngredientsManagement() {
             <label className="text-sm text-gray-600 ml-4 mr-2">Image:</label>
             <select
               value={filterHasImage}
-              onChange={(e) => setFilterHasImage(e.target.value as 'any' | 'with' | 'without')}
+              onChange={(e) =>
+                setFilterHasImage(e.target.value as "any" | "with" | "without")
+              }
               className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm outline-none"
             >
               <option value="any">All</option>
@@ -363,7 +390,9 @@ export default function IngredientsManagement() {
               animate={{ opacity: 1, scale: 1 }}
               onClick={() => toggleSelectOne(ingredient.id)}
               className={`bg-white rounded-2xl p-6 border ${
-                selectedIds.includes(ingredient.id) ? "border-green-500 bg-green-50/10" : "border-gray-200"
+                selectedIds.includes(ingredient.id)
+                  ? "border-green-500 bg-green-50/10"
+                  : "border-gray-200"
               } hover:border-gray-300 transition-all shadow-sm hover:shadow-md cursor-pointer relative`}
             >
               <div className="flex items-start gap-4">
@@ -393,12 +422,19 @@ export default function IngredientsManagement() {
                   <h3 className="text-lg font-black text-gray-900 truncate">
                     {ingredient.name_en}
                   </h3>
-                  <p className="text-sm text-gray-600 truncate">{ingredient.name_bn}</p>
-                  <p className="text-xs text-gray-400 mt-1">ID: {ingredient.id}</p>
+                  <p className="text-sm text-gray-600 truncate">
+                    {ingredient.name_bn}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-1">
+                    ID: {ingredient.id}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-4" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="flex items-center gap-2 mt-4"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   onClick={() => startEdit(ingredient)}
                   className="flex-1 px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-xl text-sm font-bold transition-colors"
@@ -446,7 +482,9 @@ export default function IngredientsManagement() {
                   <input
                     type="text"
                     value={formData.name_en}
-                    onChange={(e) => setFormData({ ...formData, name_en: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name_en: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
                     placeholder="e.g., Tomato"
                   />
@@ -459,7 +497,9 @@ export default function IngredientsManagement() {
                   <input
                     type="text"
                     value={formData.name_bn}
-                    onChange={(e) => setFormData({ ...formData, name_bn: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name_bn: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
                     placeholder="e.g., টমেটো"
                   />
@@ -472,7 +512,9 @@ export default function IngredientsManagement() {
                   <input
                     type="text"
                     value={formData.img}
-                    onChange={(e) => setFormData({ ...formData, img: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, img: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
                     placeholder="https://..."
                   />
@@ -482,7 +524,9 @@ export default function IngredientsManagement() {
                         src={formData.img}
                         alt="Preview"
                         className="w-full h-full object-contain"
-                        onError={(e) => (e.currentTarget.style.display = "none")}
+                        onError={(e) =>
+                          (e.currentTarget.style.display = "none")
+                        }
                       />
                     </div>
                   )}
@@ -537,7 +581,9 @@ export default function IngredientsManagement() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
             >
-              <h3 className="text-2xl font-black text-gray-900 mb-4">Delete Ingredient?</h3>
+              <h3 className="text-2xl font-black text-gray-900 mb-4">
+                Delete Ingredient?
+              </h3>
               <p className="text-gray-600 mb-6">
                 Are you sure? This will affect recipes using this ingredient.
               </p>

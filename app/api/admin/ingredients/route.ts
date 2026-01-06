@@ -14,7 +14,9 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "50");
     const search = searchParams.get("search") || "";
     const sortField = searchParams.get("sortField") || "id";
-    const sortOrder = (searchParams.get("sortOrder") || "asc") as "asc" | "desc";
+    const sortOrder = (searchParams.get("sortOrder") || "asc") as
+      | "asc"
+      | "desc";
 
     const skip = (page - 1) * limit;
 
@@ -125,7 +127,9 @@ export async function DELETE(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({ message: `${ids.length} ingredients deleted successfully` });
+    return NextResponse.json({
+      message: `${ids.length} ingredients deleted successfully`,
+    });
   } catch (error) {
     console.error("Error bulk deleting ingredients:", error);
     return NextResponse.json(

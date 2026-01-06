@@ -269,7 +269,9 @@ export default function Navbar({
                           )}
                           <div className="flex flex-col min-w-0">
                             <span className="text-xs font-bold text-slate-900 truncate">
-                              {locale === "en" ? s.label : s.label_bn || s.label}
+                              {locale === "en"
+                                ? s.label
+                                : s.label_bn || s.label}
                             </span>
                             <span className="text-[9px] text-slate-400 font-medium uppercase tracking-wider">
                               {s.type}
@@ -302,9 +304,7 @@ export default function Navbar({
                   className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-xl font-bold text-sm hover:from-red-700 hover:to-orange-700 active:scale-95 transition-all shadow-lg"
                 >
                   <ClipboardList size={18} />
-                  <span>
-                    Request Recipe
-                  </span>
+                  <span>Request Recipe</span>
                 </Link>
 
                 {/* Language Selection */}

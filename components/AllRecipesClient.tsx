@@ -275,7 +275,10 @@ export default function AllRecipesClient({
                   );
                 } else if (p === page - 2 || p === page + 2) {
                   return (
-                    <span key={p} className="text-slate-400 text-sm sm:text-base">
+                    <span
+                      key={p}
+                      className="text-slate-400 text-sm sm:text-base"
+                    >
                       ...
                     </span>
                   );

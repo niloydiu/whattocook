@@ -234,7 +234,11 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                   : "bg-white border-slate-200 text-slate-400 hover:text-red-600 hover:border-red-200"
               }`}
             >
-              <Heart size={18} className="sm:w-5 sm:h-5" fill={isFavorite ? "currentColor" : "none"} />
+              <Heart
+                size={18}
+                className="sm:w-5 sm:h-5"
+                fill={isFavorite ? "currentColor" : "none"}
+              />
             </button>
           </div>
         </div>
@@ -341,7 +345,10 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                         className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm text-slate-900 flex items-center gap-2 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
                       >
                         <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-red-600 to-orange-600 text-white flex items-center justify-center transition-all group-hover:scale-110">
-                          <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" />
+                          <Play
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                            fill="currentColor"
+                          />
                         </div>
                         <span className="hidden sm:inline">
                           {t ? "WATCH RECIPE VIDEO" : "রেসিপি ভিডিও দেখুন"}
@@ -423,7 +430,9 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                               className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-[10px] sm:text-xs font-bold text-slate-700 transition-all active:scale-95"
                             >
                               <YouTubeIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                              <span className="tabular-nums">{step.timestamp}</span>
+                              <span className="tabular-nums">
+                                {step.timestamp}
+                              </span>
                             </button>
                           )}
                         </div>
