@@ -13,6 +13,7 @@ import {
   Sparkles,
   Database,
 } from "lucide-react";
+import { API_PATHS } from "@/lib/api-paths";
 
 interface Stats {
   recipes: number;
@@ -32,8 +33,8 @@ export default function AdminDashboard() {
   async function fetchStats() {
     try {
       const [recipesRes, ingredientsRes] = await Promise.all([
-        fetch("/api/recipes?limit=1000"),
-        fetch("/api/ingredients?limit=1000"),
+        fetch(`${API_PATHS.RECIPES}?limit=1000`),
+        fetch(`${API_PATHS.INGREDIENTS}?limit=1000`),
       ]);
 
       const recipesData = await recipesRes.json();
@@ -46,8 +47,14 @@ export default function AdminDashboard() {
       const cuisineMap = new Map<string, number>();
 
       recipes.forEach((recipe: any) => {
-        categoryMap.set(recipe.category, (categoryMap.get(recipe.category) || 0) + 1);
-        cuisineMap.set(recipe.cuisine, (cuisineMap.get(recipe.cuisine) || 0) + 1);
+        categoryMap.set(
+          recipe.category,
+          (categoryMap.get(recipe.category) || 0) + 1
+        );
+        cuisineMap.set(
+          recipe.cuisine,
+          (cuisineMap.get(recipe.cuisine) || 0) + 1
+        );
       });
 
       setStats({
@@ -108,8 +115,8 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-3xl font-black text-gray-900 mb-2">Dashboard</h2>
-        <p className="text-gray-600">Manage your recipe platform</p>
+        <h2 className="text-3xl font-black text-slate-900">Dashboard</h2>
+        <p className="text-slate-600 font-medium">Manage your recipe platform</p>
       </div>
 
       {/* Stats */}
@@ -117,58 +124,74 @@ export default function AdminDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border border-blue-200"
+          className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all"
         >
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-bold text-blue-900">Total Recipes</p>
-            <BookOpen className="text-blue-600" size={20} />
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-bold text-blue-700 uppercase tracking-wider">Total Recipes</p>
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
+              <BookOpen className="text-blue-600" size={20} />
+            </div>
           </div>
-          <p className="text-4xl font-black text-blue-900">{loading ? "..." : stats?.recipes || 0}</p>
+          <p className="text-4xl font-black text-blue-900">
+            {loading ? "..." : stats?.recipes || 0}
+          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200"
+          className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-green-100 shadow-lg hover:shadow-xl transition-all"
         >
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-bold text-green-900">Ingredients</p>
-            <Utensils className="text-green-600" size={20} />
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-bold text-green-700 uppercase tracking-wider">Ingredients</p>
+            <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center">
+              <Utensils className="text-green-600" size={20} />
+            </div>
           </div>
-          <p className="text-4xl font-black text-green-900">{loading ? "..." : stats?.ingredients || 0}</p>
+          <p className="text-4xl font-black text-green-900">
+            {loading ? "..." : stats?.ingredients || 0}
+          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-200"
+          className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-purple-100 shadow-lg hover:shadow-xl transition-all"
         >
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-bold text-purple-900">Categories</p>
-            <Database className="text-purple-600" size={20} />
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-bold text-purple-700 uppercase tracking-wider">Categories</p>
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center">
+              <Database className="text-purple-600" size={20} />
+            </div>
           </div>
-          <p className="text-4xl font-black text-purple-900">{loading ? "..." : stats?.categories.length || 0}</p>
+          <p className="text-4xl font-black text-purple-900">
+            {loading ? "..." : stats?.categories.length || 0}
+          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200"
+          className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-orange-100 shadow-lg hover:shadow-xl transition-all"
         >
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-bold text-orange-900">Cuisines</p>
-            <Sparkles className="text-orange-600" size={20} />
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-bold text-orange-700 uppercase tracking-wider">Cuisines</p>
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
+              <Sparkles className="text-orange-600" size={20} />
+            </div>
           </div>
-          <p className="text-4xl font-black text-orange-900">{loading ? "..." : stats?.cuisines.length || 0}</p>
+          <p className="text-4xl font-black text-orange-900">
+            {loading ? "..." : stats?.cuisines.length || 0}
+          </p>
         </motion.div>
       </div>
 
       {/* Quick Actions */}
       <div>
-        <h3 className="text-xl font-black text-gray-900 mb-4">Quick Actions</h3>
+        <h3 className="text-2xl font-black text-slate-900 mb-6">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {quickActions.map((action, index) => (
             <Link key={action.href} href={action.href}>
@@ -177,15 +200,17 @@ export default function AdminDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4, scale: 1.02 }}
-                className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all cursor-pointer shadow-sm hover:shadow-lg"
+                className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-slate-100 shadow-lg hover:shadow-xl transition-all"
               >
                 <div
-                  className={`w-12 h-12 bg-gradient-to-br ${action.color} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
+                  className={`w-14 h-14 bg-gradient-to-br ${action.color} rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
                 >
                   <action.icon className="text-white" size={24} />
                 </div>
-                <h4 className="text-lg font-black text-gray-900 mb-2">{action.title}</h4>
-                <p className="text-sm text-gray-600">{action.description}</p>
+                <h4 className="text-lg font-black text-slate-900 mb-2">
+                  {action.title}
+                </h4>
+                <p className="text-sm text-slate-600 font-medium">{action.description}</p>
               </motion.div>
             </Link>
           ))}
@@ -195,40 +220,62 @@ export default function AdminDashboard() {
       {/* Stats Breakdown */}
       {!loading && stats && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-6 border border-gray-200">
-            <h4 className="text-lg font-black text-gray-900 mb-4">Recipe Categories</h4>
-            <div className="space-y-3">
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-slate-100 shadow-lg">
+            <h4 className="text-xl font-black text-slate-900 mb-6">
+              Recipe Categories
+            </h4>
+            <div className="space-y-4">
               {stats.categories.slice(0, 5).map((cat) => (
-                <div key={cat.name} className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-gray-700">{cat.name}</span>
+                <div
+                  key={cat.name}
+                  className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-700">
+                    {cat.name}
+                  </span>
                   <div className="flex items-center gap-3">
-                    <div className="h-2 w-32 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2.5 w-32 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                        style={{ width: `${(cat.count / stats.recipes) * 100}%` }}
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                        style={{
+                          width: `${(cat.count / stats.recipes) * 100}%`,
+                        }}
                       />
                     </div>
-                    <span className="text-sm font-black text-gray-900 w-8 text-right">{cat.count}</span>
+                    <span className="text-sm font-black text-slate-900 w-8 text-right">
+                      {cat.count}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 border border-gray-200">
-            <h4 className="text-lg font-black text-gray-900 mb-4">Recipe Cuisines</h4>
-            <div className="space-y-3">
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-slate-100 shadow-lg">
+            <h4 className="text-xl font-black text-slate-900 mb-6">
+              Recipe Cuisines
+            </h4>
+            <div className="space-y-4">
               {stats.cuisines.slice(0, 5).map((cuisine) => (
-                <div key={cuisine.name} className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-gray-700">{cuisine.name}</span>
+                <div
+                  key={cuisine.name}
+                  className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-700">
+                    {cuisine.name}
+                  </span>
                   <div className="flex items-center gap-3">
-                    <div className="h-2 w-32 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2.5 w-32 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-green-500 to-teal-500"
-                        style={{ width: `${(cuisine.count / stats.recipes) * 100}%` }}
+                        className="h-full bg-gradient-to-r from-green-500 to-teal-500 rounded-full"
+                        style={{
+                          width: `${(cuisine.count / stats.recipes) * 100}%`,
+                        }}
                       />
                     </div>
-                    <span className="text-sm font-black text-gray-900 w-8 text-right">{cuisine.count}</span>
+                    <span className="text-sm font-black text-slate-900 w-8 text-right">
+                      {cuisine.count}
+                    </span>
                   </div>
                 </div>
               ))}

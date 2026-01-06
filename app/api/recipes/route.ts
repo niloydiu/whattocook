@@ -20,13 +20,14 @@ export async function GET(request: NextRequest) {
     if (search) {
       // Enhanced multi-language search with phonetic matching
       const searchTerm = search.trim();
-      
+
       // Build comprehensive OR conditions
       const searchConditions: any[] = [
         { title_en: { contains: searchTerm, mode: "insensitive" } },
         { title_bn: { contains: searchTerm } },
         { cuisine: { contains: searchTerm, mode: "insensitive" } },
         { category: { contains: searchTerm, mode: "insensitive" } },
+        { foodCategory: { contains: searchTerm, mode: "insensitive" } },
       ];
 
       // Also search in ingredients
@@ -38,10 +39,10 @@ export async function GET(request: NextRequest) {
                 { name_en: { contains: searchTerm, mode: "insensitive" } },
                 { name_bn: { contains: searchTerm } },
                 { phonetic: { has: searchTerm.toLowerCase() } },
-              ]
-            }
-          }
-        }
+              ],
+            },
+          },
+        },
       });
 
       where.OR = searchConditions;

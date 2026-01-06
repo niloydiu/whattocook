@@ -57,10 +57,10 @@ export default function RequestRecipePage() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600 rounded-full mb-6 shadow-lg shadow-red-600/30">
             <ChefHat size={40} className="text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900">
             {locale === "en" ? "Request a Recipe" : "রেসিপি অনুরোধ করুন"}
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+          <p className="text-lg text-slate-600">
             {locale === "en"
               ? "Can't find what you're looking for? Submit a recipe, request one based on your ingredients, or tell us what you'd like to see."
               : "যা খুঁজছেন তা পাচ্ছেন না? একটি রেসিপি জমা দিন, আপনার উপকরণ দিয়ে একটি চাই, অথবা আপনি কী দেখতে চান তা আমাদের জানান।"}
@@ -77,10 +77,10 @@ export default function RequestRecipePage() {
               transition={{ delay: index * 0.1 }}
             >
               <Link href={type.href}>
-                <div className="group relative h-full bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden">
+                <div className="group relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-8 border-2 border-slate-100 shadow-lg hover:shadow-xl transition-all">
                   {/* Gradient Background */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${type.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                    className={`absolute inset-0 bg-gradient-to-br ${type.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-3xl`}
                   />
 
                   {/* Icon */}
@@ -94,7 +94,7 @@ export default function RequestRecipePage() {
                   <h3 className="text-2xl font-black text-slate-900 mb-3">
                     {type.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600 font-medium leading-relaxed">
                     {type.description}
                   </p>
 
@@ -108,11 +108,11 @@ export default function RequestRecipePage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      strokeWidth={2.5}
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
@@ -128,46 +128,46 @@ export default function RequestRecipePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="mt-16 bg-white rounded-3xl p-8 shadow-lg"
+          className="mt-16 bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border-2 border-slate-100 shadow-lg"
         >
-          <h2 className="text-2xl font-black text-slate-900 mb-4">
+          <h2 className="text-3xl font-black text-slate-900 mb-8">
             {locale === "en" ? "How It Works" : "এটি কীভাবে কাজ করে"}
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div>
-              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-black mb-3">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl hover:bg-slate-50/50 transition-colors">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-100 to-red-200 rounded-xl flex items-center justify-center text-red-600 font-black mb-4 shadow-sm">
                 1
               </div>
-              <h3 className="font-bold text-slate-900 mb-2">
+              <h3 className="font-black text-lg text-slate-900 mb-2">
                 {locale === "en" ? "Submit Request" : "অনুরোধ জমা দিন"}
               </h3>
-              <p className="text-slate-600 text-sm">
+              <p className="text-slate-600 text-sm font-medium leading-relaxed">
                 {locale === "en"
                   ? "Choose your request type and fill in the details"
                   : "আপনার অনুরোধের ধরন বেছে নিন এবং বিবরণ পূরণ করুন"}
               </p>
             </div>
-            <div>
-              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-black mb-3">
+            <div className="p-6 rounded-2xl hover:bg-slate-50/50 transition-colors">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center text-orange-600 font-black mb-4 shadow-sm">
                 2
               </div>
-              <h3 className="font-bold text-slate-900 mb-2">
+              <h3 className="font-black text-lg text-slate-900 mb-2">
                 {locale === "en" ? "We Review" : "আমরা পর্যালোচনা করি"}
               </h3>
-              <p className="text-slate-600 text-sm">
+              <p className="text-slate-600 text-sm font-medium leading-relaxed">
                 {locale === "en"
                   ? "Our team reviews your request and works on it"
                   : "আমাদের টিম আপনার অনুরোধ পর্যালোচনা করে এবং কাজ করে"}
               </p>
             </div>
-            <div>
-              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-black mb-3">
+            <div className="p-6 rounded-2xl hover:bg-slate-50/50 transition-colors">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center text-green-600 font-black mb-4 shadow-sm">
                 3
               </div>
-              <h3 className="font-bold text-slate-900 mb-2">
+              <h3 className="font-black text-lg text-slate-900 mb-2">
                 {locale === "en" ? "Recipe Added" : "রেসিপি যোগ করা হয়"}
               </h3>
-              <p className="text-slate-600 text-sm">
+              <p className="text-slate-600 text-sm font-medium leading-relaxed">
                 {locale === "en"
                   ? "Your recipe becomes available to everyone"
                   : "আপনার রেসিপি সবার জন্য উপলব্ধ হয়ে যায়"}

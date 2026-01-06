@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b sticky top-0 z-40">
+      <nav className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center gap-8">
@@ -73,8 +73,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                       href={item.href}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-colors ${
                         isActive
-                          ? "bg-blue-100 text-blue-700"
-                          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                          ? "bg-blue-100"
+                          : "text-gray-600"
                       }`}
                     >
                       <item.icon size={16} />
@@ -88,13 +88,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <div className="flex items-center gap-4">
               <Link
                 href="/"
-                className="text-sm text-gray-600 hover:text-gray-900 font-bold"
+                className="text-sm text-gray-600"
               >
                 View Site
               </Link>
               <button 
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg font-bold text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-red-100"
               >
                 <LogOut size={16} />
                 Logout

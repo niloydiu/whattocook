@@ -60,25 +60,26 @@ export default function RecipeCardApi({
   const totalTime = recipe.prep_time + recipe.cook_time;
   const difficultyColor =
     recipe.difficulty === "Easy"
-      ? "text-emerald-600 bg-emerald-50"
+      ? "text-emerald-600"
       : recipe.difficulty === "Medium"
-      ? "text-amber-600 bg-amber-50"
-      : "text-rose-600 bg-rose-50";
+      ? "text-amber-600"
+      : "text-rose-600";
 
   return (
     <motion.article
       layout
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ y: -4 }}
-      className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col h-full group transition-all duration-300 border border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100/80 transition-all duration-300 group"
     >
       <div className="relative h-56 overflow-hidden">
         <Link href={`/recipes/${recipe.slug}`}>
           <img
             src={recipe.image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         </Link>
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
@@ -102,7 +103,7 @@ export default function RecipeCardApi({
 
         {/* Food Category badge */}
         {recipe.foodCategory && (
-          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md text-slate-900 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">
+          <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-amber-700 shadow-sm">
             {recipe.foodCategory}
           </div>
         )}
@@ -111,25 +112,37 @@ export default function RecipeCardApi({
       <div className="flex-1 p-5 flex flex-col">
         <div className="flex-1">
           <Link href={`/recipes/${recipe.slug}`}>
-            <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors line-clamp-2 leading-tight">
+            <h3 className="text-lg font-bold text-slate-900 hover:text-red-600 transition-colors mb-3">
               {title}
             </h3>
           </Link>
 
           {/* New Stats Bar */}
-          <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-50/50 p-2 rounded-lg border border-slate-100/50">
-            <div className="flex items-center gap-1.5" title={locale === "en" ? "Cooking Time" : "রান্নার সময়"}>
+          <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-500">
+            <div
+              className="flex items-center gap-1.5"
+              title={locale === "en" ? "Cooking Time" : "রান্নার সময়"}
+            >
               <Clock size={12} className="text-red-500" />
               <span>
-                <span className="text-[8px] text-slate-400 mr-0.5">{locale === "en" ? "TIME:" : "সময়:"}</span>
+                <span className="text-[8px] text-slate-400 mr-0.5">
+                  {locale === "en" ? "TIME:" : "সময়:"}
+                </span>
                 {locale === "bn" ? toBengaliNumber(totalTime) : totalTime}m
               </span>
             </div>
-            <div className="flex items-center gap-1.5" title={locale === "en" ? "Servings" : "পরিবেশন"}>
+            <div
+              className="flex items-center gap-1.5"
+              title={locale === "en" ? "Servings" : "পরিবেশন"}
+            >
               <Users size={12} className="text-red-500" />
               <span>
-                <span className="text-[8px] text-slate-400 mr-0.5">{locale === "en" ? "SERVINGS:" : "জন:"}</span>
-                {locale === "bn" ? toBengaliNumber(recipe.servings) : recipe.servings}
+                <span className="text-[8px] text-slate-400 mr-0.5">
+                  {locale === "en" ? "SERVINGS:" : "জন:"}
+                </span>
+                {locale === "bn"
+                  ? toBengaliNumber(recipe.servings)
+                  : recipe.servings}
               </span>
             </div>
             <div className="flex items-center gap-1.5 leading-none">
@@ -139,14 +152,14 @@ export default function RecipeCardApi({
           </div>
 
           <div className="flex items-center gap-2 mb-4">
-             <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md text-[9px] font-black uppercase tracking-tighter">
-                {recipe.category}
-             </span>
-             {recipe.foodCategory && (
-                <span className="px-2 py-0.5 bg-amber-50 text-amber-600 rounded-md text-[9px] font-black uppercase tracking-tighter">
-                   {recipe.foodCategory}
-                </span>
-             )}
+            <span className="px-3 py-1 bg-indigo-50/80 text-indigo-700 rounded-lg text-xs font-bold">
+              {recipe.category}
+            </span>
+            {recipe.foodCategory && (
+              <span className="px-3 py-1 bg-amber-50/80 text-amber-700 rounded-lg text-xs font-bold">
+                {recipe.foodCategory}
+              </span>
+            )}
           </div>
 
           {/* Ingredients preview - minimalist style */}
@@ -156,9 +169,11 @@ export default function RecipeCardApi({
                 {recipe.ingredients.slice(0, 3).map((ing, idx) => (
                   <span
                     key={idx}
-                    className="text-[10px] font-medium px-2 py-0.5 bg-slate-50 text-slate-500 rounded-md border border-slate-100"
+                    className="text-[10px] font-medium px-2 py-0.5 bg-slate-50/80 text-slate-600 rounded-md"
                   >
-                    {locale === "bn" ? ing.ingredient.name_bn : ing.ingredient.name_en}
+                    {locale === "bn"
+                      ? ing.ingredient.name_bn
+                      : ing.ingredient.name_en}
                   </span>
                 ))}
                 {recipe.ingredients.length > 3 && (
@@ -172,11 +187,16 @@ export default function RecipeCardApi({
         </div>
 
         <Link href={`/recipes/${recipe.slug}`} className="mt-auto">
-          <button className="w-full py-3 bg-slate-900 hover:bg-red-600 text-white rounded-xl font-bold text-xs transition-all tracking-widest uppercase active:scale-[0.98]">
+          <button className="w-full py-3.5 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] transition-all duration-200">
             {locale === "en" ? "View Full Recipe" : "পুরো রেসিপি দেখুন"}
           </button>
         </Link>
-        {showReport && <ReportModal recipeId={recipe.id} onClose={() => setShowReport(false)} />}
+        {showReport && (
+          <ReportModal
+            recipeId={recipe.id}
+            onClose={() => setShowReport(false)}
+          />
+        )}
       </div>
     </motion.article>
   );

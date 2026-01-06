@@ -3,8 +3,19 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Edit, Trash2, Eye, Plus, Filter, X, Loader2, ChefHat } from "lucide-react";
+import {
+  Search,
+  Edit,
+  Trash2,
+  Eye,
+  Plus,
+  Filter,
+  X,
+  Loader2,
+  ChefHat,
+} from "lucide-react";
 import AlertModal from "@/components/AlertModal";
+import { API_PATHS } from "@/lib/api-paths";
 
 interface Recipe {
   id: number;
@@ -32,7 +43,7 @@ export default function RecipesManagement() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [bulkDeleting, setBulkDeleting] = useState(false);
   const [showBulkDeleteConfirm, setShowBulkDeleteConfirm] = useState(false);
-  
+
   // Alert Modal State
   const [alertConfig, setAlertConfig] = useState<{
     isOpen: boolean;
@@ -52,7 +63,7 @@ export default function RecipesManagement() {
 
   async function fetchRecipes() {
     try {
-      const res = await fetch("/api/recipes?limit=1000");
+      const res = await fetch(`${API_PATHS.RECIPES}?limit=1000`);
       const data = await res.json();
       setRecipes(data.recipes || []);
     } catch (error) {
@@ -66,11 +77,11 @@ export default function RecipesManagement() {
     setDeleting(true);
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch(`/api/admin/recipes/${id}`, {
+      const res = await fetch(API_PATHS.ADMIN_RECIPE_BY_ID(id), {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (res.ok) {
@@ -112,10 +123,10 @@ export default function RecipesManagement() {
       const res = await fetch("/api/admin/recipes", {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ids: selectedIds })
+        body: JSON.stringify({ ids: selectedIds }),
       });
 
       if (res.ok) {
@@ -154,13 +165,13 @@ export default function RecipesManagement() {
     if (selectedIds.length === filteredRecipes.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(filteredRecipes.map(r => r.id));
+      setSelectedIds(filteredRecipes.map((r) => r.id));
     }
   }
 
   function toggleSelectOne(id: number) {
     if (selectedIds.includes(id)) {
-      setSelectedIds(selectedIds.filter(idx => idx !== id));
+      setSelectedIds(selectedIds.filter((idx) => idx !== id));
     } else {
       setSelectedIds([...selectedIds, id]);
     }
@@ -171,7 +182,8 @@ export default function RecipesManagement() {
       recipe.title_en.toLowerCase().includes(searchQuery.toLowerCase()) ||
       recipe.title_bn.includes(searchQuery);
     const matchesCuisine = !filterCuisine || recipe.cuisine === filterCuisine;
-    const matchesCategory = !filterCategory || recipe.category === filterCategory;
+    const matchesCategory =
+      !filterCategory || recipe.category === filterCategory;
     return matchesSearch && matchesCuisine && matchesCategory;
   });
 
@@ -212,7 +224,10 @@ export default function RecipesManagement() {
       <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              size={20}
+            />
             <input
               type="text"
               placeholder="Search recipes..."
@@ -254,7 +269,10 @@ export default function RecipesManagement() {
           <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
             <input
               type="checkbox"
-              checked={filteredRecipes.length > 0 && selectedIds.length === filteredRecipes.length}
+              checked={
+                filteredRecipes.length > 0 &&
+                selectedIds.length === filteredRecipes.length
+              }
               onChange={toggleSelectAll}
               className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
             />
@@ -273,7 +291,9 @@ export default function RecipesManagement() {
       ) : filteredRecipes.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-2xl border border-gray-200">
           <ChefHat className="mx-auto text-gray-300 mb-4" size={64} />
-          <h3 className="text-xl font-bold text-gray-900 mb-2">No recipes found</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            No recipes found
+          </h3>
           <p className="text-gray-600">Try adjusting your search or filters</p>
         </div>
       ) : (
@@ -284,7 +304,9 @@ export default function RecipesManagement() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`bg-white rounded-2xl p-6 border ${
-                selectedIds.includes(recipe.id) ? "border-blue-500 bg-blue-50/10" : "border-gray-200"
+                selectedIds.includes(recipe.id)
+                  ? "border-blue-500 bg-blue-50/10"
+                  : "border-gray-200"
               } hover:border-gray-300 transition-all shadow-sm hover:shadow-md cursor-pointer`}
               onClick={() => toggleSelectOne(recipe.id)}
             >
@@ -297,7 +319,7 @@ export default function RecipesManagement() {
                     className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                   />
                 </div>
-                
+
                 <img
                   src={recipe.image}
                   alt={recipe.title_en}
@@ -312,7 +334,9 @@ export default function RecipesManagement() {
                   <h3 className="text-xl font-black text-gray-900 mb-1 truncate">
                     {recipe.title_en}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-2 truncate">{recipe.title_bn}</p>
+                  <p className="text-sm text-gray-600 mb-2 truncate">
+                    {recipe.title_bn}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">
                       {recipe.cuisine}
@@ -329,7 +353,10 @@ export default function RecipesManagement() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                <div
+                  className="flex items-center gap-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Link
                     href={`/recipes/${recipe.slug}`}
                     target="_blank"
@@ -376,9 +403,12 @@ export default function RecipesManagement() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
             >
-              <h3 className="text-2xl font-black text-gray-900 mb-4">Delete Recipe?</h3>
+              <h3 className="text-2xl font-black text-gray-900 mb-4">
+                Delete Recipe?
+              </h3>
               <p className="text-gray-600 mb-6">
-                Are you sure you want to delete this recipe? This action cannot be undone.
+                Are you sure you want to delete this recipe? This action cannot
+                be undone.
               </p>
               <div className="flex gap-4">
                 <button
@@ -425,9 +455,12 @@ export default function RecipesManagement() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
             >
-              <h3 className="text-2xl font-black text-gray-900 mb-4">Delete {selectedIds.length} Recipes?</h3>
+              <h3 className="text-2xl font-black text-gray-900 mb-4">
+                Delete {selectedIds.length} Recipes?
+              </h3>
               <p className="text-gray-600 mb-6">
-                Are you sure you want to delete {selectedIds.length} selected recipes? This action cannot be undone.
+                Are you sure you want to delete {selectedIds.length} selected
+                recipes? This action cannot be undone.
               </p>
               <div className="flex gap-4">
                 <button

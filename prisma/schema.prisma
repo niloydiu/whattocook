@@ -17,6 +17,7 @@ model Ingredient {
   updatedAt         DateTime           @updatedAt
   recipeIngredients RecipeIngredient[]
   userAllergies     UserAllergy[]
+  wishlistItems     WishlistIngredient[]
 
   @@index([name_en])
   @@index([name_bn])
@@ -44,6 +45,7 @@ model Recipe {
   steps        RecipeStep[]
   recipeReports RecipeReport[]
   favorites    Favorite[]
+  cookingProgress CookingProgress[]
 
   @@index([slug])
   @@index([title_en])
@@ -165,6 +167,45 @@ model RecipeReport {
   @@index([status])
 }
 
+model CookingProgress {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  recipeId     Int
+  status       String   @default("in_progress") // "in_progress", "completed"
+  completedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  recipe       Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  stepProgress CookingStepProgress[]
+  ingredientProgress CookingIngredientProgress[]
+
+  @@unique([userId, recipeId])
+  @@index([userId])
+}
+
+model CookingStepProgress {
+  id                Int             @id @default(autoincrement())
+  cookingProgressId Int
+  stepNumber        Int
+  isCompleted       Boolean         @default(false)
+  
+  cookingProgress   CookingProgress @relation(fields: [cookingProgressId], references: [id], onDelete: Cascade)
+
+  @@unique([cookingProgressId, stepNumber])
+}
+
+model CookingIngredientProgress {
+  id                Int             @id @default(autoincrement())
+  cookingProgressId Int
+  ingredientId      Int
+  isHave            Boolean         @default(false)
+  
+  cookingProgress   CookingProgress @relation(fields: [cookingProgressId], references: [id], onDelete: Cascade)
+
+  @@unique([cookingProgressId, ingredientId])
+}
+
 // Chat sessions stored per authenticated user. Messages saved as JSON array.
 model ChatSession {
   id        Int      @id @default(autoincrement())
@@ -190,6 +231,20 @@ model Favorite {
 
 // User-declared allergies. Can reference a known Ingredient (ingredientId) or store free-text names.
 model UserAllergy {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  ingredientId Int?     // optional reference to Ingredient
+  name_en      String   // canonical english name (or free-text)
+  name_bn      String?  // optional bengali name
+  createdAt    DateTime @default(now())
+
+  ingredient Ingredient? @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Ingredients user wants to buy or keep track of
+model WishlistIngredient {
   id           Int      @id @default(autoincrement())
   userId       String
   ingredientId Int?     // optional reference to Ingredient

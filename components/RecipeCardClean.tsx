@@ -88,7 +88,9 @@ export default function RecipeCardClean({
 
     return () => {
       mounted = false;
-      try { sub.subscription.unsubscribe(); } catch (e) {}
+      try {
+        sub.subscription.unsubscribe();
+      } catch (e) {}
     };
   }, []);
 
@@ -97,7 +99,7 @@ export default function RecipeCardClean({
       // If not logged in, check local favorites fallback
       try {
         const raw = localStorage.getItem("wtc_local_favorites_v1");
-        const arr = raw ? JSON.parse(raw) as number[] : [];
+        const arr = raw ? (JSON.parse(raw) as number[]) : [];
         setIsFav(arr.includes(Number(recipe.id)));
       } catch (e) {
         setIsFav(false);
@@ -116,17 +118,24 @@ export default function RecipeCardClean({
         const res = await fetch(`/api/user/favorites`, { headers });
         const json = await res.json();
         if (!json.error && Array.isArray(json.favorites)) {
-          const found = json.favorites.find((f: any) => f.recipeId === Number(recipe.id));
+          const found = json.favorites.find(
+            (f: any) => f.recipeId === Number(recipe.id)
+          );
           setIsFav(!!found);
         }
 
         // Sync any local favorites to server (one-time sync)
         const raw = localStorage.getItem("wtc_local_favorites_v1");
-        const localArr = raw ? JSON.parse(raw) as number[] : [];
+        const localArr = raw ? (JSON.parse(raw) as number[]) : [];
         if (Array.isArray(localArr) && localArr.length > 0) {
           for (const rid of localArr) {
             // skip if already favorited on server
-            if (json && Array.isArray(json.favorites) && json.favorites.find((f: any) => f.recipeId === rid)) continue;
+            if (
+              json &&
+              Array.isArray(json.favorites) &&
+              json.favorites.find((f: any) => f.recipeId === rid)
+            )
+              continue;
             await fetch(`/api/user/favorites`, {
               method: "POST",
               headers,
@@ -156,7 +165,9 @@ export default function RecipeCardClean({
         const res = await fetch(`/api/user/allergies`, { headers });
         const json = await res.json();
         if (!json.error && Array.isArray(json.allergies)) {
-          setAllergies(json.allergies.map((a: any) => (a.name_en || "").toLowerCase()));
+          setAllergies(
+            json.allergies.map((a: any) => (a.name_en || "").toLowerCase())
+          );
         }
       } catch (e) {
         // ignore
@@ -200,7 +211,7 @@ export default function RecipeCardClean({
     // Local fallback: toggle in localStorage
     try {
       const raw = localStorage.getItem("wtc_local_favorites_v1");
-      let arr = raw ? JSON.parse(raw) as number[] : [];
+      let arr = raw ? (JSON.parse(raw) as number[]) : [];
       const idn = Number(recipe.id);
       if (!arr) arr = [];
       if (!isFav) {
@@ -226,7 +237,9 @@ export default function RecipeCardClean({
   useEffect(() => {
     try {
       const normalized = recipeIngredients.map((r) => r.toLowerCase().trim());
-      const matches = normalized.filter((ing) => allergies.some((a) => ing.includes(a) || a.includes(ing)));
+      const matches = normalized.filter((ing) =>
+        allergies.some((a) => ing.includes(a) || a.includes(ing))
+      );
       setAllergyMatches(Array.from(new Set(matches)));
     } catch (e) {
       setAllergyMatches([]);
@@ -247,8 +260,9 @@ export default function RecipeCardClean({
     <motion.article
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ y: -4 }}
-      className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col h-full group transition-all duration-300 border border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50 cursor-pointer"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100/80 transition-all duration-300 group"
     >
       <div className="relative h-56 overflow-hidden bg-slate-50">
         {thumbnail ? (
@@ -258,7 +272,7 @@ export default function RecipeCardClean({
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">
+          <div className="w-full h-full bg-slate-100">
             <ChefHat size={48} strokeWidth={1} />
           </div>
         )}
@@ -282,79 +296,122 @@ export default function RecipeCardClean({
         {allergyMatches.length > 0 && (
           <div className="absolute top-4 right-4 z-20">
             <div className="px-3 py-1.5 rounded-full font-black text-[10px] uppercase tracking-wider shadow-lg bg-red-600 text-white">
-              {locale === 'en' ? 'Allergy Alert' : 'অ্যালার্জি সতর্কতা'}
+              {locale === "en" ? "Allergy Alert" : "অ্যালার্জি সতর্কতা"}
             </div>
-            <div className="mt-1 text-xs bg-white/90 text-red-600 rounded p-1 max-w-xs">
-              {locale === 'en' ? 'Contains:' : 'উপাদান:'} {allergyMatches.slice(0,3).join(', ')}
+            <div className="mt-1 text-xs bg-white/90">
+              {locale === "en" ? "Contains:" : "উপাদান:"}{" "}
+              {allergyMatches.slice(0, 3).join(", ")}
             </div>
           </div>
         )}
 
         {/* Play Button Overlay */}
         {recipe.youtubeId && (
-          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/10">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-14 h-14 bg-white text-red-600 rounded-full flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-sm bg-white/90"
+              className="w-16 h-16 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl border-2 border-white/50 cursor-pointer"
               onClick={() => onOpenVideo(recipe.youtubeId!)}
             >
-              <Play fill="currentColor" size={24} className="ml-1" />
+              <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center">
+                <Play fill="currentColor" size={20} className="ml-1 text-white" />
+              </div>
             </motion.div>
           </div>
         )}
       </div>
 
-      <div className="p-5 flex flex-col flex-1" onClick={() => recipe.youtubeId && onOpenVideo(recipe.youtubeId)}>
-        <h3 className="text-lg font-bold text-slate-900 mb-4 line-clamp-2 group-hover:text-red-600 transition-colors leading-tight">
+      <div
+        className="p-5 flex flex-col flex-1"
+        onClick={() => recipe.youtubeId && onOpenVideo(recipe.youtubeId)}
+      >
+        <h3 className="text-lg font-bold text-slate-900 hover:text-red-600 transition-colors mb-3">
           {title}
         </h3>
 
         {/* Stats */}
-        <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50/50 p-2 rounded-lg border border-slate-100/50">
-           <div className="flex items-center gap-1.5" title={locale === "en" ? "Match Count" : "মিলের সংখ্যা"}>
-              <CheckCircle2 size={12} className={pct > 80 ? "text-emerald-500" : "text-amber-500"} />
-              <span>
-                <span className="text-[8px] text-slate-400 mr-0.5">{locale === "en" ? "HAVE:" : "মিল:"}</span>
-                {have}/{total}
+        <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-400">
+          <div
+            className="flex items-center gap-1.5"
+            title={locale === "en" ? "Match Count" : "মিলের সংখ্যা"}
+          >
+            <CheckCircle2
+              size={12}
+              className={pct > 80 ? "text-emerald-500" : "text-amber-500"}
+            />
+            <span>
+              <span className="text-[8px] text-slate-400">
+                {locale === "en" ? "HAVE:" : "মিল:"}
               </span>
-           </div>
-           <div className="flex items-center gap-1">
-             <ChefHat size={12} className="text-red-500" />
-             <span>Youtube</span>
-           </div>
+              {have}/{total}
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            <ChefHat size={12} className="text-red-500" />
+            <span>Youtube</span>
+          </div>
         </div>
 
         {/* Missing Ingredients Snippet */}
         {missing.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-auto mb-4">
             {missing.map((ing, idx) => (
-              <span key={idx} className="text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 bg-slate-50 text-slate-400 rounded-md">
+              <span
+                key={idx}
+                className="text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 bg-slate-50/80 text-slate-600 rounded-md"
+              >
                 +{ing}
               </span>
             ))}
           </div>
         )}
 
-        <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-          <span className="text-[10px] font-black text-red-600 uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">
-            {locale === "en" ? "Watch Video" : "ভিডিও দেখুন"}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-          </span>
-          <div className="flex items-center gap-3">
-            <button onClick={toggleFavorite} className="text-slate-300 hover:text-red-500 transition-colors" title={locale === 'en' ? 'Add to favorites' : 'প্রিয়তে যোগ করুন'} onMouseDown={(e)=>e.stopPropagation()}>
-              {isFav ? <HeartIcon size={16} className="text-red-500" /> : <HeartIcon size={16} className="text-slate-300" />}
-            </button>
-            {recipe.youtubeUrl && (
-               <a 
-                 href={recipe.youtubeUrl} 
-                 target="_blank" 
-                 className="text-slate-300 hover:text-red-500 transition-colors"
-                 onClick={(e) => e.stopPropagation()}
-               >
-                 <ExternalLink size={14} />
-               </a>
-            )}
+        <div className="mt-auto pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-red-600 flex items-center gap-1.5 group-hover:text-red-700 transition-colors">
+              {locale === "en" ? "Watch Video" : "ভিডিও দেখুন"}
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="group-hover:translate-x-1 transition-transform"
+              >
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </span>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={toggleFavorite}
+                className="p-2 rounded-xl hover:bg-red-50 transition-all active:scale-95 border-2 border-transparent hover:border-red-200"
+                title={locale === "en" ? "Add to favorites" : "প্রিয়তে যোগ করুন"}
+                onMouseDown={(e) => e.stopPropagation()}
+              >
+                {isFav ? (
+                  <HeartIcon size={18} className="text-red-600 fill-red-600" />
+                ) : (
+                  <HeartIcon
+                    size={18}
+                    className="text-slate-400 hover:text-red-500 transition-colors"
+                  />
+                )}
+              </button>
+              {recipe.youtubeUrl && (
+                <a
+                  href={recipe.youtubeUrl}
+                  target="_blank"
+                  className="p-2 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition-all active:scale-95 border-2 border-transparent hover:border-red-200"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink size={16} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

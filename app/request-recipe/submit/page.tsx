@@ -129,19 +129,19 @@ export default function SubmitRecipePage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-white rounded-3xl p-12 text-center shadow-2xl max-w-md"
+          className="bg-white rounded-3xl p-12 text-center shadow-2xl border border-slate-100/80 max-w-md"
         >
-          <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
             <Check size={48} className="text-white" />
           </div>
-          <h2 className="text-3xl font-black text-slate-900 mb-4">
+          <h2 className="text-3xl font-black text-slate-900 mb-3">
             {locale === "en" ? "Recipe Submitted!" : "রেসিপি জমা হয়েছে!"}
           </h2>
-          <p className="text-slate-600">
+          <p className="text-slate-600 font-medium">
             {locale === "en"
               ? "Thank you for sharing! We'll review and add it soon."
               : "শেয়ার করার জন্য ধন্যবাদ! আমরা শীঘ্রই পর্যালোচনা করে যোগ করব।"}
@@ -156,23 +156,25 @@ export default function SubmitRecipePage() {
       <div className="max-w-4xl mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-center mb-2 gap-2">
             {[1, 2, 3, 4].map((step) => (
               <div
                 key={step}
-                className={`flex-1 h-2 rounded-full mx-1 transition-all duration-300 ${
-                  step <= currentStep ? "bg-red-600" : "bg-slate-200"
+                className={`flex-1 h-2.5 rounded-full transition-all duration-300 ${
+                  step <= currentStep
+                    ? "bg-gradient-to-r from-red-600 to-orange-600 shadow-md"
+                    : "bg-slate-200"
                 }`}
               />
             ))}
           </div>
-          <p className="text-sm text-slate-600 text-center font-medium">
+          <p className="text-sm text-slate-600 text-center font-bold">
             {locale === "en" ? "Step" : "ধাপ"} {currentStep} {locale === "en" ? "of" : "এর"} {totalSteps}
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+        <div className="bg-white rounded-3xl shadow-2xl border border-slate-100/80 p-8">
           <AnimatePresence mode="wait">
             {/* Step 1: Basic Info */}
             {currentStep === 1 && (
@@ -196,7 +198,7 @@ export default function SubmitRecipePage() {
                         type="text"
                         value={formData.title_en}
                         onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                         placeholder="Chicken Curry"
                       />
                     </div>
@@ -209,7 +211,7 @@ export default function SubmitRecipePage() {
                         type="text"
                         value={formData.title_bn}
                         onChange={(e) => setFormData({ ...formData, title_bn: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                         placeholder="চিকেন কারি"
                       />
                     </div>
@@ -224,7 +226,7 @@ export default function SubmitRecipePage() {
                         type="text"
                         value={formData.cuisine}
                         onChange={(e) => setFormData({ ...formData, cuisine: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                         placeholder="Indian, Bengali, etc."
                       />
                     </div>
@@ -237,7 +239,7 @@ export default function SubmitRecipePage() {
                         type="text"
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                         placeholder="Main Course, Snack, etc."
                       />
                     </div>
@@ -250,7 +252,7 @@ export default function SubmitRecipePage() {
                     <select
                       value={formData.foodCategory}
                       onChange={(e) => setFormData({ ...formData, foodCategory: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                     >
                       {FOOD_CATEGORIES.map((cat) => (
                         <option key={cat.value} value={cat.value}>
@@ -269,7 +271,7 @@ export default function SubmitRecipePage() {
                         type="number"
                         value={formData.prep_time}
                         onChange={(e) => setFormData({ ...formData, prep_time: parseInt(e.target.value) })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       />
                     </div>
 
@@ -281,7 +283,7 @@ export default function SubmitRecipePage() {
                         type="number"
                         value={formData.cook_time}
                         onChange={(e) => setFormData({ ...formData, cook_time: parseInt(e.target.value) })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       />
                     </div>
 
@@ -293,7 +295,7 @@ export default function SubmitRecipePage() {
                         type="number"
                         value={formData.servings}
                         onChange={(e) => setFormData({ ...formData, servings: parseInt(e.target.value) })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       />
                     </div>
 
@@ -304,7 +306,7 @@ export default function SubmitRecipePage() {
                       <select
                         value={formData.difficulty}
                         onChange={(e) => setFormData({ ...formData, difficulty: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       >
                         <option value="Easy">{locale === "en" ? "Easy" : "সহজ"}</option>
                         <option value="Medium">{locale === "en" ? "Medium" : "মাঝারি"}</option>
@@ -355,7 +357,7 @@ export default function SubmitRecipePage() {
                             newIng[index].name_en = e.target.value;
                             setIngredients(newIng);
                           }}
-                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm"
+                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm bg-slate-50 text-slate-700 font-medium transition-all"
                         />
 
                         <input
@@ -367,7 +369,7 @@ export default function SubmitRecipePage() {
                             newIng[index].name_bn = e.target.value;
                             setIngredients(newIng);
                           }}
-                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm"
+                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm bg-slate-50 text-slate-700 font-medium transition-all"
                         />
 
                         <input
@@ -379,7 +381,7 @@ export default function SubmitRecipePage() {
                             newIng[index].quantity = e.target.value;
                             setIngredients(newIng);
                           }}
-                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm"
+                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm bg-slate-50 text-slate-700 font-medium transition-all"
                         />
 
                         <input
@@ -392,7 +394,7 @@ export default function SubmitRecipePage() {
                             newIng[index].unit_bn = e.target.value;
                             setIngredients(newIng);
                           }}
-                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm"
+                          className="px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm bg-slate-50 text-slate-700 font-medium transition-all"
                         />
                       </div>
                     </div>
@@ -401,7 +403,7 @@ export default function SubmitRecipePage() {
 
                 <button
                   onClick={addIngredient}
-                  className="mt-4 flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-xl font-bold hover:bg-red-200 transition-colors"
+                  className="mt-4 flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-red-50 to-orange-50 text-red-600 rounded-xl font-bold hover:from-red-100 hover:to-orange-100 border border-red-200/50 transition-all shadow-sm hover:shadow-md active:scale-95"
                 >
                   <Plus size={20} />
                   {locale === "en" ? "Add Ingredient" : "উপকরণ যোগ করুন"}
@@ -448,7 +450,7 @@ export default function SubmitRecipePage() {
                             setSteps(newSteps);
                           }}
                           rows={2}
-                          className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm resize-none"
+                          className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm resize-none bg-slate-50 text-slate-700 font-medium transition-all"
                         />
 
                         <textarea
@@ -460,7 +462,7 @@ export default function SubmitRecipePage() {
                             setSteps(newSteps);
                           }}
                           rows={2}
-                          className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:outline-none text-sm resize-none"
+                          className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none text-sm resize-none bg-slate-50 text-slate-700 font-medium transition-all"
                         />
                       </div>
                     </div>
@@ -469,7 +471,7 @@ export default function SubmitRecipePage() {
 
                 <button
                   onClick={addStep}
-                  className="mt-4 flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-xl font-bold hover:bg-red-200 transition-colors"
+                  className="mt-4 flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-red-50 to-orange-50 text-red-600 rounded-xl font-bold hover:from-red-100 hover:to-orange-100 border border-red-200/50 transition-all shadow-sm hover:shadow-md active:scale-95"
                 >
                   <Plus size={20} />
                   {locale === "en" ? "Add Step" : "ধাপ যোগ করুন"}
@@ -498,7 +500,7 @@ export default function SubmitRecipePage() {
                       type="text"
                       value={formData.userName}
                       onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       placeholder={locale === "en" ? "John Doe" : "আপনার নাম"}
                     />
                   </div>
@@ -511,7 +513,7 @@ export default function SubmitRecipePage() {
                       type="email"
                       value={formData.userEmail}
                       onChange={(e) => setFormData({ ...formData, userEmail: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
                       placeholder="john@example.com"
                     />
                     <p className="text-xs text-slate-500 mt-2">
@@ -530,7 +532,7 @@ export default function SubmitRecipePage() {
             <button
               onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
               disabled={currentStep === 1}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-slate-100 border-2 border-slate-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
             >
               <ArrowLeft size={20} />
               {locale === "en" ? "Previous" : "পূর্ববর্তী"}
@@ -539,7 +541,7 @@ export default function SubmitRecipePage() {
             {currentStep < totalSteps ? (
               <button
                 onClick={() => setCurrentStep(currentStep + 1)}
-                className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-xl font-bold hover:from-red-700 hover:to-orange-700 transition-all shadow-md hover:shadow-lg active:scale-95"
               >
                 {locale === "en" ? "Next" : "পরবর্তী"}
                 <ArrowRight size={20} />
@@ -548,7 +550,7 @@ export default function SubmitRecipePage() {
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
               >
                 {submitting ? (
                   <>

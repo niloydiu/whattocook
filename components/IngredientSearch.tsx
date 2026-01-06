@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, X, ArrowRight, Sparkles } from "lucide-react";
+import { Search, Plus, X, ArrowRight, Sparkles, ChefHat } from "lucide-react";
 import ingredientsData from "../lib/ingredients.json";
 import {
   useFuzzyIngredientSearch,
   highlightMatch,
   type Ingredient,
 } from "../hooks/useFuzzySearch";
+import { useGlobalScrollCapture } from "./ScrollCaptureProvider";
 
 type Locale = "en" | "bn";
 
@@ -28,6 +29,25 @@ export default function IngredientSearch({
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState<"bottom" | "top">(
+    "top"
+  );
+
+  // Calculate dropdown position based on available space
+  useEffect(() => {
+    if (open && inputRef.current) {
+      const inputRect = inputRef.current.getBoundingClientRect();
+      const spaceAbove = inputRect.top;
+
+      // Prioritize top position, only use bottom if there's not enough space above
+      if (spaceAbove < 200) {
+        setDropdownPosition("bottom");
+      } else {
+        setDropdownPosition("top");
+      }
+    }
+  }, [open, input]);
 
   const ingredients = ingredientsData as Ingredient[];
 
@@ -37,8 +57,13 @@ export default function IngredientSearch({
     threshold: 0.35,
   });
 
-  // Visible count for lazy-loading the suggestion list
   const [visibleCount, setVisibleCount] = useState<number>(20);
+
+  // Use global scroll capture for the dropdown
+  const scrollCaptureRef = useGlobalScrollCapture(
+    "ingredient-search-dropdown",
+    5
+  );
 
   // Filter out already selected ingredients
   const filtered = searchResults.filter((result) => {
@@ -101,193 +126,327 @@ export default function IngredientSearch({
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-2 md:px-0">
-      <div className="glass-effect rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)] border border-white/60">
-        <div className="flex items-center gap-2 md:gap-3 p-1">
-          <div className="relative flex-1 group">
-            <div className="absolute inset-y-0 left-4 md:left-6 flex items-center pointer-events-none text-slate-400 group-focus-within:text-red-500 transition-colors">
-              <Search size={20} className="md:w-6 md:h-6" />
-            </div>
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                setOpen(true);
-              }}
-              onFocus={() => setOpen(true)}
-              onClick={() => setOpen(true)}
-              onBlur={() => setTimeout(() => setOpen(false), 200)}
-              onKeyDown={(e) => e.key === "Enter" && addFromInput()}
-              className="w-full pl-12 md:pl-16 pr-6 md:pr-8 py-4 md:py-6 bg-white/50 rounded-[1.5rem] md:rounded-[2.5rem] outline-none text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-4 focus:ring-red-500/5 transition-all text-lg md:text-xl font-bold"
-              placeholder={
-                locale === "en"
-                  ? "What's in your kitchen?"
-                  : "আপনার রান্নাঘরে কী আছে?"
-              }
-            />
+    <div className="w-full max-w-3xl mx-auto relative z-20">
+      {/* Main Search Container */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="relative"
+      >
+        <div className="glass-effect rounded-[2.5rem] p-2 shadow-[0_25px_80px_-20px_rgba(0,0,0,0.15)] border border-white/60 backdrop-blur-xl">
+          {/* Search Input Section */}
+          <div className="flex items-center gap-3 p-2">
+            <div className="flex-1 relative">
+              <motion.div
+                className="absolute inset-y-0 left-6 flex items-center pointer-events-none"
+                animate={{
+                  color: input ? "#dc2626" : "#94a3b8",
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <Search size={22} />
+              </motion.div>
 
-            <AnimatePresence>
-              {open && filtered.length > 0 && (
-                <motion.ul
-                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                  className="absolute left-0 right-0 bottom-full mb-2 bg-white/98 backdrop-blur-3xl rounded-2xl md:rounded-[2.5rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-white/60 max-h-[250px] md:max-h-[300px] overflow-auto z-[100] py-3 md:py-4 px-2 md:px-3 scrollbar-hidden"
-                  onScroll={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 80) {
-                      setVisibleCount((v) => Math.min(filtered.length, v + 50));
-                    }
-                  }}
-                >
-                  <div className="px-4 py-2 mb-1 md:mb-2 text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 flex items-center justify-between">
-                    <span>
-                      {locale === "en"
-                        ? "Suggested Ingredients"
-                        : "প্রস্তাবিত উপকরণ"}
-                    </span>
-                    {input && (
-                      <span className="flex items-center gap-1 text-red-500">
-                        <Sparkles size={10} /> Fuzzy Match
-                      </span>
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  setOpen(true);
+                }}
+                onFocus={() => setOpen(true)}
+                onClick={() => setOpen(true)}
+                onBlur={() => setTimeout(() => setOpen(false), 200)}
+                onKeyDown={(e) => e.key === "Enter" && addFromInput()}
+                className="w-full pl-16 pr-6 py-4 bg-white/80 backdrop-blur-sm rounded-2xl border-2 border-transparent focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-500/10 outline-none transition-all duration-300 text-base font-medium text-slate-700 placeholder:text-slate-400 placeholder:font-normal"
+                placeholder={
+                  locale === "en"
+                    ? "Add ingredients you have..."
+                    : "আপনার যে উপকরণ আছে যোগ করুন..."
+                }
+              />
+
+              {/* Enhanced Suggestions Dropdown */}
+              <AnimatePresence>
+                {open && filtered.length > 0 && (
+                  <motion.div
+                    ref={dropdownRef}
+                    initial={{
+                      opacity: 0,
+                      y: dropdownPosition === "bottom" ? 15 : -15,
+                      scale: 0.95,
+                    }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{
+                      opacity: 0,
+                      y: dropdownPosition === "bottom" ? 15 : -15,
+                      scale: 0.95,
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className={`absolute left-0 right-0 bg-white rounded-2xl shadow-2xl border border-slate-200/80 max-h-[400px] overflow-hidden z-[9999] backdrop-blur-sm ${
+                      dropdownPosition === "bottom"
+                        ? "top-full mt-3"
+                        : "bottom-full mb-3"
+                    }`}
+                    style={{
+                      boxShadow:
+                        "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+                      filter:
+                        "drop-shadow(0 4px 6px rgb(0 0 0 / 0.07)) drop-shadow(0 10px 15px rgb(0 0 0 / 0.1))",
+                    }}
+                  >
+                    {/* Position indicator arrow */}
+                    <div
+                      className={`absolute left-8 w-0 h-0 border-l-4 border-r-4 border-transparent ${
+                        dropdownPosition === "bottom"
+                          ? "top-0 -mt-2 border-b-4 border-b-white"
+                          : "bottom-0 -mb-2 border-t-4 border-t-white"
+                      }`}
+                      style={{
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))",
+                      }}
+                    />
+                    <div className="p-4 border-b border-slate-100/80 bg-gradient-to-r from-slate-50/50 to-white/50">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                        <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
+                          <Sparkles size={14} className="text-white" />
+                        </div>
+                        <span>
+                          {locale === "en"
+                            ? "Smart Suggestions"
+                            : "স্মার্ট পরামর্শ"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      ref={scrollCaptureRef as React.RefObject<HTMLDivElement>}
+                      className="max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent"
+                      onScroll={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        if (
+                          el.scrollTop + el.clientHeight >=
+                          el.scrollHeight - 80
+                        ) {
+                          setVisibleCount((v) =>
+                            Math.min(filtered.length, v + 50)
+                          );
+                        }
+                      }}
+                    >
+                      {filtered.slice(0, visibleCount).map((result, index) => {
+                        const i = result.ingredient;
+                        const isGuess = result.isClosestGuess;
+
+                        return (
+                          <motion.div
+                            key={i.id}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.02 }}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              onAdd(locale === "en" ? i.name_en : i.name_bn);
+                              setInput("");
+                              setOpen(false);
+                            }}
+                            className={`group px-5 py-4 hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50 active:bg-red-100 transition-all duration-200 cursor-pointer border-b border-slate-50/50 last:border-0 relative ${
+                              isGuess
+                                ? "border-l-4 border-orange-400 bg-gradient-to-r from-orange-50/30 to-transparent"
+                                : ""
+                            }`}
+                          >
+                            <div className="flex items-center gap-4">
+                              <div className="relative">
+                                <div className="w-12 h-12 bg-gradient-to-br from-white to-slate-50 rounded-xl flex items-center justify-center shadow-sm border border-slate-100/50">
+                                  <img
+                                    src={i.img}
+                                    alt=""
+                                    className="w-8 h-8 object-contain"
+                                    onError={(e) => {
+                                      const img = e.currentTarget;
+                                      img.style.display = "none";
+                                      const container = img.parentElement!;
+                                      if (
+                                        !container.querySelector(
+                                          ".fallback-icon"
+                                        )
+                                      ) {
+                                        const fallback =
+                                          document.createElement("div");
+                                        fallback.className =
+                                          "fallback-icon absolute inset-0 bg-gradient-to-br from-red-400 to-orange-400 rounded-xl flex items-center justify-center text-white text-sm font-bold";
+                                        fallback.textContent = i.name_en
+                                          .charAt(0)
+                                          .toUpperCase();
+                                        container.appendChild(fallback);
+                                      }
+                                    }}
+                                  />
+                                </div>
+                                {isGuess && (
+                                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
+                                    <span className="text-white text-xs">
+                                      ★
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-slate-900 font-semibold text-base">
+                                  {locale === "en"
+                                    ? highlightMatch(i.name_en, result.matches)
+                                    : highlightMatch(i.name_bn, result.matches)}
+                                </div>
+                                <div className="text-sm text-slate-500 font-medium">
+                                  {locale === "en" ? i.name_bn : i.name_en}
+                                </div>
+                                {isGuess && (
+                                  <div className="flex items-center gap-1.5 mt-1.5">
+                                    <div className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse"></div>
+                                    <span className="text-xs text-orange-600 font-semibold">
+                                      {locale === "en"
+                                        ? "Closest match"
+                                        : "সবচেয়ে কাছের মিল"}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                              <motion.div
+                                whileHover={{ scale: 1.1, rotate: 90 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center shadow-lg shadow-red-500/30 group-hover:shadow-red-500/50 transition-all duration-200"
+                              >
+                                <Plus size={18} />
+                              </motion.div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+
+                    {filtered.length > visibleCount && (
+                      <div className="px-5 py-3 text-center text-sm text-slate-500 bg-gradient-to-r from-slate-50 to-white border-t border-slate-100/50">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="w-1 h-1 bg-slate-400 rounded-full animate-bounce"></div>
+                          <span className="font-medium">
+                            {locale === "en"
+                              ? "Scroll for more..."
+                              : "আরও দেখতে স্ক্রল করুন..."}
+                          </span>
+                          <div
+                            className="w-1 h-1 bg-slate-400 rounded-full animate-bounce"
+                            style={{ animationDelay: "0.1s" }}
+                          ></div>
+                        </div>
+                      </div>
                     )}
-                  </div>
-                  {filtered.slice(0, visibleCount).map((result) => {
-                    const i = result.ingredient;
-                    const isGuess = result.isClosestGuess;
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
-                    return (
-                      <li
-                        key={i.id}
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          onAdd(locale === "en" ? i.name_en : i.name_bn);
-                          setInput("");
-                          setOpen(false);
-                        }}
-                        className={`px-3 md:px-5 py-3 md:py-4 hover:bg-red-50/80 hover:text-red-600 cursor-pointer text-sm md:text-base font-semibold transition-all flex items-center justify-between group rounded-xl md:rounded-2xl mb-1 ${
-                          isGuess
-                            ? "border border-orange-200/50 bg-orange-50/30"
-                            : ""
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 md:gap-4 flex-1 min-w-0">
-                          <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-50 rounded-lg md:rounded-xl flex items-center justify-center p-1.5 md:p-2 group-hover:bg-white transition-colors shadow-sm shrink-0">
-                            <img
-                              src={i.img}
-                              alt=""
-                              className="w-full h-full object-contain"
-                              onError={(e) =>
-                                (e.currentTarget.style.display = "none")
-                              }
-                            />
-                          </div>
-                          <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-slate-900 group-hover:text-red-600 transition-colors truncate">
-                              {locale === "en"
-                                ? highlightMatch(i.name_en, result.matches)
-                                : highlightMatch(i.name_bn, result.matches)}
-                            </span>
-                            <span className="text-[10px] md:text-xs text-slate-400 font-medium truncate">
-                              {locale === "en" ? i.name_bn : i.name_en}
-                            </span>
-                            {isGuess && (
-                              <span className="text-[8px] md:text-[9px] text-orange-500 font-black uppercase tracking-wider">
-                                Closest Match
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-slate-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0 shrink-0">
-                          <Plus size={14} className="md:w-4 md:h-4" />
-                        </div>
-                      </li>
-                    );
-                  })}
-                  {filtered.length > visibleCount && (
-                    <li className="px-3 md:px-5 py-3 md:py-4 text-center text-sm text-slate-500">
-                      Scrolling loads more ingredients...
-                    </li>
-                  )}
-                </motion.ul>
-              )}
-            </AnimatePresence>
+            {/* Modern Find Button */}
+            <motion.button
+              onClick={onFind}
+              disabled={selected.length === 0}
+              whileHover={{ scale: selected.length > 0 ? 1.05 : 1 }}
+              whileTap={{ scale: selected.length > 0 ? 0.95 : 1 }}
+              className={`px-6 py-4 rounded-2xl font-bold text-base transition-all duration-300 shadow-lg flex items-center gap-3 min-w-[140px] justify-center ${
+                selected.length > 0
+                  ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30 hover:shadow-red-500/40"
+                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
+              }`}
+            >
+              <ChefHat size={20} />
+              <span>{locale === "en" ? "Cook!" : "রান্না!"}</span>
+            </motion.button>
           </div>
 
-          <button
-            onClick={onFind}
-            disabled={selected.length === 0}
-            className="hidden md:flex items-center gap-3 px-8 lg:px-12 py-4 lg:py-6 bg-red-600 hover:bg-red-700 disabled:bg-slate-100 disabled:text-slate-400 text-white rounded-[1.5rem] lg:rounded-[2.5rem] font-black text-lg lg:text-xl transition-all shadow-2xl shadow-red-600/20 active:scale-95 hover:-translate-y-1"
-          >
-            <span>{locale === "en" ? "Find" : "খুঁজুন"}</span>
-            <ArrowRight size={24} />
-          </button>
-        </div>
-
-        <div className="px-4 md:px-6 pb-3">
-          <AnimatePresence mode="popLayout">
+          {/* Selected Ingredients Display */}
+          <AnimatePresence>
             {selected.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 md:mt-5 flex flex-wrap gap-2 md:gap-2.5 pb-2"
+                transition={{ duration: 0.3 }}
+                className="px-4 pb-4"
               >
-                {selected.map((s, i) => (
-                  <motion.span
-                    key={s}
-                    layout
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    className="flex items-center gap-2 md:gap-2.5 bg-white/80 backdrop-blur-sm border border-white/60 px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold text-slate-700 shadow-sm hover:shadow-md hover:border-red-200 transition-all group"
-                  >
-                    <div className="w-5 h-5 md:w-6 md:h-6 bg-slate-50 rounded-lg flex items-center justify-center p-1 group-hover:bg-white transition-colors">
-                      <img
-                        src={getIconForName(s)}
-                        alt=""
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          const img = e.currentTarget;
-                          img.style.display = "none";
-                          const container = img.parentElement!;
-                          // Check if fallback already exists
-                          if (!container.querySelector(".fallback-icon")) {
-                            const fallback = document.createElement("div");
-                            fallback.className =
-                              "fallback-icon w-full h-full bg-gradient-to-br from-red-400 to-orange-400 rounded flex items-center justify-center text-white text-[8px] md:text-[10px] font-black";
-                            fallback.textContent = s.charAt(0).toUpperCase();
-                            container.appendChild(fallback);
-                          }
-                        }}
-                      />
-                    </div>
-                    <span>{s}</span>
-                    <button
-                      onClick={() => onRemove(i)}
-                      className="text-slate-300 hover:text-red-500 transition-colors ml-1"
+                <div className="flex flex-wrap gap-3 mt-4">
+                  {selected.map((s, i) => (
+                    <motion.div
+                      key={s}
+                      layout
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.2 }}
+                      className="group flex items-center gap-3 bg-white/90 backdrop-blur-sm border border-slate-200/60 rounded-2xl px-4 py-3 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-200"
                     >
-                      <X size={14} className="md:w-4 md:h-4" />
-                    </button>
-                  </motion.span>
-                ))}
+                      <div className="w-8 h-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg flex items-center justify-center">
+                        <img
+                          src={getIconForName(s)}
+                          alt=""
+                          className="w-6 h-6 object-contain"
+                          onError={(e) => {
+                            const img = e.currentTarget;
+                            img.style.display = "none";
+                            const container = img.parentElement!;
+                            if (!container.querySelector(".fallback-icon")) {
+                              const fallback = document.createElement("div");
+                              fallback.className =
+                                "fallback-icon w-full h-full bg-gradient-to-br from-red-400 to-orange-400 rounded flex items-center justify-center text-white text-xs font-black";
+                              fallback.textContent = s.charAt(0).toUpperCase();
+                              container.appendChild(fallback);
+                            }
+                          }}
+                        />
+                      </div>
+                      <span className="text-slate-700 font-medium">{s}</span>
+                      <motion.button
+                        onClick={() => onRemove(i)}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="text-slate-400 hover:text-red-500 transition-colors"
+                      >
+                        <X size={16} />
+                      </motion.button>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="mt-6 md:hidden flex justify-center px-2">
-        <button
+      {/* Mobile Find Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="mt-6 md:hidden px-4"
+      >
+        <motion.button
           onClick={onFind}
           disabled={selected.length === 0}
-          className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 disabled:bg-slate-200 text-white rounded-2xl font-black text-base transition-all shadow-xl shadow-red-600/20"
+          whileHover={{ scale: selected.length > 0 ? 1.02 : 1 }}
+          whileTap={{ scale: selected.length > 0 ? 0.98 : 1 }}
+          className={`w-full py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-3 ${
+            selected.length > 0
+              ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30"
+              : "bg-slate-200 text-slate-400 cursor-not-allowed"
+          }`}
         >
-          <span>{locale === "en" ? "Find Recipes" : "রেসিপি খুঁজুন"}</span>
+          <ChefHat size={20} />
+          <span>
+            {locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}
+          </span>
           <ArrowRight size={20} />
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     </div>
   );
 }
