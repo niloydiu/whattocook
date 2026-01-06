@@ -1,12 +1,12 @@
-# WhatToCook - Intelligent Recipe Discovery Platform
+# WhatToCook? — Recipe Discovery Platform by Niloy
 
-A modern, bilingual recipe discovery platform that helps users find recipes based on available ingredients. Built with Next.js 14, TypeScript, Prisma, and PostgreSQL.
+A modern, bilingual recipe discovery platform that helps users find recipes based on available ingredients. Created by Niloy Kumar Mohonta.
 
 ## 🚀 Features
 
 ### For Users
 - **Ingredient-Based Recipe Search**: Find recipes based on ingredients you have at home
-- **Smart Matching Algorithm**: Advanced fuzzy search with phonetic matching for English and বাংলা
+- **Advanced Matching Algorithm**: Sophisticated fuzzy search with phonetic matching for English and বাংলা
 - **Bilingual Support**: Complete support for English and বাংলা languages
 - **Beautiful Modern UI**: Responsive design with smooth animations using Framer Motion
 - **Detailed Recipe Pages**: Complete information with ingredients, steps, timing, and blog content
@@ -17,7 +17,7 @@ A modern, bilingual recipe discovery platform that helps users find recipes base
 - **Comprehensive Dashboard**: Beautiful admin panel with statistics and analytics
 - **Recipe Management**: Full CRUD operations for recipes
 - **Ingredient Management**: Add, edit, delete ingredients with image support
-- **YouTube Import**: AI-powered recipe extraction from YouTube videos
+- **YouTube Import**: Automated recipe extraction from YouTube videos
 - **Bulk Operations**: Import recipes from JSON, manage ingredients in bulk
 - **Real-time Stats**: View recipe counts, categories, cuisines, and more
 

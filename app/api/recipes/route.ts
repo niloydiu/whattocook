@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get("search") || "";
     const cuisine = searchParams.get("cuisine") || "";
     const category = searchParams.get("category") || "";
+    const foodCategory = searchParams.get("foodCategory") || "";
     const difficulty = searchParams.get("difficulty") || "";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "12");
@@ -17,16 +18,41 @@ export async function GET(request: NextRequest) {
     const where: any = {};
 
     if (search) {
-      where.OR = [
-        { title_en: { contains: search, mode: "insensitive" } },
-        { title_bn: { contains: search } },
+      // Enhanced multi-language search with phonetic matching
+      const searchTerm = search.trim();
+      
+      // Build comprehensive OR conditions
+      const searchConditions: any[] = [
+        { title_en: { contains: searchTerm, mode: "insensitive" } },
+        { title_bn: { contains: searchTerm } },
+        { cuisine: { contains: searchTerm, mode: "insensitive" } },
+        { category: { contains: searchTerm, mode: "insensitive" } },
       ];
+
+      // Also search in ingredients
+      searchConditions.push({
+        ingredients: {
+          some: {
+            ingredient: {
+              OR: [
+                { name_en: { contains: searchTerm, mode: "insensitive" } },
+                { name_bn: { contains: searchTerm } },
+                { phonetic: { has: searchTerm.toLowerCase() } },
+              ]
+            }
+          }
+        }
+      });
+
+      where.OR = searchConditions;
     }
 
     if (cuisine) where.cuisine = cuisine;
     if (category) where.category = category;
+    if (foodCategory) where.foodCategory = foodCategory;
     if (difficulty) where.difficulty = difficulty;
 
+    // Main search results
     const [recipes, total] = await Promise.all([
       prisma.recipe.findMany({
         where,
@@ -51,8 +77,38 @@ export async function GET(request: NextRequest) {
       prisma.recipe.count({ where }),
     ]);
 
+    // When a search is performed, also include a small list of "featured" recipes
+    // (fallback: most recent recipes). These will be returned in a separate
+    // `featured` array so the client can render them at the bottom of results.
+    let featured: any[] = [];
+    if (search) {
+      // Fetch 3 most recent recipes as featured (excluding any already in results)
+      const fetched = await prisma.recipe.findMany({
+        take: 3,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          slug: true,
+          title_en: true,
+          title_bn: true,
+          image: true,
+          cuisine: true,
+          category: true,
+          difficulty: true,
+          prep_time: true,
+          cook_time: true,
+          servings: true,
+          createdAt: true,
+        },
+      });
+
+      const existingIds = new Set(recipes.map((r: any) => r.id));
+      featured = fetched.filter((f) => !existingIds.has(f.id));
+    }
+
     return NextResponse.json({
       recipes,
+      featured,
       pagination: {
         page,
         limit,
@@ -82,6 +138,7 @@ export async function POST(request: NextRequest) {
       youtube_url,
       cuisine,
       category,
+      foodCategory,
       difficulty,
       prep_time,
       cook_time,
@@ -165,6 +222,7 @@ export async function POST(request: NextRequest) {
         youtube_url: youtube_url ?? "",
         cuisine: cuisine ?? "",
         category: category ?? "",
+        foodCategory: foodCategory ?? "Savory",
         difficulty: difficulty ?? "",
         prep_time: prep_time ?? 0,
         cook_time: cook_time ?? 0,

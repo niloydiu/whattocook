@@ -11,6 +11,7 @@ export async function GET(
   const shouldImport = searchParams.get("import") === "true";
 
   try {
+    // If importing, skip metadata extraction and go straight to import
     if (shouldImport) {
       const result = await importRecipeFromYoutube(videoId);
       return NextResponse.json(result);

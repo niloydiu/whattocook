@@ -3,7 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, ChefHat, Apple, Youtube, Users, LogOut, Loader2 } from "lucide-react";
+import { Home, ChefHat, Apple, Youtube, Users, LogOut, Loader2, ClipboardList } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -47,6 +47,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     { href: "/admin", label: "Dashboard", icon: Home },
     { href: "/admin/recipes", label: "Recipes", icon: ChefHat },
     { href: "/admin/ingredients", label: "Ingredients", icon: Apple },
+    { href: "/admin/recipe-requests", label: "Requests", icon: ClipboardList },
     { href: "/admin/import", label: "Import", icon: Youtube },
     { href: "/admin/users", label: "Users", icon: Users },
   ];

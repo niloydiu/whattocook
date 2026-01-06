@@ -78,6 +78,7 @@ export async function PUT(
         youtube_id: data.youtube_id,
         cuisine: data.cuisine,
         category: data.category,
+        foodCategory: data.foodCategory,
         difficulty: data.difficulty,
         prep_time: data.prep_time,
         cook_time: data.cook_time,

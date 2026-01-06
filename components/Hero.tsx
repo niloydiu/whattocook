@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ChefHat, Sparkles } from "lucide-react";
+import { ChefHat } from "lucide-react";
 import IngredientSearch from "./IngredientSearch";
 
 type Locale = "en" | "bn";
@@ -53,20 +53,6 @@ export default function Hero({
       </div>
 
       <div className="max-w-5xl mx-auto px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-600 text-sm font-medium mb-6 border border-red-100"
-        >
-          <Sparkles size={14} />
-          <span>
-            {locale === "en"
-              ? "AI-Powered Recipe Matching"
-              : "এআই-চালিত রেসিপি ম্যাচিং"}
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,8 +78,8 @@ export default function Hero({
           className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed px-4"
         >
           {locale === "en"
-            ? "Turn your pantry ingredients into delicious meals. Just type what you have and let our AI find the perfect recipe for you."
-            : "আপনার রান্নাঘরের উপকরণ দিয়ে তৈরি করুন সুস্বাদু খাবার। আপনার যা আছে তা লিখুন এবং আমাদের এআই আপনার জন্য সেরা রেসিপি খুঁজে দেবে।"}
+            ? "Turn your pantry ingredients into delicious meals. Just type what you have and find the perfect recipe for you instantly."
+            : "আপনার রান্নাঘরের উপকরণ দিয়ে তৈরি করুন সুস্বাদু খাবার। আপনার যা আছে তা লিখুন এবং মুহূর্তেই আপনার জন্য সেরা রেসিপি খুঁজে নিন।"}
         </motion.p>
 
         <motion.div
