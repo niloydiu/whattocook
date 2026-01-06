@@ -3,6 +3,7 @@
 import { YoutubeTranscript } from "youtube-transcript";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import prisma from "@/lib/prisma";
+import findOrCreateIngredient from "@/lib/findOrCreateIngredient";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
@@ -87,15 +88,94 @@ export async function importRecipeFromYoutube(videoId: string) {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response
-      .text()
-      .replace(/```json|```/g, "")
-      .trim();
+    let text = await response.text();
 
-    console.log("[Import] Gemini response received");
-    console.log("[Import] Parsing JSON...");
-    
-    const recipeData = JSON.parse(text);
+    // Normalize common markdown/code fences and markdown links
+    try {
+      // Replace markdown links like [label](url) with the URL if the URL looks like https?
+      text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, "$2");
+      // Remove ```json or ``` fences
+      text = text.replace(/```json|```/gi, "");
+      text = text.trim();
+    } catch (e) {
+      console.warn("[Import] Warning normalizing Gemini text:", e);
+    }
+
+    console.log("[Import] Gemini response received: length=", text.length);
+    console.log("[Import] Attempting to parse JSON from response...");
+
+    let recipeData: any;
+    try {
+      recipeData = JSON.parse(text);
+    } catch (err) {
+      // Attempt to extract the first JSON object substring as a fallback
+      const firstBrace = text.indexOf("{");
+      const lastBrace = text.lastIndexOf("}");
+      if (firstBrace >= 0 && lastBrace > firstBrace) {
+        const candidate = text.substring(firstBrace, lastBrace + 1);
+        try {
+          recipeData = JSON.parse(candidate);
+        } catch (err2) {
+          console.error("[Import] Failed to parse extracted JSON candidate:", err2);
+          throw new Error("Failed to parse JSON from Gemini response");
+        }
+      } else {
+        console.error("[Import] No JSON object found in Gemini response");
+        throw new Error("No JSON found in Gemini response");
+      }
+    }
+
+    // Ensure youtube_id and youtube_url are canonical and valid
+    const YT_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+    function extractYouTubeId(urlOrId: string | undefined) {
+      if (!urlOrId) return null;
+      const s = String(urlOrId).trim();
+      if (YT_ID_RE.test(s)) return s;
+      // try common url patterns
+      const patterns = [
+        /v=([A-Za-z0-9_-]{11})/, // standard
+        /youtu\.be\/([A-Za-z0-9_-]{11})/, // short
+        /embed\/([A-Za-z0-9_-]{11})/,
+      ];
+      for (const p of patterns) {
+        const m = s.match(p);
+        if (m) return m[1];
+      }
+      return null;
+    }
+
+    let youtubeId = extractYouTubeId(recipeData.youtube_id || recipeData.youtube_url || recipeData.youtube || "");
+    if (!youtubeId && recipeData.image) {
+      // Try to extract id from image urls like .../vi/ID/...
+      const m = String(recipeData.image).match(/vi\/(?:([A-Za-z0-9_-]{11}))/);
+      if (m) youtubeId = m[1];
+    }
+
+    if (youtubeId) {
+      recipeData.youtube_id = youtubeId;
+      recipeData.youtube_url = `https://www.youtube.com/watch?v=${youtubeId}`;
+      // Always construct canonical thumbnail from the id
+      recipeData.image = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+      recipeData.thumbnailAlternatives = [
+        `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`,
+        `https://img.youtube.com/vi/${youtubeId}/mqdefault.jpg`,
+        `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg`,
+        `https://img.youtube.com/vi/${youtubeId}/0.jpg`,
+      ];
+      recipeData.validation = recipeData.validation ?? {};
+      recipeData.validation.youtube_id_valid = true;
+      recipeData.validation.youtube_url_valid = true;
+      recipeData.validation.image_url_valid_format = true;
+    } else {
+      // No valid id found — clear fields and mark validation
+      recipeData.youtube_id = "";
+      recipeData.youtube_url = "";
+      recipeData.validation = recipeData.validation ?? {};
+      recipeData.validation.youtube_id_valid = false;
+      recipeData.validation.youtube_url_valid = false;
+      recipeData.validation.image_url_valid_format = false;
+      // keep any newIngredients notes so human can review
+    }
     console.log(`[Import] Recipe parsed: ${recipeData.title_en}`);
 
     // 3. Check if recipe already exists by YouTube video ID
@@ -130,38 +210,25 @@ export async function importRecipeFromYoutube(videoId: string) {
         cook_time: recipeData.cook_time,
         servings: recipeData.servings,
         ingredients: {
-          create: await Promise.all(recipeData.ingredients.map(async (ing: any) => {
-            // Try to find existing ingredient
-            let ingredient = await prisma.ingredient.findFirst({
-              where: {
-                OR: [
-                  { name_en: { equals: ing.name_en, mode: "insensitive" } },
-                  { name_bn: { equals: ing.name_bn } }
-                ]
-              }
-            });
-
-            // If not found, create it
-            if (!ingredient) {
-              ingredient = await prisma.ingredient.create({
-                data: {
-                  name_en: ing.name_en,
-                  name_bn: ing.name_bn,
-                  img: "",
-                  phonetic: []
-                }
+          create: await Promise.all(
+            recipeData.ingredients.map(async (ing: any) => {
+              const ingredient = await findOrCreateIngredient({
+                name_en: ing.name_en,
+                name_bn: ing.name_bn,
+                img: "",
+                phonetic: [],
               });
-            }
 
-            return {
-              ingredient_id: ingredient.id,
-              quantity: ing.quantity,
-              unit_en: ing.unit_en,
-              unit_bn: ing.unit_bn,
-              notes_en: ing.notes_en,
-              notes_bn: ing.notes_bn
-            };
-          }))
+              return {
+                ingredient_id: ingredient.id,
+                quantity: ing.quantity,
+                unit_en: ing.unit_en,
+                unit_bn: ing.unit_bn,
+                notes_en: ing.notes_en,
+                notes_bn: ing.notes_bn,
+              };
+            })
+          ),
         },
         steps: {
           create: recipeData.steps.map((s: any) => ({

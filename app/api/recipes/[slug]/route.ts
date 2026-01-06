@@ -99,14 +99,15 @@ export async function PUT(
           });
           if (!found) {
             if (createMissing) {
-              const created = await prisma.ingredient.create({
-                data: {
+              // use centralized helper to avoid duplicates
+              const created = await import("@/lib/findOrCreateIngredient").then(
+                (m) => m.default({
                   name_en: it.name_en ?? it.name_bn ?? "",
                   name_bn: it.name_bn ?? it.name_en ?? "",
                   img: it.img ?? "",
                   phonetic: [],
-                },
-              });
+                })
+              );
               resolvedIngredients.push({ ingredientId: created.id, meta: it });
             } else {
               missing.push(it.name_en ?? it.name_bn ?? "unknown");

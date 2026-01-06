@@ -389,11 +389,17 @@ export default function RecipePage() {
                     key={ing.id}
                     className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <img
-                      src={ing.ingredient.img}
-                      alt={ing.ingredient.name_en}
-                      className="w-12 h-12 rounded-lg object-cover"
-                    />
+                    {ing.ingredient.img && ing.ingredient.img.trim() !== "" ? (
+                      <img
+                        src={ing.ingredient.img}
+                        alt={ing.ingredient.name_en}
+                        className="w-12 h-12 rounded-lg object-cover"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400">
+                        <ChefHat size={18} />
+                      </div>
+                    )}
                     <div className="flex-1">
                       <p className="font-bold text-slate-900">
                         {locale === "bn"

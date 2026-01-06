@@ -1,14 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma";
 
-const prisma = new PrismaClient({
-  log: ["error", "warn", "info"],
-});
-
-async function deleteAllRecipes() {
-  console.log("🗑️  Starting to delete all recipe data...\n");
+async function main() {
+  console.log("🗑️  Starting to delete all recipe data...");
+  console.log("Connecting using DATABASE_URL:",
+    process.env.DATABASE_URL ? process.env.DATABASE_URL.slice(0, 60) + "..." : "(none)");
 
   try {
-    // Get count before deletion
     const recipeCount = await prisma.recipe.count();
     const ingredientLinkCount = await prisma.recipeIngredient.count();
     const stepCount = await prisma.recipeStep.count();
@@ -25,14 +22,11 @@ async function deleteAllRecipes() {
       return;
     }
 
-    // Delete all recipes (cascade will handle related data)
     console.log("🔄 Deleting all recipes and related data...");
     const result = await prisma.recipe.deleteMany({});
 
     console.log(`\n✅ Successfully deleted ${result.count} recipes!`);
-    console.log("   - All recipe ingredients, steps, and blog content were also deleted (cascade).\n");
 
-    // Verify deletion
     const remainingRecipes = await prisma.recipe.count();
     const remainingIngredientLinks = await prisma.recipeIngredient.count();
     const remainingSteps = await prisma.recipeStep.count();
@@ -49,7 +43,6 @@ async function deleteAllRecipes() {
     } else {
       console.warn("⚠️  Warning: Some data might still remain. Please check manually.");
     }
-
   } catch (error) {
     console.error("❌ Error deleting recipes:", error);
     throw error;
@@ -58,8 +51,7 @@ async function deleteAllRecipes() {
   }
 }
 
-// Run the deletion
-deleteAllRecipes()
+main()
   .then(() => {
     console.log("\n✨ Script completed successfully.");
     process.exit(0);
