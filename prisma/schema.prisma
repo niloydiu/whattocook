@@ -41,6 +41,7 @@ model Recipe {
   blogContent  RecipeBlogContent?
   ingredients  RecipeIngredient[]
   steps        RecipeStep[]
+  recipeReports RecipeReport[]
 
   @@index([slug])
   @@index([title_en])
@@ -143,4 +144,21 @@ model RecipeRequest {
   @@index([status])
   @@index([requestType])
   @@index([createdAt])
+}
+
+model RecipeReport {
+  id             Int      @id @default(autoincrement())
+  recipe_id      Int
+  reporter_name  String?
+  reporter_email String?
+  reason         String
+  details        String?
+  status         String   @default("open") // open, reviewed, closed
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  recipe Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+
+  @@index([recipe_id])
+  @@index([status])
 }

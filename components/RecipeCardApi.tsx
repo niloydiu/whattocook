@@ -4,6 +4,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Play, Clock, Users, ChefHat } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import ReportModal from "./ReportModal";
 
 type Locale = "en" | "bn";
 
@@ -53,6 +55,7 @@ export default function RecipeCardApi({
   recipe: ApiRecipe;
   locale?: Locale;
 }) {
+  const [showReport, setShowReport] = useState(false);
   const title = locale === "bn" ? recipe.title_bn : recipe.title_en;
   const totalTime = recipe.prep_time + recipe.cook_time;
   const difficultyColor =
@@ -168,11 +171,17 @@ export default function RecipeCardApi({
         )}
 
         {/* View Recipe Button */}
-        <Link href={`/recipes/${recipe.slug}`}>
-          <button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-black text-sm transition-all shadow-lg shadow-red-600/20 hover:shadow-red-600/30 active:scale-95">
-            {locale === "en" ? "View Recipe" : "রেসিপি দেখুন"}
+        <div className="flex gap-3">
+          <Link href={`/recipes/${recipe.slug}`}>
+            <button className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-black text-sm transition-all shadow-lg shadow-red-600/20 hover:shadow-red-600/30 active:scale-95">
+              {locale === "en" ? "View Recipe" : "রেসিপি দেখুন"}
+            </button>
+          </Link>
+          <button onClick={() => setShowReport(true)} className="px-4 py-3 bg-white border rounded-xl text-sm font-bold">
+            Report
           </button>
-        </Link>
+        </div>
+        {showReport && <ReportModal recipeId={recipe.id} onClose={() => setShowReport(false)} />}
       </div>
     </motion.article>
   );

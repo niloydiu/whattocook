@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ReportModal from "@/components/ReportModal";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -103,6 +104,7 @@ export default function RecipePage() {
   const [error, setError] = useState<string | null>(null);
   const [locale, setLocale] = useState<"en" | "bn">("en");
   const [showVideo, setShowVideo] = useState(false);
+  const [showReport, setShowReport] = useState(false);
   const [videoStats, setVideoStats] = useState<{
     duration: string;
     viewCount: string;
@@ -351,8 +353,15 @@ export default function RecipePage() {
                 {locale === "en" ? "Watch on YouTube" : "ইউটিউবে দেখুন"}
               </a>
             )}
+            <div className="mt-4">
+              <button onClick={() => setShowReport(true)} className="px-4 py-2 bg-white border rounded-lg font-bold">Report</button>
+            </div>
           </div>
         </motion.div>
+
+        {showReport && (
+          <ReportModal recipeId={recipe.id} onClose={() => setShowReport(false)} />
+        )}
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Ingredients */}

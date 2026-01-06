@@ -48,6 +48,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     { href: "/admin/recipes", label: "Recipes", icon: ChefHat },
     { href: "/admin/ingredients", label: "Ingredients", icon: Apple },
     { href: "/admin/recipe-requests", label: "Requests", icon: ClipboardList },
+    { href: "/admin/recipe-reports", label: "Reports", icon: ClipboardList },
     { href: "/admin/import", label: "Import", icon: Youtube },
     { href: "/admin/users", label: "Users", icon: Users },
   ];
