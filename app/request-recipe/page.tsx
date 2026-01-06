@@ -47,20 +47,20 @@ export default function RequestRecipePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600 rounded-full mb-6 shadow-lg shadow-red-600/30">
-            <ChefHat size={40} className="text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-full mb-4 sm:mb-6 shadow-lg shadow-red-600/30">
+            <ChefHat size={32} className="sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 px-4">
             {locale === "en" ? "Request a Recipe" : "রেসিপি অনুরোধ করুন"}
           </h1>
-          <p className="text-lg text-slate-600">
+          <p className="text-base sm:text-lg text-slate-600 mt-3 px-4 max-w-3xl mx-auto">
             {locale === "en"
               ? "Can't find what you're looking for? Submit a recipe, request one based on your ingredients, or tell us what you'd like to see."
               : "যা খুঁজছেন তা পাচ্ছেন না? একটি রেসিপি জমা দিন, আপনার উপকরণ দিয়ে একটি চাই, অথবা আপনি কী দেখতে চান তা আমাদের জানান।"}
@@ -68,7 +68,7 @@ export default function RequestRecipePage() {
         </motion.div>
 
         {/* Request Type Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {requestTypes.map((type, index) => (
             <motion.div
               key={type.href}
@@ -77,24 +77,24 @@ export default function RequestRecipePage() {
               transition={{ delay: index * 0.1 }}
             >
               <Link href={type.href}>
-                <div className="group relative h-full bg-white/80 backdrop-blur-sm rounded-3xl p-8 border-2 border-slate-100 shadow-lg hover:shadow-xl transition-all">
+                <div className="group relative h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 border-slate-100 shadow-lg hover:shadow-xl transition-all">
                   {/* Gradient Background */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${type.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-3xl`}
+                    className={`absolute inset-0 bg-gradient-to-br ${type.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl sm:rounded-3xl`}
                   />
 
                   {/* Icon */}
                   <div
-                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${type.color} mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                    className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${type.color} mb-4 sm:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <type.icon size={32} className="text-white" />
+                    <type.icon size={28} className="sm:w-8 sm:h-8 text-white" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-2xl font-black text-slate-900 mb-3">
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-2 sm:mb-3">
                     {type.title}
                   </h3>
-                  <p className="text-slate-600 font-medium leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
                     {type.description}
                   </p>
 
@@ -128,12 +128,12 @@ export default function RequestRecipePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="mt-16 bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border-2 border-slate-100 shadow-lg"
+          className="mt-12 sm:mt-16 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 border-2 border-slate-100 shadow-lg"
         >
-          <h2 className="text-3xl font-black text-slate-900 mb-8">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-6 sm:mb-8">
             {locale === "en" ? "How It Works" : "এটি কীভাবে কাজ করে"}
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="p-6 rounded-2xl hover:bg-slate-50/50 transition-colors">
               <div className="w-12 h-12 bg-gradient-to-br from-red-100 to-red-200 rounded-xl flex items-center justify-center text-red-600 font-black mb-4 shadow-sm">
                 1

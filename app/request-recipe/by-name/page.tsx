@@ -53,15 +53,15 @@ export default function RequestByNamePage() {
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-white rounded-3xl p-12 text-center shadow-2xl border border-slate-100/80 max-w-md"
+          className="bg-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center shadow-2xl border border-slate-100/80 max-w-md w-full"
         >
-          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <Check size={48} className="text-white" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg">
+            <Check className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
           </div>
-          <h2 className="text-3xl font-black text-slate-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2 sm:mb-3">
             {locale === "en" ? "Request Submitted!" : "অনুরোধ জমা হয়েছে!"}
           </h2>
-          <p className="text-slate-600 font-medium">
+          <p className="text-sm sm:text-base text-slate-600 font-medium">
             {locale === "en"
               ? "We'll add this recipe to our collection soon!"
               : "আমরা শীঘ্রই এই রেসিপি আমাদের সংগ্রহে যোগ করব!"}
@@ -72,63 +72,63 @@ export default function RequestByNamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-6 sm:py-8 lg:py-12 px-4 sm:px-6">
       <div className="max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
         >
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Search size={32} className="text-white" />
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <Search className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 px-4">
             {locale === "en" ? "Request a Specific Recipe" : "নির্দিষ্ট রেসিপি অনুরোধ করুন"}
           </h1>
-          <p className="text-slate-600">
+          <p className="text-sm sm:text-base text-slate-600 mt-2 px-4">
             {locale === "en"
               ? "Tell us the recipe name or share a YouTube video"
               : "আমাদের রেসিপির নাম বলুন বা একটি ইউটিউব ভিডিও শেয়ার করুন"}
           </p>
         </motion.div>
 
-        <div className="bg-white rounded-3xl shadow-xl border border-slate-100/80 p-8">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-100/80 p-4 sm:p-6 lg:p-8">
           {/* Request Type Toggle */}
-          <div className="flex gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
             <button
               onClick={() => setRequestType("name")}
-              className={`flex-1 py-4 px-6 rounded-xl font-bold transition-all active:scale-95 ${
+              className={`flex-1 py-3 sm:py-4 px-4 sm:px-6 rounded-xl font-bold text-sm sm:text-base transition-all active:scale-95 ${
                 requestType === "name"
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                   : "bg-slate-100 hover:bg-slate-200 border border-slate-200"
               }`}
             >
               <div className="flex items-center justify-center gap-2">
-                <Search size={20} />
-                {locale === "en" ? "By Recipe Name" : "রেসিপির নাম দ্বারা"}
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="truncate">{locale === "en" ? "By Recipe Name" : "রেসিপির নাম দ্বারা"}</span>
               </div>
             </button>
 
             <button
               onClick={() => setRequestType("youtube")}
-              className={`flex-1 py-4 px-6 rounded-xl font-bold transition-all active:scale-95 ${
+              className={`flex-1 py-3 sm:py-4 px-4 sm:px-6 rounded-xl font-bold text-sm sm:text-base transition-all active:scale-95 ${
                 requestType === "youtube"
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                   : "bg-slate-100 hover:bg-slate-200 border border-slate-200"
               }`}
             >
               <div className="flex items-center justify-center gap-2">
-                <Youtube size={20} />
-                {locale === "en" ? "By YouTube Video" : "ইউটিউব ভিডিও দ্বারা"}
+                <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="truncate">{locale === "en" ? "By YouTube Video" : "ইউটিউব ভিডিও দ্বারা"}</span>
               </div>
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             {/* Main Input */}
             {requestType === "name" ? (
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1 sm:mb-2">
                   {locale === "en" ? "Recipe Name" : "রেসিপির নাম"}
                 </label>
                 <input
@@ -136,17 +136,17 @@ export default function RequestByNamePage() {
                   value={recipeName}
                   onChange={(e) => setRecipeName(e.target.value)}
                   required
-                  className="w-full px-4 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-lg bg-slate-50 text-slate-700 font-medium"
+                  className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-base sm:text-lg bg-slate-50 text-slate-700 font-medium"
                   placeholder={
                     locale === "en"
-                      ? "e.g., Chicken Biryani, Prawn Malai Curry"
-                      : "যেমন, চিকেন বিরিয়ানি, চিংড়ি মালাইকারি"
+                      ? "e.g., Chicken Biryani"
+                      : "যেমন, চিকেন বিরিয়ানি"
                   }
                 />
               </div>
             ) : (
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1 sm:mb-2">
                   {locale === "en" ? "YouTube Video URL" : "ইউটিউব ভিডিও URL"}
                 </label>
                 <input
@@ -154,10 +154,10 @@ export default function RequestByNamePage() {
                   value={youtubeUrl}
                   onChange={(e) => setYoutubeUrl(e.target.value)}
                   required
-                  className="w-full px-4 py-4 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all text-lg bg-slate-50 text-slate-700 font-medium"
+                  className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none transition-all text-base sm:text-lg bg-slate-50 text-slate-700 font-medium"
                   placeholder="https://www.youtube.com/watch?v=..."
                 />
-                <p className="text-xs text-slate-500 mt-2">
+                <p className="text-xs text-slate-500 mt-1 sm:mt-2">
                   {locale === "en"
                     ? "Paste the full YouTube video URL"
                     : "সম্পূর্ণ ইউটিউব ভিডিও URL পেস্ট করুন"}
@@ -167,14 +167,14 @@ export default function RequestByNamePage() {
 
             {/* Additional Notes */}
             <div>
-              <label className="block text-sm font-bold text-slate-700">
+              <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1 sm:mb-2">
                 {locale === "en" ? "Additional Notes (Optional)" : "অতিরিক্ত মন্তব্য (ঐচ্ছিক)"}
               </label>
               <textarea
                 value={additionalNotes}
                 onChange={(e) => setAdditionalNotes(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
+                rows={3}
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-sm sm:text-base bg-slate-50 text-slate-700 font-medium"
                 placeholder={
                   locale === "en"
                     ? "Any specific variations or preferences..."
@@ -184,32 +184,32 @@ export default function RequestByNamePage() {
             </div>
 
             {/* Contact Info */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-sm font-bold text-slate-700">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1 sm:mb-2">
                   {locale === "en" ? "Your Name (Optional)" : "আপনার নাম (ঐচ্ছিক)"}
                 </label>
                 <input
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-sm sm:text-base bg-slate-50 text-slate-700 font-medium"
                   placeholder={locale === "en" ? "Your name" : "আপনার নাম"}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-slate-700">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1 sm:mb-2">
                   {locale === "en" ? "Your Email (Optional)" : "আপনার ইমেইল (ঐচ্ছিক)"}
                 </label>
                 <input
                   type="email"
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all bg-slate-50 text-slate-700 font-medium"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-sm sm:text-base bg-slate-50 text-slate-700 font-medium"
                   placeholder="your@email.com"
                 />
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 mt-1">
                   {locale === "en"
                     ? "We'll notify you when it's added"
                     : "যুক্ত হলে আমরা আপনাকে জানাব"}
@@ -221,16 +221,16 @@ export default function RequestByNamePage() {
             <button
               type="submit"
               disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl active:scale-95"
+                className="w-full flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-sm sm:text-base hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl active:scale-95"
             >
               {submitting ? (
                 <>
-                  <Loader2 size={20} className="animate-spin" />
+                  <Loader2 className="w-5 h-5 animate-spin" />
                   {locale === "en" ? "Submitting..." : "জমা দেওয়া হচ্ছে..."}
                 </>
               ) : (
                 <>
-                  <Check size={20} />
+                  <Check className="w-5 h-5" />
                   {locale === "en" ? "Submit Request" : "অনুরোধ জমা দিন"}
                 </>
               )}
@@ -243,12 +243,12 @@ export default function RequestByNamePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mt-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100/50 shadow-sm"
+          className="mt-4 sm:mt-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100/50 shadow-sm"
         >
-          <h3 className="font-bold text-blue-900">
+          <h3 className="font-bold text-sm sm:text-base text-blue-900 mb-2 sm:mb-3">
             {locale === "en" ? "How it works" : "এটি কিভাবে কাজ করে"}
           </h3>
-          <ul className="space-y-2 text-sm text-blue-800">
+          <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-blue-800">
             <li className="flex items-start gap-2">
               <span className="text-blue-500 font-bold">1.</span>
               <span>
