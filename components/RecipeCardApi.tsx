@@ -15,6 +15,7 @@ type ApiRecipe = {
   image: string;
   cuisine: string;
   category: string;
+  foodCategory?: string;
   difficulty: string;
   prep_time: number;
   cook_time: number;
@@ -92,6 +93,13 @@ export default function RecipeCardApi({
         >
           {recipe.difficulty}
         </div>
+
+        {/* Food Category badge */}
+        {recipe.foodCategory && (
+          <div className="absolute bottom-4 left-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+            {recipe.foodCategory}
+          </div>
+        )}
 
         {/* Cuisine/Category */}
         <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">

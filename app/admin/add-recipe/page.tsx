@@ -67,6 +67,7 @@ export default function AddRecipePage() {
     youtube_id: "xxxxx",
     cuisine: "Indian",
     category: "Main Course",
+    foodCategory: "Savory",
     difficulty: "Medium",
     prep_time: 20,
     cook_time: 40,

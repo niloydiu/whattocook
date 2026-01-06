@@ -22,30 +22,32 @@ model Ingredient {
 }
 
 model Recipe {
-  id          Int                @id @default(autoincrement())
-  slug        String             @unique
-  title_en    String
-  title_bn    String
-  image       String
-  youtube_url String
-  youtube_id  String?
-  cuisine     String
-  category    String
-  difficulty  String
-  prep_time   Int
-  cook_time   Int
-  servings    Int
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-  blogContent RecipeBlogContent?
-  ingredients RecipeIngredient[]
-  steps       RecipeStep[]
+  id           Int                @id @default(autoincrement())
+  slug         String             @unique
+  title_en     String
+  title_bn     String
+  image        String
+  youtube_url  String
+  youtube_id   String?
+  cuisine      String
+  category     String
+  foodCategory String?            @default("Savory") // Dessert, Spicy, Sour, Sweet, Savory, Drinks, Appetizer, Soup, Salad
+  difficulty   String
+  prep_time    Int
+  cook_time    Int
+  servings     Int
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  blogContent  RecipeBlogContent?
+  ingredients  RecipeIngredient[]
+  steps        RecipeStep[]
 
   @@index([slug])
   @@index([title_en])
   @@index([title_bn])
   @@index([cuisine])
   @@index([category])
+  @@index([foodCategory])
 }
 
 model RecipeIngredient {
@@ -107,4 +109,38 @@ model Admin {
   updatedAt     DateTime @updatedAt
 
   @@index([username])
+}
+
+model RecipeRequest {
+  id             Int      @id @default(autoincrement())
+  requestType    String   // "submit", "by-ingredients", "by-name"
+  status         String   @default("pending") // pending, approved, rejected
+  
+  // Common fields
+  title          String?
+  description    String?
+  userEmail      String?
+  userName       String?
+  
+  // For submit type
+  recipeData     Json?    // Full recipe JSON
+  
+  // For by-ingredients type
+  ingredients    String[] // Array of ingredient names
+  
+  // For by-name type
+  recipeName     String?
+  youtubeUrl     String?
+  
+  // Admin fields
+  adminNotes     String?
+  processedBy    String?
+  processedAt    DateTime?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([status])
+  @@index([requestType])
+  @@index([createdAt])
 }
