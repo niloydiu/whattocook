@@ -349,9 +349,12 @@ export default function Page() {
               <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-lg md:rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-600/20 group-hover:rotate-12 transition-transform duration-300">
                 <ChefHat size={20} className="md:w-6 md:h-6" />
               </div>
-              <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900">
-                whatto<span className="text-red-600">Cook?</span>
-              </span>
+              <div className="flex flex-col leading-tight">
+                <div className="text-[11px] md:text-xs text-slate-500 font-medium -mb-0.5">AI-powered recipes</div>
+                <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900">
+                  whatto<span className="text-red-600">Cook?</span>
+                </span>
+              </div>
             </Link>
           </div>
 

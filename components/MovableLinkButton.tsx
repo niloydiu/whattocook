@@ -81,7 +81,10 @@ export default function MovableLinkButton({
 
   const onClick = () => {
     try {
-      if (typeof window !== "undefined") window.open(href, "_blank", "noopener,noreferrer");
+      if (typeof window !== "undefined") {
+        const w = window.open(href, "_blank");
+        if (w) try { w.opener = null; } catch (e) {}
+      }
     } catch (_) {}
   };
 
