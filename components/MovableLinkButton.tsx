@@ -195,7 +195,9 @@ export default function MovableLinkButton({
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
-              <span className="text-sm font-bold text-slate-800">Quick Links</span>
+              <span className="text-sm font-bold text-slate-800">
+                Quick Links
+              </span>
               <button
                 onClick={() => setIsOpen(false)}
                 className="w-7 h-7 flex items-center justify-center hover:bg-slate-100 rounded-lg transition-colors"
@@ -296,7 +298,7 @@ export default function MovableLinkButton({
               localStorage.setItem(key, JSON.stringify(finalPos));
             } catch (e) {}
           }
-          
+
           setTimeout(() => setIsDragging(false), 100);
         }}
         className="fixed z-[9999] select-none"
@@ -314,7 +316,7 @@ export default function MovableLinkButton({
         >
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-tr from-red-500/10 via-orange-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+
           {/* Content */}
           <div className="relative z-10">
             <img
@@ -322,7 +324,7 @@ export default function MovableLinkButton({
               alt="Menu"
               draggable={false}
               className="w-7 h-7 object-contain drop-shadow-md pointer-events-none select-none"
-              style={{ userSelect: 'none' }}
+              style={{ userSelect: "none" }}
             />
           </div>
         </motion.button>

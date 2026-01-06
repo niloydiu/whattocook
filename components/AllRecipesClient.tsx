@@ -300,7 +300,9 @@ export default function AllRecipesClient({
             <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg">
               <ChefHat size={20} />
             </div>
-            <span className="font-black text-2xl text-slate-900">whattoCook?</span>
+            <span className="font-black text-2xl text-slate-900">
+              whattoCook?
+            </span>
           </div>
           <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">
             © 2026 whattoCook.{" "}

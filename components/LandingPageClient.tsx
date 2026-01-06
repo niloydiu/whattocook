@@ -544,40 +544,42 @@ export default function LandingPageClient({
         )}
       </AnimatePresence>
 
-          <footer className="py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg">
-                  <ChefHat size={20} />
-                </div>
-                <span className="font-black text-2xl text-slate-900">whattoCook?</span>
-              </div>
-              <p className="text-slate-700 text-base font-semibold mb-3">
-                Created by{" "}
-                <a
-                  href="https://niloykm.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-red-600 hover:text-red-700 font-bold transition-colors"
-                >
-                  Niloy Kumar Mohonta
-                </a>
-              </p>
-              <p className="text-slate-600 text-sm mb-6 font-medium">
-                Contact:{" "}
-                <a
-                  href="mailto:niloykumarmohonta@gmail.com"
-                  className="hover:text-red-600 transition-colors font-semibold"
-                >
-                  niloykumarmohonta@gmail.com
-                </a>
-              </p>
-              <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">
-                © 2026 whattoCook.{" "}
-                {locale === "en" ? "All rights reserved." : "সর্বস্বত্ব সংরক্ষিত।"}
-              </p>
+      <footer className="py-16 border-t border-slate-200/60 bg-gradient-to-b from-white/80 to-slate-50/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+              <ChefHat size={20} />
             </div>
-          </footer>
+            <span className="font-black text-2xl text-slate-900">
+              whattoCook?
+            </span>
+          </div>
+          <p className="text-slate-700 text-base font-semibold mb-3">
+            Created by{" "}
+            <a
+              href="https://niloykm.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-600 hover:text-red-700 font-bold transition-colors"
+            >
+              Niloy Kumar Mohonta
+            </a>
+          </p>
+          <p className="text-slate-600 text-sm mb-6 font-medium">
+            Contact:{" "}
+            <a
+              href="mailto:niloykumarmohonta@gmail.com"
+              className="hover:text-red-600 transition-colors font-semibold"
+            >
+              niloykumarmohonta@gmail.com
+            </a>
+          </p>
+          <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">
+            © 2026 whattoCook.{" "}
+            {locale === "en" ? "All rights reserved." : "সর্বস্বত্ব সংরক্ষিত।"}
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
