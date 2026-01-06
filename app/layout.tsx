@@ -26,7 +26,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         {/* Use the user-provided PNG favicon from /public for consistent rendering */}
         <link rel="icon" href="/favicon.png" sizes="any" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon-16.png" sizes="16x16" />
+        <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+        <link rel="icon" href="/favicon-48.png" sizes="48x48" />
+        <link rel="icon" href="/favicon-96.png" sizes="96x96" />
+        <link rel="icon" href="/favicon-256.png" sizes="256x256" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body suppressHydrationWarning={true}>
         <LanguageProvider>{children}</LanguageProvider>
