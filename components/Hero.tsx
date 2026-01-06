@@ -59,8 +59,8 @@ export default function Hero({
           transition={{ duration: 0.5, delay: 0.05 }}
           className="mb-4"
         >
-          <div className="inline-block px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm border border-white/30 text-xs md:text-sm text-red-600 font-semibold tracking-wide shadow-sm">
-            AI‑powered recipe application
+          <div className="inline-block px-3 py-1 rounded-xl bg-gradient-to-r from-red-50/80 to-orange-50/80 backdrop-blur-sm border border-white/20 text-xs md:text-sm text-red-600 font-semibold tracking-wide shadow-sm">
+            Smart recipes — crafted by AI
           </div>
         </motion.div>
         <motion.h1

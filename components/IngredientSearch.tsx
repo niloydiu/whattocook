@@ -33,9 +33,12 @@ export default function IngredientSearch({
 
   // Use fuzzy search instead of basic filtering
   const searchResults = useFuzzyIngredientSearch(ingredients, input, {
-    limit: 8,
+    limit: 50,
     threshold: 0.35,
   });
+
+  // Visible count for lazy-loading the suggestion list
+  const [visibleCount, setVisibleCount] = useState<number>(20);
 
   // Filter out already selected ingredients
   const filtered = searchResults.filter((result) => {
@@ -130,7 +133,13 @@ export default function IngredientSearch({
                   initial={{ opacity: 0, y: 15, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                  className="absolute left-0 right-0 bottom-full mb-2 bg-white/98 backdrop-blur-3xl rounded-2xl md:rounded-[2.5rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-white/60 max-h-[250px] md:max-h-[300px] overflow-auto z-[100] py-3 md:py-4 px-2 md:px-3 custom-scrollbar"
+                  className="absolute left-0 right-0 bottom-full mb-2 bg-white/98 backdrop-blur-3xl rounded-2xl md:rounded-[2.5rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-white/60 max-h-[250px] md:max-h-[300px] overflow-auto z-[100] py-3 md:py-4 px-2 md:px-3 scrollbar-hidden"
+                  onScroll={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 80) {
+                      setVisibleCount((v) => Math.min(filtered.length, v + 50));
+                    }
+                  }}
                 >
                   <div className="px-4 py-2 mb-1 md:mb-2 text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 flex items-center justify-between">
                     <span>
@@ -144,7 +153,7 @@ export default function IngredientSearch({
                       </span>
                     )}
                   </div>
-                  {filtered.map((result) => {
+                  {filtered.slice(0, visibleCount).map((result) => {
                     const i = result.ingredient;
                     const isGuess = result.isClosestGuess;
 
@@ -196,6 +205,11 @@ export default function IngredientSearch({
                       </li>
                     );
                   })}
+                  {filtered.length > visibleCount && (
+                    <li className="px-3 md:px-5 py-3 md:py-4 text-center text-sm text-slate-500">
+                      Scrolling loads more ingredients...
+                    </li>
+                  )}
                 </motion.ul>
               )}
             </AnimatePresence>
