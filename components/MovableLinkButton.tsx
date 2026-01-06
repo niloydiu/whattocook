@@ -55,6 +55,8 @@ export default function MovableLinkButton({
           if (posRef.current) localStorage.setItem(key, JSON.stringify(posRef.current));
         } catch (e) {}
       }
+      // restore z-index after interaction
+      setZIndexState(9999);
     };
     if (typeof window !== "undefined") {
       window.addEventListener("pointermove", onMove);
@@ -72,7 +74,6 @@ export default function MovableLinkButton({
     const el = ref.current;
     if (!el) return;
     e.stopPropagation();
-    e.preventDefault();
     setZIndexState(99999);
     const rect = el.getBoundingClientRect();
     dragRef.current.dragging = true;
@@ -87,10 +88,15 @@ export default function MovableLinkButton({
   const onClick = () => {
     try {
       if (typeof window !== "undefined") {
-        const w = window.open(href, "_blank", "noopener,noreferrer");
-        if (w) {
-          try { w.opener = null; } catch (e) {}
-        }
+        // Use an anchor element to ensure `rel` can be set for noopener
+        const a = document.createElement("a");
+        a.href = href;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
       }
     } catch (_) {}
   };

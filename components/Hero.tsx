@@ -53,6 +53,16 @@ export default function Hero({
       </div>
 
       <div className="max-w-5xl mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="mb-4"
+        >
+          <div className="inline-block px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm border border-white/30 text-xs md:text-sm text-red-600 font-semibold tracking-wide shadow-sm">
+            AI‑powered recipe application
+          </div>
+        </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
