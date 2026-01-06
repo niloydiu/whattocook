@@ -1,6 +1,10 @@
 import "./globals.css";
 import { ReactNode } from "react";
 import { LanguageProvider } from "../components/LanguageProvider";
+import ChatBot from "../components/ChatBot";
+import AuthButton from "../components/AuthButton";
+import MovableLinkButton from "../components/MovableLinkButton";
+import FloatingNav from "../components/FloatingNav";
 
 export const metadata = {
   title: "whattoCook? — Discover what to cook today",
@@ -36,7 +40,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="theme-color" content="#0b6ed8" />
       </head>
       <body suppressHydrationWarning={true}>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <FloatingNav />
+          <AuthButton />
+          <MovableLinkButton />
+          {children}
+          <ChatBot />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ChefHat,
   Languages,
-  Github,
   Youtube,
   X,
   Settings,
@@ -345,16 +344,15 @@ export default function Page() {
       {/* Navigation */}
       <nav className="sticky top-0 z-[110] glass-effect border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
-          <div
-            className="flex items-center gap-2 md:gap-3 cursor-pointer group"
-            onClick={() => setShowAdmin(!showAdmin)}
-          >
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-lg md:rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-600/20 group-hover:rotate-12 transition-transform duration-300">
-              <ChefHat size={20} className="md:w-6 md:h-6" />
-            </div>
-            <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900">
-              whatto<span className="text-red-600">Cook?</span>
-            </span>
+          <div className="flex items-center gap-2 md:gap-3 group">
+            <Link href="/" className="flex items-center gap-2 md:gap-3 cursor-pointer">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-lg md:rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-600/20 group-hover:rotate-12 transition-transform duration-300">
+                <ChefHat size={20} className="md:w-6 md:h-6" />
+              </div>
+              <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900">
+                whatto<span className="text-red-600">Cook?</span>
+              </span>
+            </Link>
           </div>
 
           <div className="flex items-center gap-3 md:gap-6">
@@ -470,13 +468,7 @@ export default function Page() {
                 বাংলা
               </button>
             </div>
-            <a
-              href="https://github.com/niloydiu"
-              target="_blank"
-              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-slate-900 text-white hover:bg-red-600 transition-colors shadow-lg shadow-slate-900/10"
-            >
-              <Github size={18} className="md:w-5 md:h-5" />
-            </a>
+            
           </div>
         </div>
       </nav>
@@ -760,36 +752,53 @@ export default function Page() {
                   </p>
                 </div>
                 
-                {/* Category Filter Chips */}
-                <div className="flex flex-wrap gap-2 max-w-2xl">
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      selectedCategory === null
-                        ? "bg-slate-900 text-white shadow-lg"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
-                    }`}
-                  >
-                    {locale === "en" ? "All" : "সব"}
-                  </button>
-                  {categoryStats.map((cat) => (
+                {/* Category Filter - desktop chips + mobile select */}
+                <div className="flex items-center gap-3 max-w-2xl w-full">
+                  <div className="hidden md:flex gap-2 overflow-x-auto py-1 scrollbar-hidden">
                     <button
-                      key={cat.name}
-                      onClick={() => setSelectedCategory(cat.name)}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                        selectedCategory === cat.name
-                          ? "bg-red-600 text-white shadow-lg shadow-red-600/20"
+                      onClick={() => setSelectedCategory(null)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                        selectedCategory === null
+                          ? "bg-slate-900 text-white shadow-lg"
                           : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
                       }`}
                     >
-                      <span>{cat.name}</span>
-                      <span className={`px-1.5 py-0.5 rounded-md text-[10px] ${
-                        selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
-                      }`}>
-                        {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
-                      </span>
+                      {locale === "en" ? "All" : "সব"}
                     </button>
-                  ))}
+                    {categoryStats.map((cat) => (
+                      <button
+                        key={cat.name}
+                        onClick={() => setSelectedCategory(cat.name)}
+                        className={`whitespace-nowrap px-3 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
+                          selectedCategory === cat.name
+                            ? "bg-red-600 text-white shadow-md"
+                            : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
+                        }`}
+                      >
+                        <span className="capitalize">{cat.name}</span>
+                        <span className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
+                          selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
+                        }`}>
+                          {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="md:hidden w-full">
+                    <select
+                      value={selectedCategory ?? ""}
+                      onChange={(e) => setSelectedCategory(e.target.value || null)}
+                      className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-white text-sm"
+                    >
+                      <option value="">{locale === "en" ? "All" : "সব"}</option>
+                      {categoryStats.map((cat) => (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name} ({locale === "en" ? cat.count : toBengaliNumber(cat.count)})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {debouncedSearchQuery && (
@@ -852,36 +861,53 @@ export default function Page() {
                   </p>
                 </div>
 
-                {/* Category Filter Chips */}
-                <div className="flex flex-wrap gap-2 max-w-2xl">
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      selectedCategory === null
-                        ? "bg-slate-900 text-white shadow-lg"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
-                    }`}
-                  >
-                    {locale === "en" ? "All" : "সব"}
-                  </button>
-                  {categoryStats.map((cat) => (
+                {/* Category Filter - desktop chips + mobile select */}
+                <div className="flex items-center gap-3 max-w-2xl w-full">
+                  <div className="hidden md:flex gap-2 overflow-x-auto py-1 scrollbar-hidden">
                     <button
-                      key={cat.name}
-                      onClick={() => setSelectedCategory(cat.name)}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                        selectedCategory === cat.name
-                          ? "bg-red-600 text-white shadow-lg shadow-red-600/20"
+                      onClick={() => setSelectedCategory(null)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                        selectedCategory === null
+                          ? "bg-slate-900 text-white shadow-lg"
                           : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
                       }`}
                     >
-                      <span>{cat.name}</span>
-                      <span className={`px-1.5 py-0.5 rounded-md text-[10px] ${
-                        selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
-                      }`}>
-                        {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
-                      </span>
+                      {locale === "en" ? "All" : "সব"}
                     </button>
-                  ))}
+                    {categoryStats.map((cat) => (
+                      <button
+                        key={cat.name}
+                        onClick={() => setSelectedCategory(cat.name)}
+                        className={`whitespace-nowrap px-3 py-2 rounded-full text-xs font-semibold transition-all flex items-center gap-2 ${
+                          selectedCategory === cat.name
+                            ? "bg-red-600 text-white shadow-md"
+                            : "bg-white text-slate-600 border border-slate-200 hover:border-red-200 hover:text-red-600"
+                        }`}
+                      >
+                        <span className="capitalize">{cat.name}</span>
+                        <span className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
+                          selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
+                        }`}>
+                          {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="md:hidden w-full">
+                    <select
+                      value={selectedCategory ?? ""}
+                      onChange={(e) => setSelectedCategory(e.target.value || null)}
+                      className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-white text-sm"
+                    >
+                      <option value="">{locale === "en" ? "All" : "সব"}</option>
+                      {categoryStats.map((cat) => (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name} ({locale === "en" ? cat.count : toBengaliNumber(cat.count)})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {debouncedSearchQuery && (

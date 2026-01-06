@@ -23,7 +23,7 @@ export async function importRecipeFromYoutube(videoId: string) {
 
     // 2. Call Gemini to process transcript
     console.log("[Import] Calling Gemini AI...");
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Using 1.5 flash for better quota
+    const model = genAI.getGenerativeModel({ model: "models/gemini-flash-latest" });
 
     // Get existing ingredients to help Gemini match them
     const existingIngredients = await prisma.ingredient.findMany({

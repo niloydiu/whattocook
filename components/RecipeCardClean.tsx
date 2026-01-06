@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Play,
@@ -9,6 +9,8 @@ import {
   AlertCircle,
   ChefHat,
 } from "lucide-react";
+import { Heart as HeartIcon } from "lucide-react";
+import supabase from "@/lib/supabaseClient";
 import ingredientsData from "../lib/ingredients.json";
 
 type Locale = "en" | "bn";
@@ -64,6 +66,156 @@ export default function RecipeCardClean({
   onOpenVideo: (id: string) => void;
   pantry?: string[];
 }) {
+  const [user, setUser] = useState<any>(null);
+  const [isFav, setIsFav] = useState(false);
+  const [allergies, setAllergies] = useState<string[]>([]);
+  const [allergyMatches, setAllergyMatches] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!supabase) return;
+    let mounted = true;
+    (async () => {
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (!mounted) return;
+        setUser((data as any)?.session?.user ?? null);
+      } catch (e) {}
+    })();
+
+    const sub = supabase.auth.onAuthStateChange((_e: string, session: any) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      mounted = false;
+      try { sub.subscription.unsubscribe(); } catch (e) {}
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!user || !user.id) {
+      // If not logged in, check local favorites fallback
+      try {
+        const raw = localStorage.getItem("wtc_local_favorites_v1");
+        const arr = raw ? JSON.parse(raw) as number[] : [];
+        setIsFav(arr.includes(Number(recipe.id)));
+      } catch (e) {
+        setIsFav(false);
+      }
+      return;
+    }
+
+    (async () => {
+      try {
+        const { data: sessionResp } = await supabase.auth.getSession();
+        const token = (sessionResp as any)?.session?.access_token;
+        const headers: any = { "Content-Type": "application/json" };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+
+        // Fetch server favorites
+        const res = await fetch(`/api/user/favorites`, { headers });
+        const json = await res.json();
+        if (!json.error && Array.isArray(json.favorites)) {
+          const found = json.favorites.find((f: any) => f.recipeId === Number(recipe.id));
+          setIsFav(!!found);
+        }
+
+        // Sync any local favorites to server (one-time sync)
+        const raw = localStorage.getItem("wtc_local_favorites_v1");
+        const localArr = raw ? JSON.parse(raw) as number[] : [];
+        if (Array.isArray(localArr) && localArr.length > 0) {
+          for (const rid of localArr) {
+            // skip if already favorited on server
+            if (json && Array.isArray(json.favorites) && json.favorites.find((f: any) => f.recipeId === rid)) continue;
+            await fetch(`/api/user/favorites`, {
+              method: "POST",
+              headers,
+              body: JSON.stringify({ recipeId: Number(rid) }),
+            }).catch(() => null);
+          }
+          // optionally clear local favorites after sync
+          localStorage.removeItem("wtc_local_favorites_v1");
+        }
+      } catch (e) {
+        // ignore
+      }
+    })();
+
+    // load allergies only from server when user is logged in
+    (async () => {
+      try {
+        if (!user || !user.id) {
+          setAllergies([]);
+          return;
+        }
+
+        const { data: sessionResp } = await supabase.auth.getSession();
+        const token = (sessionResp as any)?.session?.access_token;
+        const headers: any = { "Content-Type": "application/json" };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+        const res = await fetch(`/api/user/allergies`, { headers });
+        const json = await res.json();
+        if (!json.error && Array.isArray(json.allergies)) {
+          setAllergies(json.allergies.map((a: any) => (a.name_en || "").toLowerCase()));
+        }
+      } catch (e) {
+        // ignore
+      }
+    })();
+  }, [user, recipe.id]);
+
+  const toggleFavorite = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // If user is present and supabase configured, call server API. Otherwise use localStorage fallback.
+    if (user && user.id && supabase) {
+      try {
+        const { data: sessionResp } = await supabase.auth.getSession();
+        const token = (sessionResp as any)?.session?.access_token;
+        const headers: any = { "Content-Type": "application/json" };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+
+        if (!isFav) {
+          const res = await fetch(`/api/user/favorites`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({ recipeId: Number(recipe.id) }),
+          });
+          const json = await res.json();
+          if (!json.error) setIsFav(true);
+        } else {
+          const res = await fetch(`/api/user/favorites`, {
+            method: "DELETE",
+            headers,
+            body: JSON.stringify({ recipeId: Number(recipe.id) }),
+          });
+          const json = await res.json();
+          if (!json.error) setIsFav(false);
+        }
+      } catch (e) {
+        console.warn("favorite action failed", e);
+      }
+      return;
+    }
+
+    // Local fallback: toggle in localStorage
+    try {
+      const raw = localStorage.getItem("wtc_local_favorites_v1");
+      let arr = raw ? JSON.parse(raw) as number[] : [];
+      const idn = Number(recipe.id);
+      if (!arr) arr = [];
+      if (!isFav) {
+        if (!arr.includes(idn)) arr.push(idn);
+        setIsFav(true);
+      } else {
+        arr = arr.filter((x) => x !== idn);
+        setIsFav(false);
+      }
+      localStorage.setItem("wtc_local_favorites_v1", JSON.stringify(arr));
+      // show transient notice? left to UI
+    } catch (e) {
+      console.warn("local favorite action failed", e);
+    }
+  };
   const title = recipe.title[locale] || recipe.title.en;
   const thumbnail = recipe.youtubeId
     ? getYoutubeThumbnail(recipe.youtubeId)
@@ -71,6 +223,15 @@ export default function RecipeCardClean({
   const pct = Math.round(matchPercent * 100);
 
   const recipeIngredients = recipe.ingredients[locale];
+  useEffect(() => {
+    try {
+      const normalized = recipeIngredients.map((r) => r.toLowerCase().trim());
+      const matches = normalized.filter((ing) => allergies.some((a) => ing.includes(a) || a.includes(ing)));
+      setAllergyMatches(Array.from(new Set(matches)));
+    } catch (e) {
+      setAllergyMatches([]);
+    }
+  }, [allergies, recipeIngredients]);
   const missing = recipeIngredients
     .filter((ing) => {
       const normalizedIng = ing.toLowerCase().trim();
@@ -116,6 +277,18 @@ export default function RecipeCardClean({
             {pct}% {locale === "en" ? "Match" : "মিল"}
           </div>
         </div>
+
+        {/* Allergy badge */}
+        {allergyMatches.length > 0 && (
+          <div className="absolute top-4 right-4 z-20">
+            <div className="px-3 py-1.5 rounded-full font-black text-[10px] uppercase tracking-wider shadow-lg bg-red-600 text-white">
+              {locale === 'en' ? 'Allergy Alert' : 'অ্যালার্জি সতর্কতা'}
+            </div>
+            <div className="mt-1 text-xs bg-white/90 text-red-600 rounded p-1 max-w-xs">
+              {locale === 'en' ? 'Contains:' : 'উপাদান:'} {allergyMatches.slice(0,3).join(', ')}
+            </div>
+          </div>
+        )}
 
         {/* Play Button Overlay */}
         {recipe.youtubeId && (
@@ -168,16 +341,21 @@ export default function RecipeCardClean({
             {locale === "en" ? "Watch Video" : "ভিডিও দেখুন"}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
           </span>
-          {recipe.youtubeUrl && (
-             <a 
-               href={recipe.youtubeUrl} 
-               target="_blank" 
-               className="text-slate-300 hover:text-red-500 transition-colors"
-               onClick={(e) => e.stopPropagation()}
-             >
-               <ExternalLink size={14} />
-             </a>
-          )}
+          <div className="flex items-center gap-3">
+            <button onClick={toggleFavorite} className="text-slate-300 hover:text-red-500 transition-colors" title={locale === 'en' ? 'Add to favorites' : 'প্রিয়তে যোগ করুন'} onMouseDown={(e)=>e.stopPropagation()}>
+              {isFav ? <HeartIcon size={16} className="text-red-500" /> : <HeartIcon size={16} className="text-slate-300" />}
+            </button>
+            {recipe.youtubeUrl && (
+               <a 
+                 href={recipe.youtubeUrl} 
+                 target="_blank" 
+                 className="text-slate-300 hover:text-red-500 transition-colors"
+                 onClick={(e) => e.stopPropagation()}
+               >
+                 <ExternalLink size={14} />
+               </a>
+            )}
+          </div>
         </div>
       </div>
     </motion.article>

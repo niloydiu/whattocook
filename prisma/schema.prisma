@@ -16,6 +16,7 @@ model Ingredient {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   recipeIngredients RecipeIngredient[]
+  userAllergies     UserAllergy[]
 
   @@index([name_en])
   @@index([name_bn])
@@ -42,6 +43,7 @@ model Recipe {
   ingredients  RecipeIngredient[]
   steps        RecipeStep[]
   recipeReports RecipeReport[]
+  favorites    Favorite[]
 
   @@index([slug])
   @@index([title_en])
@@ -161,4 +163,41 @@ model RecipeReport {
 
   @@index([recipe_id])
   @@index([status])
+}
+
+// Chat sessions stored per authenticated user. Messages saved as JSON array.
+model ChatSession {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  messages  Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  recipeId  Int
+  createdAt DateTime @default(now())
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
+  @@index([userId])
+}
+
+// User-declared allergies. Can reference a known Ingredient (ingredientId) or store free-text names.
+model UserAllergy {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  ingredientId Int?     // optional reference to Ingredient
+  name_en      String   // canonical english name (or free-text)
+  name_bn      String?  // optional bengali name
+  createdAt    DateTime @default(now())
+
+  ingredient Ingredient? @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
