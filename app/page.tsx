@@ -140,15 +140,9 @@ export default function Page() {
         // Detect simple food category tokens in the query and send as `foodCategory`.
         // e.g. "chicken dessert" => search=chicken&foodCategory=Dessert
         const FOOD_CATEGORIES = [
-          "savory",
-          "sweet",
-          "spicy",
-          "sour",
-          "dessert",
-          "drinks",
-          "appetizer",
-          "soup",
-          "salad",
+          "savory", "sweet", "spicy", "sour",
+          "dessert", "drinks", "appetizer", "soup", "salad",
+          "breakfast", "lunch", "dinner", "snack", "main course", "side dish"
         ];
 
         let freeText = debouncedSearchQuery?.trim() || "";

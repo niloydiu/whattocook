@@ -21,6 +21,9 @@ export default function IngredientsManagement() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [showAdd, setShowAdd] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [bulkDeleting, setBulkDeleting] = useState(false);
+  const [showBulkDeleteConfirm, setShowBulkDeleteConfirm] = useState(false);
   const [formData, setFormData] = useState({
     name_en: "",
     name_bn: "",
@@ -146,6 +149,60 @@ export default function IngredientsManagement() {
     }
   }
 
+  async function handleBulkDelete() {
+    if (selectedIds.length === 0) return;
+    setBulkDeleting(true);
+    try {
+      const token = localStorage.getItem("adminToken");
+      const res = await fetch("/api/admin/ingredients", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ids: selectedIds })
+      });
+
+      if (res.ok) {
+        setIngredients(ingredients.filter((i) => !selectedIds.includes(i.id)));
+        setSelectedIds([]);
+        setShowBulkDeleteConfirm(false);
+        setAlertConfig({
+          isOpen: true,
+          title: "Success",
+          message: `${selectedIds.length} ingredients deleted successfully!`,
+          type: "success",
+        });
+      } else {
+        const data = await res.json();
+        setAlertConfig({
+          isOpen: true,
+          title: "Error",
+          message: data.error || "Failed to delete ingredients",
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Bulk delete error:", error);
+      setAlertConfig({
+        isOpen: true,
+        title: "Error",
+        message: "Something went wrong while deleting the ingredients.",
+        type: "error",
+      });
+    } finally {
+      setBulkDeleting(false);
+    }
+  }
+
+  function toggleSelectOne(id: number) {
+    if (selectedIds.includes(id)) {
+      setSelectedIds(selectedIds.filter(idx => idx !== id));
+    } else {
+      setSelectedIds([...selectedIds, id]);
+    }
+  }
+
   function startEdit(ingredient: Ingredient) {
     setEditId(ingredient.id);
     setFormData({
@@ -172,21 +229,32 @@ export default function IngredientsManagement() {
             {filteredIngredients.length} of {ingredients.length} ingredients
           </p>
         </div>
-        <button
-          onClick={() => {
-            setShowAdd(true);
-            setEditId(null);
-            setFormData({ name_en: "", name_bn: "", img: "" });
-          }}
-          className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-colors shadow-lg"
-        >
-          <Plus size={20} />
-          Add Ingredient
-        </button>
+        <div className="flex items-center gap-3">
+          {selectedIds.length > 0 && (
+            <button
+              onClick={() => setShowBulkDeleteConfirm(true)}
+              className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-red-600/20"
+            >
+              <Trash2 size={20} />
+              Delete {selectedIds.length} Selected
+            </button>
+          )}
+          <button
+            onClick={() => {
+              setShowAdd(true);
+              setEditId(null);
+              setFormData({ name_en: "", name_bn: "", img: "" });
+            }}
+            className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-colors shadow-lg"
+          >
+            <Plus size={20} />
+            Add Ingredient
+          </button>
+        </div>
       </div>
 
-      {/* Search */}
-      <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+      {/* Search and Selection */}
+      <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           <input
@@ -197,6 +265,23 @@ export default function IngredientsManagement() {
             className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
           />
         </div>
+
+        {filteredIngredients.length > 0 && (
+          <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+            <input
+              type="checkbox"
+              checked={filteredIngredients.length > 0 && selectedIds.length === filteredIngredients.length}
+              onChange={() => {
+                if (selectedIds.length === filteredIngredients.length) setSelectedIds([]);
+                else setSelectedIds(filteredIngredients.map(i => i.id));
+              }}
+              className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
+            />
+            <span className="text-sm font-bold text-gray-700">
+              Select All Visible ({filteredIngredients.length})
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Ingredients Grid */}
@@ -211,9 +296,21 @@ export default function IngredientsManagement() {
               key={ingredient.id}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all shadow-sm hover:shadow-md"
+              onClick={() => toggleSelectOne(ingredient.id)}
+              className={`bg-white rounded-2xl p-6 border ${
+                selectedIds.includes(ingredient.id) ? "border-green-500 bg-green-50/10" : "border-gray-200"
+              } hover:border-gray-300 transition-all shadow-sm hover:shadow-md cursor-pointer relative`}
             >
               <div className="flex items-start gap-4">
+                <div onClick={(e) => e.stopPropagation()} className="mt-1">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(ingredient.id)}
+                    onChange={() => toggleSelectOne(ingredient.id)}
+                    className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
+                  />
+                </div>
+
                 <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
                   {ingredient.img ? (
                     <img
@@ -236,7 +333,7 @@ export default function IngredientsManagement() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-4">
+              <div className="flex items-center gap-2 mt-4" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => startEdit(ingredient)}
                   className="flex-1 px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-xl text-sm font-bold transition-colors"

@@ -80,3 +80,35 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// DELETE /api/admin/ingredients - Bulk delete ingredients
+export async function DELETE(request: NextRequest) {
+  if (!checkAdminAuth(request)) {
+    return unauthorizedResponse();
+  }
+
+  try {
+    const { ids } = await request.json();
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json(
+        { error: "Invalid ingredient IDs provided" },
+        { status: 400 }
+      );
+    }
+
+    await prisma.ingredient.deleteMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+
+    return NextResponse.json({ message: `${ids.length} ingredients deleted successfully` });
+  } catch (error) {
+    console.error("Error bulk deleting ingredients:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

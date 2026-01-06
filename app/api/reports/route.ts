@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 // GET /api/reports - list reports (admin)
 export async function GET(request: NextRequest) {
+  if (!checkAdminAuth(request)) return unauthorizedResponse();
   try {
     const reports = await prisma.recipeReport.findMany({
       orderBy: { createdAt: "desc" },
@@ -38,5 +40,25 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Failed to create report" }, { status: 500 });
+  }
+}
+
+// DELETE /api/reports - bulk delete reports (admin)
+export async function DELETE(request: NextRequest) {
+  if (!checkAdminAuth(request)) return unauthorizedResponse();
+  try {
+    const { ids } = await request.json();
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json({ error: "Invalid IDs" }, { status: 400 });
+    }
+
+    await prisma.recipeReport.deleteMany({
+      where: { id: { in: ids.map(Number) } },
+    });
+
+    return NextResponse.json({ success: true, message: "Reports deleted" });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Failed to delete reports" }, { status: 500 });
   }
 }

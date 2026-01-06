@@ -4,8 +4,11 @@ import React, { useState } from "react";
 
 const PRESET_REASONS = [
   "Image is missing",
-  "Recipe is wrong",
-  "YouTube URL is wrong or broken",
+  "Ingredients are incorrect",
+  "Steps are incorrect or confusing",
+  "YouTube URL is broken",
+  "Allergens/food safety issue",
+  "Duplicate recipe",
   "Other",
 ];
 

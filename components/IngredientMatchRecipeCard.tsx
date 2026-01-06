@@ -42,21 +42,21 @@ export default function IngredientMatchRecipeCard({
 
   return (
     <Link href={`/recipes/${recipe.slug}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -8 }}
-        className="group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/60 cursor-pointer"
+      <motion.article
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ y: -4 }}
+        className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col h-full group transition-all duration-300 border border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50 cursor-pointer"
       >
         {/* Match Badge */}
         <div className="absolute top-4 left-4 z-10">
           {isComplete ? (
-            <div className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full font-black text-xs shadow-lg">
-              <CheckCircle2 size={16} />
+            <div className="flex items-center gap-2 bg-emerald-500 text-white px-3 py-1.5 rounded-full font-black text-[10px] uppercase tracking-wider shadow-lg">
+              <CheckCircle2 size={12} />
               <span>{locale === "en" ? "100% Match" : "১০০% মিল"}</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full font-black text-xs shadow-lg">
+            <div className="flex items-center gap-2 bg-amber-500 text-white px-3 py-1.5 rounded-full font-black text-[10px] uppercase tracking-wider shadow-lg">
               <span>
                 {Math.round(matchPercent * 100)}%{" "}
                 {locale === "en" ? "Match" : "মিল"}
@@ -66,40 +66,40 @@ export default function IngredientMatchRecipeCard({
         </div>
 
         {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-slate-100">
+        <div className="relative h-56 overflow-hidden bg-slate-50">
           <img
             src={recipe.image}
             alt={locale === "en" ? recipe.title_en : recipe.title_bn}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             onError={(e) => {
               e.currentTarget.src =
                 "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <h3 className="text-xl font-black text-slate-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
+        <div className="p-5 flex flex-col flex-1">
+          <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors leading-tight">
             {locale === "en" ? recipe.title_en : recipe.title_bn}
           </h3>
 
           {/* Match Info */}
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex items-center gap-1 text-sm font-bold">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider">
               <CheckCircle2
-                size={16}
-                className={isComplete ? "text-green-500" : "text-orange-500"}
+                size={14}
+                className={isComplete ? "text-emerald-500" : "text-amber-500"}
               />
-              <span className={isComplete ? "text-green-600" : "text-orange-600"}>
+              <span className={isComplete ? "text-emerald-600" : "text-amber-600"}>
                 {matchedCount}/{totalIngredients}{" "}
                 {locale === "en" ? "ingredients" : "উপকরণ"}
               </span>
             </div>
             {missingCount > 0 && (
-              <div className="flex items-center gap-1 text-sm font-bold text-slate-400">
-                <XCircle size={16} />
+              <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-slate-300">
+                <XCircle size={14} />
                 <span>
                   {missingCount} {locale === "en" ? "missing" : "নেই"}
                 </span>
@@ -107,42 +107,45 @@ export default function IngredientMatchRecipeCard({
             )}
           </div>
 
-          {/* Meta Info */}
-          <div className="flex items-center gap-4 text-xs text-slate-500 font-medium mb-4">
-            <div className="flex items-center gap-1.5">
-              <Clock size={14} />
+          {/* Stats bar */}
+          <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-auto bg-slate-50/50 p-2 rounded-lg border border-slate-100/50">
+            <div className="flex items-center gap-1.5" title={locale === "en" ? "Cooking Time" : "রান্নার সময়"}>
+              <Clock size={12} className="text-red-500" />
               <span>
-                {totalTime} {locale === "en" ? "min" : "মিনিট"}
+                <span className="text-[8px] text-slate-400 mr-0.5">{locale === "en" ? "TIME:" : "সময়:"}</span>
+                {totalTime}m
               </span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Users size={14} />
+            <div className="flex items-center gap-1.5" title={locale === "en" ? "Servings" : "পরিবেশন"}>
+              <Users size={12} className="text-red-500" />
               <span>
-                {recipe.servings} {locale === "en" ? "servings" : "পরিবেশন"}
+                <span className="text-[8px] text-slate-400 mr-0.5">{locale === "en" ? "SERVINGS:" : "জন:"}</span>
+                {recipe.servings}
               </span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <ChefHat size={14} />
-              <span>{recipe.difficulty}</span>
+            <div className="flex items-center gap-1.5 leading-none">
+              <ChefHat size={12} className="text-red-500" />
+              <span className="truncate max-w-[60px]">{recipe.difficulty}</span>
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-bold text-slate-700">
-              {recipe.cuisine}
-            </span>
-            <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-bold text-slate-700">
-              {recipe.category}
+          <div className="flex items-center gap-2 mb-4">
+             <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md text-[9px] font-black uppercase tracking-tighter">
+                {recipe.category}
+             </span>
+             <span className="px-2 py-0.5 bg-slate-50 text-slate-500 rounded-md text-[9px] font-black uppercase tracking-tighter">
+                {recipe.cuisine}
+             </span>
+          </div>
+
+          <div className="mt-2 pt-4 border-t border-slate-50 flex items-center justify-between">
+            <span className="text-[10px] font-black text-red-600 uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">
+              {locale === "en" ? "Full Recipe" : "পুরো রেসিপি"}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
             </span>
           </div>
         </div>
-
-        {/* Hover Indicator */}
-        <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all">
-          <ChefHat size={20} />
-        </div>
-      </motion.div>
+      </motion.article>
     </Link>
   );
 }

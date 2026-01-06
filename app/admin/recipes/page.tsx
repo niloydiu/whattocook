@@ -29,6 +29,9 @@ export default function RecipesManagement() {
   const [filterCategory, setFilterCategory] = useState("");
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [bulkDeleting, setBulkDeleting] = useState(false);
+  const [showBulkDeleteConfirm, setShowBulkDeleteConfirm] = useState(false);
   
   // Alert Modal State
   const [alertConfig, setAlertConfig] = useState<{
@@ -101,6 +104,68 @@ export default function RecipesManagement() {
     }
   }
 
+  async function handleBulkDelete() {
+    if (selectedIds.length === 0) return;
+    setBulkDeleting(true);
+    try {
+      const token = localStorage.getItem("adminToken");
+      const res = await fetch("/api/admin/recipes", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ids: selectedIds })
+      });
+
+      if (res.ok) {
+        setRecipes(recipes.filter((r) => !selectedIds.includes(r.id)));
+        setSelectedIds([]);
+        setShowBulkDeleteConfirm(false);
+        setAlertConfig({
+          isOpen: true,
+          title: "Success",
+          message: `${selectedIds.length} recipes deleted successfully!`,
+          type: "success",
+        });
+      } else {
+        const data = await res.json();
+        setAlertConfig({
+          isOpen: true,
+          title: "Error",
+          message: data.error || "Failed to delete recipes",
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Bulk delete error:", error);
+      setAlertConfig({
+        isOpen: true,
+        title: "Error",
+        message: "Something went wrong while deleting the recipes.",
+        type: "error",
+      });
+    } finally {
+      setBulkDeleting(false);
+    }
+  }
+
+  function toggleSelectAll() {
+    if (selectedIds.length === filteredRecipes.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredRecipes.map(r => r.id));
+    }
+  }
+
+  function toggleSelectOne(id: number) {
+    if (selectedIds.includes(id)) {
+      setSelectedIds(selectedIds.filter(idx => idx !== id));
+    } else {
+      setSelectedIds([...selectedIds, id]);
+    }
+  }
+
   const filteredRecipes = recipes.filter((recipe) => {
     const matchesSearch =
       recipe.title_en.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -123,17 +188,28 @@ export default function RecipesManagement() {
             {filteredRecipes.length} of {recipes.length} recipes
           </p>
         </div>
-        <Link
-          href="/admin/add-recipe"
-          className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors shadow-lg"
-        >
-          <Plus size={20} />
-          Add Recipe
-        </Link>
+        <div className="flex items-center gap-3">
+          {selectedIds.length > 0 && (
+            <button
+              onClick={() => setShowBulkDeleteConfirm(true)}
+              className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-red-600/20"
+            >
+              <Trash2 size={20} />
+              Delete {selectedIds.length} Selected
+            </button>
+          )}
+          <Link
+            href="/admin/add-recipe"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors shadow-lg"
+          >
+            <Plus size={20} />
+            Add Recipe
+          </Link>
+        </div>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -172,6 +248,21 @@ export default function RecipesManagement() {
             ))}
           </select>
         </div>
+
+        {/* Multi-select Header */}
+        {filteredRecipes.length > 0 && (
+          <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+            <input
+              type="checkbox"
+              checked={filteredRecipes.length > 0 && selectedIds.length === filteredRecipes.length}
+              onChange={toggleSelectAll}
+              className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+            />
+            <span className="text-sm font-bold text-gray-700">
+              Select All Visible ({filteredRecipes.length})
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Recipes List */}
@@ -192,9 +283,21 @@ export default function RecipesManagement() {
               key={recipe.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all shadow-sm hover:shadow-md"
+              className={`bg-white rounded-2xl p-6 border ${
+                selectedIds.includes(recipe.id) ? "border-blue-500 bg-blue-50/10" : "border-gray-200"
+              } hover:border-gray-300 transition-all shadow-sm hover:shadow-md cursor-pointer`}
+              onClick={() => toggleSelectOne(recipe.id)}
             >
               <div className="flex items-center gap-6">
+                <div onClick={(e) => e.stopPropagation()}>
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(recipe.id)}
+                    onChange={() => toggleSelectOne(recipe.id)}
+                    className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                  />
+                </div>
+                
                 <img
                   src={recipe.image}
                   alt={recipe.title_en}
@@ -226,7 +329,7 @@ export default function RecipesManagement() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <Link
                     href={`/recipes/${recipe.slug}`}
                     target="_blank"
@@ -256,7 +359,7 @@ export default function RecipesManagement() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
+      {/* Single Delete Confirmation Modal */}
       <AnimatePresence>
         {deleteId && (
           <motion.div
@@ -295,6 +398,55 @@ export default function RecipesManagement() {
                 <button
                   onClick={() => setDeleteId(null)}
                   disabled={deleting}
+                  className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 text-gray-700 rounded-xl font-bold transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <AnimatePresence>
+        {showBulkDeleteConfirm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => !bulkDeleting && setShowBulkDeleteConfirm(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            >
+              <h3 className="text-2xl font-black text-gray-900 mb-4">Delete {selectedIds.length} Recipes?</h3>
+              <p className="text-gray-600 mb-6">
+                Are you sure you want to delete {selectedIds.length} selected recipes? This action cannot be undone.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  onClick={handleBulkDelete}
+                  disabled={bulkDeleting}
+                  className="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2"
+                >
+                  {bulkDeleting ? (
+                    <>
+                      <Loader2 className="animate-spin" size={20} />
+                      Deleting...
+                    </>
+                  ) : (
+                    "Delete All"
+                  )}
+                </button>
+                <button
+                  onClick={() => setShowBulkDeleteConfirm(false)}
+                  disabled={bulkDeleting}
                   className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 text-gray-700 rounded-xl font-bold transition-colors"
                 >
                   Cancel

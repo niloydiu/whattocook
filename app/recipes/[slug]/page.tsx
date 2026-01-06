@@ -13,6 +13,7 @@ import {
   ArrowLeft,
   Eye,
   Youtube as YouTubeIcon,
+  Flag,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -260,23 +261,33 @@ export default function RecipePage() {
                     </div>
                   </button>
                 )}
+                
+                {/* Subtle Report Button on Hero */}
+                <button
+                  onClick={() => setShowReport(true)}
+                  title={locale === "en" ? "Report recipe" : "রিপোর্ট করুন"}
+                  className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-md text-white/50 opacity-40 hover:opacity-100 hover:text-white transition-all z-10"
+                >
+                  <Flag size={18} />
+                  <span className="sr-only">Report</span>
+                </button>
               </>
             )}
           </div>
 
           <div className="p-8">
-            <div className="flex flex-wrap gap-3 mb-4">
-              <span className={`px-4 py-2 rounded-full font-bold text-sm ${difficultyColor}`}>
+            <div className="flex flex-wrap gap-3 mb-6">
+              <span className={`px-4 py-1.5 rounded-full font-black text-[10px] uppercase tracking-wider ${difficultyColor} shadow-sm border border-black/5`}>
                 {recipe.difficulty}
               </span>
-              <span className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm">
+              <span className="px-4 py-1.5 bg-slate-50 text-slate-600 rounded-full font-black text-[10px] uppercase tracking-wider shadow-sm border border-slate-100">
                 {recipe.cuisine}
               </span>
-              <span className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm">
+              <span className="px-4 py-1.5 bg-slate-50 text-slate-600 rounded-full font-black text-[10px] uppercase tracking-wider shadow-sm border border-slate-100">
                 {recipe.category}
               </span>
               {recipe.foodCategory && (
-                <span className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-sm shadow-lg">
+                <span className="px-4 py-1.5 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-wider shadow-lg shadow-black/20">
                   {recipe.foodCategory}
                 </span>
               )}
@@ -353,9 +364,6 @@ export default function RecipePage() {
                 {locale === "en" ? "Watch on YouTube" : "ইউটিউবে দেখুন"}
               </a>
             )}
-            <div className="mt-4">
-              <button onClick={() => setShowReport(true)} className="px-4 py-2 bg-white border rounded-lg font-bold">Report</button>
-            </div>
           </div>
         </motion.div>
 

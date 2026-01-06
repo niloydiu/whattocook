@@ -19,6 +19,8 @@ type Report = {
 export default function AdminReports() {
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     fetchReports();
@@ -51,11 +53,53 @@ export default function AdminReports() {
     }
   }
 
+  async function handleBulkDelete() {
+    if (selectedIds.length === 0) return;
+    if (!confirm(`Are you sure you want to delete ${selectedIds.length} reports?`)) return;
+
+    setDeleting(true);
+    try {
+      const res = await fetch("/api/reports", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: selectedIds }),
+      });
+      if (res.ok) {
+        setReports(reports.filter(r => !selectedIds.includes(r.id)));
+        setSelectedIds([]);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDeleting(false);
+    }
+  }
+
+  function toggleOne(id: number) {
+    if (selectedIds.includes(id)) {
+      setSelectedIds(selectedIds.filter(x => x !== id));
+    } else {
+      setSelectedIds([...selectedIds, id]);
+    }
+  }
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-black">Recipe Reports</h2>
-        <p className="text-slate-600">User-submitted reports about recipes</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-black">Recipe Reports</h2>
+          <p className="text-slate-600">User-submitted reports about recipes</p>
+        </div>
+        
+        {selectedIds.length > 0 && (
+          <button
+            onClick={handleBulkDelete}
+            disabled={deleting}
+            className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20"
+          >
+            Delete {selectedIds.length} Selected
+          </button>
+        )}
       </div>
 
       <div className="bg-white rounded-2xl p-6 border">
@@ -65,18 +109,39 @@ export default function AdminReports() {
           <div className="text-slate-500">No reports found</div>
         ) : (
           <div className="space-y-4">
+            <div className="flex items-center gap-3 pb-4 border-b">
+              <input
+                type="checkbox"
+                checked={reports.length > 0 && selectedIds.length === reports.length}
+                onChange={() => {
+                  if (selectedIds.length === reports.length) setSelectedIds([]);
+                  else setSelectedIds(reports.map(r => r.id));
+                }}
+                className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-500"
+              />
+              <span className="text-sm font-bold text-slate-700">Select All ({reports.length})</span>
+            </div>
+
             {reports.map((r) => (
-              <div key={r.id} className="p-4 border rounded-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                <div>
-                  <div className="text-sm text-slate-400">#{r.id} • {new Date(r.createdAt).toLocaleString()}</div>
-                  <div className="font-bold text-slate-900">{r.reason}</div>
-                  <div className="text-sm text-slate-600">{r.details}</div>
-                  <div className="mt-2 text-xs text-slate-500">Reporter: {r.reporter_name || "—"} {r.reporter_email ? `• ${r.reporter_email}` : ""}</div>
-                  {r.recipe && (
-                    <div className="mt-2 text-xs">
-                      Recipe: <Link href={`/recipes/${r.recipe.slug}`} className="text-red-600 font-bold">{r.recipe.title_en}</Link>
-                    </div>
-                  )}
+              <div key={r.id} className={`p-4 border rounded-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3 ${selectedIds.includes(r.id) ? 'bg-red-50/20 border-red-200' : ''}`}>
+                <div className="flex items-start gap-4">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(r.id)}
+                    onChange={() => toggleOne(r.id)}
+                    className="w-5 h-5 mt-1 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                  />
+                  <div>
+                    <div className="text-sm text-slate-400">#{r.id} • {new Date(r.createdAt).toLocaleString()}</div>
+                    <div className="font-bold text-slate-900">{r.reason}</div>
+                    <div className="text-sm text-slate-600">{r.details}</div>
+                    <div className="mt-2 text-xs text-slate-500">Reporter: {r.reporter_name || "—"} {r.reporter_email ? `• ${r.reporter_email}` : ""}</div>
+                    {r.recipe && (
+                      <div className="mt-2 text-xs">
+                        Recipe: <Link href={`/recipes/${r.recipe.slug}`} className="text-red-600 font-bold">{r.recipe.title_en}</Link>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2">
