@@ -28,7 +28,9 @@ export default function PrintViewClient({ recipe }: Props) {
           <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold">
             W
           </div>
-          <span className="font-bold text-slate-700">WhatToCook Print View</span>
+          <span className="font-bold text-slate-700">
+            WhatToCook Print View
+          </span>
         </div>
         <div className="flex gap-3">
           <button

@@ -258,7 +258,9 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                 isFavorite
                   ? "bg-red-50 border-red-200 text-red-600"
                   : "bg-white border-slate-200 text-slate-400 hover:text-red-600 hover:border-red-200"
-              } ${loadingStates["favorite"] ? "opacity-70 cursor-not-allowed" : ""}`}
+              } ${
+                loadingStates["favorite"] ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
               {loadingStates["favorite"] ? (
                 <Loader2 size={18} className="animate-spin sm:w-5 sm:h-5" />
@@ -376,7 +378,10 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                         onClick={() => {
                           setVideoMode("modal");
                           setButtonLoading("watch", true);
-                          setTimeout(() => setButtonLoading("watch", false), 1000);
+                          setTimeout(
+                            () => setButtonLoading("watch", false),
+                            1000
+                          );
                         }}
                         disabled={loadingStates["watch"]}
                         className="h-10 sm:h-14 px-3 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm text-slate-900 flex items-center gap-1.5 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
@@ -420,8 +425,14 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                       <button
                         onClick={() => {
                           setButtonLoading("print", true);
-                          window.open(`/recipes/${recipe.slug}/print`, "_blank");
-                          setTimeout(() => setButtonLoading("print", false), 2000);
+                          window.open(
+                            `/recipes/${recipe.slug}/print`,
+                            "_blank"
+                          );
+                          setTimeout(
+                            () => setButtonLoading("print", false),
+                            2000
+                          );
                         }}
                         disabled={loadingStates["print"]}
                         className="h-10 sm:h-14 px-3 sm:px-4 lg:px-6 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm text-slate-900 flex items-center gap-1.5 sm:gap-2 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"

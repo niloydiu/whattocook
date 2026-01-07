@@ -3,7 +3,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Flag, ExternalLink, Github, Linkedin, Twitter, X, Plus } from "lucide-react";
+import {
+  Home,
+  Flag,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Twitter,
+  X,
+  Plus,
+} from "lucide-react";
 
 export default function MovableLinkButton({
   href = "https://niloykm.vercel.app",
@@ -16,7 +25,12 @@ export default function MovableLinkButton({
   const ref = useRef<HTMLButtonElement | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   const [zIndexState, setZIndexState] = useState<number>(9999);
-  const dragRef = useRef<{ dragging: boolean; moved: boolean; offsetX: number; offsetY: number }>({ dragging: false, moved: false, offsetX: 0, offsetY: 0 });
+  const dragRef = useRef<{
+    dragging: boolean;
+    moved: boolean;
+    offsetX: number;
+    offsetY: number;
+  }>({ dragging: false, moved: false, offsetX: 0, offsetY: 0 });
   const posRef = useRef<{ x: number; y: number } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -36,9 +50,9 @@ export default function MovableLinkButton({
         // default to top-right corner with some margin
         const defaultX = Math.max(16, (window.innerWidth || 800) - 72);
         const defaultY = 20;
-          const initial = { x: defaultX, y: defaultY };
-          setPos(initial);
-          posRef.current = initial;
+        const initial = { x: defaultX, y: defaultY };
+        setPos(initial);
+        posRef.current = initial;
       }
     } catch (e) {
       const fallback = { x: 16, y: 20 };
@@ -47,14 +61,14 @@ export default function MovableLinkButton({
     }
   }, []);
 
-    // apply transform when pos state changes (non-dragging)
-    useEffect(() => {
-      if (!pos || !ref.current) return;
-      // use transform for smoothness
-      ref.current.style.left = "0px";
-      ref.current.style.top = "0px";
-      ref.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-    }, [pos]);
+  // apply transform when pos state changes (non-dragging)
+  useEffect(() => {
+    if (!pos || !ref.current) return;
+    // use transform for smoothness
+    ref.current.style.left = "0px";
+    ref.current.style.top = "0px";
+    ref.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+  }, [pos]);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -110,7 +124,8 @@ export default function MovableLinkButton({
             // update state once on release for reactivity
             setPos(cur);
             // ensure final transform applied
-            if (ref.current) ref.current.style.transform = `translate3d(${cur.x}px, ${cur.y}px, 0)`;
+            if (ref.current)
+              ref.current.style.transform = `translate3d(${cur.x}px, ${cur.y}px, 0)`;
             localStorage.setItem(key, JSON.stringify(cur));
           }
         } catch (e) {}
@@ -216,15 +231,23 @@ export default function MovableLinkButton({
                 const size = 320;
                 const btnW = 52;
                 const gap = 20;
-                if (!pos) return { position: "fixed", left: 16, top: 16 } as React.CSSProperties;
-                const winW = typeof window !== "undefined" ? window.innerWidth : 800;
-                const winH = typeof window !== "undefined" ? window.innerHeight : 600;
-                
+                if (!pos)
+                  return {
+                    position: "fixed",
+                    left: 16,
+                    top: 16,
+                  } as React.CSSProperties;
+                const winW =
+                  typeof window !== "undefined" ? window.innerWidth : 800;
+                const winH =
+                  typeof window !== "undefined" ? window.innerHeight : 600;
+
                 // Position logic to stay within viewport
                 let top = pos.y - size / 2 + btnW / 2;
-                let left = anchorSide === "left" 
-                  ? pos.x + btnW + gap 
-                  : pos.x - size - gap;
+                let left =
+                  anchorSide === "left"
+                    ? pos.x + btnW + gap
+                    : pos.x - size - gap;
 
                 top = Math.max(16, Math.min(top, winH - size - 16));
                 left = Math.max(16, Math.min(left, winW - size - 16));
@@ -240,10 +263,12 @@ export default function MovableLinkButton({
               className="relative z-[99999] bg-white/40 backdrop-blur-[32px] backdrop-saturate-[180%] rounded-full shadow-[0_40px_100px_rgba(0,0,0,0.12)] border border-white/40 flex items-center justify-center p-0 overflow-visible"
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                
                 {/* 1. HOME - Top */}
                 <button
-                  onClick={() => { setShowMenu(false); router.push("/"); }}
+                  onClick={() => {
+                    setShowMenu(false);
+                    router.push("/");
+                  }}
                   className="absolute transition-all duration-300 hover:scale-110 active:scale-90 shadow-[0_10px_25px_rgba(79,70,229,0.15)] rounded-full group"
                   style={{ transform: "translate(0px, -100px)" }}
                 >
@@ -254,7 +279,10 @@ export default function MovableLinkButton({
 
                 {/* 2. REPORT - Top Right */}
                 <button
-                  onClick={() => { setShowMenu(false); router.push("/request-recipe/submit"); }}
+                  onClick={() => {
+                    setShowMenu(false);
+                    router.push("/request-recipe/submit");
+                  }}
                   className="absolute transition-all duration-300 hover:scale-110 active:scale-90 shadow-[0_10px_25px_rgba(225,29,72,0.15)] rounded-full"
                   style={{ transform: "translate(86.6px, -50px)" }}
                 >
@@ -285,7 +313,11 @@ export default function MovableLinkButton({
                   style={{ transform: "translate(0px, 100px)" }}
                 >
                   <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center border border-slate-100 overflow-hidden p-3 bg-slate-50">
-                    <img src="/favicon.png" alt="portfolio" className="w-full h-full object-contain filter " />
+                    <img
+                      src="/favicon.png"
+                      alt="portfolio"
+                      className="w-full h-full object-contain filter "
+                    />
                   </div>
                 </a>
 

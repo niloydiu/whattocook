@@ -115,7 +115,9 @@ export default function Page() {
   const [debouncedPantry, setDebouncedPantry] = useState<string[]>(pantry);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [ingredientSearchResults, setIngredientSearchResults] = useState<any[]>([]);
+  const [ingredientSearchResults, setIngredientSearchResults] = useState<any[]>(
+    []
+  );
   const [ingredientSearchLoading, setIngredientSearchLoading] = useState(false);
   const [searchActivated, setSearchActivated] = useState(false);
 
@@ -140,9 +142,21 @@ export default function Page() {
         // Detect simple food category tokens in the query and send as `foodCategory`.
         // e.g. "chicken dessert" => search=chicken&foodCategory=Dessert
         const FOOD_CATEGORIES = [
-          "savory", "sweet", "spicy", "sour",
-          "dessert", "drinks", "appetizer", "soup", "salad",
-          "breakfast", "lunch", "dinner", "snack", "main course", "side dish"
+          "savory",
+          "sweet",
+          "spicy",
+          "sour",
+          "dessert",
+          "drinks",
+          "appetizer",
+          "soup",
+          "salad",
+          "breakfast",
+          "lunch",
+          "dinner",
+          "snack",
+          "main course",
+          "side dish",
         ];
 
         let freeText = debouncedSearchQuery?.trim() || "";
@@ -155,7 +169,10 @@ export default function Page() {
             const token = p.replace(/[:]/g, "").toLowerCase();
             if (FOOD_CATEGORIES.includes(token)) {
               detectedCategory = token.charAt(0).toUpperCase() + token.slice(1);
-            } else if (token.startsWith("category:") || token.startsWith("cat:")) {
+            } else if (
+              token.startsWith("category:") ||
+              token.startsWith("cat:")
+            ) {
               const val = token.split(":")[1];
               if (val && FOOD_CATEGORIES.includes(val)) {
                 detectedCategory = val.charAt(0).toUpperCase() + val.slice(1);
@@ -165,7 +182,8 @@ export default function Page() {
             }
           }
 
-          if (remaining.length > 0) params.append("search", remaining.join(" "));
+          if (remaining.length > 0)
+            params.append("search", remaining.join(" "));
         }
 
         if (detectedCategory) params.append("foodCategory", detectedCategory);
@@ -175,9 +193,14 @@ export default function Page() {
 
         // Append featured recipes to the bottom when a search is active.
         let combined: ApiRecipe[] = data.recipes || [];
-        if ((debouncedSearchQuery || params.has("foodCategory")) && Array.isArray(data.featured)) {
+        if (
+          (debouncedSearchQuery || params.has("foodCategory")) &&
+          Array.isArray(data.featured)
+        ) {
           const existingIds = new Set(combined.map((r) => r.id));
-          const toAppend = data.featured.filter((f: ApiRecipe) => !existingIds.has(f.id));
+          const toAppend = data.featured.filter(
+            (f: ApiRecipe) => !existingIds.has(f.id)
+          );
           combined = [...combined, ...toAppend];
         }
 
@@ -231,7 +254,9 @@ export default function Page() {
     }
     const fetchSuggestions = async () => {
       try {
-        const res = await fetch(`/api/recipes/autocomplete?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(
+          `/api/recipes/autocomplete?q=${encodeURIComponent(searchQuery)}`
+        );
         const data = await res.json();
         setSuggestions(data.suggestions || []);
       } catch (err) {
@@ -258,10 +283,12 @@ export default function Page() {
     // apply current searchQuery immediately and mark search activated
     setDebouncedSearchQuery(searchQuery);
     setSearchActivated(Boolean(searchQuery));
-    
+
     // Scroll to results section after a short delay to allow state update
     setTimeout(() => {
-      const el = document.getElementById("results-section") || document.getElementById("recipes-section");
+      const el =
+        document.getElementById("results-section") ||
+        document.getElementById("recipes-section");
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }
@@ -305,7 +332,7 @@ export default function Page() {
     setSearchActivated(true);
     setLoading(true);
     setIngredientSearchLoading(true);
-    
+
     // Call API to search by ingredients
     fetch("/api/recipes/search-by-ingredients", {
       method: "POST",
@@ -353,7 +380,10 @@ export default function Page() {
       <nav className="sticky top-0 z-[110] glass-effect border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 md:gap-3 group">
-            <Link href="/" className="flex items-center gap-2 md:gap-3 cursor-pointer">
+            <Link
+              href="/"
+              className="flex items-center gap-2 md:gap-3 cursor-pointer"
+            >
               <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-lg md:rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-600/20 group-hover:rotate-12 transition-transform duration-300">
                 <ChefHat size={20} className="md:w-6 md:h-6" />
               </div>
@@ -432,7 +462,7 @@ export default function Page() {
                         )}
                         <div className="flex flex-col">
                           <span className="text-sm font-bold text-slate-900">
-                            {locale === "en" ? s.label : (s.label_bn || s.label)}
+                            {locale === "en" ? s.label : s.label_bn || s.label}
                           </span>
                           <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
                             {s.type}
@@ -478,7 +508,6 @@ export default function Page() {
                 বাংলা
               </button>
             </div>
-            
           </div>
         </div>
       </nav>
@@ -627,7 +656,7 @@ export default function Page() {
                     )}
                     <div className="flex flex-col">
                       <span className="text-sm font-bold text-slate-900">
-                        {locale === "en" ? s.label : (s.label_bn || s.label)}
+                        {locale === "en" ? s.label : s.label_bn || s.label}
                       </span>
                       <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
                         {s.type}
@@ -647,105 +676,109 @@ export default function Page() {
             {/* Pantry Matching Results (shown above Featured when a search/find occurred) */}
             <section id="results-section">
               <AnimatePresence mode="wait">
-              {loading ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center py-20"
-                >
-                  <div className="w-16 h-16 border-4 border-red-100 border-t-red-600 rounded-full animate-spin mb-4" />
-                  <p className="text-slate-500 font-medium">
-                    {locale === "en"
-                      ? "Finding the best recipes for you..."
-                      : "আপনার জন্য সেরা রেসিপি খোঁজা হচ্ছে..."}
-                  </p>
-                </motion.div>
-              ) : ingredientSearchResults.length > 0 ? (
-                <motion.div
-                  key="ingredient-results"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
-                      {locale === "en" ? "Recipes You Can Make" : "আপনি যা রান্না করতে পারেন"}
-                    </h2>
-                    <p className="text-slate-600 font-medium">
+                {loading ? (
+                  <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center justify-center py-20"
+                  >
+                    <div className="w-16 h-16 border-4 border-red-100 border-t-red-600 rounded-full animate-spin mb-4" />
+                    <p className="text-slate-500 font-medium">
                       {locale === "en"
-                        ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
-                        : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
+                        ? "Finding the best recipes for you..."
+                        : "আপনার জন্য সেরা রেসিপি খোঁজা হচ্ছে..."}
                     </p>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {ingredientSearchResults.map((result) => (
-                      <IngredientMatchRecipeCard
-                        key={result.recipe.id}
-                        recipe={result.recipe}
-                        matchPercent={result.matchPercent}
-                        matchedCount={result.matchedCount}
-                        totalIngredients={result.totalIngredients}
-                        missingCount={result.missingCount}
+                  </motion.div>
+                ) : ingredientSearchResults.length > 0 ? (
+                  <motion.div
+                    key="ingredient-results"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="mb-8">
+                      <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                        {locale === "en"
+                          ? "Recipes You Can Make"
+                          : "আপনি যা রান্না করতে পারেন"}
+                      </h2>
+                      <p className="text-slate-600 font-medium">
+                        {locale === "en"
+                          ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
+                          : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {ingredientSearchResults.map((result) => (
+                        <IngredientMatchRecipeCard
+                          key={result.recipe.id}
+                          recipe={result.recipe}
+                          matchPercent={result.matchPercent}
+                          matchedCount={result.matchedCount}
+                          totalIngredients={result.totalIngredients}
+                          missingCount={result.missingCount}
+                          locale={locale}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : results.length > 0 ? (
+                  <motion.div
+                    key="results"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  >
+                    {results.map((r, idx) => (
+                      <RecipeCard
+                        key={r.recipe.id}
+                        recipe={r.recipe}
+                        matchPercent={r.matchPercent}
+                        have={r.have}
+                        total={r.total}
                         locale={locale}
+                        onOpenVideo={(id) => setSelectedVideo(id)}
+                        pantry={pantry}
                       />
                     ))}
-                  </div>
-                </motion.div>
-              ) : results.length > 0 ? (
-                <motion.div
-                  key="results"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                  {results.map((r, idx) => (
-                    <RecipeCard
-                      key={r.recipe.id}
-                      recipe={r.recipe}
-                      matchPercent={r.matchPercent}
-                      have={r.have}
-                      total={r.total}
-                      locale={locale}
-                      onOpenVideo={(id) => setSelectedVideo(id)}
-                      pantry={pantry}
-                    />
-                  ))}
-                </motion.div>
-              ) : pantry.length > 0 ? (
-                <motion.div
-                  key="no-results"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-20 md:py-32 bg-white/40 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] border border-dashed border-slate-200 shadow-inner px-6"
-                >
-                  <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 text-slate-300 shadow-sm">
-                    <ChefHat
-                      size={32}
-                      className="md:w-12 md:h-12"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4">
-                    {locale === "en"
-                      ? "No exact matches found"
-                      : "কোনো মিল পাওয়া যায়নি"}
-                  </h3>
-                  <p className="text-sm md:text-lg text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
-                    {locale === "en"
-                      ? "Try adding more common ingredients like oil, salt, or onion to see more results."
-                      : "আরও কিছু সাধারণ উপকরণ যেমন তেল, লবণ বা পেঁয়াজ যোগ করে দেখুন।"}
-                  </p>
-                  <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                    className="mt-8 md:mt-10 px-6 py-3 md:px-8 md:py-4 bg-slate-900 text-white rounded-xl md:rounded-2xl font-black text-xs md:text-sm hover:bg-red-600 transition-all shadow-xl shadow-slate-900/10 hover:shadow-red-600/20"
+                  </motion.div>
+                ) : pantry.length > 0 ? (
+                  <motion.div
+                    key="no-results"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-20 md:py-32 bg-white/40 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] border border-dashed border-slate-200 shadow-inner px-6"
                   >
-                    {locale === "en"
-                      ? "ADD MORE INGREDIENTS"
-                      : "আরও উপকরণ যোগ করুন"}
-                  </button>
-                </motion.div>
-              ) : null}
+                    <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 text-slate-300 shadow-sm">
+                      <ChefHat
+                        size={32}
+                        className="md:w-12 md:h-12"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4">
+                      {locale === "en"
+                        ? "No exact matches found"
+                        : "কোনো মিল পাওয়া যায়নি"}
+                    </h3>
+                    <p className="text-sm md:text-lg text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
+                      {locale === "en"
+                        ? "Try adding more common ingredients like oil, salt, or onion to see more results."
+                        : "আরও কিছু সাধারণ উপকরণ যেমন তেল, লবণ বা পেঁয়াজ যোগ করে দেখুন।"}
+                    </p>
+                    <button
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className="mt-8 md:mt-10 px-6 py-3 md:px-8 md:py-4 bg-slate-900 text-white rounded-xl md:rounded-2xl font-black text-xs md:text-sm hover:bg-red-600 transition-all shadow-xl shadow-slate-900/10 hover:shadow-red-600/20"
+                    >
+                      {locale === "en"
+                        ? "ADD MORE INGREDIENTS"
+                        : "আরও উপকরণ যোগ করুন"}
+                    </button>
+                  </motion.div>
+                ) : null}
               </AnimatePresence>
             </section>
 
@@ -762,7 +795,7 @@ export default function Page() {
                       : "বিশ্বের বিভিন্ন প্রান্ত থেকে সুস্বাদু রেসিপি আবিষ্কার করুন"}
                   </p>
                 </div>
-                
+
                 {/* Category Filter - desktop chips + mobile select */}
                 <div className="flex items-center gap-3 max-w-2xl w-full">
                   <div className="hidden md:flex gap-2 overflow-x-auto py-1 scrollbar-hidden">
@@ -787,10 +820,16 @@ export default function Page() {
                         }`}
                       >
                         <span className="capitalize">{cat.name}</span>
-                        <span className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
-                          selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
-                        }`}>
-                          {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
+                        <span
+                          className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
+                            selectedCategory === cat.name
+                              ? "bg-white/20"
+                              : "bg-slate-100"
+                          }`}
+                        >
+                          {locale === "en"
+                            ? cat.count
+                            : toBengaliNumber(cat.count)}
                         </span>
                       </button>
                     ))}
@@ -799,13 +838,19 @@ export default function Page() {
                   <div className="md:hidden w-full">
                     <select
                       value={selectedCategory ?? ""}
-                      onChange={(e) => setSelectedCategory(e.target.value || null)}
+                      onChange={(e) =>
+                        setSelectedCategory(e.target.value || null)
+                      }
                       className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-white text-sm"
                     >
                       <option value="">{locale === "en" ? "All" : "সব"}</option>
                       {categoryStats.map((cat) => (
                         <option key={cat.name} value={cat.name}>
-                          {cat.name} ({locale === "en" ? cat.count : toBengaliNumber(cat.count)})
+                          {cat.name} (
+                          {locale === "en"
+                            ? cat.count
+                            : toBengaliNumber(cat.count)}
+                          )
                         </option>
                       ))}
                     </select>
@@ -896,10 +941,16 @@ export default function Page() {
                         }`}
                       >
                         <span className="capitalize">{cat.name}</span>
-                        <span className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
-                          selectedCategory === cat.name ? "bg-white/20" : "bg-slate-100"
-                        }`}>
-                          {locale === "en" ? cat.count : toBengaliNumber(cat.count)}
+                        <span
+                          className={`ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] ${
+                            selectedCategory === cat.name
+                              ? "bg-white/20"
+                              : "bg-slate-100"
+                          }`}
+                        >
+                          {locale === "en"
+                            ? cat.count
+                            : toBengaliNumber(cat.count)}
                         </span>
                       </button>
                     ))}
@@ -908,13 +959,19 @@ export default function Page() {
                   <div className="md:hidden w-full">
                     <select
                       value={selectedCategory ?? ""}
-                      onChange={(e) => setSelectedCategory(e.target.value || null)}
+                      onChange={(e) =>
+                        setSelectedCategory(e.target.value || null)
+                      }
                       className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-white text-sm"
                     >
                       <option value="">{locale === "en" ? "All" : "সব"}</option>
                       {categoryStats.map((cat) => (
                         <option key={cat.name} value={cat.name}>
-                          {cat.name} ({locale === "en" ? cat.count : toBengaliNumber(cat.count)})
+                          {cat.name} (
+                          {locale === "en"
+                            ? cat.count
+                            : toBengaliNumber(cat.count)}
+                          )
                         </option>
                       ))}
                     </select>
@@ -968,105 +1025,109 @@ export default function Page() {
             {/* Pantry Matching Results */}
             <section id="results-section">
               <AnimatePresence mode="wait">
-              {loading ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center py-20"
-                >
-                  <div className="w-16 h-16 border-4 border-red-100 border-t-red-600 rounded-full animate-spin mb-4" />
-                  <p className="text-slate-500 font-medium">
-                    {locale === "en"
-                      ? "Finding the best recipes for you..."
-                      : "আপনার জন্য সেরা রেসিপি খোঁজা হচ্ছে..."}
-                  </p>
-                </motion.div>
-              ) : ingredientSearchResults.length > 0 ? (
-                <motion.div
-                  key="ingredient-results"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
-                      {locale === "en" ? "Recipes You Can Make" : "আপনি যা রান্না করতে পারেন"}
-                    </h2>
-                    <p className="text-slate-600 font-medium">
+                {loading ? (
+                  <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center justify-center py-20"
+                  >
+                    <div className="w-16 h-16 border-4 border-red-100 border-t-red-600 rounded-full animate-spin mb-4" />
+                    <p className="text-slate-500 font-medium">
                       {locale === "en"
-                        ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
-                        : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
+                        ? "Finding the best recipes for you..."
+                        : "আপনার জন্য সেরা রেসিপি খোঁজা হচ্ছে..."}
                     </p>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {ingredientSearchResults.map((result) => (
-                      <IngredientMatchRecipeCard
-                        key={result.recipe.id}
-                        recipe={result.recipe}
-                        matchPercent={result.matchPercent}
-                        matchedCount={result.matchedCount}
-                        totalIngredients={result.totalIngredients}
-                        missingCount={result.missingCount}
+                  </motion.div>
+                ) : ingredientSearchResults.length > 0 ? (
+                  <motion.div
+                    key="ingredient-results"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="mb-8">
+                      <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+                        {locale === "en"
+                          ? "Recipes You Can Make"
+                          : "আপনি যা রান্না করতে পারেন"}
+                      </h2>
+                      <p className="text-slate-600 font-medium">
+                        {locale === "en"
+                          ? `Found ${ingredientSearchResults.length} recipes matching your ingredients`
+                          : `আপনার উপকরণের সাথে ${ingredientSearchResults.length}টি রেসিপি পাওয়া গেছে`}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {ingredientSearchResults.map((result) => (
+                        <IngredientMatchRecipeCard
+                          key={result.recipe.id}
+                          recipe={result.recipe}
+                          matchPercent={result.matchPercent}
+                          matchedCount={result.matchedCount}
+                          totalIngredients={result.totalIngredients}
+                          missingCount={result.missingCount}
+                          locale={locale}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : results.length > 0 ? (
+                  <motion.div
+                    key="results"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  >
+                    {results.map((r, idx) => (
+                      <RecipeCard
+                        key={r.recipe.id}
+                        recipe={r.recipe}
+                        matchPercent={r.matchPercent}
+                        have={r.have}
+                        total={r.total}
                         locale={locale}
+                        onOpenVideo={(id) => setSelectedVideo(id)}
+                        pantry={pantry}
                       />
                     ))}
-                  </div>
-                </motion.div>
-              ) : results.length > 0 ? (
-                <motion.div
-                  key="results"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                  {results.map((r, idx) => (
-                    <RecipeCard
-                      key={r.recipe.id}
-                      recipe={r.recipe}
-                      matchPercent={r.matchPercent}
-                      have={r.have}
-                      total={r.total}
-                      locale={locale}
-                      onOpenVideo={(id) => setSelectedVideo(id)}
-                      pantry={pantry}
-                    />
-                  ))}
-                </motion.div>
-              ) : pantry.length > 0 ? (
-                <motion.div
-                  key="no-results"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-20 md:py-32 bg-white/40 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] border border-dashed border-slate-200 shadow-inner px-6"
-                >
-                  <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 text-slate-300 shadow-sm">
-                    <ChefHat
-                      size={32}
-                      className="md:w-12 md:h-12"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4">
-                    {locale === "en"
-                      ? "No exact matches found"
-                      : "কোনো মিল পাওয়া যায়নি"}
-                  </h3>
-                  <p className="text-sm md:text-lg text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
-                    {locale === "en"
-                      ? "Try adding more common ingredients like oil, salt, or onion to see more results."
-                      : "আরও কিছু সাধারণ উপকরণ যেমন তেল, লবণ বা পেঁয়াজ যোগ করে দেখুন।"}
-                  </p>
-                  <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                    className="mt-8 md:mt-10 px-6 py-3 md:px-8 md:py-4 bg-slate-900 text-white rounded-xl md:rounded-2xl font-black text-xs md:text-sm hover:bg-red-600 transition-all shadow-xl shadow-slate-900/10 hover:shadow-red-600/20"
+                  </motion.div>
+                ) : pantry.length > 0 ? (
+                  <motion.div
+                    key="no-results"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-20 md:py-32 bg-white/40 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] border border-dashed border-slate-200 shadow-inner px-6"
                   >
-                    {locale === "en"
-                      ? "ADD MORE INGREDIENTS"
-                      : "আরও উপকরণ যোগ করুন"}
-                  </button>
-                </motion.div>
-              ) : null}
+                    <div className="w-16 h-16 md:w-24 md:h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 text-slate-300 shadow-sm">
+                      <ChefHat
+                        size={32}
+                        className="md:w-12 md:h-12"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4">
+                      {locale === "en"
+                        ? "No exact matches found"
+                        : "কোনো মিল পাওয়া যায়নি"}
+                    </h3>
+                    <p className="text-sm md:text-lg text-slate-500 max-w-md mx-auto font-medium leading-relaxed">
+                      {locale === "en"
+                        ? "Try adding more common ingredients like oil, salt, or onion to see more results."
+                        : "আরও কিছু সাধারণ উপকরণ যেমন তেল, লবণ বা পেঁয়াজ যোগ করে দেখুন।"}
+                    </p>
+                    <button
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className="mt-8 md:mt-10 px-6 py-3 md:px-8 md:py-4 bg-slate-900 text-white rounded-xl md:rounded-2xl font-black text-xs md:text-sm hover:bg-red-600 transition-all shadow-xl shadow-slate-900/10 hover:shadow-red-600/20"
+                    >
+                      {locale === "en"
+                        ? "ADD MORE INGREDIENTS"
+                        : "আরও উপকরণ যোগ করুন"}
+                    </button>
+                  </motion.div>
+                ) : null}
               </AnimatePresence>
             </section>
           </>
@@ -1116,16 +1177,27 @@ export default function Page() {
             <span className="font-bold text-slate-900">whattoCook?</span>
           </div>
           <p className="text-slate-600 text-sm font-bold mb-2">
-            Created by <a href="https://niloykm.vercel.app" target="_blank" className="text-red-600 hover:underline">Niloy Kumar Mohonta</a>
+            Created by{" "}
+            <a
+              href="https://niloykm.vercel.app"
+              target="_blank"
+              className="text-red-600 hover:underline"
+            >
+              Niloy Kumar Mohonta
+            </a>
           </p>
           <p className="text-slate-500 text-xs mb-4">
-            Contact: <a href="mailto:niloykumarmohonta@gmail.com" className="hover:text-red-600">niloykumarmohonta@gmail.com</a>
+            Contact:{" "}
+            <a
+              href="mailto:niloykumarmohonta@gmail.com"
+              className="hover:text-red-600"
+            >
+              niloykumarmohonta@gmail.com
+            </a>
           </p>
           <p className="text-slate-400 text-[10px] uppercase tracking-widest font-bold">
             © 2026 whattoCook.{" "}
-            {locale === "en"
-              ? "All rights reserved."
-              : "সর্বস্বত্ব সংরক্ষিত।"}
+            {locale === "en" ? "All rights reserved." : "সর্বস্বত্ব সংরক্ষিত।"}
           </p>
         </div>
       </footer>

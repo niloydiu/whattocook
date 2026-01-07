@@ -73,9 +73,9 @@ export default function RecipeCardClean({
   const [allergyMatches, setAllergyMatches] = useState<string[]>([]);
   const [addedWishlist, setAddedWishlist] = useState<string[]>([]);
   const [isFavLoading, setIsFavLoading] = useState(false);
-  const [wishlistLoading, setWishlistLoading] = useState<Record<string, boolean>>(
-    {}
-  );
+  const [wishlistLoading, setWishlistLoading] = useState<
+    Record<string, boolean>
+  >({});
 
   useEffect(() => {
     if (!supabase) return;
