@@ -124,7 +124,7 @@ export function useFuzzyIngredientSearch(
     >();
 
     for (const r of fuseResults) {
-      const id = (r.item as Ingredient).id;
+      const id = String((r.item as Ingredient).id);
       const existing = bestById.get(id);
       const score = typeof r.score === "number" ? r.score : 0;
       if (!existing || score < existing.score) {
