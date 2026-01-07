@@ -589,6 +589,17 @@ export default function Page() {
         totalRecipes={apiTotal ?? recipeData.length}
       />
 
+      {/* See all recipes button */}
+      <div className="max-w-7xl mx-auto px-4 mt-6 mb-8 flex justify-center">
+        <Link
+          href="/recipes"
+          className="inline-flex items-center gap-3 px-5 py-3 bg-white/80 backdrop-blur-sm border border-white/50 rounded-full text-sm font-bold text-slate-700 shadow-md hover:shadow-lg hover:bg-white transition-colors"
+        >
+          <ClipboardList size={18} />
+          <span>{locale === "en" ? "See all recipes" : "সমস্ত রেসিপি দেখুন"}</span>
+        </Link>
+      </div>
+
       {/* Mobile Search Bar */}
       <div className="md:hidden px-4 pb-6">
         <div className="flex relative items-center bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl px-4 py-3">
