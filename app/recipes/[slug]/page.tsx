@@ -4,9 +4,16 @@ import RecipeDetailClient from "./RecipeDetailClient";
 import { getRecipeBySlug, getYouTubeMetadata } from "../../actions/recipes";
 
 export async function generateMetadata({ params }: any) {
-  const { slug } = params;
+  const { slug } = params || {};
+  if (!slug) {
+    return {
+      title: "Recipe",
+      description: "Delicious recipe",
+    };
+  }
+
   const recipe = await getRecipeBySlug(slug);
-  if (!recipe) return {};
+  if (!recipe) return { title: "Recipe" };
 
   const title = recipe.title_en || recipe.title_bn || "Recipe";
   const description =
