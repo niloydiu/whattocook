@@ -104,7 +104,7 @@ export default function AuthButton({ inline }: AuthButtonProps) {
           </button>
         ) : (
           <button
-            onClick={() => (window.location.href = "/user/favorites")}
+            onClick={() => (window.location.href = "/user")}
             title="Profile"
             aria-label="Profile"
             className="w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-sm border border-slate-200/60 text-slate-700 hover:border-red-300 transition-all active:scale-95"
@@ -148,6 +148,16 @@ export default function AuthButton({ inline }: AuthButtonProps) {
                   {user.email}
                 </p>
               </div>
+              <Link
+                href="/user"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-600">
+                  <User size={16} />
+                </div>
+                Profile
+              </Link>
               <Link
                 href="/user/favorites"
                 onClick={() => setOpen(false)}

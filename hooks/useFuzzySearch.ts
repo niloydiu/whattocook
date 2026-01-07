@@ -7,7 +7,7 @@ import {
 } from "../lib/phoneticUtils";
 
 export type Ingredient = {
-  id: string;
+  id: string | number;
   name_en: string;
   name_bn: string;
   img: string;

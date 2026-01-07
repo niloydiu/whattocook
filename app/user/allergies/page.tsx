@@ -10,23 +10,87 @@ export default function MyAllergiesPage() {
   const [user, setUser] = useState<any>(null);
   const [allergies, setAllergies] = useState<any[]>([]);
   const [newAllergy, setNewAllergy] = useState("");
+  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [searching, setSearching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
+  const [toast, setToast] = useState<{
+    message: string;
+    type?: "success" | "error" | "info";
+  } | null>(null);
+
+  // helper to show toast briefly
+  const showToast = (
+    message: string,
+    type: "success" | "error" | "info" = "info"
+  ) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
 
   useEffect(() => {
-    if (!supabase) return;
     let mounted = true;
+    if (!supabase) {
+      // Dev fallback: read local dev user if present so UI can be tested without Supabase
+      const raw =
+        typeof window !== "undefined"
+          ? localStorage.getItem("wtc_dev_user")
+          : null;
+      if (raw) {
+        try {
+          setUser(JSON.parse(raw));
+        } catch (e) {
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+      return;
+    }
+
     (async () => {
-      const { data } = await supabase.auth.getSession();
-      if (!mounted) return;
-      setUser((data as any)?.session?.user ?? null);
-      setLoading(false);
+      try {
+        // If redirected back from OAuth, let Supabase parse the URL and return the session
+        if (
+          typeof window !== "undefined" &&
+          supabase?.auth?.getSessionFromUrl
+        ) {
+          try {
+            const maybe = await supabase.auth.getSessionFromUrl();
+            const session = (maybe as any)?.data?.session;
+            if (session) {
+              if (!mounted) return;
+              setUser(session.user ?? null);
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            // ignore and continue to normal getSession
+          }
+        }
+
+        const { data } = await supabase.auth.getSession();
+        if (!mounted) return;
+        setUser((data as any)?.session?.user ?? null);
+        setLoading(false);
+      } catch (e) {
+        setUser(null);
+        setLoading(false);
+      }
     })();
-    const sub = supabase.auth.onAuthStateChange((_event: string, session: any) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-    return () => { mounted = false; try { sub.subscription.unsubscribe(); } catch (e) {} };
+    const sub = supabase.auth.onAuthStateChange(
+      (_event: string, session: any) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
+    );
+    return () => {
+      mounted = false;
+      try {
+        sub.subscription.unsubscribe();
+      } catch (e) {}
+    };
   }, []);
 
   useEffect(() => {
@@ -34,6 +98,18 @@ export default function MyAllergiesPage() {
       // allergies management is server-only and requires login
       if (!user) {
         setAllergies([]);
+        return;
+      }
+
+      // If Supabase client isn't configured, load from local fallback store
+      if (!supabase) {
+        try {
+          const raw = localStorage.getItem("wtc_local_allergies_v1");
+          const arr = raw ? JSON.parse(raw) : [];
+          setAllergies(Array.isArray(arr) ? arr : []);
+        } catch (e) {
+          setAllergies([]);
+        }
         return;
       }
 
@@ -45,39 +121,168 @@ export default function MyAllergiesPage() {
 
         const res = await fetch(`/api/user/allergies`, { headers });
         const json = await res.json();
-        if (!json.error && Array.isArray(json.allergies)) setAllergies(json.allergies);
-      } catch (e) { setAllergies([]); }
+        if (!json.error && Array.isArray(json.allergies))
+          setAllergies(json.allergies);
+      } catch (e) {
+        setAllergies([]);
+      }
     })();
   }, [user]);
 
-  const add = async () => {
-    if (!newAllergy.trim()) return;
+  // ingredient suggestions for the add input
+  useEffect(() => {
+    const q = newAllergy.trim();
+    if (!q) {
+      setSuggestions([]);
+      setSearching(false);
+      return;
+    }
+
+    setSearching(true);
+    const t = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `/api/ingredients?search=${encodeURIComponent(q)}&limit=8`
+        );
+        const json = await res.json();
+        if (!json.error && Array.isArray(json.ingredients))
+          setSuggestions(json.ingredients);
+        else setSuggestions([]);
+      } catch (e) {
+        setSuggestions([]);
+      } finally {
+        setSearching(false);
+      }
+    }, 200);
+
+    return () => clearTimeout(t);
+  }, [newAllergy]);
+
+  const addAllergy = async (suggestion?: any) => {
+    const nameToAdd = suggestion ? suggestion.name_en : newAllergy.trim();
+    if (!nameToAdd) return;
+
+    // prevent duplicates locally
+    const exists = allergies.some((a) => {
+      if (suggestion && a.ingredientId && suggestion.id)
+        return a.ingredientId === suggestion.id;
+      return (a.name_en || "").toLowerCase() === nameToAdd.toLowerCase();
+    });
+    if (exists) {
+      showToast("Allergy already exists", "info");
+      setNewAllergy("");
+      setSuggestions([]);
+      return;
+    }
+
     // require login for server-side allergy creation/linking
     if (!user) {
-      await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: window.location.href } });
+      await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.href },
+      });
       return;
     }
 
     setAdding(true);
     try {
+      // If Supabase isn't configured, use local fallback storage for dev
+      if (!supabase) {
+        try {
+          const key = "wtc_local_allergies_v1";
+          const raw = localStorage.getItem(key);
+          const arr = raw ? JSON.parse(raw) : [];
+          const newAllergyObj = {
+            id: Date.now(),
+            userId: user?.id || user?.email || "dev",
+            ingredientId: suggestion?.id ?? null,
+            name_en: nameToAdd,
+            name_bn: suggestion?.name_bn ?? "",
+            createdAt: new Date().toISOString(),
+          };
+          arr.push(newAllergyObj);
+          localStorage.setItem(key, JSON.stringify(arr));
+          setAllergies((prev) => [...prev, newAllergyObj]);
+          showToast("Allergy added (local)", "success");
+          setNewAllergy("");
+          setSuggestions([]);
+          return;
+        } catch (e) {
+          showToast("Failed to add allergy (local)", "error");
+          return;
+        }
+      }
+
       const { data: sessionResp } = await supabase.auth.getSession();
       const token = (sessionResp as any)?.session?.access_token;
       const headers: any = { "Content-Type": "application/json" };
-      if (token) headers["Authorization"] = `Bearer ${token}`;
-      const res = await fetch(`/api/user/allergies`, { method: "POST", headers, body: JSON.stringify({ name_en: newAllergy.trim() }) });
+      if (!token) {
+        showToast("Please sign in to add allergies", "error");
+        // trigger sign-in flow
+        await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: { redirectTo: window.location.href },
+        });
+        return;
+      }
+      headers["Authorization"] = `Bearer ${token}`;
+
+      const body: any = {};
+      if (suggestion && suggestion.id) body.ingredientId = suggestion.id;
+      else body.name_en = nameToAdd;
+
+      const res = await fetch(`/api/user/allergies`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        if (res.status === 401) {
+          showToast("Unauthorized — please sign in", "error");
+          await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: { redirectTo: window.location.href },
+          });
+          return;
+        }
+        const err = await res.json().catch(() => ({}));
+        showToast(
+          err?.error || `Failed to add allergy (${res.status})`,
+          "error"
+        );
+        return;
+      }
+
       const json = await res.json();
-      if (!json.error) setAllergies((prev) => [...prev, json.allergy]);
-      setNewAllergy("");
+      if (json?.allergy) {
+        if (json.existed) {
+          showToast("Allergy already exists", "info");
+        } else {
+          setAllergies((prev) => [...prev, json.allergy]);
+          showToast("Allergy added", "success");
+        }
+        setNewAllergy("");
+        setSuggestions([]);
+      } else {
+        showToast("Failed to add allergy", "error");
+      }
     } catch (e) {
+      showToast("Failed to add allergy", "error");
     } finally {
       setAdding(false);
     }
   };
 
+  // keep old add name for compatibility
+  const add = () => addAllergy();
+
   const remove = async (id: any) => {
     // require login for server-side allergy removal
     if (!user) {
-      await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: window.location.href } });
+      await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.href },
+      });
       return;
     }
     try {
@@ -85,9 +290,21 @@ export default function MyAllergiesPage() {
       const token = (sessionResp as any)?.session?.access_token;
       const headers: any = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
-      await fetch(`/api/user/allergies`, { method: "DELETE", headers, body: JSON.stringify({ id }) });
-      setAllergies((prev) => prev.filter((a) => a.id !== id));
-    } catch (e) {}
+      const res = await fetch(`/api/user/allergies`, {
+        method: "DELETE",
+        headers,
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setAllergies((prev) => prev.filter((a) => a.id !== id));
+        showToast("Allergy removed", "success");
+      } else {
+        const err = await res.json().catch(() => ({}));
+        showToast(err?.error || `Failed to remove (${res.status})`, "error");
+      }
+    } catch (e) {
+      showToast("Failed to remove allergy", "error");
+    }
   };
 
   if (loading) {
@@ -111,7 +328,8 @@ export default function MyAllergiesPage() {
           Sign in to manage allergies
         </h1>
         <p className="text-slate-600 font-medium mb-8 text-center max-w-md">
-          Track ingredients you're allergic to and get warnings when browsing recipes.
+          Track ingredients you're allergic to and get warnings when browsing
+          recipes.
         </p>
         <Link
           href="/"
@@ -126,13 +344,60 @@ export default function MyAllergiesPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-slate-600 hover:text-amber-600 font-semibold mb-6 sm:mb-8 transition-colors"
-        >
-          <ArrowLeft size={20} />
-          Back to Recipes
-        </Link>
+        {/* Toast */}
+        {toast && (
+          <div
+            className={`mb-4 p-3 rounded-xl text-sm font-semibold ${
+              toast.type === "success"
+                ? "bg-emerald-50 text-emerald-800 border border-emerald-100"
+                : toast.type === "error"
+                ? "bg-red-50 text-red-800 border border-red-100"
+                : "bg-slate-50 text-slate-800 border border-slate-100"
+            }`}
+          >
+            {toast.message}
+          </div>
+        )}
+        <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-slate-600 hover:text-amber-600 font-semibold transition-colors"
+          >
+            <ArrowLeft size={20} />
+            Back to Recipes
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/user"
+              className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              Profile
+            </Link>
+            <button
+              onClick={async () => {
+                try {
+                  if (supabase) {
+                    await supabase.auth.signOut();
+                  } else {
+                    // dev fallback
+                    try {
+                      localStorage.removeItem("wtc_dev_user");
+                      localStorage.removeItem("wtc_local_allergies_v1");
+                    } catch (e) {}
+                  }
+                  setUser(null);
+                  showToast("Signed out", "info");
+                } catch (e) {
+                  showToast("Failed to sign out", "error");
+                }
+              }}
+              className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
 
         <div className="flex items-center gap-4 mb-8 sm:mb-12">
           <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-yellow-100 rounded-2xl flex items-center justify-center shadow-md">
@@ -157,29 +422,69 @@ export default function MyAllergiesPage() {
             <input
               value={newAllergy}
               onChange={(e) => setNewAllergy(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && add()}
+              onKeyPress={(e) => e.key === "Enter" && add()}
               placeholder="e.g., Peanut, Dairy, Shellfish"
               className="flex-1 px-4 py-3 sm:py-3.5 rounded-xl border-2 border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all text-sm sm:text-base bg-slate-50 text-slate-700 font-medium"
             />
-            <button
-              onClick={add}
-              disabled={!newAllergy.trim() || adding}
-              className="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-6 py-3 sm:py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-            >
-              {adding ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  <span className="hidden sm:inline">Adding...</span>
-                </>
-              ) : (
-                <>
-                  <Plus size={18} />
-                  <span>Add</span>
-                </>
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={add}
+                disabled={!newAllergy.trim() || adding}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-6 py-3 sm:py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {adding ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    <span className="hidden sm:inline">Adding...</span>
+                  </>
+                ) : (
+                  <>
+                    <Plus size={18} />
+                    <span>Add</span>
+                  </>
+                )}
+              </button>
+              <button
+                onClick={() => {
+                  setNewAllergy("");
+                  setSuggestions([]);
+                }}
+                className="px-4 py-3 bg-white rounded-xl border"
+              >
+                Clear
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Suggestions dropdown */}
+        {suggestions.length > 0 && (
+          <div className="mt-2 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+              {suggestions.map((s, idx) => (
+                <button
+                  key={s.id || idx}
+                  onClick={() => {
+                    addAllergy(s);
+                  }}
+                  className="w-full text-left px-4 py-3 hover:bg-amber-50 transition-colors flex items-center gap-3"
+                >
+                  <img
+                    src={s.img || "/images/placeholder-ingredient.png"}
+                    alt={s.name_en}
+                    className="w-8 h-8 rounded mr-2 object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold">{s.name_en}</div>
+                    {s.name_bn && (
+                      <div className="text-xs text-slate-500">{s.name_bn}</div>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Allergies List */}
         {allergies.length === 0 ? (
@@ -191,7 +496,8 @@ export default function MyAllergiesPage() {
               No allergies set
             </h3>
             <p className="text-slate-600 font-medium text-sm sm:text-base">
-              Add ingredients you're allergic to so we can warn you when a recipe contains them.
+              Add ingredients you're allergic to so we can warn you when a
+              recipe contains them.
             </p>
           </div>
         ) : (

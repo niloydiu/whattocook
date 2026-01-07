@@ -25,6 +25,25 @@ export function useActiveUser() {
     let mounted = true;
     (async () => {
       try {
+        // If redirected back from OAuth, let Supabase parse the URL and return the session
+        if (
+          typeof window !== "undefined" &&
+          supabase?.auth?.getSessionFromUrl
+        ) {
+          try {
+            const maybe = await supabase.auth.getSessionFromUrl();
+            const session = (maybe as any)?.data?.session;
+            if (session) {
+              if (!mounted) return;
+              setUser(session.user ?? null);
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            // ignore and continue to normal getSession
+          }
+        }
+
         const { data } = await supabase.auth.getSession();
         if (!mounted) return;
         setUser((data as any)?.session?.user ?? null);

@@ -3,13 +3,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Plus, X, ArrowRight, Sparkles, ChefHat } from "lucide-react";
-import ingredientsData from "../lib/ingredients.json";
 import {
   useFuzzyIngredientSearch,
   highlightMatch,
   type Ingredient,
 } from "../hooks/useFuzzySearch";
 import { useGlobalScrollCapture } from "./ScrollCaptureProvider";
+import { API_PATHS } from "../lib/api-paths";
 
 type Locale = "en" | "bn";
 
@@ -33,6 +33,23 @@ export default function IngredientSearch({
   const [dropdownPosition, setDropdownPosition] = useState<"bottom" | "top">(
     "top"
   );
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+
+  // Fetch all ingredients from the database for fuzzy searching
+  useEffect(() => {
+    async function fetchIngredients() {
+      try {
+        const response = await fetch(`${API_PATHS.INGREDIENTS}?limit=5000`);
+        const data = await response.json();
+        if (data.ingredients) {
+          setIngredients(data.ingredients);
+        }
+      } catch (error) {
+        console.error("Failed to fetch ingredients from DB", error);
+      }
+    }
+    fetchIngredients();
+  }, []);
 
   // Calculate dropdown position based on available space
   useEffect(() => {
@@ -48,8 +65,6 @@ export default function IngredientSearch({
       }
     }
   }, [open, input]);
-
-  const ingredients = ingredientsData as Ingredient[];
 
   // Use fuzzy search instead of basic filtering
   const searchResults = useFuzzyIngredientSearch(ingredients, input, {
@@ -356,24 +371,6 @@ export default function IngredientSearch({
                 )}
               </AnimatePresence>
             </div>
-
-            {/* Modern Find Button */}
-            <motion.button
-              onClick={onFind}
-              disabled={selected.length === 0}
-              whileHover={{ scale: selected.length > 0 ? 1.05 : 1 }}
-              whileTap={{ scale: selected.length > 0 ? 0.95 : 1 }}
-              className={`inline-flex px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 shadow-md sm:shadow-lg items-center gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] lg:min-w-[140px] justify-center min-h-[44px] ${
-                selected.length > 0
-                  ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30 hover:shadow-red-500/40"
-                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
-              }`}
-            >
-              <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="ml-2">
-                {locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}
-              </span>
-            </motion.button>
           </div>
 
           {/* Selected Ingredients Display */}
@@ -416,7 +413,7 @@ export default function IngredientSearch({
                           }}
                         />
                       </div>
-                      <span className="text-slate-700 font-medium text-sm sm:text-base truncate max-w-[120px] sm:max-w-none">
+                      <span className="text-slate-700 font-medium text-sm sm:text-base truncate max-w-[180px] sm:max-w-none">
                         {s}
                       </span>
                       <motion.button
@@ -436,12 +433,12 @@ export default function IngredientSearch({
         </div>
       </motion.div>
 
-      {/* Mobile Find Button */}
+      {/* Main Find Button */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="mt-4 sm:mt-6 md:hidden px-2 sm:px-4"
+        className="mt-4 sm:mt-6 px-2 sm:px-4"
       >
         <motion.button
           onClick={onFind}

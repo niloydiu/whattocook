@@ -1,5 +1,14 @@
-import prisma from "../lib/prisma.js";
-import ingredients from "../lib/ingredients.json" assert { type: "json" };
+import prisma from "../lib/prisma";
+import { readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const ingredients = JSON.parse(
+  readFileSync(join(__dirname, "../lib/ingredients.json"), "utf-8")
+);
 
 async function migrateIngredients() {
   console.log("Starting ingredient migration...");
