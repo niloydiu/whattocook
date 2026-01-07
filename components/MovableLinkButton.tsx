@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Home, Flag, ExternalLink, Github, Linkedin, Twitter } from "lucide-react";
 
 export default function MovableLinkButton({
   href = "https://niloykm.vercel.app",
@@ -19,6 +20,7 @@ export default function MovableLinkButton({
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [anchorSide, setAnchorSide] = useState<"left" | "right">("right");
+  const rafRef = useRef<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,9 +35,9 @@ export default function MovableLinkButton({
         // default to top-right corner with some margin
         const defaultX = Math.max(16, (window.innerWidth || 800) - 72);
         const defaultY = 20;
-        const initial = { x: defaultX, y: defaultY };
-        setPos(initial);
-        posRef.current = initial;
+          const initial = { x: defaultX, y: defaultY };
+          setPos(initial);
+          posRef.current = initial;
       }
     } catch (e) {
       const fallback = { x: 16, y: 20 };
@@ -43,6 +45,15 @@ export default function MovableLinkButton({
       posRef.current = fallback;
     }
   }, []);
+
+    // apply transform when pos state changes (non-dragging)
+    useEffect(() => {
+      if (!pos || !ref.current) return;
+      // use transform for smoothness
+      ref.current.style.left = "0px";
+      ref.current.style.top = "0px";
+      ref.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+    }, [pos]);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -57,7 +68,14 @@ export default function MovableLinkButton({
         if (dx > 4 || dy > 4) dragRef.current.moved = true;
       }
       posRef.current = next;
-      setPos(next);
+
+      // apply transform directly for smooth updates (no rerender)
+      if (ref.current) {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          ref.current!.style.transform = `translate3d(${next.x}px, ${next.y}px, 0)`;
+        });
+      }
     };
     const onUp = () => {
       if (dragRef.current.dragging) {
@@ -81,7 +99,10 @@ export default function MovableLinkButton({
             const winH = window.innerHeight || 600;
             cur.y = Math.min(Math.max(12, cur.y), winH - btnW - 12);
             posRef.current = cur;
+            // update state once on release for reactivity
             setPos(cur);
+            // ensure final transform applied
+            if (ref.current) ref.current.style.transform = `translate3d(${cur.x}px, ${cur.y}px, 0)`;
             localStorage.setItem(key, JSON.stringify(cur));
           }
         } catch (e) {}
@@ -117,7 +138,9 @@ export default function MovableLinkButton({
     } catch (_) {}
   };
 
-  const onClick = () => {
+  const onClick = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     try {
       // ignore click if the user dragged the button
       if (dragRef.current.moved) {
@@ -140,10 +163,10 @@ export default function MovableLinkButton({
         onClick={onClick}
         title={label}
         aria-label={label}
-        style={{ position: "fixed", left: pos.x, top: pos.y, zIndex: zIndexState, width: 48, height: 48, pointerEvents: 'auto', touchAction: 'none' }}
+        style={{ position: "fixed", left: 0, top: 0, zIndex: zIndexState, width: 48, height: 48, pointerEvents: 'auto', touchAction: 'none', willChange: 'transform' }}
         className="bg-black text-white rounded-full shadow-md hover:opacity-95 flex items-center justify-center p-0 overflow-hidden"
       >
-        <img src="/favicon.png" alt="menu" className="w-6 h-6 object-contain" />
+        <img src="/favicon.png" alt="menu" draggable={false} onDragStart={(e)=>e.preventDefault()} className="w-6 h-6 object-contain" />
       </button>
 
       {showMenu && (
