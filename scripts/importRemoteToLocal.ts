@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // TARGET_DATABASE_URL should be provided in env or default to the common local URL
-const TARGET = process.env.TARGET_DATABASE_URL || "postgresql://niloy@localhost:5432/whattocook?schema=public";
+const TARGET =
+  process.env.TARGET_DATABASE_URL ||
+  "postgresql://niloy@localhost:5432/whattocook?schema=public";
 
 // Set DATABASE_URL for Prisma client to TARGET before importing
 process.env.DATABASE_URL = TARGET;
@@ -20,7 +22,9 @@ async function main() {
   }
 
   const raw = JSON.parse(fs.readFileSync(inPath, "utf-8"));
-  console.log(`Importing ${raw.length} recipes into target DB: ${TARGET.slice(0, 60)}...`);
+  console.log(
+    `Importing ${raw.length} recipes into target DB: ${TARGET.slice(0, 60)}...`
+  );
 
   for (const r of raw) {
     // Upsert recipe basic fields
@@ -61,8 +65,12 @@ async function main() {
 
     // Remove existing steps and recipeIngredients and blogContent for this recipe
     await prisma.recipeStep.deleteMany({ where: { recipe_id: recipeId } });
-    await prisma.recipeIngredient.deleteMany({ where: { recipe_id: recipeId } });
-    await prisma.recipeBlogContent.deleteMany({ where: { recipe_id: recipeId } });
+    await prisma.recipeIngredient.deleteMany({
+      where: { recipe_id: recipeId },
+    });
+    await prisma.recipeBlogContent.deleteMany({
+      where: { recipe_id: recipeId },
+    });
 
     // Recreate steps
     if (Array.isArray(r.steps) && r.steps.length) {
@@ -83,46 +91,75 @@ async function main() {
       for (const ri of r.ingredients) {
         const ing = ri.ingredient || ri;
         // Try find by name_en then create if not exists
-        let existing = await prisma.ingredient.findFirst({ where: { name_en: ing.name_en } });
+        let existing = await prisma.ingredient.findFirst({
+          where: { name_en: ing.name_en },
+        });
         if (!existing) {
-          existing = await prisma.ingredient.create({ data: {
-            name_en: ing.name_en || "",
-            name_bn: ing.name_bn || "",
-            img: ing.img || "",
-            phonetic: ing.phonetic || [],
-          }});
+          try {
+            existing = await prisma.ingredient.create({
+              data: {
+                name_en: ing.name_en || "",
+                name_bn: ing.name_bn || "",
+                img: ing.img || "",
+                phonetic: ing.phonetic || [],
+              },
+            });
+          } catch (createErr: any) {
+            // Handle potential race or unique-id conflicts by attempting to re-find the ingredient
+            console.warn(
+              "Warning: ingredient.create failed, attempting to re-find existing ingredient",
+              createErr?.code || createErr
+            );
+            existing = await prisma.ingredient.findFirst({
+              where: { name_en: ing.name_en },
+            });
+            if (!existing) {
+              // Try fallback lookups
+              existing = await prisma.ingredient.findFirst({
+                where: { name_bn: ing.name_bn || "" },
+              });
+            }
+            if (!existing) {
+              // If still not found, rethrow the original error
+              throw createErr;
+            }
+          }
         }
 
-        await prisma.recipeIngredient.create({ data: {
-          recipe_id: recipeId,
-          ingredient_id: existing.id,
-          quantity: ri.quantity || "",
-          unit_en: ri.unit_en || "",
-          unit_bn: ri.unit_bn || "",
-          notes_en: ri.notes_en || null,
-          notes_bn: ri.notes_bn || null,
-        }});
+        await prisma.recipeIngredient.create({
+          data: {
+            recipe_id: recipeId,
+            ingredient_id: existing.id,
+            quantity: ri.quantity || "",
+            unit_en: ri.unit_en || "",
+            unit_bn: ri.unit_bn || "",
+            notes_en: ri.notes_en || null,
+            notes_bn: ri.notes_bn || null,
+          },
+        });
       }
     }
 
     // Recreate blogContent if present
     if (r.blogContent) {
       const bc = r.blogContent;
-      await prisma.recipeBlogContent.create({ data: {
-        recipe_id: recipeId,
-        intro_en: bc.intro_en || "",
-        intro_bn: bc.intro_bn || "",
-        what_makes_it_special_en: bc.what_makes_it_special_en || "",
-        what_makes_it_special_bn: bc.what_makes_it_special_bn || "",
-        cooking_tips_en: bc.cooking_tips_en || "",
-        cooking_tips_bn: bc.cooking_tips_bn || "",
-        serving_en: bc.serving_en || "",
-        serving_bn: bc.serving_bn || "",
-        storage_en: bc.storage_en || null,
-        storage_bn: bc.storage_bn || null,
-        full_blog_en: bc.full_blog_en || "",
-        full_blog_bn: bc.full_blog_bn || "",
-      }});
+      await prisma.recipeBlogContent.create({
+        data: {
+          recipe_id: recipeId,
+          intro_en: bc.intro_en || "",
+          intro_bn: bc.intro_bn || "",
+          what_makes_it_special_en: bc.what_makes_it_special_en || "",
+          what_makes_it_special_bn: bc.what_makes_it_special_bn || "",
+          cooking_tips_en: bc.cooking_tips_en || "",
+          cooking_tips_bn: bc.cooking_tips_bn || "",
+          serving_en: bc.serving_en || "",
+          serving_bn: bc.serving_bn || "",
+          storage_en: bc.storage_en || null,
+          storage_bn: bc.storage_bn || null,
+          full_blog_en: bc.full_blog_en || "",
+          full_blog_bn: bc.full_blog_bn || "",
+        },
+      });
     }
   }
 

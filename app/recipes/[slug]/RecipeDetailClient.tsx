@@ -10,6 +10,7 @@ import {
   ArrowLeft,
   Eye,
   Youtube as YouTubeIcon,
+  Printer,
   Flag,
   X,
   Heart,
@@ -331,6 +332,8 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                 <img
                   src={recipe.image || "/recipe-placeholder.jpg"}
                   alt={t ? recipe.title_en : recipe.title_bn}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
@@ -359,13 +362,25 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                       </button>
                     )}
 
-                    <button
-                      onClick={handleStartCooking}
-                      className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 sm:gap-3 transition-all shadow-xl hover:shadow-2xl active:scale-95"
-                    >
-                      <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
-                      {t ? "COOK MODE" : "কুকিং মোড"}
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleStartCooking}
+                        className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 sm:gap-3 transition-all shadow-xl hover:shadow-2xl active:scale-95"
+                      >
+                        <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
+                        {t ? "COOK MODE" : "কুকিং মোড"}
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          window.open(`/recipes/${recipe.slug}/print`, "_blank")
+                        }
+                        className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm text-slate-900 flex items-center gap-2 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
+                      >
+                        <Printer className="w-4 h-4 sm:w-5 sm:h-5" />
+                        {t ? "PRINT" : "প্রিন্ট"}
+                      </button>
+                    </div>
                   </div>
 
                   <button
@@ -537,6 +552,8 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                                   ? item.ingredient.name_en
                                   : item.ingredient.name_bn
                               }
+                              loading="lazy"
+                              decoding="async"
                               className="w-12 h-12 rounded-xl object-cover bg-slate-100 shadow-sm"
                             />
                           ) : (

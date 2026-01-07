@@ -43,6 +43,8 @@ export default function RecipesManagement() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [bulkDeleting, setBulkDeleting] = useState(false);
   const [showBulkDeleteConfirm, setShowBulkDeleteConfirm] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const [scanSummary, setScanSummary] = useState<string | null>(null);
 
   // Alert Modal State
   const [alertConfig, setAlertConfig] = useState<{
@@ -217,6 +219,37 @@ export default function RecipesManagement() {
             <Plus size={20} />
             Add Recipe
           </Link>
+          <button
+            onClick={async () => {
+              const token = localStorage.getItem("adminToken");
+              if (!token) return setScanSummary("Not signed in");
+              try {
+                setScanning(true);
+                setScanSummary(null);
+                const res = await fetch("/api/admin/recipes/check-urls", {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                  body: JSON.stringify({ fix: true }),
+                });
+                const data = await res.json();
+                if (res.ok) {
+                  const fixed = data.results.filter((r: any) => r.fixed).length;
+                  setScanSummary(`${fixed} recipes updated`);
+                  // refresh list
+                  fetchRecipes();
+                } else {
+                  setScanSummary(data.error || "Scan failed");
+                }
+              } catch (err) {
+                setScanSummary("Error during scan");
+              } finally {
+                setScanning(false);
+              }
+            }}
+            className="flex items-center gap-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-colors shadow-lg"
+          >
+            {scanning ? "Scanning..." : "Scan/Fix URLs"}
+          </button>
         </div>
       </div>
 
@@ -372,6 +405,41 @@ export default function RecipesManagement() {
                   >
                     <Edit size={20} />
                   </Link>
+                  <button
+                    onClick={async () => {
+                      const token = localStorage.getItem("adminToken");
+                      if (!token) {
+                        setAlertConfig({ isOpen: true, title: "Error", message: "Not signed in", type: "error" });
+                        return;
+                      }
+                      try {
+                        const res = await fetch(`/api/admin/recipes/${recipe.id}/check-urls`, {
+                          method: "POST",
+                          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                          body: JSON.stringify({ fix: true }),
+                        });
+                        const data = await res.json();
+                        if (res.ok && data.ok) {
+                          if (data.fixed) {
+                            setAlertConfig({ isOpen: true, title: "Fixed", message: "Recipe URLs updated", type: "success" });
+                            fetchRecipes();
+                          } else {
+                            setAlertConfig({ isOpen: true, title: "No changes", message: "No URL changes detected", type: "info" });
+                          }
+                        } else if (res.ok && !data.ok) {
+                          setAlertConfig({ isOpen: true, title: "Result", message: JSON.stringify(data), type: "info" });
+                        } else {
+                          setAlertConfig({ isOpen: true, title: "Error", message: data.error || "Failed", type: "error" });
+                        }
+                      } catch (err) {
+                        setAlertConfig({ isOpen: true, title: "Error", message: "Request failed", type: "error" });
+                      }
+                    }}
+                    className="p-3 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-xl transition-colors"
+                    title="Check/Fix URLs"
+                  >
+                    🔧
+                  </button>
                   <button
                     onClick={() => setDeleteId(recipe.id)}
                     className="p-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl transition-colors"

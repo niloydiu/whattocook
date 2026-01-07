@@ -25,6 +25,10 @@ interface Stats {
 export default function AdminDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<string | null>(null);
+  const [scanningUrls, setScanningUrls] = useState(false);
+  const [scanStatus, setScanStatus] = useState<string | null>(null);
 
   useEffect(() => {
     fetchStats();
@@ -117,6 +121,82 @@ export default function AdminDashboard() {
       <div>
         <h2 className="text-3xl font-black text-slate-900">Dashboard</h2>
         <p className="text-slate-600 font-medium">Manage your recipe platform</p>
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            onClick={async () => {
+              const token = localStorage.getItem("adminToken");
+              if (!token) {
+                setSyncStatus("Not signed in");
+                return;
+              }
+
+              try {
+                setSyncing(true);
+                setSyncStatus(null);
+                const res = await fetch("/api/admin/trigger-sync", {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${token}` },
+                });
+                const data = await res.json();
+                if (res.ok && data.ok) {
+                  setSyncStatus("Triggered export workflow");
+                } else {
+                  setSyncStatus(
+                    `Failed: ${data.error || data.detail || res.status}`
+                  );
+                }
+              } catch (err) {
+                setSyncStatus("Error triggering sync");
+              } finally {
+                setSyncing(false);
+              }
+            }}
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-bold"
+          >
+            {syncing ? "Triggering..." : "Run Sync Now"}
+          </button>
+
+          <button
+            onClick={async () => {
+              const token = localStorage.getItem("adminToken");
+              if (!token) {
+                setScanStatus("Not signed in");
+                return;
+              }
+
+              try {
+                setScanningUrls(true);
+                setScanStatus(null);
+                const res = await fetch("/api/admin/recipes/check-urls", {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                  body: JSON.stringify({ fix: true }),
+                });
+                const data = await res.json();
+                if (res.ok && data.ok) {
+                  const fixed = (data.results || []).filter((r: any) => r.fixed).length;
+                  setScanStatus(`${fixed} recipes updated`);
+                } else {
+                  setScanStatus(data.error || `Scan failed: ${res.status}`);
+                }
+              } catch (err) {
+                setScanStatus("Error during scan");
+              } finally {
+                setScanningUrls(false);
+              }
+            }}
+            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md font-bold"
+          >
+            {scanningUrls ? "Scanning..." : "Scan/Fix URLs"}
+          </button>
+
+          {scanStatus && (
+            <span className="text-sm text-slate-600">{scanStatus}</span>
+          )}
+          {syncStatus && (
+            <span className="text-sm text-slate-600">{syncStatus}</span>
+          )}
+        </div>
       </div>
 
       {/* Stats */}

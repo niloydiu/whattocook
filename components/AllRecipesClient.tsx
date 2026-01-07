@@ -165,11 +165,26 @@ export default function AllRecipesClient({
         suggestions={suggestions}
         showSuggestions={showSuggestions}
         setShowSuggestions={setShowSuggestions}
-        handleSearchEnter={() => {}}
+        handleSearchEnter={() => {
+          // Trigger a search on this page: apply the current searchQuery
+          // and reset to page 1. Also update the URL so refresh/bookmark works.
+          setDebouncedSearchQuery(searchQuery);
+          setPage(1);
+          const params = new URLSearchParams(window.location.search);
+          if (searchQuery) params.set("search", searchQuery);
+          else params.delete("search");
+          // Keep category/foodCategory if present
+          const newUrl = `/recipes?${params.toString()}`;
+          window.history.replaceState({}, "", newUrl);
+        }}
         onSelectSuggestion={(s) => {
           if (s.type === "category") {
             setSearchQuery(s.label);
             setSelectedCategory(s.label);
+            setPage(1);
+            const params = new URLSearchParams(window.location.search);
+            params.set("category", s.label);
+            window.history.replaceState({}, "", `/recipes?${params.toString()}`);
           } else {
             window.location.href = `/recipes/${s.slug}`;
           }

@@ -16,6 +16,7 @@
     "db:reset": "prisma migrate reset",
     "db:import-ingredients": "tsx scripts/migrateIngredientsToDb.ts",
     "db:import-recipes": "tsx scripts/importRecipesToDb.ts",
+    "sync:remote-to-local": "bash scripts/sync-remote-to-local.sh",
     "db:delete-recipes": "tsx scripts/deleteAllRecipes.ts",
     "admin:create": "tsx scripts/createAdmin.ts"
   },
