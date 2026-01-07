@@ -29,6 +29,7 @@ function extractYoutubeId(url: string | null) {
   if (!url) return null;
   // unwrap markdown/anchor wrappers first
   url = unwrapLink(url);
+  if (!url) return null;
 
   // If it's a google search with q=youtube url
   const q = extractQParam(url);
@@ -50,6 +51,8 @@ function normalizeImageUrl(img: string | null) {
   if (!img) return null;
   // unwrap markdown or anchor wrappers
   img = unwrapLink(img);
+
+  if (!img) return null;
 
   // If it's a google search link with q=actualImageUrl
   const q = extractQParam(img);
