@@ -130,7 +130,7 @@ export default function Hero({
         >
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-            <span className="font-medium">{totalRecipes}+ Recipes</span>
+            <span className="font-medium">{totalRecipes} Recipes</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>

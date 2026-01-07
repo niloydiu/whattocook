@@ -549,7 +549,7 @@ export default function Page() {
         onRemove={removePantryItem}
         onFind={handleFind}
         locale={locale}
-        totalRecipes={displayedRecipes.length}
+        totalRecipes={apiRecipes.length + recipeData.length}
       />
 
       {/* Mobile Search Bar */}

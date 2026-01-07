@@ -18,6 +18,7 @@ export default function MovableLinkButton({
   const posRef = useRef<{ x: number; y: number } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const [anchorSide, setAnchorSide] = useState<"left" | "right">("right");
   const router = useRouter();
 
   useEffect(() => {
@@ -62,7 +63,27 @@ export default function MovableLinkButton({
       if (dragRef.current.dragging) {
         dragRef.current.dragging = false;
         try {
-          if (posRef.current) localStorage.setItem(key, JSON.stringify(posRef.current));
+          if (posRef.current) {
+            // snap to left or right edge when released
+            const btnW = 48;
+            const margin = 12;
+            const winW = window.innerWidth || 800;
+            const cur = { ...posRef.current };
+            const centerX = cur.x + btnW / 2;
+            if (centerX < winW / 2) {
+              cur.x = margin;
+              setAnchorSide("left");
+            } else {
+              cur.x = Math.max(margin, winW - btnW - margin);
+              setAnchorSide("right");
+            }
+            // clamp vertical position
+            const winH = window.innerHeight || 600;
+            cur.y = Math.min(Math.max(12, cur.y), winH - btnW - 12);
+            posRef.current = cur;
+            setPos(cur);
+            localStorage.setItem(key, JSON.stringify(cur));
+          }
         } catch (e) {}
       }
       // restore z-index after interaction
@@ -126,16 +147,31 @@ export default function MovableLinkButton({
       </button>
 
       {showMenu && (
-        <div
-          className="fixed inset-0 z-[99998] flex items-center justify-center"
-          onMouseDown={() => setShowMenu(false)}
-        >
+        <div className="fixed inset-0 z-[99998]" onMouseDown={() => setShowMenu(false)}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
+          {/* Anchored menu positioned near the button */}
           <div
             ref={menuRef}
             onMouseDown={(e) => e.stopPropagation()}
-            className="relative z-[99999] w-[320px] max-w-[90%] bg-white rounded-3xl shadow-2xl border border-slate-100 p-6"
+            style={(function () {
+              const menuW = 320;
+              const btnW = 48;
+              const gap = 8;
+              if (!pos) return { position: "fixed", left: 16, top: 16 } as React.CSSProperties;
+              const winW = typeof window !== "undefined" ? window.innerWidth : 800;
+              const winH = typeof window !== "undefined" ? window.innerHeight : 600;
+              const top = Math.min(Math.max(8, pos.y), winH - 120);
+              if (anchorSide === "left") {
+                const left = Math.min(winW - 16 - menuW, pos.x + btnW + gap);
+                return { position: "fixed", left, top, width: Math.min(menuW, winW - 32) } as React.CSSProperties;
+              } else {
+                const left = Math.max(16, pos.x - menuW - gap);
+                // if too far left, fallback to right anchored
+                return { position: "fixed", left, top, width: Math.min(menuW, winW - 32) } as React.CSSProperties;
+              }
+            })()}
+            className="relative z-[99999] max-w-[90%] bg-white rounded-3xl shadow-2xl border border-slate-100 p-6"
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
