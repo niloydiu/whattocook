@@ -79,7 +79,11 @@ export async function POST(req: NextRequest) {
       // Normalize youtube_url
       const rawYoutube = r.youtube_url;
       const extracted = extractYoutubeId(rawYoutube);
-      if (!rawYoutube || (!rawYoutube.includes("youtube.com") && !rawYoutube.includes("youtu.be"))) {
+      if (
+        !rawYoutube ||
+        (!rawYoutube.includes("youtube.com") &&
+          !rawYoutube.includes("youtu.be"))
+      ) {
         // maybe google search link
         const q = extractQParam(rawYoutube || "");
         if (q && q.includes("youtube")) {
@@ -105,9 +109,19 @@ export async function POST(req: NextRequest) {
       if (Object.keys(updates).length > 0) {
         if (fix) {
           await prisma.recipe.update({ where: { id: r.id }, data: updates });
-          report.push({ id: r.id, slug: r.slug, fixed: true, changes: updates });
+          report.push({
+            id: r.id,
+            slug: r.slug,
+            fixed: true,
+            changes: updates,
+          });
         } else {
-          report.push({ id: r.id, slug: r.slug, fixed: false, changes: updates });
+          report.push({
+            id: r.id,
+            slug: r.slug,
+            fixed: false,
+            changes: updates,
+          });
         }
       } else {
         report.push({ id: r.id, slug: r.slug, fixed: false, changes: null });
@@ -117,6 +131,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, results: report });
   } catch (err: any) {
     console.error("Error checking recipes URLs:", err?.stack || err);
-    return NextResponse.json({ error: err?.message || String(err), stack: err?.stack }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message || String(err), stack: err?.stack },
+      { status: 500 }
+    );
   }
 }

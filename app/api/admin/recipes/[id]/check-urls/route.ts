@@ -25,6 +25,7 @@ function unwrapLink(value: string | null) {
 function extractYoutubeId(url: string | null) {
   if (!url) return null;
   url = unwrapLink(url);
+  if (!url) return null;
   const q = extractQParam(url);
   if (q && q.includes("youtube")) url = q;
 
@@ -42,6 +43,7 @@ function extractYoutubeId(url: string | null) {
 function normalizeImageUrl(img: string | null) {
   if (!img) return null;
   img = unwrapLink(img);
+  if (!img) return null;
   const q = extractQParam(img);
   if (q && (q.startsWith("http://") || q.startsWith("https://"))) {
     return q;
@@ -50,12 +52,15 @@ function normalizeImageUrl(img: string | null) {
   return img;
 }
 
-export async function POST(req: NextRequest, ctx: { params?: { id?: string } }) {
+export async function POST(
+  req: NextRequest,
+  ctx: { params: Promise<{ id: string }> }
+) {
   try {
     if (!checkAdminAuth(req)) return unauthorizedResponse();
-
     let id: number;
-    const idStr = ctx?.params?.id;
+    const paramsObj = await ctx.params;
+    const idStr = paramsObj?.id;
     if (idStr) {
       id = parseInt(idStr, 10);
     } else {
@@ -68,13 +73,21 @@ export async function POST(req: NextRequest, ctx: { params?: { id?: string } }) 
           u = new URL(req.url, "http://localhost");
         }
         const m = u.pathname.match(/\/api\/admin\/recipes\/(\d+)\/check-urls/);
-        if (!m) return NextResponse.json({ error: "Missing recipe id" }, { status: 400 });
+        if (!m)
+          return NextResponse.json(
+            { error: "Missing recipe id" },
+            { status: 400 }
+          );
         id = parseInt(m[1], 10);
       } catch (e) {
-        return NextResponse.json({ error: "Missing recipe id" }, { status: 400 });
+        return NextResponse.json(
+          { error: "Missing recipe id" },
+          { status: 400 }
+        );
       }
     }
-    if (Number.isNaN(id)) return NextResponse.json({ error: "Invalid recipe id" }, { status: 400 });
+    if (Number.isNaN(id))
+      return NextResponse.json({ error: "Invalid recipe id" }, { status: 400 });
 
     const { fix } = (await req.json().catch(() => ({}))) as { fix?: boolean };
 
@@ -87,7 +100,8 @@ export async function POST(req: NextRequest, ctx: { params?: { id?: string } }) 
     const q = extractQParam(rawYoutube || "");
     if (q && q.includes("youtube")) {
       const idFromQ = extractYoutubeId(q);
-      if (idFromQ) updates.youtube_url = `https://www.youtube.com/watch?v=${idFromQ}`;
+      if (idFromQ)
+        updates.youtube_url = `https://www.youtube.com/watch?v=${idFromQ}`;
     }
 
     if (!r.youtube_id) {
@@ -96,11 +110,15 @@ export async function POST(req: NextRequest, ctx: { params?: { id?: string } }) 
     }
 
     const normalizedImage = normalizeImageUrl(r.image);
-    if (normalizedImage && normalizedImage !== r.image) updates.image = normalizedImage;
+    if (normalizedImage && normalizedImage !== r.image)
+      updates.image = normalizedImage;
 
     if (Object.keys(updates).length > 0) {
       if (fix) {
-        const updated = await prisma.recipe.update({ where: { id }, data: updates });
+        const updated = await prisma.recipe.update({
+          where: { id },
+          data: updates,
+        });
         return NextResponse.json({ ok: true, fixed: true, recipe: updated });
       }
       return NextResponse.json({ ok: true, fixed: false, changes: updates });
@@ -109,6 +127,9 @@ export async function POST(req: NextRequest, ctx: { params?: { id?: string } }) 
     return NextResponse.json({ ok: true, fixed: false, changes: null });
   } catch (err: any) {
     console.error("Error checking recipe url:", err?.stack || err);
-    return NextResponse.json({ error: err?.message || String(err), stack: err?.stack }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message || String(err), stack: err?.stack },
+      { status: 500 }
+    );
   }
 }

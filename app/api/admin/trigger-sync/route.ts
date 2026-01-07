@@ -6,7 +6,10 @@ export async function POST(req: NextRequest) {
 
   const token = process.env.GITHUB_ADMIN_TOKEN || process.env.GITHUB_TOKEN;
   if (!token) {
-    return NextResponse.json({ error: "Server missing GitHub token" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Server missing GitHub token" },
+      { status: 500 }
+    );
   }
 
   const owner = "niloydiu";
@@ -29,5 +32,8 @@ export async function POST(req: NextRequest) {
   }
 
   const text = await resp.text();
-  return NextResponse.json({ ok: false, status: resp.status, detail: text }, { status: 500 });
+  return NextResponse.json(
+    { ok: false, status: resp.status, detail: text },
+    { status: 500 }
+  );
 }

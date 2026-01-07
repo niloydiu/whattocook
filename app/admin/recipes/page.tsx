@@ -228,7 +228,10 @@ export default function RecipesManagement() {
                 setScanSummary(null);
                 const res = await fetch("/api/admin/recipes/check-urls", {
                   method: "POST",
-                  headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
                   body: JSON.stringify({ fix: true }),
                 });
                 const data = await res.json();
@@ -409,30 +412,66 @@ export default function RecipesManagement() {
                     onClick={async () => {
                       const token = localStorage.getItem("adminToken");
                       if (!token) {
-                        setAlertConfig({ isOpen: true, title: "Error", message: "Not signed in", type: "error" });
+                        setAlertConfig({
+                          isOpen: true,
+                          title: "Error",
+                          message: "Not signed in",
+                          type: "error",
+                        });
                         return;
                       }
                       try {
-                        const res = await fetch(`/api/admin/recipes/${recipe.id}/check-urls`, {
-                          method: "POST",
-                          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-                          body: JSON.stringify({ fix: true }),
-                        });
+                        const res = await fetch(
+                          `/api/admin/recipes/${recipe.id}/check-urls`,
+                          {
+                            method: "POST",
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ fix: true }),
+                          }
+                        );
                         const data = await res.json();
                         if (res.ok && data.ok) {
                           if (data.fixed) {
-                            setAlertConfig({ isOpen: true, title: "Fixed", message: "Recipe URLs updated", type: "success" });
+                            setAlertConfig({
+                              isOpen: true,
+                              title: "Fixed",
+                              message: "Recipe URLs updated",
+                              type: "success",
+                            });
                             fetchRecipes();
                           } else {
-                            setAlertConfig({ isOpen: true, title: "No changes", message: "No URL changes detected", type: "info" });
+                            setAlertConfig({
+                              isOpen: true,
+                              title: "No changes",
+                              message: "No URL changes detected",
+                              type: "info",
+                            });
                           }
                         } else if (res.ok && !data.ok) {
-                          setAlertConfig({ isOpen: true, title: "Result", message: JSON.stringify(data), type: "info" });
+                          setAlertConfig({
+                            isOpen: true,
+                            title: "Result",
+                            message: JSON.stringify(data),
+                            type: "info",
+                          });
                         } else {
-                          setAlertConfig({ isOpen: true, title: "Error", message: data.error || "Failed", type: "error" });
+                          setAlertConfig({
+                            isOpen: true,
+                            title: "Error",
+                            message: data.error || "Failed",
+                            type: "error",
+                          });
                         }
                       } catch (err) {
-                        setAlertConfig({ isOpen: true, title: "Error", message: "Request failed", type: "error" });
+                        setAlertConfig({
+                          isOpen: true,
+                          title: "Error",
+                          message: "Request failed",
+                          type: "error",
+                        });
                       }
                     }}
                     className="p-3 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-xl transition-colors"

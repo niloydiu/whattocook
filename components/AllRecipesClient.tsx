@@ -184,7 +184,11 @@ export default function AllRecipesClient({
             setPage(1);
             const params = new URLSearchParams(window.location.search);
             params.set("category", s.label);
-            window.history.replaceState({}, "", `/recipes?${params.toString()}`);
+            window.history.replaceState(
+              {},
+              "",
+              `/recipes?${params.toString()}`
+            );
           } else {
             window.location.href = `/recipes/${s.slug}`;
           }

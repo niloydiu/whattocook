@@ -120,7 +120,9 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       <div>
         <h2 className="text-3xl font-black text-slate-900">Dashboard</h2>
-        <p className="text-slate-600 font-medium">Manage your recipe platform</p>
+        <p className="text-slate-600 font-medium">
+          Manage your recipe platform
+        </p>
         <div className="mt-4 flex items-center gap-3">
           <button
             onClick={async () => {
@@ -169,12 +171,17 @@ export default function AdminDashboard() {
                 setScanStatus(null);
                 const res = await fetch("/api/admin/recipes/check-urls", {
                   method: "POST",
-                  headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
                   body: JSON.stringify({ fix: true }),
                 });
                 const data = await res.json();
                 if (res.ok && data.ok) {
-                  const fixed = (data.results || []).filter((r: any) => r.fixed).length;
+                  const fixed = (data.results || []).filter(
+                    (r: any) => r.fixed
+                  ).length;
                   setScanStatus(`${fixed} recipes updated`);
                 } else {
                   setScanStatus(data.error || `Scan failed: ${res.status}`);
@@ -207,7 +214,9 @@ export default function AdminDashboard() {
           className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all"
         >
           <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-blue-700 uppercase tracking-wider">Total Recipes</p>
+            <p className="text-sm font-bold text-blue-700 uppercase tracking-wider">
+              Total Recipes
+            </p>
             <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
               <BookOpen className="text-blue-600" size={20} />
             </div>
@@ -224,7 +233,9 @@ export default function AdminDashboard() {
           className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-green-100 shadow-lg hover:shadow-xl transition-all"
         >
           <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-green-700 uppercase tracking-wider">Ingredients</p>
+            <p className="text-sm font-bold text-green-700 uppercase tracking-wider">
+              Ingredients
+            </p>
             <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center">
               <Utensils className="text-green-600" size={20} />
             </div>
@@ -241,7 +252,9 @@ export default function AdminDashboard() {
           className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-purple-100 shadow-lg hover:shadow-xl transition-all"
         >
           <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-purple-700 uppercase tracking-wider">Categories</p>
+            <p className="text-sm font-bold text-purple-700 uppercase tracking-wider">
+              Categories
+            </p>
             <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center">
               <Database className="text-purple-600" size={20} />
             </div>
@@ -258,7 +271,9 @@ export default function AdminDashboard() {
           className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-orange-100 shadow-lg hover:shadow-xl transition-all"
         >
           <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-orange-700 uppercase tracking-wider">Cuisines</p>
+            <p className="text-sm font-bold text-orange-700 uppercase tracking-wider">
+              Cuisines
+            </p>
             <div className="w-10 h-10 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
               <Sparkles className="text-orange-600" size={20} />
             </div>
@@ -271,7 +286,9 @@ export default function AdminDashboard() {
 
       {/* Quick Actions */}
       <div>
-        <h3 className="text-2xl font-black text-slate-900 mb-6">Quick Actions</h3>
+        <h3 className="text-2xl font-black text-slate-900 mb-6">
+          Quick Actions
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {quickActions.map((action, index) => (
             <Link key={action.href} href={action.href}>
@@ -290,7 +307,9 @@ export default function AdminDashboard() {
                 <h4 className="text-lg font-black text-slate-900 mb-2">
                   {action.title}
                 </h4>
-                <p className="text-sm text-slate-600 font-medium">{action.description}</p>
+                <p className="text-sm text-slate-600 font-medium">
+                  {action.description}
+                </p>
               </motion.div>
             </Link>
           ))}
