@@ -3,9 +3,13 @@
 import React, { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 import Link from "next/link";
-import { LogIn, Heart, ShoppingCart } from "lucide-react";
+import { LogIn, Heart, ShoppingCart, User } from "lucide-react";
 
-export default function AuthButton() {
+type AuthButtonProps = {
+  inline?: boolean;
+};
+
+export default function AuthButton({ inline }: AuthButtonProps) {
   const [user, setUser] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const isDev = process.env.NODE_ENV !== "production";
@@ -85,6 +89,33 @@ export default function AuthButton() {
     setOpen(false);
   };
 
+  // Inline compact mode: used inside Navbar so no fixed positioning and simpler behavior.
+  if (inline) {
+    return (
+      <div>
+        {!user ? (
+          <button
+            onClick={signIn}
+            title="Sign in"
+            aria-label="Sign in"
+            className="w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-sm border border-slate-200/60 text-slate-700 hover:text-red-600 hover:border-red-300 transition-all active:scale-95"
+          >
+            <LogIn size={16} />
+          </button>
+        ) : (
+          <button
+            onClick={() => (window.location.href = "/user/favorites")}
+            title="Profile"
+            aria-label="Profile"
+            className="w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-sm border border-slate-200/60 text-slate-700 hover:border-red-300 transition-all active:scale-95"
+          >
+            <User size={16} />
+          </button>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="fixed right-4 top-3 md:top-5 z-[130]">
       {!user ? (
@@ -105,9 +136,7 @@ export default function AuthButton() {
             <span className="text-sm font-semibold">
               {user.email?.split("@")[0]}
             </span>
-            <span className="text-xs text-slate-400">
-              ▼
-            </span>
+            <span className="text-xs text-slate-400">▼</span>
           </button>
           {open && (
             <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100/80 backdrop-blur-xl overflow-hidden">

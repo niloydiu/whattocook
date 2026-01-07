@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import { LanguageProvider } from "../components/LanguageProvider";
 import { ScrollCaptureProvider } from "../components/ScrollCaptureProvider";
 import ChatBot from "../components/ChatBot";
-import AuthButton from "../components/AuthButton";
 import MovableLinkButton from "../components/MovableLinkButton";
 import FloatingNav from "../components/FloatingNav";
 import CookingTracker from "../components/CookingTracker";
@@ -81,7 +80,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ScrollCaptureProvider>
           <LanguageProvider>
             <FloatingNav />
-            <AuthButton />
             <MovableLinkButton />
             {children}
             <ChatBot />

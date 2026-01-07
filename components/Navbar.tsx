@@ -11,6 +11,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import AuthButton from "./AuthButton";
 import { motion, AnimatePresence } from "framer-motion";
 
 type NavbarProps = {
@@ -161,6 +162,11 @@ export default function Navbar({
             >
               BN
             </button>
+          </div>
+
+          {/* Inline Auth Button - Desktop Only (kept small & adjacent) */}
+          <div className="hidden md:flex items-center ml-2">
+            <AuthButton inline />
           </div>
 
           {/* Mobile Actions */}
