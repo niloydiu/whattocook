@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   AlertCircle,
   ChefHat,
+  Loader2,
 } from "lucide-react";
 import { Heart as HeartIcon } from "lucide-react";
 import supabase from "@/lib/supabaseClient";
@@ -71,6 +72,10 @@ export default function RecipeCardClean({
   const [allergies, setAllergies] = useState<string[]>([]);
   const [allergyMatches, setAllergyMatches] = useState<string[]>([]);
   const [addedWishlist, setAddedWishlist] = useState<string[]>([]);
+  const [isFavLoading, setIsFavLoading] = useState(false);
+  const [wishlistLoading, setWishlistLoading] = useState<Record<string, boolean>>(
+    {}
+  );
 
   useEffect(() => {
     if (!supabase) return;
@@ -178,6 +183,7 @@ export default function RecipeCardClean({
 
   const toggleFavorite = async (e: React.MouseEvent) => {
     e.stopPropagation();
+    setIsFavLoading(true);
     // If user is present and supabase configured, call server API. Otherwise use localStorage fallback.
     if (user && user.id && supabase) {
       try {
@@ -205,6 +211,8 @@ export default function RecipeCardClean({
         }
       } catch (e) {
         console.warn("favorite action failed", e);
+      } finally {
+        setIsFavLoading(false);
       }
       return;
     }
@@ -226,6 +234,8 @@ export default function RecipeCardClean({
       // show transient notice? left to UI
     } catch (e) {
       console.warn("local favorite action failed", e);
+    } finally {
+      setIsFavLoading(false);
     }
   };
 
@@ -236,6 +246,7 @@ export default function RecipeCardClean({
     if (e) e.stopPropagation();
     const key = "wtc_local_wishlist_v1";
 
+    setWishlistLoading((prev) => ({ ...prev, [name]: true }));
     if (user && user.id && supabase) {
       try {
         const { data: sessionResp } = await supabase.auth.getSession();
@@ -252,6 +263,8 @@ export default function RecipeCardClean({
         return;
       } catch (e) {
         // fallback to local
+      } finally {
+        setWishlistLoading((prev) => ({ ...prev, [name]: false }));
       }
     }
 
@@ -265,6 +278,8 @@ export default function RecipeCardClean({
       setAddedWishlist((s) => Array.from(new Set([...s, name])));
     } catch (e) {
       console.warn("local wishlist action failed", e);
+    } finally {
+      setWishlistLoading((prev) => ({ ...prev, [name]: false }));
     }
   };
   const title = recipe.title[locale] || recipe.title.en;
@@ -402,28 +417,27 @@ export default function RecipeCardClean({
           <div className="flex flex-wrap gap-1.5 mt-auto mb-4">
             {missing.map((ing, idx) => {
               const added = addedWishlist.includes(ing.toLowerCase());
+              const loading = wishlistLoading[ing.toLowerCase()];
               return (
                 <button
                   key={idx}
                   onClick={(e) =>
                     toggleWishlistIngredient(ing.toLowerCase(), e)
                   }
-                  className={`text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-md transition-colors ${
+                  disabled={loading}
+                  className={`text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-md transition-colors flex items-center gap-1 ${
                     added
                       ? "bg-emerald-100 text-emerald-700"
                       : "bg-slate-50/80 text-slate-600 hover:bg-yellow-50"
-                  }`}
-                  title={
-                    added
-                      ? locale === "en"
-                        ? "Added to wishlist"
-                        : "ইচ্ছেতালিকায় যোগ করা হয়েছে"
-                      : locale === "en"
-                      ? "Add to wishlist"
-                      : "ইচ্ছেতালিকায় যোগ করুন"
-                  }
+                  } ${loading ? "opacity-70" : ""}`}
                 >
-                  {added ? "✓ " : "+"}
+                  {loading ? (
+                    <Loader2 size={8} className="animate-spin" />
+                  ) : added ? (
+                    "✓ "
+                  ) : (
+                    "+ "
+                  )}
                   {ing}
                 </button>
               );
@@ -452,13 +466,16 @@ export default function RecipeCardClean({
             <div className="flex items-center gap-3">
               <button
                 onClick={toggleFavorite}
-                className="p-2 rounded-xl hover:bg-red-50 transition-all active:scale-95 border-2 border-transparent hover:border-red-200"
+                disabled={isFavLoading}
+                className="p-2 rounded-xl hover:bg-red-50 transition-all active:scale-95 border-2 border-transparent hover:border-red-200 disabled:opacity-70"
                 title={
                   locale === "en" ? "Add to favorites" : "প্রিয়তে যোগ করুন"
                 }
                 onMouseDown={(e) => e.stopPropagation()}
               >
-                {isFav ? (
+                {isFavLoading ? (
+                  <Loader2 size={18} className="animate-spin text-red-600" />
+                ) : isFav ? (
                   <HeartIcon size={18} className="text-red-600 fill-red-600" />
                 ) : (
                   <HeartIcon

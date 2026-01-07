@@ -17,6 +17,7 @@ import {
   ShoppingCart,
   CheckCircle2,
   ChevronDown,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import ReportModal from "@/components/ReportModal";
@@ -42,6 +43,14 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
   );
   const [showReport, setShowReport] = useState(false);
   const { user } = useActiveUser();
+
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
+    {}
+  );
+
+  const setButtonLoading = (key: string, isLoading: boolean) => {
+    setLoadingStates((prev) => ({ ...prev, [key]: isLoading }));
+  };
 
   const videoRef = useRef<HTMLIFrameElement | null>(null);
   const [pendingStart, setPendingStart] = useState<number | null>(null);
@@ -78,10 +87,15 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
       });
       return;
     }
-    const userId = user.id || user.email;
-    const res = await toggleFavorite(userId, recipe.id);
-    if (res.success) {
-      setIsFavorite(res.action === "added");
+    setButtonLoading("favorite", true);
+    try {
+      const userId = user.id || user.email;
+      const res = await toggleFavorite(userId, recipe.id);
+      if (res.success) {
+        setIsFavorite(res.action === "added");
+      }
+    } finally {
+      setButtonLoading("favorite", false);
     }
   }
 
@@ -98,25 +112,30 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
       return;
     }
     const userId = user.id || user.email;
-    const res = await toggleWishlistIngredient({
-      userId,
-      ingredientId: item.ingredient.id,
-      name_en: item.ingredient.name_en,
-      name_bn: item.ingredient.name_bn,
-    });
+    setButtonLoading(`wishlist-${item.ingredient.id}`, true);
+    try {
+      const res = await toggleWishlistIngredient({
+        userId,
+        ingredientId: item.ingredient.id,
+        name_en: item.ingredient.name_en,
+        name_bn: item.ingredient.name_bn,
+      });
 
-    if (res.success) {
-      if (res.action === "added") {
-        setWishlistIds((prev) => [...prev, item.ingredient.id]);
-        setWishlistNames((prev) => [...prev, item.ingredient.name_en]);
-      } else {
-        setWishlistIds((prev) =>
-          prev.filter((id) => id !== item.ingredient.id)
-        );
-        setWishlistNames((prev) =>
-          prev.filter((name) => name !== item.ingredient.name_en)
-        );
+      if (res.success) {
+        if (res.action === "added") {
+          setWishlistIds((prev) => [...prev, item.ingredient.id]);
+          setWishlistNames((prev) => [...prev, item.ingredient.name_en]);
+        } else {
+          setWishlistIds((prev) =>
+            prev.filter((id) => id !== item.ingredient.id)
+          );
+          setWishlistNames((prev) =>
+            prev.filter((name) => name !== item.ingredient.name_en)
+          );
+        }
       }
+    } finally {
+      setButtonLoading(`wishlist-${item.ingredient.id}`, false);
     }
   }
 
@@ -132,19 +151,24 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
       });
       return;
     }
-    const userId = user.id || user.email;
-    const res = await startCooking(userId, recipe.id);
-    if (res) {
-      // Dispatch a custom event to notify the CookingTracker component
-      window.dispatchEvent(new CustomEvent("refreshCookingProgress"));
-      setAlert({
-        isOpen: true,
-        title: t ? "Cooking started" : "রান্না শুরু হয়েছে",
-        message: t
-          ? "Check the progress bubble at the bottom right."
-          : "ডান নিচের বুদ্বুদে অগ্রগতি দেখুন।",
-        type: "success",
-      });
+    setButtonLoading("cooking", true);
+    try {
+      const userId = user.id || user.email;
+      const res = await startCooking(userId, recipe.id);
+      if (res) {
+        // Dispatch a custom event to notify the CookingTracker component
+        window.dispatchEvent(new CustomEvent("refreshCookingProgress"));
+        setAlert({
+          isOpen: true,
+          title: t ? "Cooking started" : "রান্না শুরু হয়েছে",
+          message: t
+            ? "Check the progress bubble at the bottom right."
+            : "ডান নিচের বুদ্বুদে অগ্রগতি দেখুন।",
+          type: "success",
+        });
+      }
+    } finally {
+      setButtonLoading("cooking", false);
     }
   }
 
@@ -229,17 +253,22 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
 
             <button
               onClick={handleToggleFavorite}
+              disabled={loadingStates["favorite"]}
               className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all active:scale-95 border-2 shadow-sm hover:shadow-md ${
                 isFavorite
                   ? "bg-red-50 border-red-200 text-red-600"
                   : "bg-white border-slate-200 text-slate-400 hover:text-red-600 hover:border-red-200"
-              }`}
+              } ${loadingStates["favorite"] ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              <Heart
-                size={18}
-                className="sm:w-5 sm:h-5"
-                fill={isFavorite ? "currentColor" : "none"}
-              />
+              {loadingStates["favorite"] ? (
+                <Loader2 size={18} className="animate-spin sm:w-5 sm:h-5" />
+              ) : (
+                <Heart
+                  size={18}
+                  className="sm:w-5 sm:h-5"
+                  fill={isFavorite ? "currentColor" : "none"}
+                />
+              )}
             </button>
           </div>
         </div>
@@ -340,19 +369,28 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                 {/* Floating Overlay Controls */}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
 
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 lg:gap-4">
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-4">
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-6 md:p-8 lg:p-10 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     {recipe.youtube_id && (
                       <button
-                        onClick={() => setVideoMode("modal")}
-                        className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm text-slate-900 flex items-center gap-2 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
+                        onClick={() => {
+                          setVideoMode("modal");
+                          setButtonLoading("watch", true);
+                          setTimeout(() => setButtonLoading("watch", false), 1000);
+                        }}
+                        disabled={loadingStates["watch"]}
+                        className="h-10 sm:h-14 px-3 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm text-slate-900 flex items-center gap-1.5 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
                       >
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-red-600 to-orange-600 text-white flex items-center justify-center transition-all group-hover:scale-110">
-                          <Play
-                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
-                            fill="currentColor"
-                          />
-                        </div>
+                        {loadingStates["watch"] ? (
+                          <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
+                        ) : (
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-red-600 to-orange-600 text-white flex items-center justify-center transition-all group-hover:scale-110">
+                            <Play
+                              className="w-3 h-3 sm:w-4 sm:h-4"
+                              fill="currentColor"
+                            />
+                          </div>
+                        )}
                         <span className="hidden sm:inline">
                           {t ? "WATCH RECIPE VIDEO" : "রেসিপি ভিডিও দেখুন"}
                         </span>
@@ -365,30 +403,47 @@ export default function RecipeDetailClient({ recipe, videoStats }: Props) {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={handleStartCooking}
-                        className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 sm:gap-3 transition-all shadow-xl hover:shadow-2xl active:scale-95"
+                        disabled={loadingStates["cooking"]}
+                        className="h-10 sm:h-14 px-3 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm flex items-center gap-1.5 sm:gap-3 transition-all shadow-xl hover:shadow-2xl active:scale-95 disabled:opacity-70"
                       >
-                        <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
-                        {t ? "COOK MODE" : "কুকিং মোড"}
+                        {loadingStates["cooking"] ? (
+                          <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
+                        ) : (
+                          <ChefHat className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                        )}
+                        <span className="hidden sm:inline">
+                          {t ? "COOK MODE" : "কুকিং মোড"}
+                        </span>
+                        <span className="sm:hidden">{t ? "COOK" : "কুক"}</span>
                       </button>
 
                       <button
-                        onClick={() =>
-                          window.open(`/recipes/${recipe.slug}/print`, "_blank")
-                        }
-                        className="h-12 sm:h-14 px-4 sm:px-6 lg:px-8 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm text-slate-900 flex items-center gap-2 sm:gap-3 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
+                        onClick={() => {
+                          setButtonLoading("print", true);
+                          window.open(`/recipes/${recipe.slug}/print`, "_blank");
+                          setTimeout(() => setButtonLoading("print", false), 2000);
+                        }}
+                        disabled={loadingStates["print"]}
+                        className="h-10 sm:h-14 px-3 sm:px-4 lg:px-6 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm text-slate-900 flex items-center gap-1.5 sm:gap-2 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-xl border-2 border-white/50"
                       >
-                        <Printer className="w-4 h-4 sm:w-5 sm:h-5" />
-                        {t ? "PRINT" : "প্রিন্ট"}
+                        {loadingStates["print"] ? (
+                          <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
+                        ) : (
+                          <Printer className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                        )}
+                        <span className="hidden md:inline">
+                          {t ? "PRINT" : "প্রিন্ট"}
+                        </span>
                       </button>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setShowReport(true)}
-                    className="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md text-white rounded-xl sm:rounded-2xl flex items-center justify-center hover:bg-red-600/20 hover:text-red-500 transition-all border border-white/20"
+                    className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md text-white rounded-xl sm:rounded-2xl flex items-center justify-center hover:bg-red-600/20 hover:text-red-500 transition-all border border-white/20"
                     title={t ? "Report Problem" : "রিপোর্ট করুন"}
                   >
-                    <Flag className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Flag className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                   </button>
                 </div>
               </motion.div>

@@ -90,6 +90,7 @@ export default function Page() {
   // API Recipes State
   const [apiRecipes, setApiRecipes] = useState<ApiRecipe[]>([]);
   const [apiRecipesLoading, setApiRecipesLoading] = useState(true);
+  const [apiTotal, setApiTotal] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
@@ -181,6 +182,13 @@ export default function Page() {
         }
 
         setApiRecipes(combined);
+        // set total count from API pagination when available
+        try {
+          const totalFromApi = data?.pagination?.total ?? null;
+          setApiTotal(typeof totalFromApi === "number" ? totalFromApi : null);
+        } catch (e) {
+          setApiTotal(null);
+        }
       } catch (error) {
         console.error("Failed to fetch recipes:", error);
       } finally {
@@ -549,7 +557,7 @@ export default function Page() {
         onRemove={removePantryItem}
         onFind={handleFind}
         locale={locale}
-        totalRecipes={apiRecipes.length + recipeData.length}
+        totalRecipes={apiTotal ?? recipeData.length}
       />
 
       {/* Mobile Search Bar */}

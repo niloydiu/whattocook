@@ -4,7 +4,7 @@ import { getRecipeBySlug } from "../../../actions/recipes";
 import PrintViewClient from "./PrintViewClient";
 
 export default async function PrintPage({ params }: any) {
-  const { slug } = params;
+  const { slug } = await params;
   const recipe = await getRecipeBySlug(slug);
   if (!recipe) notFound();
 
