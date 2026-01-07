@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MovableLinkButton({
   href = "https://niloykm.vercel.app",
@@ -13,8 +14,11 @@ export default function MovableLinkButton({
   const ref = useRef<HTMLButtonElement | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   const [zIndexState, setZIndexState] = useState<number>(9999);
-  const dragRef = useRef<{ dragging: boolean; offsetX: number; offsetY: number }>({ dragging: false, offsetX: 0, offsetY: 0 });
+  const dragRef = useRef<{ dragging: boolean; moved: boolean; offsetX: number; offsetY: number }>({ dragging: false, moved: false, offsetX: 0, offsetY: 0 });
   const posRef = useRef<{ x: number; y: number } | null>(null);
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // run only on client
@@ -45,6 +49,12 @@ export default function MovableLinkButton({
       const x = e.clientX - dragRef.current.offsetX;
       const y = e.clientY - dragRef.current.offsetY;
       const next = { x, y };
+      // mark as moved when user drags more than a few pixels
+      if (!dragRef.current.moved) {
+        const dx = Math.abs((posRef.current?.x || 0) - x);
+        const dy = Math.abs((posRef.current?.y || 0) - y);
+        if (dx > 4 || dy > 4) dragRef.current.moved = true;
+      }
       posRef.current = next;
       setPos(next);
     };
@@ -77,6 +87,7 @@ export default function MovableLinkButton({
     setZIndexState(99999);
     const rect = el.getBoundingClientRect();
     dragRef.current.dragging = true;
+    dragRef.current.moved = false;
     dragRef.current.offsetX = e.clientX - rect.left;
     dragRef.current.offsetY = e.clientY - rect.top;
     try {
@@ -87,35 +98,118 @@ export default function MovableLinkButton({
 
   const onClick = () => {
     try {
-      if (typeof window !== "undefined") {
-        // Use an anchor element to ensure `rel` can be set for noopener
-        const a = document.createElement("a");
-        a.href = href;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+      // ignore click if the user dragged the button
+      if (dragRef.current.moved) {
+        dragRef.current.moved = false;
+        return;
       }
+
+      // toggle menu instead of redirecting
+      setShowMenu((s) => !s);
     } catch (_) {}
   };
 
   if (!pos) return null;
 
   return (
-    <button
-      ref={ref}
-      onPointerDown={onPointerDown}
-      onClick={onClick}
-      title={label}
-      aria-label={label}
-      style={{ position: "fixed", left: pos.x, top: pos.y, zIndex: zIndexState, width: 48, height: 48, pointerEvents: 'auto', touchAction: 'none' }}
-      className="bg-black text-white rounded-full shadow-md hover:opacity-95 flex items-center justify-center p-0"
-    >
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.98-.399 3-.405 1.02.006 2.043.139 3 .405 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.824 1.102.824 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-      </svg>
-    </button>
+    <>
+      <button
+        ref={ref}
+        onPointerDown={onPointerDown}
+        onClick={onClick}
+        title={label}
+        aria-label={label}
+        style={{ position: "fixed", left: pos.x, top: pos.y, zIndex: zIndexState, width: 48, height: 48, pointerEvents: 'auto', touchAction: 'none' }}
+        className="bg-black text-white rounded-full shadow-md hover:opacity-95 flex items-center justify-center p-0 overflow-hidden"
+      >
+        <img src="/favicon.png" alt="menu" className="w-6 h-6 object-contain" />
+      </button>
+
+      {showMenu && (
+        <div
+          className="fixed inset-0 z-[99998] flex items-center justify-center"
+          onMouseDown={() => setShowMenu(false)}
+        >
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+          <div
+            ref={menuRef}
+            onMouseDown={(e) => e.stopPropagation()}
+            className="relative z-[99999] w-[320px] max-w-[90%] bg-white rounded-3xl shadow-2xl border border-slate-100 p-6"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <img src="/favicon.png" alt="logo" className="w-10 h-10 rounded-lg" />
+                <div>
+                  <div className="text-lg font-bold">whattoCook?</div>
+                  <div className="text-sm text-slate-500">Quick actions</div>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowMenu(false)}
+                className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition"
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => { setShowMenu(false); router.push('/'); }}
+                className="w-full text-left px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition font-semibold"
+              >
+                Home
+              </button>
+
+              <button
+                onClick={() => { setShowMenu(false); router.push('/request-recipe/submit'); }}
+                className="w-full text-left px-4 py-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition font-semibold"
+              >
+                Report
+              </button>
+
+              <div className="pt-2 border-t border-slate-100 mt-2" />
+
+              <div className="flex flex-col gap-2">
+                <a
+                  href="https://github.com/niloydiu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 rounded-xl hover:bg-slate-50 transition"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://x.com/niloykmohonta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 rounded-xl hover:bg-slate-50 transition"
+                >
+                  X (Twitter)
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/niloykumarmohonta000/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 rounded-xl hover:bg-slate-50 transition"
+                >
+                  LinkedIn
+                </a>
+              </div>
+
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => setShowMenu(false)}
+                  className="px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 transition"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
