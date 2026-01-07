@@ -10,7 +10,10 @@ export async function generateMetadata({ params }: any) {
 
   const title = recipe.title_en || recipe.title_bn || "Recipe";
   const description =
-    recipe.blogContent?.intro_en || recipe.title_en || recipe.title_bn || "Delicious recipe";
+    recipe.blogContent?.intro_en ||
+    recipe.title_en ||
+    recipe.title_bn ||
+    "Delicious recipe";
   const image = recipe.image || "/recipe-placeholder.jpg";
 
   return {

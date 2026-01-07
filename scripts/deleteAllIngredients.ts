@@ -40,7 +40,10 @@ async function main() {
       );
       console.log("Reset Ingredient id sequence.");
     } catch (e: any) {
-      console.warn("Could not reset Ingredient sequence:", (e && e.message) || e);
+      console.warn(
+        "Could not reset Ingredient sequence:",
+        (e && e.message) || e
+      );
     }
   } catch (e: any) {
     console.error("Error deleting ingredients:", (e && e.message) || e);
