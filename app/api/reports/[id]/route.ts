@@ -4,7 +4,7 @@ import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 export async function GET(request: NextRequest, context: any) {
   const { params } = context;
-  if (!checkAdminAuth(request)) return unauthorizedResponse();
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   try {
     const id = Number(params.id);
     const report = await prisma.recipeReport.findUnique({
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest, context: any) {
 
 export async function PATCH(request: NextRequest, context: any) {
   const { params } = context;
-  if (!checkAdminAuth(request)) return unauthorizedResponse();
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   try {
     const id = Number(params.id);
     const body = await request.json();

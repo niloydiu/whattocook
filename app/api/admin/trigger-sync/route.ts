@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 export async function POST(req: NextRequest) {
-  if (!checkAdminAuth(req)) return unauthorizedResponse();
+  if (!(await checkAdminAuth(req))) return unauthorizedResponse();
 
   const token = process.env.GITHUB_ADMIN_TOKEN || process.env.GITHUB_TOKEN;
   if (!token) {

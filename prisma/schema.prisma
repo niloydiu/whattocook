@@ -13,6 +13,7 @@ model Ingredient {
   name_bn           String
   img               String
   phonetic          String[]
+  synonyms          String[]           // Alternative names for dedup matching
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   recipeIngredients RecipeIngredient[]
@@ -38,6 +39,7 @@ model Recipe {
   prep_time    Int
   cook_time    Int
   servings     Int
+  viewCount    Int                @default(0)
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
   blogContent  RecipeBlogContent?
@@ -46,6 +48,7 @@ model Recipe {
   recipeReports RecipeReport[]
   favorites    Favorite[]
   cookingProgress CookingProgress[]
+  ratings      Rating[]
 
   @@index([slug])
   @@index([title_en])
@@ -106,12 +109,13 @@ model RecipeBlogContent {
 }
 
 model Admin {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
+  id            Int        @id @default(autoincrement())
+  username      String     @unique
   password_hash String
-  email         String?  @unique
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  email         String?    @unique
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  auditLogs     AuditLog[]
 
   @@index([username])
 }
@@ -141,6 +145,7 @@ model RecipeRequest {
   adminNotes     String?
   processedBy    String?
   processedAt    DateTime?
+  linkedRecipeId Int?      // Link to created recipe when approved
   
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -255,4 +260,34 @@ model WishlistIngredient {
   ingredient Ingredient? @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  recipeId  Int
+  score     Int      // 1-5 stars
+  review    String?  // Optional text review
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
+  @@index([recipeId])
+  @@index([userId])
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  adminId    Int
+  action     String   // "recipe.create", "recipe.delete", "ingredient.merge", etc.
+  entityType String   // "Recipe", "Ingredient", "RecipeRequest", etc.
+  entityId   Int?
+  details    Json?    // Before/after snapshot for updates
+  createdAt  DateTime @default(now())
+  admin      Admin    @relation(fields: [adminId], references: [id])
+
+  @@index([adminId])
+  @@index([action])
+  @@index([createdAt])
 }

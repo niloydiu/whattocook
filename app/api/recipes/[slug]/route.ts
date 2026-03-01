@@ -36,6 +36,12 @@ export async function GET(
       return NextResponse.json({ error: "Recipe not found" }, { status: 404 });
     }
 
+    // Increment view count (fire and forget)
+    prisma.recipe.update({
+      where: { id: recipe.id },
+      data: { viewCount: { increment: 1 } },
+    }).catch(() => {});
+
     return NextResponse.json(recipe);
   } catch (error) {
     console.error("Error fetching recipe:", error);

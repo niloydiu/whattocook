@@ -4,7 +4,7 @@ import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 // GET /api/reports - list reports (admin)
 export async function GET(request: NextRequest) {
-  if (!checkAdminAuth(request)) return unauthorizedResponse();
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   try {
     const reports = await prisma.recipeReport.findMany({
       orderBy: { createdAt: "desc" },
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 
 // DELETE /api/reports - bulk delete reports (admin)
 export async function DELETE(request: NextRequest) {
-  if (!checkAdminAuth(request)) return unauthorizedResponse();
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   try {
     const { ids } = await request.json();
     if (!Array.isArray(ids) || ids.length === 0) {
