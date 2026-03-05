@@ -706,6 +706,7 @@ export default function ChatBot() {
 
       {/* Toggle Button */}
       <motion.button
+        id="wtc-chat-toggle"
         onClick={toggleChat}
         whileHover={{ scale: 1.1, rotate: isOpen ? 180 : 0 }}
         whileTap={{ scale: 0.95 }}
