@@ -22,7 +22,16 @@ export async function getFavoriteRecipes(userId: string) {
         recipe: {
           include: {
             ingredients: {
-              include: { ingredient: true },
+              include: {
+                ingredient: {
+                  select: {
+                    id: true,
+                    name_en: true,
+                    name_bn: true,
+                    img: true,
+                  },
+                },
+              },
             },
           },
         },
@@ -61,7 +70,16 @@ export async function getUserWishlist(userId: string) {
   try {
     return await prisma.wishlistIngredient.findMany({
       where: { userId },
-      include: { ingredient: true },
+      include: {
+        ingredient: {
+          select: {
+            id: true,
+            name_en: true,
+            name_bn: true,
+            img: true,
+          },
+        },
+      },
     });
   } catch (e) {
     return [];
@@ -111,7 +129,14 @@ export async function getActiveCookingProgress(userId: string) {
             steps: { orderBy: { step_number: "asc" } },
             ingredients: {
               include: {
-                ingredient: true,
+                ingredient: {
+                  select: {
+                    id: true,
+                    name_en: true,
+                    name_bn: true,
+                    img: true,
+                  },
+                },
               },
             },
           },

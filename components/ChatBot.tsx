@@ -65,6 +65,18 @@ export default function ChatBot() {
   const STORAGE_KEY = "wtc_chat_messages_v1";
   const OPEN_KEY = "wtc_chat_open_v1";
 
+  // Helper: fetch with AbortController timeout
+  const fetchWithTimeout = async (input: RequestInfo, init?: RequestInit, timeout = 10000) => {
+    const controller = new AbortController();
+    const id = window.setTimeout(() => controller.abort(), timeout);
+    try {
+      const res = await fetch(input, { ...(init || {}), signal: controller.signal });
+      return res;
+    } finally {
+      clearTimeout(id);
+    }
+  };
+
   // Load persisted session chat and open state
   useEffect(() => {
     try {
@@ -131,8 +143,7 @@ export default function ChatBot() {
         const token = (sessionResp as any)?.data?.session?.access_token;
         const headers: any = { "Content-Type": "application/json" };
         if (token) headers["Authorization"] = `Bearer ${token}`;
-
-        const res = await fetch(API_PATHS.CHAT_HISTORY, { headers });
+        const res = await fetchWithTimeout(API_PATHS.CHAT_HISTORY, { headers }, 5000);
         const data = await res.json();
         if (!data.error && Array.isArray(data.messages)) {
           setMessages(data.messages);
@@ -162,12 +173,11 @@ export default function ChatBot() {
         const token = (sessionResp as any)?.data?.session?.access_token;
         const headers: any = { "Content-Type": "application/json" };
         if (token) headers["Authorization"] = `Bearer ${token}`;
-
-        const res = await fetch(API_PATHS.CHAT_HISTORY, {
-          method: "POST",
-          headers,
-          body: JSON.stringify({ messages: newMessages, delta: true }),
-        });
+            const res = await fetchWithTimeout(API_PATHS.CHAT_HISTORY, {
+              method: "POST",
+              headers,
+              body: JSON.stringify({ messages: newMessages, delta: true }),
+            }, 5000);
 
         const data = await res.json();
         if (!data.error) {
@@ -227,14 +237,20 @@ export default function ChatBot() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(API_PATHS.CHAT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [...messages, userMessage],
-          language,
-        }),
-      });
+      // Cap the history sent to the server to limit payload and AI processing time
+      const historyWindow = 6; // number of previous messages to include
+      const fullHistory = [...messages, userMessage];
+      const toSend = fullHistory.slice(Math.max(0, fullHistory.length - (historyWindow + 1)));
+
+      const response = await fetchWithTimeout(
+        API_PATHS.CHAT,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: toSend, language }),
+        },
+        12000
+      );
 
       const data = await response.json();
       if (data.error) {

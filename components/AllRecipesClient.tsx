@@ -40,6 +40,7 @@ export default function AllRecipesClient({
 }) {
   const { locale, setLocale } = useLanguage();
   const [recipes, setRecipes] = useState<ApiRecipe[]>(initialRecipes);
+  const [categoryStats, setCategoryStats] = useState(initialCategories);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
@@ -58,7 +59,7 @@ export default function AllRecipesClient({
 
     if (searchParam) {
       // Check if the search term matches a category name
-      const matchingCategory = initialCategories.find(
+      const matchingCategory = categoryStats.find(
         (cat) => cat.name.toLowerCase() === searchParam.toLowerCase()
       );
 
@@ -94,8 +95,8 @@ export default function AllRecipesClient({
         let cat = selectedCategory;
         let foodCat = null;
 
-        // Find the selected category in initialCategories to determine its type
-        const selectedCatObj = initialCategories.find((c) => c.name === cat);
+        // Find the selected category in categoryStats to determine its type
+        const selectedCatObj = categoryStats.find((c) => c.name === cat);
         if (selectedCatObj && selectedCatObj.type === "foodCategory") {
           foodCat = cat;
           cat = null;
@@ -111,6 +112,7 @@ export default function AllRecipesClient({
 
         setRecipes(data.recipes);
         setTotalPages(data.pagination.totalPages);
+        if (data.categoryStats) setCategoryStats(data.categoryStats);
       } catch (err) {
         console.error(err);
       } finally {
@@ -248,7 +250,7 @@ export default function AllRecipesClient({
 
           <CategoryFilters
             locale={locale}
-            categoryStats={initialCategories}
+            categoryStats={categoryStats}
             selectedCategory={selectedCategory}
             setSelectedCategory={(cat) => {
               setSelectedCategory(cat);

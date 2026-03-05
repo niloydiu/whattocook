@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Clock, Users, ChefHat, Flag } from "lucide-react";
+import { Clock, Users, ChefHat, Flag } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import ReportModal from "./ReportModal";
@@ -51,9 +52,11 @@ function toBengaliNumber(n: number) {
 export default function RecipeCardApi({
   recipe,
   locale = "en",
+  priority = false,
 }: {
   recipe: ApiRecipe;
   locale?: Locale;
+  priority?: boolean;
 }) {
   const [showReport, setShowReport] = useState(false);
   const title = locale === "bn" ? recipe.title_bn : recipe.title_en;
@@ -75,11 +78,14 @@ export default function RecipeCardApi({
       className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100/80 transition-all duration-300 group"
     >
       <div className="relative h-56 overflow-hidden">
-        <Link href={`/recipes/${recipe.slug}`}>
-          <img
+        <Link href={`/recipes/${recipe.slug}`} className="block w-full h-full">
+          <Image
             src={recipe.image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            priority={priority}
           />
         </Link>
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
@@ -186,10 +192,11 @@ export default function RecipeCardApi({
           )}
         </div>
 
-        <Link href={`/recipes/${recipe.slug}`} className="mt-auto">
-          <button className="w-full py-3.5 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] transition-all duration-200">
-            {locale === "en" ? "View Full Recipe" : "পুরো রেসিপি দেখুন"}
-          </button>
+        <Link
+          href={`/recipes/${recipe.slug}`}
+          className="mt-auto block w-full py-3.5 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] transition-all duration-200 text-center"
+        >
+          {locale === "en" ? "View Full Recipe" : "পুরো রেসিপি দেখুন"}
         </Link>
         {showReport && (
           <ReportModal

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Clock, Users, ChefHat, CheckCircle2, XCircle } from "lucide-react";
 import Link from "next/link";
@@ -47,17 +48,17 @@ export default function IngredientMatchRecipeCard({
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ y: -8, scale: 1.02 }}
         transition={{ duration: 0.2 }}
-        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100/80 transition-all duration-300 group cursor-pointer"
+        className="relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100/80 transition-all duration-300 group cursor-pointer"
       >
         {/* Match Badge */}
         <div className="absolute top-4 left-4 z-10">
           {isComplete ? (
-            <div className="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider shadow-xl backdrop-blur-sm">
+            <div className="flex items-center gap-2 bg-linear-to-r from-emerald-500 to-emerald-600 text-white px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider shadow-xl backdrop-blur-sm">
               <CheckCircle2 size={14} />
               <span>{locale === "en" ? "100% Match" : "১০০% মিল"}</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider shadow-xl backdrop-blur-sm">
+            <div className="flex items-center gap-2 bg-linear-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider shadow-xl backdrop-blur-sm">
               <span>
                 {Math.round(matchPercent * 100)}%{" "}
                 {locale === "en" ? "Match" : "মিল"}
@@ -68,16 +69,14 @@ export default function IngredientMatchRecipeCard({
 
         {/* Image */}
         <div className="relative h-56 overflow-hidden bg-slate-50">
-          <img
+          <Image
             src={recipe.image}
             alt={locale === "en" ? recipe.title_en : recipe.title_bn}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            onError={(e) => {
-              e.currentTarget.src =
-                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop";
-            }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-110 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
         </div>
 
         {/* Content */}
@@ -126,7 +125,7 @@ export default function IngredientMatchRecipeCard({
             </div>
             <div className="flex items-center gap-1.5 leading-none">
               <ChefHat size={12} className="text-red-500" />
-              <span className="truncate max-w-[60px]">{recipe.difficulty}</span>
+              <span className="truncate max-w-15">{recipe.difficulty}</span>
             </div>
           </div>
 
