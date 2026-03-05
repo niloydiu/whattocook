@@ -9,6 +9,7 @@ export default function FloatingNav() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [bottomOffset, setBottomOffset] = useState(24);
+  const [rightOffset, setRightOffset] = useState(16);
   const [reduceMotion, setReduceMotion] = useState(false);
 
   // Respect users' reduced-motion preference
@@ -28,6 +29,7 @@ export default function FloatingNav() {
   const recomputeOffset = useCallback(() => {
     try {
       const winH = window.innerHeight || 800;
+      const winW = window.innerWidth || 1200;
       // Try to detect common pagination/footer areas
       const candidates = [
         document.getElementById("pagination"),
@@ -45,8 +47,37 @@ export default function FloatingNav() {
         }
       }
       setBottomOffset(24 + extra);
+
+      // Detect other fixed elements near bottom-right (chat toggle, trackers)
+      try {
+        let extraRight = 0;
+
+        const chatBtn = document.getElementById("wtc-chat-toggle");
+        if (chatBtn && (chatBtn as HTMLElement).getBoundingClientRect) {
+          const cr = (chatBtn as HTMLElement).getBoundingClientRect();
+          if (cr.bottom >= winH - 120 && cr.right >= winW - 120) {
+            extraRight = Math.max(extraRight, Math.ceil(cr.width + 12));
+          }
+        }
+
+        // scan other fixed elements and consider small floating controls
+        const fixedEls = Array.from(document.querySelectorAll(".fixed")) as HTMLElement[];
+        for (const el of fixedEls) {
+          if (!el || !el.getBoundingClientRect) continue;
+          const r = el.getBoundingClientRect();
+          if (r.width > 220) continue; // skip large overlays
+          if (r.bottom >= winH - 120 && r.right >= winW - 120) {
+            extraRight = Math.max(extraRight, Math.ceil(r.width + 12));
+          }
+        }
+
+        setRightOffset(16 + extraRight);
+      } catch (e) {
+        setRightOffset(16);
+      }
     } catch (e) {
       setBottomOffset(24);
+      setRightOffset(16);
     }
   }, []);
 
@@ -84,7 +115,7 @@ export default function FloatingNav() {
 
   return (
     <div
-      style={{ right: 16, bottom: bottomOffset, zIndex: 140 }}
+      style={{ right: rightOffset, bottom: bottomOffset, zIndex: 140 }}
       className="fixed pointer-events-none"
     >
       <div className="flex items-end flex-col gap-3 pointer-events-auto">
