@@ -6,9 +6,10 @@ import { Prisma } from "@prisma/client";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 // Simple timeout helper for promises (non-cancellable for SDK calls)
-function withTimeout<T>(p: Promise<T>, ms = 10000): Promise<T> {
+function withTimeout<T>(p: T | Promise<T>, ms = 10000): Promise<T> {
+  const promise = Promise.resolve(p);
   return Promise.race([
-    p,
+    promise,
     new Promise<T>((_, rej) =>
       setTimeout(() => rej(new Error(`Operation timed out after ${ms}ms`)), ms)
     ),
@@ -286,7 +287,7 @@ export async function POST(req: NextRequest) {
     }
     
     // Check for function calls
-    const call = response.candidates?.[0]?.content?.parts?.find(p => p.functionCall);
+    const call = response.candidates?.[0]?.content?.parts?.find((p: any) => p.functionCall);
     
       if (call && call.functionCall) {
       const { name, args } = call.functionCall;
