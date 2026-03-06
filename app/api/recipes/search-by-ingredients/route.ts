@@ -45,12 +45,31 @@ export async function POST(request: NextRequest) {
     // Normalize user ingredients
     const userIngredients = ingredients.map(normalizeStr).filter(Boolean);
 
-    // Fetch all recipes with their ingredients
+    // Fetch all recipes with their ingredients (explicit select to avoid requesting missing columns)
     const recipes = await prisma.recipe.findMany({
-      include: {
+      select: {
+        id: true,
+        slug: true,
+        title_en: true,
+        title_bn: true,
+        image: true,
+        cuisine: true,
+        category: true,
+        difficulty: true,
+        prep_time: true,
+        cook_time: true,
+        servings: true,
+        createdAt: true,
         ingredients: {
           include: {
-            ingredient: true,
+            ingredient: {
+              select: {
+                id: true,
+                name_en: true,
+                name_bn: true,
+                img: true,
+              },
+            },
           },
         },
       },

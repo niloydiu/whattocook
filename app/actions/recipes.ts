@@ -149,9 +149,36 @@ export async function getRecipes(params: {
         }));
     }
 
+    // Compute filtered category stats using the same `where` filter so counts match the results
+    const [catGroups, foodCatGroups] = await Promise.all([
+      prisma.recipe.groupBy({ by: ["category"], where, _count: { _all: true } }),
+      prisma.recipe.groupBy({ by: ["foodCategory"], where, _count: { _all: true } }),
+    ]);
+
+    const catOut = catGroups
+      .filter((c) => c.category && String(c.category).trim() !== "")
+      .map((c) => ({
+        name: c.category!,
+        count: c._count._all,
+        type: "category" as const,
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    const foodCatOut = foodCatGroups
+      .filter((c) => c.foodCategory && String(c.foodCategory).trim() !== "")
+      .map((c) => ({
+        name: c.foodCategory!,
+        count: c._count._all,
+        type: "foodCategory" as const,
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    const categoryStats = [...catOut, ...foodCatOut];
+
     return {
       recipes: recipesWithStringDates,
       featured,
+      categoryStats,
       pagination: {
         page,
         limit,
@@ -172,7 +199,14 @@ export async function getRecipeBySlug(slug: string) {
       include: {
         ingredients: {
           include: {
-            ingredient: true,
+            ingredient: {
+              select: {
+                id: true,
+                name_en: true,
+                name_bn: true,
+                img: true,
+              },
+            },
           },
         },
         steps: {
@@ -184,8 +218,62 @@ export async function getRecipeBySlug(slug: string) {
       },
     });
     return recipe;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching recipe by slug:", error);
+    // If the DB has schema drift (Prisma P2022), retry with an explicit select that avoids optional columns.
+    try {
+      if (error?.code === "P2022") {
+        const recipe = await prisma.recipe.findUnique({
+          where: { slug },
+          select: {
+            id: true,
+            slug: true,
+            title_en: true,
+            title_bn: true,
+            image: true,
+            youtube_url: true,
+            youtube_id: true,
+            cuisine: true,
+            category: true,
+            foodCategory: true,
+            difficulty: true,
+            prep_time: true,
+            cook_time: true,
+            servings: true,
+            createdAt: true,
+            updatedAt: true,
+            blogContent: true,
+            ingredients: {
+              include: {
+                ingredient: {
+                  select: {
+                    id: true,
+                    name_en: true,
+                    name_bn: true,
+                    img: true,
+                  },
+                },
+              },
+            },
+            steps: {
+              orderBy: { step_number: "asc" },
+              select: {
+                id: true,
+                recipe_id: true,
+                step_number: true,
+                instruction_en: true,
+                instruction_bn: true,
+                timestamp: true,
+              },
+            },
+          },
+        });
+        return recipe as any;
+      }
+    } catch (err2) {
+      console.error("Retry fetching recipe by slug failed:", err2);
+    }
+
     return null;
   }
 }

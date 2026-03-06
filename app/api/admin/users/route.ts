@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 // GET /api/admin/users - Get all admin users
 export async function GET(request: NextRequest) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
 // POST /api/admin/users - Create a new admin user
 export async function POST(request: NextRequest) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 

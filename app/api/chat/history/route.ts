@@ -18,12 +18,19 @@ async function getUserIdFromAuth(req: NextRequest) {
   if (!auth || !SUPABASE_URL) return null;
   try {
     // Call Supabase Auth REST endpoint to get user for the provided access token
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-      headers: { Authorization: auth },
-    });
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json?.id || null;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2500);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        headers: { Authorization: auth },
+        signal: controller.signal,
+      });
+      if (!res.ok) return null;
+      const json = await res.json();
+      return json?.id || null;
+    } finally {
+      clearTimeout(timeout);
+    }
   } catch (e) {
     console.warn("Failed to validate supabase token:", e);
     return null;

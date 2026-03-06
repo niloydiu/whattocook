@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "@/lib/supabaseClient";
 import Link from "next/link";
 import { LogIn, Heart, ShoppingCart, User } from "lucide-react";
+import { checkSupabaseHealth, getSupabaseAuthUrl } from "@/lib/supabaseHealth";
 
 type AuthButtonProps = {
   inline?: boolean;
@@ -12,6 +13,9 @@ type AuthButtonProps = {
 export default function AuthButton({ inline }: AuthButtonProps) {
   const [user, setUser] = useState<any>(null);
   const [open, setOpen] = useState(false);
+  const [supabaseAvailable, setSupabaseAvailable] = useState<boolean | null>(null);
+  const [fallbackVisible, setFallbackVisible] = useState(false);
+  const [fallbackUrl, setFallbackUrl] = useState("");
   const isDev = process.env.NODE_ENV !== "production";
 
   useEffect(() => {
@@ -35,6 +39,16 @@ export default function AuthButton({ inline }: AuthButtonProps) {
         if (!mounted) return;
         setUser((data as any)?.session?.user ?? null);
       } catch (e) {}
+    })();
+
+    // quick client-side health check for Supabase so we avoid redirecting to an unreachable host
+    (async () => {
+      try {
+        const r = await checkSupabaseHealth(2000);
+        setSupabaseAvailable(r.ok);
+      } catch (e) {
+        setSupabaseAvailable(false);
+      }
     })();
 
     const { data: sub } = supabase.auth.onAuthStateChange(
@@ -67,6 +81,14 @@ export default function AuthButton({ inline }: AuthButtonProps) {
       );
       return;
     }
+    // If health-check indicates Supabase is unreachable, show a fallback UI instead of redirecting
+    if (supabaseAvailable === false) {
+      const url = getSupabaseAuthUrl(window.location.href || "/");
+      setFallbackUrl(url);
+      setFallbackVisible(true);
+      return;
+    }
+
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: window.location.href },
@@ -112,6 +134,45 @@ export default function AuthButton({ inline }: AuthButtonProps) {
             <User size={16} />
           </button>
         )}
+          {fallbackVisible && (
+            <div className="mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm">
+              <div>Auth host appears unreachable.</div>
+              <div className="mt-2 flex gap-2">
+                <button
+                  onClick={() => {
+                    try {
+                      navigator.clipboard.writeText(fallbackUrl || getSupabaseAuthUrl(window.location.href || "/"));
+                      alert("Copied OAuth URL to clipboard");
+                    } catch (e) {}
+                  }}
+                  className="px-2 py-1 bg-white border rounded"
+                >
+                  Copy link
+                </button>
+                <button
+                  onClick={() => window.open(fallbackUrl || getSupabaseAuthUrl(window.location.href || "/"), "_blank")}
+                  className="px-2 py-1 bg-white border rounded"
+                >
+                  Open link
+                </button>
+                {isDev && (
+                  <button
+                    onClick={() => {
+                      const fake = { email: "dev@local" };
+                      setUser(fake);
+                      try {
+                        localStorage.setItem("wtc_dev_user", JSON.stringify(fake));
+                      } catch (e) {}
+                      setFallbackVisible(false);
+                    }}
+                    className="px-2 py-1 bg-white border rounded"
+                  >
+                    Use local sign-in
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
       </div>
     );
   }

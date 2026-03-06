@@ -4,7 +4,7 @@ import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 // GET /api/admin/ingredients - Get all ingredients with pagination
 export async function GET(request: NextRequest) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
 
 // POST /api/admin/ingredients - Create a new ingredient
 export async function POST(request: NextRequest) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
 
 // DELETE /api/admin/ingredients - Bulk delete ingredients
 export async function DELETE(request: NextRequest) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 

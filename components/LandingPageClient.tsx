@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChefHat, Search, X, ArrowRight } from "lucide-react";
 import RecipeCard from "../components/RecipeCardClean";
@@ -79,6 +80,7 @@ export default function LandingPageClient({
   totalRecipes: number;
 }) {
   const { locale, setLocale, t } = useLanguage();
+  const router = useRouter();
   const [recipeData, setRecipeData] = useState<Recipe[]>(
     recipeDataRaw as Recipe[]
   );
@@ -216,10 +218,7 @@ export default function LandingPageClient({
 
   function handleSearchEnter() {
     if (searchQuery.trim()) {
-      // Redirect to all recipes page with search query
-      window.location.href = `/recipes?search=${encodeURIComponent(
-        searchQuery.trim()
-      )}`;
+      router.push(`/recipes?search=${encodeURIComponent(searchQuery.trim())}`);
     }
   }
 
@@ -315,7 +314,7 @@ export default function LandingPageClient({
             setSelectedCategory(s.label);
             setSearchActivated(true);
           } else {
-            window.location.href = `/recipes/${s.slug}`;
+            router.push(`/recipes/${s.slug}`);
           }
           setShowSuggestions(false);
         }}

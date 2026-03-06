@@ -57,7 +57,7 @@ export async function POST(
   ctx: { params: Promise<{ id: string }> }
 ) {
   try {
-    if (!checkAdminAuth(req)) return unauthorizedResponse();
+    if (!(await checkAdminAuth(req))) return unauthorizedResponse();
     let id: number;
     const paramsObj = await ctx.params;
     const idStr = paramsObj?.id;

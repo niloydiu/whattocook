@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { checkAdminAuth, unauthorizedResponse } from "@/lib/adminAuth";
 
 // GET /api/recipe-requests/:id - Get a single recipe request
 export async function GET(request: NextRequest, context: any) {
@@ -30,6 +31,7 @@ export async function GET(request: NextRequest, context: any) {
 
 // PATCH /api/recipe-requests/:id - Update recipe request status
 export async function PATCH(request: NextRequest, context: any) {
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   const { params } = context;
   try {
     const id = parseInt(params.id);
@@ -72,6 +74,7 @@ export async function PATCH(request: NextRequest, context: any) {
 
 // DELETE /api/recipe-requests/:id - Delete a recipe request
 export async function DELETE(request: NextRequest, context: any) {
+  if (!(await checkAdminAuth(request))) return unauthorizedResponse();
   const { params } = context;
   try {
     const id = parseInt(params.id);

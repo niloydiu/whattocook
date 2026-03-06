@@ -434,6 +434,7 @@ export default function IngredientSearch({
       </motion.div>
 
       {/* Main Find Button */}
+      {selected.length > 0 && (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -442,22 +443,16 @@ export default function IngredientSearch({
       >
         <motion.button
           onClick={onFind}
-          disabled={selected.length === 0}
-          whileHover={{ scale: selected.length > 0 ? 1.02 : 1 }}
-          whileTap={{ scale: selected.length > 0 ? 0.98 : 1 }}
-          className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2.5 sm:gap-3 min-h-[48px] ${
-            selected.length > 0
-              ? "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30"
-              : "bg-slate-200 text-slate-400 cursor-not-allowed"
-          }`}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2.5 sm:gap-3 min-h-[48px] bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-red-500/30"
         >
           <ChefHat className="w-5 h-5" />
-          <span>
-            {locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}
-          </span>
+          <span>{locale === "en" ? "Find My Recipes" : "আমার রেসিপি খুঁজুন"}</span>
           <ArrowRight className="w-5 h-5" />
         </motion.button>
       </motion.div>
+      )}
     </div>
   );
 }

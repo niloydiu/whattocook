@@ -24,7 +24,7 @@ export default function MovableLinkButton({
   const key = "wtc_movable_github_v1";
   const ref = useRef<HTMLButtonElement | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
-  const [zIndexState, setZIndexState] = useState<number>(9999);
+  const [zIndexState, setZIndexState] = useState<number>(130);
   const dragRef = useRef<{
     dragging: boolean;
     moved: boolean;
@@ -34,7 +34,7 @@ export default function MovableLinkButton({
   const posRef = useRef<{ x: number; y: number } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const [anchorSide, setAnchorSide] = useState<"left" | "right">("right");
+  const [anchorSide, setAnchorSide] = useState<"left" | "right">("left");
   const rafRef = useRef<number | null>(null);
   const router = useRouter();
 
@@ -47,17 +47,21 @@ export default function MovableLinkButton({
         setPos(parsed);
         posRef.current = parsed;
       } else {
-        // default to top-right corner with some margin
-        const defaultX = Math.max(16, (window.innerWidth || 800) - 72);
-        const defaultY = 20;
+        // default to bottom-left corner with some margin (avoid bottom-right FAB overlap)
+        const btnW = 52;
+        const margin = 16;
+        const defaultX = margin;
+        const defaultY = Math.max(margin, (window.innerHeight || 600) - btnW - 20);
         const initial = { x: defaultX, y: defaultY };
         setPos(initial);
         posRef.current = initial;
+        setAnchorSide("left");
       }
     } catch (e) {
       const fallback = { x: 16, y: 20 };
       setPos(fallback);
       posRef.current = fallback;
+      setAnchorSide("left");
     }
   }, []);
 

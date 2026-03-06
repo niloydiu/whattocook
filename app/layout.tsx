@@ -4,7 +4,6 @@ import { LanguageProvider } from "../components/LanguageProvider";
 import { ScrollCaptureProvider } from "../components/ScrollCaptureProvider";
 import ChatBot from "../components/ChatBot";
 import MovableLinkButton from "../components/MovableLinkButton";
-import FloatingNav from "../components/FloatingNav";
 import CookingTracker from "../components/CookingTracker";
 
 export const metadata = {
@@ -79,7 +78,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body suppressHydrationWarning={true}>
         <ScrollCaptureProvider>
           <LanguageProvider>
-            <FloatingNav />
             <MovableLinkButton />
             {children}
             <ChatBot />

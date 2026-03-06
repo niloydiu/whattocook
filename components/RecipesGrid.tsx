@@ -41,7 +41,7 @@ export default function RecipesGrid({
             key={i}
             className="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100/80 animate-pulse"
           >
-            <div className="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200" />
+            <div className="aspect-4/3 bg-linear-to-br from-slate-100 to-slate-200" />
             <div className="p-6 space-y-3">
               <div className="h-4 bg-slate-200 rounded w-3/4" />
               <div className="h-4 bg-slate-200 rounded w-1/2" />
@@ -55,7 +55,7 @@ export default function RecipesGrid({
   if (recipes.length === 0) {
     return (
       <div className="text-center py-24 bg-white/60 backdrop-blur-sm rounded-3xl border border-slate-100/80 shadow-sm">
-        <div className="w-20 h-20 bg-gradient-to-br from-red-100 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+        <div className="w-20 h-20 bg-linear-to-br from-red-100 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
           <Search
             size={40}
             className="text-red-600"
@@ -87,7 +87,7 @@ export default function RecipesGrid({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
         >
-          <RecipeCardApi recipe={recipe} locale={locale} />
+          <RecipeCardApi recipe={recipe} locale={locale} priority={index < 3} />
         </motion.div>
       ))}
     </motion.div>
