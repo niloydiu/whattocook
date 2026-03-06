@@ -1,51 +1,59 @@
 import { NextRequest, NextResponse } from "next/server";
+import * as jose from "jose";
 
-export function checkAdminAuth(request: NextRequest): boolean {
-  const authHeader = request.headers.get("authorization");
+const JWT_SECRET_KEY = process.env.JWT_SECRET ?? process.env.ADMIN_SECRET ?? "";
+const TOKEN_EXPIRY = "24h";
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return false;
+function getSecretKey(): Uint8Array {
+  if (!JWT_SECRET_KEY) {
+    throw new Error("JWT_SECRET environment variable is not set");
   }
+  return new TextEncoder().encode(JWT_SECRET_KEY);
+}
 
-  const token = authHeader.substring(7);
+export interface AdminTokenPayload {
+  sub: number;
+  username: string;
+}
 
+export async function signToken(adminId: number, username: string): Promise<string> {
+  return new jose.SignJWT({ sub: adminId, username } as unknown as jose.JWTPayload)
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime(TOKEN_EXPIRY)
+    .sign(getSecretKey());
+}
+
+export async function verifyToken(token: string): Promise<AdminTokenPayload | null> {
+  if (!token) return null;
   try {
-    // Decode the base64 token
-    const decoded = Buffer.from(token, "base64").toString("utf-8");
-    const [adminId, username, timestamp] = decoded.split(":");
-
-    // Check if token is not older than 24 hours (86400000 ms)
-    const tokenAge = Date.now() - parseInt(timestamp);
-    if (tokenAge > 86400000) {
-      return false;
-    }
-
-    return true;
+    const { payload } = await jose.jwtVerify(token, getSecretKey());
+    return {
+      sub: payload.sub as unknown as number,
+      username: payload.username as string,
+    };
   } catch {
-    return false;
+    return null;
   }
 }
 
-export function verifyToken(token: string): boolean {
-  if (!token) return false;
-
-  try {
-    // Decode the base64 token
-    const decoded = Buffer.from(token, "base64").toString("utf-8");
-    const [adminId, username, timestamp] = decoded.split(":");
-
-    if (!adminId || !username || !timestamp) return false;
-
-    // Check if token is not older than 24 hours (86400000 ms)
-    const tokenAge = Date.now() - parseInt(timestamp);
-    if (tokenAge > 86400000) {
-      return false;
-    }
-
-    return true;
-  } catch {
+export async function checkAdminAuth(request: NextRequest): Promise<boolean> {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return false;
   }
+  const token = authHeader.substring(7);
+  const payload = await verifyToken(token);
+  return payload !== null;
+}
+
+export async function getAdminFromRequest(request: NextRequest): Promise<AdminTokenPayload | null> {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return null;
+  }
+  const token = authHeader.substring(7);
+  return verifyToken(token);
 }
 
 export function unauthorizedResponse() {

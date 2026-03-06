@@ -11,6 +11,87 @@
     }
   ],
   "paths": {
+    "/api/admin/ingredients/duplicates": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/admin/ingredients/duplicates",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/ingredients/merge": {
+      "post": {
+        "summary": "Auto-generated operation for POST /api/admin/ingredients/merge",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/ingredients": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/admin/ingredients",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Auto-generated operation for POST /api/admin/ingredients",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Auto-generated operation for DELETE /api/admin/ingredients",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/admin/ingredients/{id}": {
       "get": {
         "summary": "Auto-generated operation for GET /api/admin/ingredients/{id}",
@@ -88,39 +169,9 @@
         ]
       }
     },
-    "/api/admin/ingredients": {
-      "get": {
-        "summary": "Auto-generated operation for GET /api/admin/ingredients",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/api/admin/login": {
       "post": {
-        "summary": "Auto-generated operation for POST /api/admin/ingredients",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Auto-generated operation for DELETE /api/admin/ingredients",
+        "summary": "Auto-generated operation for POST /api/admin/login",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -135,9 +186,56 @@
         }
       }
     },
-    "/api/admin/login": {
+    "/api/admin/recipes/check-urls": {
       "post": {
-        "summary": "Auto-generated operation for POST /api/admin/login",
+        "summary": "Auto-generated operation for POST /api/admin/recipes/check-urls",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/recipes": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/admin/recipes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Auto-generated operation for POST /api/admin/recipes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Auto-generated operation for DELETE /api/admin/recipes",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -256,73 +354,41 @@
         ]
       }
     },
-    "/api/admin/recipes/check-urls": {
-      "post": {
-        "summary": "Auto-generated operation for POST /api/admin/recipes/check-urls",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/admin/recipes": {
-      "get": {
-        "summary": "Auto-generated operation for GET /api/admin/recipes",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Auto-generated operation for POST /api/admin/recipes",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Auto-generated operation for DELETE /api/admin/recipes",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/admin/trigger-sync": {
       "post": {
         "summary": "Auto-generated operation for POST /api/admin/trigger-sync",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/admin/users",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Auto-generated operation for POST /api/admin/users",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -389,38 +455,6 @@
         ]
       }
     },
-    "/api/admin/users": {
-      "get": {
-        "summary": "Auto-generated operation for GET /api/admin/users",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Auto-generated operation for POST /api/admin/users",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/chat/history": {
       "get": {
         "summary": "Auto-generated operation for GET /api/chat/history",
@@ -470,6 +504,23 @@
         }
       }
     },
+    "/api/health": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/health",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ingredients": {
       "get": {
         "summary": "Auto-generated operation for GET /api/ingredients",
@@ -488,6 +539,38 @@
       },
       "post": {
         "summary": "Auto-generated operation for POST /api/ingredients",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/recipe-requests": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/recipe-requests",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Auto-generated operation for POST /api/recipe-requests",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -570,115 +653,6 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/api/recipe-requests": {
-      "get": {
-        "summary": "Auto-generated operation for GET /api/recipe-requests",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Auto-generated operation for POST /api/recipe-requests",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/recipes/{slug}": {
-      "get": {
-        "summary": "Auto-generated operation for GET /api/recipes/{slug}",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "slug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "put": {
-        "summary": "Auto-generated operation for PUT /api/recipes/{slug}",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "slug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Auto-generated operation for DELETE /api/recipes/{slug}",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "slug",
             "in": "path",
             "required": true,
             "schema": {
@@ -771,9 +745,9 @@
         }
       }
     },
-    "/api/reports/{id}": {
+    "/api/recipes/{slug}/ratings": {
       "get": {
-        "summary": "Auto-generated operation for GET /api/reports/{id}",
+        "summary": "Auto-generated operation for GET /api/recipes/{slug}/ratings",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -788,7 +762,7 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "slug",
             "in": "path",
             "required": true,
             "schema": {
@@ -797,8 +771,8 @@
           }
         ]
       },
-      "patch": {
-        "summary": "Auto-generated operation for PATCH /api/reports/{id}",
+      "post": {
+        "summary": "Auto-generated operation for POST /api/recipes/{slug}/ratings",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -813,7 +787,84 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/recipes/{slug}": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/recipes/{slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Auto-generated operation for PUT /api/recipes/{slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Auto-generated operation for DELETE /api/recipes/{slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
             "in": "path",
             "required": true,
             "schema": {
@@ -868,6 +919,58 @@
             }
           }
         }
+      }
+    },
+    "/api/reports/{id}": {
+      "get": {
+        "summary": "Auto-generated operation for GET /api/reports/{id}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Auto-generated operation for PATCH /api/reports/{id}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/api/user/allergies": {

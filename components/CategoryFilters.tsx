@@ -38,6 +38,9 @@ export default function CategoryFilters({
 }: CategoryFiltersProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const startScrollLeft = useRef(0);
 
   // Scroll selected category into view
   useEffect(() => {
@@ -50,6 +53,53 @@ export default function CategoryFilters({
       });
     }
   }, [selectedCategory]);
+
+  // Pointer drag + wheel-to-scroll handlers for desktop chip scrolling
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      isDown.current = true;
+      startX.current = e.pageX - el.offsetLeft;
+      startScrollLeft.current = el.scrollLeft;
+      (e.target as Element).setPointerCapture(e.pointerId);
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDown.current) return;
+      const x = e.pageX - el.offsetLeft;
+      const walk = x - startX.current;
+      el.scrollLeft = startScrollLeft.current - walk;
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      isDown.current = false;
+      try {
+        (e.target as Element).releasePointerCapture(e.pointerId);
+      } catch (err) {}
+    };
+
+    const onWheel = (e: WheelEvent) => {
+      // map vertical wheel to horizontal scrolling when over the container
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener("pointerdown", onPointerDown as any, { passive: true });
+    window.addEventListener("pointermove", onPointerMove as any);
+    window.addEventListener("pointerup", onPointerUp as any);
+    el.addEventListener("wheel", onWheel as any, { passive: false });
+
+    return () => {
+      el.removeEventListener("pointerdown", onPointerDown as any);
+      window.removeEventListener("pointermove", onPointerMove as any);
+      window.removeEventListener("pointerup", onPointerUp as any);
+      el.removeEventListener("wheel", onWheel as any);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">

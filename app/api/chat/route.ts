@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
+// Simple timeout helper for promises (non-cancellable for SDK calls)
+function withTimeout<T>(p: T | Promise<T>, ms = 10000): Promise<T> {
+  const promise = Promise.resolve(p);
+  return Promise.race([
+    promise,
+    new Promise<T>((_, rej) =>
+      setTimeout(() => rej(new Error(`Operation timed out after ${ms}ms`)), ms)
+    ),
+  ]);
+}
 // --- Logic from search-by-ingredients (Simplified for Chat Tools) ---
 function normalizeStr(s?: string): string {
   if (!s) return "";
@@ -34,51 +45,58 @@ function itemMatches(a: string, b: string): boolean {
 
 async function findRecipesByIngredients(ingredients: string[]) {
   const userIngredients = ingredients.map(normalizeStr).filter(Boolean);
-  const recipes = await prisma.recipe.findMany({
-    include: {
-      ingredients: {
-        include: {
-          ingredient: true,
-        },
-      },
-    },
-  });
+  if (userIngredients.length === 0) return [];
 
-  const scoredRecipes = recipes
-    .map((recipe) => {
-      const recipeIngredients = recipe.ingredients.map((ri) => ({
-        name_en: normalizeStr(ri.ingredient.name_en),
-        name_bn: normalizeStr(ri.ingredient.name_bn),
-      }));
+  // Find ingredient ids that match any of the user-supplied tokens (name_en/name_bn)
+  const orConditions: any[] = [];
+  for (const ui of userIngredients) {
+    orConditions.push({ name_en: { contains: ui, mode: "insensitive" } });
+    orConditions.push({ name_bn: { contains: ui, mode: "insensitive" } });
+  }
 
-      let matchedCount = 0;
-      for (const userIng of userIngredients) {
-        if (recipeIngredients.some(ri => itemMatches(ri.name_en, userIng) || itemMatches(ri.name_bn, userIng))) {
-          matchedCount++;
-        }
-      }
+  const matchingIngredients = await prisma.ingredient.findMany({ where: { OR: orConditions }, select: { id: true } });
+  const ingredientIds = matchingIngredients.map((i) => i.id);
+  if (ingredientIds.length === 0) return [];
 
-      return {
-        title_en: recipe.title_en,
-        title_bn: recipe.title_bn,
-        slug: recipe.slug,
-        matchCount: matchedCount,
-        totalIngredients: recipeIngredients.length,
-        matchPercent: matchedCount / recipeIngredients.length,
-      };
-    })
-    .filter((r) => r.matchPercent > 0)
-    .sort((a, b) => b.matchPercent - a.matchPercent)
-    .slice(0, 5);
+  // Aggregate matches in SQL: count matched ingredients per recipe and compute total ingredient count
+  const rows: any[] = await prisma.$queryRaw(Prisma.sql`
+    SELECT r.slug, r.title_en, r.title_bn, COUNT(DISTINCT ri.ingredient_id) AS matched_count,
+      (SELECT COUNT(*) FROM "RecipeIngredient" ri2 WHERE ri2.recipe_id = r.id) AS total_ingredients
+    FROM "Recipe" r
+    JOIN "RecipeIngredient" ri ON ri.recipe_id = r.id
+    WHERE ri.ingredient_id IN (${Prisma.join(ingredientIds.map(id => Prisma.sql`${id}`))})
+    GROUP BY r.id
+    HAVING COUNT(DISTINCT ri.ingredient_id) > 0
+    ORDER BY (COUNT(DISTINCT ri.ingredient_id)::float / (SELECT COUNT(*) FROM "RecipeIngredient" ri2 WHERE ri2.recipe_id = r.id)) DESC
+    LIMIT 5
+  `);
 
-  return scoredRecipes;
+  return rows.map((r) => ({
+    title_en: r.title_en,
+    title_bn: r.title_bn,
+    slug: r.slug,
+    matchCount: Number(r.matched_count),
+    totalIngredients: Number(r.total_ingredients),
+    matchPercent: Number(r.matched_count) / Number(r.total_ingredients),
+  }));
 }
 
 async function getRecipeDetails(slug: string) {
   const recipe = await prisma.recipe.findUnique({
     where: { slug },
     include: {
-      ingredients: { include: { ingredient: true } },
+      ingredients: {
+        include: {
+          ingredient: {
+            select: {
+              id: true,
+              name_en: true,
+              name_bn: true,
+              img: true,
+            },
+          },
+        },
+      },
       steps: { orderBy: { step_number: "asc" } },
       blogContent: true,
     },
@@ -138,7 +156,13 @@ async function searchIngredientsByName(name: string) {
         { name_bn: { contains: name, mode: 'insensitive' } }
       ]
     },
-    take: 5
+    take: 5,
+    select: {
+      id: true,
+      name_en: true,
+      name_bn: true,
+      img: true,
+    },
   });
   return ingredients.map(i => ({ name_en: i.name_en, name_bn: i.name_bn }));
 }
@@ -219,8 +243,11 @@ export async function POST(req: NextRequest) {
       ]
     });
 
+    // Cap history to the most recent 6 messages (excluding the current user message)
+    const historyLimit = 6;
+    const priorMessages = messages.slice(Math.max(0, messages.length - 1 - historyLimit), messages.length - 1);
     const chat = model.startChat({
-      history: messages.slice(0, -1).map((m: any) => ({
+      history: priorMessages.map((m: any) => ({
         role: m.role === "user" ? "user" : "model",
         parts: [{ text: m.content }],
       })),
@@ -247,13 +274,22 @@ export async function POST(req: NextRequest) {
     - If you use a tool, explain the results naturally to the user.
     `;
 
-    const result = await chat.sendMessage(sysPrompt + "\n\nUser: " + userMessage);
-    const response = await result.response;
+    // Send the user message to the model with a timeout and timing logs
+    const start = Date.now();
+    let response: any;
+    try {
+      const result = await withTimeout(chat.sendMessage(sysPrompt + "\n\nUser: " + userMessage), 12000);
+      response = await withTimeout(result.response, 12000);
+      console.log(`[Chat API] AI call finished in ${Date.now() - start}ms`);
+    } catch (err: any) {
+      console.error("Chat API AI call error/timeout:", err?.message || err);
+      return NextResponse.json({ error: "AI request timed out or failed" }, { status: 504 });
+    }
     
     // Check for function calls
-    const call = response.candidates?.[0]?.content?.parts?.find(p => p.functionCall);
+    const call = response.candidates?.[0]?.content?.parts?.find((p: any) => p.functionCall);
     
-    if (call && call.functionCall) {
+      if (call && call.functionCall) {
       const { name, args } = call.functionCall;
       let toolResult;
 
@@ -269,14 +305,26 @@ export async function POST(req: NextRequest) {
         toolResult = await searchIngredientsByName((args as any).name as string);
       }
 
-      const result2 = await chat.sendMessage([{
-        functionResponse: {
-          name,
-          response: { result: toolResult }
-        }
-      }]);
-      
-      return NextResponse.json({ message: result2.response.text() });
+      try {
+        const startTool = Date.now();
+        const result2 = await withTimeout(
+          chat.sendMessage([
+            {
+              functionResponse: {
+                name,
+                response: { result: toolResult },
+              },
+            },
+          ]),
+          12000
+        );
+        const finalResp = await withTimeout(result2.response, 12000);
+        console.log(`[Chat API] Tool ${call.functionCall.name} roundtrip ${Date.now() - startTool}ms`);
+        return NextResponse.json({ message: finalResp.text() });
+      } catch (e: any) {
+        console.error("Chat API tool call error/timeout:", e?.message || e);
+        return NextResponse.json({ error: "AI follow-up timed out" }, { status: 504 });
+      }
     }
 
     return NextResponse.json({ message: response.text() });

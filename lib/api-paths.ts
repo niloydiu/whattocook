@@ -10,8 +10,11 @@ export const API_PATHS = {
   CHAT_HISTORY: "/api/chat/history",
   USER_ALLERGIES: "/api/user/allergies",
   USER_FAVORITES: "/api/user/favorites",
+  USER_WISHLIST: "/api/user/wishlist",
+  USER_COOKING: "/api/user/cooking",
   YOUTUBE: (videoId: string) => `/api/youtube/${videoId}`,
   RECIPE_BY_SLUG: (slug: string) => `/api/recipes/${slug}`,
+  RECIPE_RATINGS: (slug: string) => `/api/recipes/${slug}/ratings`,
   RECIPE_REQUEST_BY_ID: (id: string | number) => `/api/recipe-requests/${id}`,
   ADMIN_LOGIN: "/api/admin/login",
   ADMIN_RECIPE_BY_ID: (id: string | number) => `/api/admin/recipes/${id}`,
@@ -19,7 +22,10 @@ export const API_PATHS = {
   ADMIN_INGREDIENT_BY_ID: (id: string | number) =>
     `/api/admin/ingredients/${id}`,
   ADMIN_INGREDIENTS: "/api/admin/ingredients",
+  ADMIN_INGREDIENTS_MERGE: "/api/admin/ingredients/merge",
+  ADMIN_INGREDIENTS_DUPLICATES: "/api/admin/ingredients/duplicates",
   ADMIN_USER_BY_ID: (id: string | number) => `/api/admin/users/${id}`,
   ADMIN_USERS: "/api/admin/users",
   REPORT_BY_ID: (id: string | number) => `/api/reports/${id}`,
+  HEALTH: "/api/health",
 };

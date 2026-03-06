@@ -9,9 +9,26 @@ export async function GET(
   const { slug } = await params;
 
   try {
+    // Use an explicit select to avoid querying columns that may be missing in the DB (e.g. viewCount)
     const recipe = await prisma.recipe.findUnique({
       where: { slug },
-      include: {
+      select: {
+        id: true,
+        slug: true,
+        title_en: true,
+        title_bn: true,
+        image: true,
+        youtube_url: true,
+        youtube_id: true,
+        cuisine: true,
+        category: true,
+        difficulty: true,
+        prep_time: true,
+        cook_time: true,
+        servings: true,
+        createdAt: true,
+        updatedAt: true,
+        blogContent: true,
         ingredients: {
           include: {
             ingredient: {
@@ -27,14 +44,27 @@ export async function GET(
         },
         steps: {
           orderBy: { step_number: "asc" },
+          select: {
+            id: true,
+            recipe_id: true,
+            step_number: true,
+            instruction_en: true,
+            instruction_bn: true,
+            timestamp: true,
+          },
         },
-        blogContent: true,
       },
     });
 
     if (!recipe) {
       return NextResponse.json({ error: "Recipe not found" }, { status: 404 });
     }
+
+    // Increment view count (fire and forget)
+    prisma.recipe.update({
+      where: { id: recipe.id },
+      data: { viewCount: { increment: 1 } },
+    }).catch(() => {});
 
     return NextResponse.json(recipe);
   } catch (error) {

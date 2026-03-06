@@ -13,7 +13,8 @@ export async function GET(
   try {
     // If importing, skip metadata extraction and go straight to import
     if (shouldImport) {
-      const result = await importRecipeFromYoutube(videoId);
+      const preview = searchParams.get("preview") === "true";
+      const result = await importRecipeFromYoutube(videoId, { preview });
       return NextResponse.json(result);
     }
 

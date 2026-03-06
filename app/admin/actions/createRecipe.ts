@@ -62,7 +62,7 @@ interface RecipeData {
 }
 
 export async function createRecipeWithIngredients(recipeData: RecipeData, token: string) {
-  if (!verifyToken(token)) {
+  if (!(await verifyToken(token))) {
     return {
       success: false,
       error: "Unauthorized: Invalid or expired token",

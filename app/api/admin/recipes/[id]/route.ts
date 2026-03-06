@@ -7,7 +7,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
@@ -48,7 +48,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
@@ -171,7 +171,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!checkAdminAuth(request)) {
+  if (!(await checkAdminAuth(request))) {
     return unauthorizedResponse();
   }
 
